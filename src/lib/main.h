@@ -10,7 +10,6 @@ struct NodeOperator {
     NodeOperator* next;
 };
 
-NodeOperator* top = NULL;
 
 
 void push(NodeOperator* elem);
@@ -18,11 +17,11 @@ void pop(NodeOperator* elem);
 void NodeOutput();
 
 
-int IsNumber(char symbol);
-int priority(char symbol);
+int Priority(char symbol);
 
-void NumberOrPostfixFunction();
-void FromInfixToPostfix();
-void PushAllFromStack();
-int Operator();
-int PrefixFunction();
+int IsOperator(char symbol);
+int IsNumber(char symbol);
+void FromInfixToPostfix(char* input, char* output);
+int IsPostfixFunction(char symbol);
+int IsPrefixFunction();
+void AllFromStack(char* output, int output_index);
