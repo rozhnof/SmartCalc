@@ -1,5 +1,14 @@
 #include "main.h"
 
+
+typedef struct NodeOperator NodeOperator;
+
+struct NodeOperator {
+    int8_t operator;
+    NodeOperator* next;
+};
+
+
 NodeOperator* top = NULL;
 
 void push(NodeOperator* elem) {
@@ -99,24 +108,39 @@ int PushOutConditions(char symbol) {
                     Priority(top->operator) == Priority(symbol))));
 }
 
+void ReadNumber(char* input, char* output, int* input_index, int* output_index) {
+    int i = *input_index;
+    int j = *output_index;
+
+    while (IsNumber(input[i]) || input[i] == '.') {
+        output[j++] = input[i++];
+    }
+    *input_index = i - 1;
+    *output_index = j;
+}
+
 void FromInfixToPostfix(char* input, char* output) {
     int input_index = 0;
     int output_index = 0;
 
     while (input[input_index] != '\0') {
         if (IsNumber(input[input_index])) {
-            output[output_index++] = input[input_index];      
+            ReadNumber(input, output, &input_index, &output_index);
+            output[output_index++] = ' ';
         } else if (IsPostfixFunction(input[input_index])) {
             output[output_index++] = input[input_index];
+            output[output_index++] = ' ';
         } else if (IsPrefixFunction(input[input_index])) {
             OperatorToStack(input[input_index]);
         } else if (input[input_index] == '(') {
             OperatorToStack(input[input_index]);
         } else if (input[input_index] == ')') {
             OperatorsBetweenBracketsToOutput(output, &output_index);
+            output[output_index++] = ' ';
         } else if (IsOperator(input[input_index])) {
             while (PushOutConditions(input[input_index])) {
                 PushOutFromStackToOutput(output, &output_index);
+                output[output_index++] = ' ';
             }
             OperatorToStack(input[input_index]);
         }
