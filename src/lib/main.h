@@ -17,11 +17,18 @@ void pop(NodeOperator* elem);
 void NodeOutput();
 
 
+void FromInfixToPostfix(char* input, char* output);
+
 int Priority(char symbol);
 
 int IsOperator(char symbol);
 int IsNumber(char symbol);
-void FromInfixToPostfix(char* input, char* output);
 int IsPostfixFunction(char symbol);
 int IsPrefixFunction();
+
+int PushOutConditions(char symbol);
+void PushOutFromStackToOutput(char* output, int *output_index);
+void OperatorsBetweenBracketsToOutput(char* output, int* output_index);
+int OperatorIsLeftAssociativity(char symbol);
+void OperatorToStack(char symbol);
 void AllFromStack(char* output, int output_index);

@@ -77,7 +77,26 @@ void OperatorToStack(char symbol) {
 }
 
 int OperatorIsLeftAssociativity(char symbol) {
-    return IsOperator(symbol) && symbol != '^';
+    return (IsOperator(symbol) && symbol != '^');
+}
+
+void OperatorsBetweenBracketsToOutput(char* output, int* output_index) {
+    while (top->operator != '(') {
+        PushOutFromStackToOutput(output, output_index);
+    }
+    pop(top);
+}
+
+void PushOutFromStackToOutput(char* output, int *output_index) {
+    output[(*output_index)++] = top->operator;
+    pop(top);
+}
+
+int PushOutConditions(char symbol) {
+    return (top != NULL && (IsPrefixFunction(top->operator) || 
+                    Priority(top->operator) >= Priority(symbol) || 
+                    (OperatorIsLeftAssociativity(top->operator) && 
+                    Priority(top->operator) == Priority(symbol))));
 }
 
 void FromInfixToPostfix(char* input, char* output) {
@@ -94,18 +113,10 @@ void FromInfixToPostfix(char* input, char* output) {
         } else if (input[input_index] == '(') {
             OperatorToStack(input[input_index]);
         } else if (input[input_index] == ')') {
-            while (top->operator != '(') {
-                    output[output_index++] = top->operator;
-                    pop(top);
-            }
-            pop(top);
+            OperatorsBetweenBracketsToOutput(output, &output_index);
         } else if (IsOperator(input[input_index])) {
-            while (top != NULL && (IsPrefixFunction(top->operator) || 
-                    Priority(top->operator) >= Priority(input[input_index]) || 
-                    (OperatorIsLeftAssociativity(top->operator) && 
-                    Priority(top->operator) == Priority(input[input_index])))) {
-                output[output_index++] = top->operator;
-                pop(top);
+            while (PushOutConditions(input[input_index])) {
+                PushOutFromStackToOutput(output, &output_index);
             }
             OperatorToStack(input[input_index]);
         }
