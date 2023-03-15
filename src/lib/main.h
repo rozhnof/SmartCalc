@@ -1,6 +1,14 @@
+#ifdef __cplusplus
+
+extern "C" {
+
+#endif
+
+
 #include "stdio.h"
 #include "stdlib.h"
 #include "inttypes.h"
+
 
 #define SIN 1
 #define COS 2
@@ -41,3 +49,9 @@ void PushNumberToStack(char* str_number);
 void NumberToStack(long double number);
 void Factorial();
 void NodeOutput();
+
+
+#ifdef __cplusplus
+}
+
+#endif

@@ -22,14 +22,14 @@ void PopNumber(NodeNumber* elem) {
     elem = NULL;
 }
 
-void NodeOutput() {
-    NodeNumber* tmp_top_number = top_number;
+// void NodeOutput() {
+//     NodeNumber* tmp_top_number = top_number;
 
-    while (tmp_top_number != NULL) {
-        printf("%.20Lf\n", tmp_top_number->number);
-        tmp_top_number = tmp_top_number->next;
-    }
-}
+//     while (tmp_top_number != NULL) {
+//         printf("%.20Lf\n", tmp_top_number->number);
+//         tmp_top_number = tmp_top_number->next;
+//     }
+// }
 
 void NumberToStack(long double number) {
     NodeNumber* node_numbers = malloc(sizeof(NodeNumber));
