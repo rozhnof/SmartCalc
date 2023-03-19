@@ -32,10 +32,6 @@ int Priority(char symbol) {
     return result;
 }
 
-int IsPostfixFunction(char symbol) {
-    return (symbol == '!');
-}
-
 int IsNumber(char symbol) {
     return (symbol >= '0' && symbol <= '9');
 }
@@ -44,7 +40,7 @@ int IsOperator(char symbol) {
     return (symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/' || symbol == '^' || symbol == '~');
 }
 
-void AllFromStack(char* output, int output_index, NodeOperator* top) {
+void PushOutAll(char* output, int output_index, NodeOperator* top) {
     while (top != NULL) {
         output[output_index++] = top->oper;
         output[output_index++] = ' ';
@@ -62,18 +58,16 @@ int OperatorIsLeftAssociativity(char symbol) {
     return (IsOperator(symbol) && symbol != '^' && symbol != '~');
 }
 
-void OperatorsBetweenBracketsToOutput(char* output, int* output_index, NodeOperator* top) {
+void OperatorsBetweenBracketsToOutput(char* output, int* output_index, NodeOperator* top) { //
     while (top != NULL && top->oper != '(') {
-        PushOutFromStackToOutput(output, output_index, top);
+        PushOut(output, output_index, top);
     }
     if (top->oper == '(') {
         PopOperator(top, top);
-    } else {
-        exit(1); // ------------------------------------------------------------------------------------------------------------------------ remade
-    }
+    } 
 }
 
-void PushOutFromStackToOutput(char* output, int *output_index, NodeOperator* top) {
+void PushOut(char* output, int *output_index, NodeOperator* top) {
     output[(*output_index)++] = top->oper;
     output[(*output_index)++] = ' ';
     PopOperator(top, top);
@@ -85,22 +79,22 @@ int PushOutConditions(char symbol, NodeOperator* top) {
                     Priority(top->oper) == Priority(symbol))));
 }
 
-void ReadNumber(char* input, char* output, int* input_index, int* output_index, NodeOperator* top) {
-    int i = *input_index;
-    int j = *output_index;
-
-    while (IsNumber(input[i]) || input[i] == '.') {
-        output[j++] = input[i++];
+void ReadNumber(char* input, char* output, int* input_index, int* output_index, NodeOperator* top) { //
+    while (IsNumber(input[*input_index]) || input[*input_index] == '.') {
+        output[( *output_index)++] = input[(*input_index)++];
     }
-    *input_index = i - 1;
-    *output_index = j;
+    (*input_index)--;
 }
 
 int IsUnaryOperator(char* input, int input_index) {
     int result = 0;
 
     if (input[input_index] == '-' || input[input_index] == '+') {
-        if (input_index == 0 || IsOperator(input[input_index - 1]) || input[input_index - 1] == '(') {
+        if (input_index == 0) {
+            result = 1;
+        } else if (IsOperator(input[input_index - 1])) {
+            result = 1;
+        } else if (input[input_index - 1] == '(') {
             result = 1;
         }
     }
@@ -147,7 +141,7 @@ int DecisionFunction(char* input, char* output, char function, NodeOperator* top
 
 void PushOutAndPush(char symbol, char* output, int* output_index, NodeOperator* top) {
     while (PushOutConditions(symbol, top)) {
-        PushOutFromStackToOutput(output, output_index, top);
+        PushOut(output, output_index, top);
     }
     OperatorToStack(symbol, top);
 }
@@ -162,8 +156,8 @@ void FromInfixToPostfix(char* input, char* output) {
             output[output_index++] = 'x';
         } else if (IsNumber(input[input_index])) {
             ReadNumber(input, output, &input_index, &output_index, top_operator);
-        } else if (IsPostfixFunction(input[input_index])) {
-            output[output_index++] = input[input_index];
+        } else if (input[input_index] == '!') {
+            output[output_index++] = '!';
         } else if (Function(input + input_index, output + output_index, top_operator)) {
             input_index = strlen(input) - 1;
             output_index = strlen(output);
@@ -184,5 +178,5 @@ void FromInfixToPostfix(char* input, char* output) {
         output[output_index++] = ' ';
         input_index++;
     }
-    AllFromStack(output, output_index, top_operator);
+    PushOutAll(output, output_index, top_operator);
 }

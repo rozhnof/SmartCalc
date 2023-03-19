@@ -42,7 +42,7 @@ typedef struct NodeOperator NodeOperator;
 typedef struct NodeOperator {
     int8_t oper;
     NodeOperator* next;
-};
+}NodeOperator;
 
 
 void FromInfixToPostfix(char* input, char* output);
@@ -72,11 +72,11 @@ int IsPostfixFunction(char symbol);
 int IsUnaryOperator(char* input, int input_index);
 
 int PushOutConditions(char symbol, NodeOperator* top);
-void PushOutFromStackToOutput(char* output, int *output_index, NodeOperator* top);
+void PushOut(char* output, int *output_index, NodeOperator* top);
 void OperatorsBetweenBracketsToOutput(char* output, int* output_index, NodeOperator* top);
 int OperatorIsLeftAssociativity(char symbol);
 void OperatorToStack(char symbol, NodeOperator* top);
-void AllFromStack(char* output, int output_index, NodeOperator* top);
+void PushOutAll(char* output, int output_index, NodeOperator* top);
 void ReadNumber(char* input, char* output, int* input_index, int* output_index, NodeOperator* top);
 void PushOutAndPush(char symbol, char* output, int* output_index, NodeOperator* top);
 
