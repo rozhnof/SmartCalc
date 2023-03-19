@@ -1,6 +1,5 @@
 #include "main.h"
-#include <string.h>
-#include <math.h>
+
 
 
 typedef struct NodeNumber NodeNumber;
@@ -21,15 +20,6 @@ void PopNumber(NodeNumber* elem) {
     top_number = elem->next;
     elem = NULL;
 }
-
-// void NodeOutput() {
-//     NodeNumber* tmp_top_number = top_number;
-
-//     while (tmp_top_number != NULL) {
-//         printf("%.20Lf\n", tmp_top_number->number);
-//         tmp_top_number = tmp_top_number->next;
-//     }
-// }
 
 void NumberToStack(long double number) {
     NodeNumber* node_numbers = malloc(sizeof(NodeNumber));
@@ -72,17 +62,13 @@ void CalculateTwoNumbersFromStack(char operation) {
 
 void Factorial() {
     long double number = top_number->number;
-    long double int_part = 0;
-    long double fract_part = 0;
     long double result = 1;
 
-    fract_part = modfl(number, &int_part);
-    if (fabsl(fract_part) < 1e-7) {
-        while (int_part > 0) {
-            result *= int_part;
-            int_part--;
-        }
+    while (number > 0) {
+        result *= number;
+        number--;
     }
+    
     top_number->number = result;
 }
 
@@ -112,14 +98,19 @@ void DecisionTrigonometricFunction(char number) {
     }
 }
 
-long double Calculation(char* output, char* x) {
-    char* elem = strtok(output, " ");
+long double Calculation(char* output, double x) {
+    char tmp_output[1024] = {0};
+    for (int i = 0; output[i] != '\0'; i++) {
+        tmp_output[i] = output[i];
+    }
+
+    char* elem = strtok(tmp_output, " ");
     while (elem != NULL) {
         if (elem[0] == 'x') {
-            PushNumberToStack(x);
+            NumberToStack(x);
         } else if (IsNumber(elem[0])) {
             PushNumberToStack(elem);
-        } else if (IsOperator(elem[0]) && elem[0] != '~' || elem[0] == 'M') {
+        } else if ((IsOperator(elem[0]) || elem[0] == MOD ) && elem[0] != '~') {
             CalculateTwoNumbersFromStack(elem[0]);
         } else if (elem[0] == '!') {
             Factorial();
