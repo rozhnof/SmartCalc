@@ -29,7 +29,8 @@ HEADERS += \
 FORMS += \
     mainwindow.ui
 
-DESTDIR = ../build/
+DESTDIR += ../build/
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

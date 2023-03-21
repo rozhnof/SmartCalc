@@ -96,6 +96,7 @@ int SetModValid(char* input);
 int XValid(char* input);
 int SetXValid(char* input);
 int ClearInput(char* input);
+int IsNeedToClear(int index, int last_elem, char symbol);
 int ResultInputValid(char* input);
 
 void AnnuityLoan(Credit* values);

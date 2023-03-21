@@ -206,6 +206,10 @@ int SetXValid(char* input) {
     return status;
 }
 
+int IsNeedToClear(int index, int last_elem, char symbol) {
+    return (index >= last_elem-1-4 && symbol != 'd' && symbol != 'x' && !IsOperator(symbol) && symbol != '(');
+}
+
 int ClearInput(char* input) {
     int status = 0;
     int last_elem = strlen(input) - 1;
@@ -215,7 +219,7 @@ int ClearInput(char* input) {
             if (IsOperator(input[last_elem-1]) || input[last_elem-1] == '(') {
                 input[last_elem] = '\0';
             } else {
-                for (int i = last_elem-1; i >= last_elem-1-4 && input[i] != 'd' && input[i] != 'x' && !IsOperator(input[i]) && input[i] != '('; i--) {
+                for (int i = last_elem-1; IsNeedToClear(i, last_elem, input[i]); i--) {
                     input[i] = '\0';
                 }
             }

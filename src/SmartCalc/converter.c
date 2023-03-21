@@ -14,6 +14,7 @@ void PopOperator(ConvertHelper* val) {
     NodeOperator* tmp = val->top;
     val->top = val->top->next;
     free(tmp);
+    tmp = NULL;
 }
 
 int Priority(char symbol) {

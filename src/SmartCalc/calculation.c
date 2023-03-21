@@ -5,6 +5,7 @@ void PopNumber(NodeNumber* *top) {
     NodeNumber* tmp = *top;
     *top = (**top).next;
     free(tmp);
+    tmp = NULL;
 }
 
 void PushNumber(long double number, NodeNumber* *top) {
@@ -20,7 +21,7 @@ void PushStrNumber(char* str_number, NodeNumber* *top) {
     NodeNumber* elem = malloc(sizeof(NodeNumber));
 
     long double number = 0;
-    sscanf(str_number, "%Lf", &number);
+    number = atof(str_number);
 
     elem->next = *top;
     elem->number = number;
