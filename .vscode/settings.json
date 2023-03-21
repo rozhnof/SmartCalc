@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "ratio": "c",
+        "complex": "c",
+        "cmath": "c",
+        "queue": "c",
+        "stack": "c",
+        "main.h": "c",
+        "random": "c",
+        "locale": "c",
+        "__functional_03": "c",
+        "functional": "c"
+    }
+}

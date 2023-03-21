@@ -1,4 +1,4 @@
-#include "main.h"
+#include "SmartCalc.h"
 
 
 void AnnuityLoan(Credit* values) {

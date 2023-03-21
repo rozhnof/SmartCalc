@@ -1,14 +1,19 @@
-#include "main.h"
+#include "SmartCalc.h"
 
 
-void PushOperator(NodeOperator* elem, NodeOperator* top) {
-    elem->next = top;
-    top = elem;
+void PushOperator(char symbol, ConvertHelper* val) {
+    NodeOperator* elem = malloc(sizeof(NodeOperator));
+
+    elem->next = val->top;
+    elem->oper = symbol;
+
+    val->top = elem;
 }
 
-void PopOperator(NodeOperator* elem, NodeOperator* top) {
-    top = elem->next;
-    elem = NULL;
+void PopOperator(ConvertHelper* val) {
+    NodeOperator* tmp = val->top;
+    val->top = val->top->next;
+    free(tmp);
 }
 
 int Priority(char symbol) {
@@ -40,50 +45,45 @@ int IsOperator(char symbol) {
     return (symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/' || symbol == '^' || symbol == '~');
 }
 
-void PushOutAll(char* output, int output_index, NodeOperator* top) {
-    while (top != NULL) {
-        output[output_index++] = top->oper;
-        output[output_index++] = ' ';
-        PopOperator(top, top);
+void PushOutAll(char* output, ConvertHelper* val) {
+    while (val->top != NULL) {
+        output[val->out_idx++] = val->top->oper;
+        output[val->out_idx++] = ' ';
+        PopOperator(val);
     }
-}
-
-void OperatorToStack(char symbol, NodeOperator* top) {
-    NodeOperator* node_operators = malloc(sizeof(NodeOperator));
-    node_operators->oper = symbol;
-    PushOperator(node_operators, top);
 }
 
 int OperatorIsLeftAssociativity(char symbol) {
     return (IsOperator(symbol) && symbol != '^' && symbol != '~');
 }
 
-void OperatorsBetweenBracketsToOutput(char* output, int* output_index, NodeOperator* top) { //
-    while (top != NULL && top->oper != '(') {
-        PushOut(output, output_index, top);
+void OperatorsBetweenBracketsToOutput(char* output, ConvertHelper* val) {
+    while (val->top != NULL && val->top->oper != '(') {        
+        PushOut(output, val);
     }
-    if (top->oper == '(') {
-        PopOperator(top, top);
-    } 
-}
 
-void PushOut(char* output, int *output_index, NodeOperator* top) {
-    output[(*output_index)++] = top->oper;
-    output[(*output_index)++] = ' ';
-    PopOperator(top, top);
-}
-
-int PushOutConditions(char symbol, NodeOperator* top) {
-    return (top != NULL && (Priority(top->oper) >= Priority(symbol) || 
-                    (OperatorIsLeftAssociativity(top->oper) && 
-                    Priority(top->oper) == Priority(symbol))));
-}
-
-void ReadNumber(char* input, char* output, int* input_index, int* output_index, NodeOperator* top) { //
-    while (IsNumber(input[*input_index]) || input[*input_index] == '.') {
-        output[( *output_index)++] = input[(*input_index)++];
+    if (val->top != NULL && val->top->oper == '(') {
+        PopOperator(val);
     }
-    (*input_index)--;
+}
+
+void PushOut(char* output, ConvertHelper* val) {
+    output[val->out_idx++] = val->top->oper;
+    output[val->out_idx++] = ' ';
+    PopOperator(val);
+}
+
+int PushOutConditions(char symbol, ConvertHelper* val) {
+    return (val->top != NULL && (Priority(val->top->oper) >= Priority(symbol) || 
+                    (OperatorIsLeftAssociativity(val->top->oper) && 
+                    Priority(val->top->oper) == Priority(symbol))));
+}
+
+void ReadNumber(char* input, char* output, ConvertHelper* val) { 
+    while (IsNumber(input[val->in_idx]) || input[val->in_idx] == '.') {
+        output[val->out_idx++] = input[val->in_idx++];
+    }
+    val->in_idx--;
 }
 
 int IsUnaryOperator(char* input, int input_index) {
@@ -101,82 +101,87 @@ int IsUnaryOperator(char* input, int input_index) {
     return result;
 }
 
-int Function(char* input, char* output, NodeOperator* top) {
+int Function(char* input, char* output, ConvertHelper* val) {
     int result = 1;
 
     if (!strncmp(input, "sin", 3)) {
-        DecisionFunction(input + 3, output, SIN, top);
+        DecisionFunction(input + 3, output, SIN, val);
     } else if (!strncmp(input, "cos", 3)) {
-        DecisionFunction(input + 3, output, COS, top);
+        DecisionFunction(input + 3, output, COS, val);
     } else if (!strncmp(input, "tan", 3)) {
-        DecisionFunction(input + 3, output, TAN, top);
+        DecisionFunction(input + 3, output, TAN, val);
     } else if (!strncmp(input, "asin", 4)) {
-        DecisionFunction(input + 4, output, ASIN, top);
+        DecisionFunction(input + 4, output, ASIN, val);
     } else if (!strncmp(input, "acos", 4)) {
-        DecisionFunction(input + 4, output, ACOS, top);
+        DecisionFunction(input + 4, output, ACOS, val);
     } else if (!strncmp(input, "atan", 4)) {
-        DecisionFunction(input + 4, output, ATAN, top);
+        DecisionFunction(input + 4, output, ATAN, val);
     } else if (!strncmp(input, "sqrt", 4)) {
-        DecisionFunction(input + 4, output, SQRT, top);
+        DecisionFunction(input + 4, output, SQRT, val);
     } else if (!strncmp(input, "ln", 2)) {
-        DecisionFunction(input + 2, output, LN, top);
+        DecisionFunction(input + 2, output, LN, val);
     } else if (!strncmp(input, "log", 3)) {
-        DecisionFunction(input + 3, output, LOG, top);
+        DecisionFunction(input + 3, output, LOG, val);
     } else {
         result = 0;
     }
     return result;
 }
 
-int DecisionFunction(char* input, char* output, char function, NodeOperator* top) {
-    OperatorToStack(function, top);
+int DecisionFunction(char* input, char* output, char function, ConvertHelper* val) {
+    PushOperator(function, val);
 
     char f_output[1024] = {0};
-
-    FromInfixToPostfix(input, f_output);  
+    Converter(input, f_output, val);  
     strcat(output, f_output);
 
     return 0;
 }
 
-void PushOutAndPush(char symbol, char* output, int* output_index, NodeOperator* top) {
-    while (PushOutConditions(symbol, top)) {
-        PushOut(output, output_index, top);
+void PushOutAndPush(char symbol, char* output, ConvertHelper* val) {
+    while (PushOutConditions(symbol, val)) {
+        PushOut(output, val);
     }
-    OperatorToStack(symbol, top);
+    PushOperator(symbol, val);
+}
+
+void Converter(char* input, char* output, ConvertHelper* val) {
+    val->in_idx = 0;
+    val->out_idx = 0;
+
+    while (input[val->in_idx] != '\0') {
+        if (input[val->in_idx] == 'x') {
+            output[val->out_idx++] = 'x';
+        } else if (IsNumber(input[val->in_idx])) {
+            ReadNumber(input, output, val);
+        } else if (input[val->in_idx] == '!') {
+            output[val->out_idx++] = '!';
+        } else if (Function(input + val->in_idx, output + val->out_idx, val)) {
+            val->in_idx = strlen(input) - 1;
+            val->out_idx = strlen(output);
+        } else if (input[val->in_idx] == '(') {
+            PushOperator('(', val);
+        } else if (input[val->in_idx] == ')') {
+            OperatorsBetweenBracketsToOutput(output, val);
+        } else if (IsUnaryOperator(input, val->in_idx)) {
+            if (input[val->in_idx] == '-') {
+                PushOutAndPush('~', output, val);
+            }
+        } else if (IsOperator(input[val->in_idx])) {
+            PushOutAndPush(input[val->in_idx], output, val);
+        } else if (!strncmp(input + val->in_idx, "mod", 3)) {
+            PushOutAndPush(MOD, output, val);
+            val->in_idx += 2;
+        }
+        output[val->out_idx++] = ' ';
+        val->in_idx++;
+    }
+    PushOutAll(output, val);
 }
 
 void FromInfixToPostfix(char* input, char* output) {
-    int input_index = 0;
-    int output_index = 0;
-    NodeOperator* top_operator = NULL;
+    ConvertHelper val = {0};
+    val.top = NULL;
 
-    while (input[input_index] != '\0') {
-        if (input[input_index] == 'x') {
-            output[output_index++] = 'x';
-        } else if (IsNumber(input[input_index])) {
-            ReadNumber(input, output, &input_index, &output_index, top_operator);
-        } else if (input[input_index] == '!') {
-            output[output_index++] = '!';
-        } else if (Function(input + input_index, output + output_index, top_operator)) {
-            input_index = strlen(input) - 1;
-            output_index = strlen(output);
-        } else if (input[input_index] == '(') {
-            OperatorToStack(input[input_index], top_operator);
-        } else if (input[input_index] == ')') {
-            OperatorsBetweenBracketsToOutput(output, &output_index, top_operator);
-        } else if (IsUnaryOperator(input, input_index)) {
-            if (input[input_index] == '-') {
-                PushOutAndPush('~', output, &output_index, top_operator);
-            }
-        } else if (IsOperator(input[input_index])) {
-            PushOutAndPush(input[input_index], output, &output_index, top_operator);
-        } else if (!strncmp(input + input_index, "mod", 3)) {
-            PushOutAndPush(MOD, output, &output_index, top_operator);
-            input_index += 2;
-        }
-        output[output_index++] = ' ';
-        input_index++;
-    }
-    PushOutAll(output, output_index, top_operator);
+    Converter(input, output, &val);
 }

@@ -1,47 +1,42 @@
-#include "main.h"
+#include "SmartCalc.h"
 
 
-
-typedef struct NodeNumber NodeNumber;
-
-struct NodeNumber {
-    long double number;
-    NodeNumber* next;
-};
-
-NodeNumber* top_number = NULL;
-
-void PushNumber(NodeNumber* elem) {
-    elem->next = top_number;
-    top_number = elem;
+void PopNumber(NodeNumber* *top) {
+    NodeNumber* tmp = *top;
+    *top = (**top).next;
+    free(tmp);
 }
 
-void PopNumber(NodeNumber* elem) {
-    top_number = elem->next;
-    elem = NULL;
+void PushNumber(long double number, NodeNumber* *top) {
+    NodeNumber* elem = malloc(sizeof(NodeNumber));
+
+    elem->next = *top;
+    elem->number = number;
+
+    *top = elem;
 }
 
-void NumberToStack(long double number) {
-    NodeNumber* node_numbers = malloc(sizeof(NodeNumber));
-    node_numbers->number = number;
-    PushNumber(node_numbers);
-}
+void PushStrNumber(char* str_number, NodeNumber* *top) {
+    NodeNumber* elem = malloc(sizeof(NodeNumber));
 
-void PushNumberToStack(char* str_number) {
     long double number = 0;
-
     sscanf(str_number, "%Lf", &number);
-    NumberToStack(number);
+
+    elem->next = *top;
+    elem->number = number;
+
+    *top = elem;
 }
 
-void CalculateTwoNumbersFromStack(char operation) {
+
+void CalculateTwoNumbersFromStack(char operation, NodeNumber* *top) {
     long double result = 0;
 
-    long double number2 = top_number->number;
-    PopNumber(top_number);
+    long double number2 = (**top).number;
+    PopNumber(top);
 
-    long double number1 = top_number->number;
-    PopNumber(top_number);
+    long double number1 = (**top).number;
+    PopNumber(top);
 
     if (operation == '+') {
         result = number1 + number2;
@@ -57,11 +52,11 @@ void CalculateTwoNumbersFromStack(char operation) {
         result = fmodl(number1, number2);
     } 
 
-    NumberToStack(result);
+    PushNumber(result, top);
 }
 
-void Factorial() {
-    long double number = top_number->number;
+void Factorial(NodeNumber* *top) {
+    long double number = (**top).number;
     long double result = 1;
 
     while (number > 0) {
@@ -69,32 +64,32 @@ void Factorial() {
         number--;
     }
     
-    top_number->number = result;
+    (**top).number = result;
 }
 
 int IsTrigonometricFunction(char number) {
     return (number >= 1 && number <= 9);
 }
 
-void DecisionTrigonometricFunction(char number) {
+void DecisionTrigonometricFunction(char number, NodeNumber* *top) {
     if (number == SIN) {
-        top_number->number = sinl(top_number->number);
+        (**top).number = sinl((**top).number);
     } else if (number == COS) {
-        top_number->number = cosl(top_number->number);
+        (**top).number = cosl((**top).number);
     } else if (number == TAN) {
-        top_number->number = tanl(top_number->number);
+        (**top).number = tanl((**top).number);
     } else if (number == ASIN) {
-        top_number->number = asinl(top_number->number);
+        (**top).number = asinl((**top).number);
     } else if (number == ACOS) {
-        top_number->number = acosl(top_number->number);
+        (**top).number = acosl((**top).number);
     } else if (number == ATAN) {
-        top_number->number = atanl(top_number->number);
+        (**top).number = atanl((**top).number);
     } else if (number == SQRT) {
-        top_number->number = sqrtl(top_number->number);
+        (**top).number = sqrtl((**top).number);
     } else if (number == LN) {
-        top_number->number = logl(top_number->number);
+        (**top).number = logl((**top).number);
     } else if (number == LOG) {
-        top_number->number = log10l(top_number->number);
+        (**top).number = log10l((**top).number);
     }
 }
 
@@ -104,25 +99,27 @@ long double Calculation(char* output, double x) {
         tmp_output[i] = output[i];
     }
 
+    NodeNumber* top = NULL;
+
     char* elem = strtok(tmp_output, " ");
     while (elem != NULL) {
         if (elem[0] == 'x') {
-            NumberToStack(x);
+            PushNumber(x, &top);
         } else if (IsNumber(elem[0])) {
-            PushNumberToStack(elem);
+            PushStrNumber(elem, &top);
         } else if ((IsOperator(elem[0]) || elem[0] == MOD ) && elem[0] != '~') {
-            CalculateTwoNumbersFromStack(elem[0]);
+            CalculateTwoNumbersFromStack(elem[0], &top);
         } else if (elem[0] == '!') {
-            Factorial();
+            Factorial(&top);
         } else if (elem[0] == '~') {
-            top_number->number = 0 - top_number->number;
+            top->number = 0 - top->number;
         } else if (IsTrigonometricFunction(elem[0])) {
-            DecisionTrigonometricFunction(elem[0]);
+            DecisionTrigonometricFunction(elem[0], &top);
         }
         elem = strtok(NULL, " ");
     }
-    long double result = top_number->number;
-    PopNumber(top_number);
+    long double result = top->number;
+    PopNumber(&top);
 
     return result;
 }

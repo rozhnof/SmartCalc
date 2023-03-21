@@ -1,4 +1,4 @@
-#include "main.h"
+#include "SmartCalc.h"
 
 
 int SetNumberValid(char* input) {
@@ -34,6 +34,8 @@ int SetOperatorValid(char* input) {
 
     if (last_elem < 0) {
         status = 0;
+    } else if (input[last_elem] == 'd') {
+        status = 0;
     } else if (input[last_elem] == '.'){
         status = 0;
     } else if (input[last_elem] == '(') {
@@ -52,8 +54,6 @@ int SetOperatorValid(char* input) {
         if (input[i] == '.') {
             status = 0;
         }
-    } else if (input[last_elem] == 'd') {
-        status = 0;
     } else if (input[last_elem] == 'g') {
         status = 0;
     } else if (input[last_elem] == 'n') {
@@ -63,7 +63,6 @@ int SetOperatorValid(char* input) {
     } else if (input[last_elem] == 's') {
         status = 0;
     }
-
     return status;
 }
 
@@ -105,6 +104,8 @@ int SetOpenBracketValid(char* input) {
     } else if (input[last_elem] == '.') {
         status = 0;
     } else if (input[last_elem] == '!') {
+        status = 0;
+    } else if (input[last_elem] == 'x') {
         status = 0;
     }
     return status;
@@ -165,7 +166,7 @@ int SetModValid(char* input) {
     } else if (input[last_elem] == ')') {
         status = 1;
     } else if (input[last_elem] == '(') {
-        status = 1;
+        status = 0;
     }
 
     return status;
@@ -214,15 +215,21 @@ int ClearInput(char* input) {
             if (IsOperator(input[last_elem-1]) || input[last_elem-1] == '(') {
                 input[last_elem] = '\0';
             } else {
-                for (int i = last_elem-1; i >= 0 && !IsOperator(input[i]) && input[i] != '('; i--) {
+                for (int i = last_elem-1; i >= last_elem-1-4 && input[i] != 'd' && input[i] != 'x' && !IsOperator(input[i]) && input[i] != '('; i--) {
                     input[i] = '\0';
                 }
             }
             status = 1; 
         }
     } else if (last_elem >= 0) {
-        input[last_elem] = '\0';
-        status = 1;  
+        if (input[last_elem] == 'd') {
+            input[last_elem-2] = '\0';
+            input[last_elem-1] = '\0';
+            input[last_elem] = '\0';
+        } else {
+            input[last_elem] = '\0';
+        }
+        status = 1;              
     }
     return status;
 }
