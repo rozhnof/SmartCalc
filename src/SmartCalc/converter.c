@@ -58,7 +58,7 @@ int OperatorIsLeftAssociativity(char symbol) {
     return (IsOperator(symbol) && symbol != '^' && symbol != '~');
 }
 
-void OperatorsBetweenBracketsToOutput(char* output, ConvertHelper* val) {
+void PushOutOperatorsBetweenBrackets(char* output, ConvertHelper* val) {
     while (val->top != NULL && val->top->oper != '(') {        
         PushOut(output, val);
     }
@@ -163,7 +163,7 @@ void Converter(char* input, char* output, ConvertHelper* val) {
         } else if (input[val->in_idx] == '(') {
             PushOperator('(', val);
         } else if (input[val->in_idx] == ')') {
-            OperatorsBetweenBracketsToOutput(output, val);
+            PushOutOperatorsBetweenBrackets(output, val);
         } else if (IsUnaryOperator(input, val->in_idx)) {
             if (input[val->in_idx] == '-') {
                 PushOutAndPush('~', output, val);

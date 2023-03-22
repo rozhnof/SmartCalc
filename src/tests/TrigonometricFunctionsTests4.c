@@ -1,9 +1,9 @@
-#include "s21_tests.h"
+#include "Tests.h"
 
 
 START_TEST(sinx_test) {
     char input[512] = "sin(x)";
-    char x_input_str[512] = "0";
+    char x_input_str[512] = "-3463463.366343";
     char output[512] = "";
 
     long double x_input_num = 0;
@@ -25,7 +25,7 @@ END_TEST
 
 START_TEST(cosx_test) {
     char input[512] = "cos(x)";
-    char x_input_str[512] = "0";
+    char x_input_str[512] = "-3463463.366343";
     char output[512] = "";
 
     long double x_input_num = 0;
@@ -47,7 +47,7 @@ END_TEST
 
 START_TEST(tanx_test) {
     char input[512] = "tan(x)";
-    char x_input_str[512] = "0";
+    char x_input_str[512] = "-3463463.366343";
     char output[512] = "";
 
     long double x_input_num = 0;
@@ -69,7 +69,7 @@ END_TEST
 
 START_TEST(asinx_test) {
     char input[512] = "asin(x)";
-    char x_input_str[512] = "0";
+    char x_input_str[512] = "-3463463.366343";
     char output[512] = "";
 
     long double x_input_num = 0;
@@ -91,7 +91,7 @@ END_TEST
 
 START_TEST(acosx_test) {
     char input[512] = "acos(x)";
-    char x_input_str[512] = "0";
+    char x_input_str[512] = "-3463463.366343";
     char output[512] = "";
 
     long double x_input_num = 0;
@@ -113,7 +113,7 @@ END_TEST
 
 START_TEST(atanx_test) {
     char input[512] = "atan(x)";
-    char x_input_str[512] = "0";
+    char x_input_str[512] = "-3463463.366343";
     char output[512] = "";
 
     long double x_input_num = 0;
@@ -135,7 +135,7 @@ END_TEST
 
 START_TEST(logx_test) {
     char input[512] = "log(x)";
-    char x_input_str[512] = "0";
+    char x_input_str[512] = "-3463463.366343";
     char output[512] = "";
 
     long double x_input_num = 0;
@@ -157,7 +157,7 @@ END_TEST
 
 START_TEST(lnx_test) {
     char input[512] = "ln(x)";
-    char x_input_str[512] = "0";
+    char x_input_str[512] = "-3463463.366343";
     char output[512] = "";
 
     long double x_input_num = 0;
@@ -179,7 +179,7 @@ END_TEST
 
 START_TEST(sqrtx_test) {
     char input[512] = "sqrt(x)";
-    char x_input_str[512] = "0";
+    char x_input_str[512] = "-3463463.366343";
     char output[512] = "";
 
     long double x_input_num = 0;
@@ -201,11 +201,11 @@ END_TEST
 
 
 
-Suite *test0(void) {
+Suite *test4(void) {
   Suite *s;
   TCase *tc;
 
-  s = suite_create("test0");
+  s = suite_create("test4");
   tc = tcase_create("core");
 
     suite_add_tcase(s, tc);

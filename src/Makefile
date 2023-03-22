@@ -25,15 +25,25 @@ LIB_SRCS = $(addprefix $(LIB_DIR),calculation.c \
 								  validator.c)
 
 ## Make array of all test files
-TEST_SRCS = $(addprefix $(TEST_DIR),s21_tests.c \
-									test0.c \
-									test1.c \
-									test2.c \
-									test3.c \
-									test4.c \
-									test5.c \
-									test6.c \
-									test7.c)
+TEST_SRCS = $(addprefix $(TEST_DIR),Tests.c \
+									BracketExpressionsTests.c \
+									ClearInputTests.c \
+									CreditCalcTest.c \
+									ResultInputValidTests.c \
+									SetBracketsValidTests.c \
+									SetDotValidTests.c \
+									SetFuncValidTests.c \
+									SetModValidTests.c \
+									SetNumberValidTests.c \
+									SetOperatorValidTests.c \
+									SetXValidTests.c \
+									TrigonometricFunctionsTests0.c \
+									TrigonometricFunctionsTests1.c \
+									TrigonometricFunctionsTests2.c \
+									TrigonometricFunctionsTests3.c \
+									TrigonometricFunctionsTests4.c \
+									TrigonometricFunctionsTests5.c \
+									TrigonometricFunctionsTests6.c)
 												  
 LIB_OBJS = $(patsubst %.c, $(OBJ_DIR)%.o, $(LIB_SRCS))
 COV_OBJS = $(patsubst %.c, $(COV_OBJ_DIR)%.o, $(LIB_SRCS))

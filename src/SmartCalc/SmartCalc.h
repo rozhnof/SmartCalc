@@ -67,7 +67,7 @@ int IsNumber(char symbol);
 int IsOperator(char symbol);
 void PushOutAll(char* output, ConvertHelper* val);
 int OperatorIsLeftAssociativity(char symbol);
-void OperatorsBetweenBracketsToOutput(char* output, ConvertHelper* val);
+void PushOutOperatorsBetweenBrackets(char* output, ConvertHelper* val);
 void PushOut(char* output, ConvertHelper* val);
 int PushOutConditions(char symbol, ConvertHelper* val);
 void ReadNumber(char* input, char* output, ConvertHelper* val); 

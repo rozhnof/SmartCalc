@@ -54,14 +54,6 @@ int SetOperatorValid(char* input) {
         if (input[i] == '.') {
             status = 0;
         }
-    } else if (input[last_elem] == 'g') {
-        status = 0;
-    } else if (input[last_elem] == 'n') {
-        status = 0;
-    } else if (input[last_elem] == 't') {
-        status = 0;
-    } else if (input[last_elem] == 's') {
-        status = 0;
     }
     return status;
 }

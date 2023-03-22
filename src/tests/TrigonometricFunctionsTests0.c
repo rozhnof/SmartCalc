@@ -1,4 +1,4 @@
-#include "s21_tests.h"
+#include "Tests.h"
 
 
 START_TEST(test5_0) {
