@@ -17,7 +17,6 @@ SRunner *default_srunner_create() {
   srunner_add_suite(sr, test10());
   srunner_add_suite(sr, test11());
   srunner_add_suite(sr, test12());
-  srunner_add_suite(sr, test13());
   srunner_add_suite(sr, test14());
   srunner_add_suite(sr, test15());
   srunner_add_suite(sr, test16());

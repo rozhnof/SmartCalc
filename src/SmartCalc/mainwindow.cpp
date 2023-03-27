@@ -6,51 +6,50 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
     ui->setupUi(this);
     ui->input->setAlignment(Qt::AlignRight | Qt:: AlignCenter);
 
-    connect(ui->pushButton_close_bracket, SIGNAL(clicked()), this, SLOT(close_bracket()));
-    connect(ui->pushButton_open_bracket, SIGNAL(clicked()), this, SLOT(open_bracket()));
+    connect(ui->pushButton_close_bracket, SIGNAL(clicked()), this, SLOT(SetCloseBracket()));
+    connect(ui->pushButton_open_bracket, SIGNAL(clicked()), this, SLOT(SetOpenBracket()));
 
-    connect(ui->pushButton_0, SIGNAL(clicked()), this, SLOT(set_number()));
-    connect(ui->pushButton_1, SIGNAL(clicked()), this, SLOT(set_number()));
-    connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(set_number()));
-    connect(ui->pushButton_3, SIGNAL(clicked()), this, SLOT(set_number()));
-    connect(ui->pushButton_4, SIGNAL(clicked()), this, SLOT(set_number()));
-    connect(ui->pushButton_5, SIGNAL(clicked()), this, SLOT(set_number()));
-    connect(ui->pushButton_6, SIGNAL(clicked()), this, SLOT(set_number()));
-    connect(ui->pushButton_7, SIGNAL(clicked()), this, SLOT(set_number()));
-    connect(ui->pushButton_8, SIGNAL(clicked()), this, SLOT(set_number()));
-    connect(ui->pushButton_9, SIGNAL(clicked()), this, SLOT(set_number()));
-    connect(ui->pushButton_dot, SIGNAL(clicked()), this, SLOT(set_dot()));
-    connect(ui->pushButton_x, SIGNAL(clicked()), this, SLOT(set_x()));
+    connect(ui->pushButton_0, SIGNAL(clicked()), this, SLOT(SetNumber()));
+    connect(ui->pushButton_1, SIGNAL(clicked()), this, SLOT(SetNumber()));
+    connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(SetNumber()));
+    connect(ui->pushButton_3, SIGNAL(clicked()), this, SLOT(SetNumber()));
+    connect(ui->pushButton_4, SIGNAL(clicked()), this, SLOT(SetNumber()));
+    connect(ui->pushButton_5, SIGNAL(clicked()), this, SLOT(SetNumber()));
+    connect(ui->pushButton_6, SIGNAL(clicked()), this, SLOT(SetNumber()));
+    connect(ui->pushButton_7, SIGNAL(clicked()), this, SLOT(SetNumber()));
+    connect(ui->pushButton_8, SIGNAL(clicked()), this, SLOT(SetNumber()));
+    connect(ui->pushButton_9, SIGNAL(clicked()), this, SLOT(SetNumber()));
+    connect(ui->pushButton_dot, SIGNAL(clicked()), this, SLOT(SetDot()));
+    connect(ui->pushButton_x, SIGNAL(clicked()), this, SLOT(SetX()));
 
-    connect(ui->pushButton_factorial, SIGNAL(clicked()), this, SLOT(set_operator()));
-    connect(ui->pushButton_sum, SIGNAL(clicked()), this, SLOT(set_operator()));
-    connect(ui->pushButton_sub, SIGNAL(clicked()), this, SLOT(set_operator()));
-    connect(ui->pushButton_mul, SIGNAL(clicked()), this, SLOT(set_operator()));
-    connect(ui->pushButton_div, SIGNAL(clicked()), this, SLOT(set_operator()));
-    connect(ui->pushButton_exp, SIGNAL(clicked()), this, SLOT(set_operator()));
-    connect(ui->pushButton_mod, SIGNAL(clicked()), this, SLOT(mod()));
+    connect(ui->pushButton_factorial, SIGNAL(clicked()), this, SLOT(SetOperator()));
+    connect(ui->pushButton_sum, SIGNAL(clicked()), this, SLOT(SetOperator()));
+    connect(ui->pushButton_sub, SIGNAL(clicked()), this, SLOT(SetOperator()));
+    connect(ui->pushButton_mul, SIGNAL(clicked()), this, SLOT(SetOperator()));
+    connect(ui->pushButton_div, SIGNAL(clicked()), this, SLOT(SetOperator()));
+    connect(ui->pushButton_exp, SIGNAL(clicked()), this, SLOT(SetOperator()));
+    connect(ui->pushButton_mod, SIGNAL(clicked()), this, SLOT(SetOperatorMod()));
 
+    connect(ui->pushButton_sin, SIGNAL(clicked()), this, SLOT(SetFunction()));
+    connect(ui->pushButton_cos, SIGNAL(clicked()), this, SLOT(SetFunction()));
+    connect(ui->pushButton_tan, SIGNAL(clicked()), this, SLOT(SetFunction()));
+    connect(ui->pushButton_asin, SIGNAL(clicked()), this, SLOT(SetFunction()));
+    connect(ui->pushButton_acos, SIGNAL(clicked()), this, SLOT(SetFunction()));
+    connect(ui->pushButton_atan, SIGNAL(clicked()), this, SLOT(SetFunction()));
+    connect(ui->pushButton_sqrt, SIGNAL(clicked()), this, SLOT(SetFunction()));
+    connect(ui->pushButton_log, SIGNAL(clicked()), this, SLOT(SetFunction()));
+    connect(ui->pushButton_ln, SIGNAL(clicked()), this, SLOT(SetFunction()));
 
-    connect(ui->pushButton_sin, SIGNAL(clicked()), this, SLOT(func()));
-    connect(ui->pushButton_cos, SIGNAL(clicked()), this, SLOT(func()));
-    connect(ui->pushButton_tan, SIGNAL(clicked()), this, SLOT(func()));
-    connect(ui->pushButton_asin, SIGNAL(clicked()), this, SLOT(func()));
-    connect(ui->pushButton_acos, SIGNAL(clicked()), this, SLOT(func()));
-    connect(ui->pushButton_atan, SIGNAL(clicked()), this, SLOT(func()));
-    connect(ui->pushButton_sqrt, SIGNAL(clicked()), this, SLOT(func()));
-    connect(ui->pushButton_log, SIGNAL(clicked()), this, SLOT(func()));
-    connect(ui->pushButton_ln, SIGNAL(clicked()), this, SLOT(func()));
+    connect(ui->pushButton_AC, SIGNAL(clicked()), this, SLOT(ClearAll()));
+    connect(ui->pushButton_C, SIGNAL(clicked()), this, SLOT(Clear()));
 
-    connect(ui->pushButton_AC, SIGNAL(clicked()), this, SLOT(all_clear()));
-    connect(ui->pushButton_C, SIGNAL(clicked()), this, SLOT(clear()));
-
-    connect(ui->pushButton_eq, SIGNAL(clicked()), this, SLOT(equal()));
-    connect(ui->pushButton_grafik, SIGNAL(clicked()), this, SLOT(graph()));
-    connect(ui->pushButton_CreditResult, SIGNAL(clicked()), this, SLOT(pushButton_CreditResult()));
+    connect(ui->pushButton_eq, SIGNAL(clicked()), this, SLOT(Equal()));
+    connect(ui->pushButton_grafik, SIGNAL(clicked()), this, SLOT(DrawGraph()));
+    connect(ui->pushButton_CreditResult, SIGNAL(clicked()), this, SLOT(CreditResult()));
 }
 
 char* MainWindow::FromQStringToCharArray(QString qstr_input) {
-    std::string str_input = qstr_input.toStdString();;
+    std::string str_input = qstr_input.toStdString();
 
     int len = str_input.length();
     char* char_input = new char[len + 1];
@@ -60,51 +59,28 @@ char* MainWindow::FromQStringToCharArray(QString qstr_input) {
     return char_input;
 }
 
-void MainWindow::set_number()
-{
-    QPushButton *button = static_cast<QPushButton*>(sender());
-    QString tmp_input = (ui->input->text()+ button->text());
+void MainWindow::FormatOutput(int status, string str_input, QString button_text) {
 
-    char* char_input = FromQStringToCharArray(tmp_input);
-    int result = SetNumberValid(char_input);
-
-    if (result == 1) {
-          ui->input->setText(ui->input->text()+ button->text());
-    } else if (result == 2) {
-        std::string str_input = char_input;
-        QString qstr = QString::fromStdString(str_input);
-
-        ui->input->setText(qstr);
+    if (status == 1) {
+        ui->input->setText(ui->input->text() + button_text);
+    } else if (status == 2) {
+        QString qstr_input = QString::fromStdString(str_input);
+        ui->input->setText(qstr_input);
     }
 }
 
-void MainWindow::open_bracket()
+void MainWindow::SetNumber()
 {
     QPushButton *button = static_cast<QPushButton*>(sender());
-    QString tmp_input = (ui->input->text()+ button->text());
+    QString qstr_input = (ui->input->text() + button->text());
+    std::string str_input = qstr_input.toStdString();
 
-    char* char_input = FromQStringToCharArray(tmp_input);
-    int result = SetOpenBracketValid(char_input);
+    Validator check(*(new NumberValidate));
 
-    if (result == 1) {
-          ui->input->setText(ui->input->text()+ button->text());
-    }
+    FormatOutput(check.Validate(str_input), str_input, button->text());
 }
 
-void MainWindow::close_bracket()
-{
-    QPushButton *button = static_cast<QPushButton*>(sender());
-    QString tmp_input = (ui->input->text()+ button->text());
-
-    char* char_input = FromQStringToCharArray(tmp_input);
-    int result = SetCloseBracketValid(char_input);
-
-    if (result == 1) {
-          ui->input->setText(ui->input->text()+ button->text());
-    }
-}
-
-void MainWindow::set_operator()
+void MainWindow::SetOperator()
 {
     QPushButton *button = static_cast<QPushButton*>(sender());
     QString tmp_input = (ui->input->text()+ button->text());
@@ -120,7 +96,18 @@ void MainWindow::set_operator()
     }
 }
 
-void MainWindow::set_dot()
+void MainWindow::SetOperatorMod()
+{
+      QPushButton *button = static_cast<QPushButton*>(sender());
+
+      char* char_input = FromQStringToCharArray(ui->input->text());
+
+      if (SetModValid(char_input)) {
+            ui->input->setText(ui->input->text()+ button->text());
+      }
+}
+
+void MainWindow::SetDot()
 {
     QPushButton *button = static_cast<QPushButton*>(sender());
     QString tmp_input = (ui->input->text()+ button->text());
@@ -132,29 +119,33 @@ void MainWindow::set_dot()
     }
 }
 
-void MainWindow::func()
+void MainWindow::SetOpenBracket()
 {
-      QPushButton *button = static_cast<QPushButton*>(sender());
+    QPushButton *button = static_cast<QPushButton*>(sender());
+    QString tmp_input = (ui->input->text()+ button->text());
 
-      char* char_input = FromQStringToCharArray(ui->input->text());
+    char* char_input = FromQStringToCharArray(tmp_input);
+    int result = SetOpenBracketValid(char_input);
 
-      if (SetFuncValid(char_input)) {
-            ui->input->setText(ui->input->text()+ button->text() + "(");
-      }
+    if (result == 1) {
+          ui->input->setText(ui->input->text()+ button->text());
+    }
 }
 
-void MainWindow::mod()
+void MainWindow::SetCloseBracket()
 {
-      QPushButton *button = static_cast<QPushButton*>(sender());
+    QPushButton *button = static_cast<QPushButton*>(sender());
+    QString tmp_input = (ui->input->text()+ button->text());
 
-      char* char_input = FromQStringToCharArray(ui->input->text());
+    char* char_input = FromQStringToCharArray(tmp_input);
+    int result = SetCloseBracketValid(char_input);
 
-      if (SetModValid(char_input)) {
-            ui->input->setText(ui->input->text()+ button->text());
-      }
+    if (result == 1) {
+          ui->input->setText(ui->input->text()+ button->text());
+    }
 }
 
-void MainWindow::set_x()
+void MainWindow::SetX()
 {
       QPushButton *button = static_cast<QPushButton*>(sender());
 
@@ -165,12 +156,27 @@ void MainWindow::set_x()
       }
 }
 
-void MainWindow::all_clear()
+void MainWindow::SetFunction()
 {
-      ui->input->setText("");
+      QPushButton *button = static_cast<QPushButton*>(sender());
+
+      char* char_input = FromQStringToCharArray(ui->input->text());
+
+      if (SetFuncValid(char_input)) {
+            ui->input->setText(ui->input->text()+ button->text() + "(");
+      }
 }
 
-void MainWindow::clear()
+void MainWindow::ClearAll()
+{
+    ui->input->setText("");
+}
+
+
+
+
+
+void MainWindow::Clear()
 {
     QString tmp_input = (ui->input->text());
 
@@ -183,7 +189,7 @@ void MainWindow::clear()
     }
 }
 
-void MainWindow::graph()
+void MainWindow::DrawGraph()
 {
     char* char_input = FromQStringToCharArray(ui->input->text());
 
@@ -192,10 +198,10 @@ void MainWindow::graph()
         customPlot->setFixedSize(1000, 600);
         customPlot->show();
 
-        double function_scope_min = ui->doubleSpinBox->text().toDouble();
-        double function_scope_max = ui->doubleSpinBox_2->text().toDouble();
-        double function_range_min = ui->doubleSpinBox_3->text().toDouble();
-        double function_range_max = ui->doubleSpinBox_4->text().toDouble();
+        double SetFunctiontion_scope_min = ui->doubleSpinBox->text().toDouble();
+        double SetFunctiontion_scope_max = ui->doubleSpinBox_2->text().toDouble();
+        double SetFunctiontion_range_min = ui->doubleSpinBox_3->text().toDouble();
+        double SetFunctiontion_range_max = ui->doubleSpinBox_4->text().toDouble();
 
         int max = 10000;
         QVector<double> x(max), y(max), x_input(max), y_line(max);
@@ -204,11 +210,11 @@ void MainWindow::graph()
         FromInfixToPostfix(char_input, char_output);
         delete[] char_input;
 
-        double x0 = function_scope_min;
-        double y0 = function_range_min;
+        double x0 = SetFunctiontion_scope_min;
+        double y0 = SetFunctiontion_range_min;
 
-        double step_x = (x0 * -1 + function_scope_max) / max;
-        double step_y = (y0 * -1 + function_range_max) / max;
+        double step_x = (x0 * -1 + SetFunctiontion_scope_max) / max;
+        double step_y = (y0 * -1 + SetFunctiontion_range_max) / max;
 
         double input_x = ui->input_x->text().toDouble();
 
@@ -235,12 +241,12 @@ void MainWindow::graph()
 
         customPlot->xAxis->setLabel("x");
         customPlot->yAxis->setLabel("y");
-        customPlot->xAxis->setRange(function_scope_min, function_scope_max);
-        customPlot->yAxis->setRange(function_range_min, function_range_max);
+        customPlot->xAxis->setRange(SetFunctiontion_scope_min, SetFunctiontion_scope_max);
+        customPlot->yAxis->setRange(SetFunctiontion_range_min, SetFunctiontion_range_max);
     }
 }
 
-void MainWindow::equal()
+void MainWindow::Equal()
 {
     char* char_input = FromQStringToCharArray(ui->input->text());
 
@@ -260,7 +266,7 @@ void MainWindow::equal()
     }
 }
 
-void MainWindow::pushButton_CreditResult()
+void MainWindow::CreditResult()
 {
     Credit annuity;
     Credit differentiated;
