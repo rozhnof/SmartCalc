@@ -1,4 +1,4 @@
-#include "SmartCalc.h"
+#include "Model.h"
 
 
 void PopNumber(NodeNumber* *top) {

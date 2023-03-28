@@ -86,18 +86,6 @@ void Factorial(NodeNumber* *top);
 int IsTrigonometricFunction(char number);
 void DecisionTrigonometricFunction(char number, NodeNumber* *top);
 
-int SetNumberValid(char* input);
-int SetOperatorValid(char* input);
-int SetDotValid(char* input);
-int SetOpenBracketValid(char* input);
-int SetCloseBracketValid(char* input);
-int SetFuncValid(char* input);
-int SetModValid(char* input);
-int XValid(char* input);
-int SetXValid(char* input);
-int ClearInput(char* input);
-int IsNeedToClear(int index, int last_elem, char symbol);
-int ResultInputValid(char* input);
 
 void AnnuityLoan(Credit* values);
 void DifferentiatedLoan(Credit* values);

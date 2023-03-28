@@ -1,4 +1,4 @@
-#include "SmartCalc.h"
+#include "Model.h"
 
 
 void PushOperator(char symbol, ConvertHelper* val) {

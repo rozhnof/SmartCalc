@@ -149,6 +149,9 @@ QPushButton:pressed {
       <property name="text">
        <string>8</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup</string>
+      </attribute>
      </widget>
      <widget class="QPushButton" name="pushButton_sub">
       <property name="geometry">
@@ -227,6 +230,9 @@ QPushButton:pressed {
       <property name="text">
        <string>7</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup</string>
+      </attribute>
      </widget>
      <widget class="QPushButton" name="pushButton_6">
       <property name="geometry">
@@ -266,6 +272,9 @@ QPushButton:pressed {
       <property name="text">
        <string>6</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup</string>
+      </attribute>
      </widget>
      <widget class="QPushButton" name="pushButton_open_bracket">
       <property name="geometry">
@@ -422,6 +431,9 @@ QPushButton:pressed {
       <property name="text">
        <string>3</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup</string>
+      </attribute>
      </widget>
      <widget class="QPushButton" name="pushButton_0">
       <property name="geometry">
@@ -461,6 +473,9 @@ QPushButton:pressed {
       <property name="text">
        <string>0</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup</string>
+      </attribute>
      </widget>
      <widget class="QPushButton" name="pushButton_dot">
       <property name="geometry">
@@ -701,6 +716,9 @@ QPushButton:pressed {
       <property name="text">
        <string>1</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup</string>
+      </attribute>
      </widget>
      <widget class="QPushButton" name="pushButton_mul">
       <property name="geometry">
@@ -779,6 +797,9 @@ QPushButton:pressed {
       <property name="text">
        <string>2</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup</string>
+      </attribute>
      </widget>
      <widget class="QPushButton" name="pushButton_eq">
       <property name="geometry">
@@ -1013,6 +1034,9 @@ QPushButton:pressed {
       <property name="text">
        <string>9</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup</string>
+      </attribute>
      </widget>
      <widget class="QPushButton" name="pushButton_factorial">
       <property name="geometry">
@@ -1130,6 +1154,9 @@ QPushButton:pressed {
       <property name="text">
        <string>4</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup</string>
+      </attribute>
      </widget>
      <widget class="QPushButton" name="pushButton_close_bracket">
       <property name="geometry">
@@ -1286,6 +1313,9 @@ QPushButton:pressed {
       <property name="text">
        <string>5</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup</string>
+      </attribute>
      </widget>
      <widget class="QPushButton" name="pushButton_AC">
       <property name="geometry">
@@ -2237,4 +2267,7 @@ QPushButton:pressed {
  </widget>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="buttonGroup"/>
+ </buttongroups>
 </ui>
