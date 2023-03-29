@@ -121,6 +121,5 @@ long double Calculation(char* output, double x) {
     }
     long double result = top->number;
     PopNumber(&top);
-
     return result;
 }

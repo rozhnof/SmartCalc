@@ -5,12 +5,33 @@ Validator::Validator(IValidate* rule) {
     alg = rule;
 }
 
-QString Validator::Validate(QString input, QString button) {
-    _input_text = input.toStdString();
-    _button_text = button.toStdString();
-    _result_text = alg->Validate(_input_text, _button_text);
+string Validator::Validate(string input, string button, int &status) {
+    return _result_text = alg->Validate(input, button, status);
+}
 
-    return QString::fromStdString(_result_text);
+int Validator::IsOperator(char symbol) {
+    int status = 0;
+
+    if (symbol == '+') {
+        status = 1;
+    } else if (symbol == '-') {
+        status = 1;
+    } else if (symbol == '*') {
+        status = 1;
+    } else if (symbol == '/') {
+        status = 1;
+    } else if (symbol == '^') {
+        status = 1;
+    } else if (symbol == 'd') {
+        status = 1;
+    }
+
+    return status;
+}
+
+int Validator::IsNumber(char symbol) {
+    return (symbol >= '0' && symbol <= '9');
 }
 
 bool Validator::dot_status = 0;
+int Validator::brackets_count = 0;

@@ -1,9 +1,9 @@
 #include "Validate.h"
 
 
-string NumberValidate::Validate(string input, const string &button)
+string NumberValidate::Validate(string input, const string &button, int &status)
 {
-    int status = 1;
+    status = 1;
     char last_symbol = input.back();
 
     if (last_symbol == '!'){

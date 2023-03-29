@@ -1,6 +1,5 @@
 #include <iostream>
 #include <QString>
-#include "../../Models/Model.h"
 
 
 using namespace std;
@@ -8,69 +7,65 @@ using namespace std;
 
 class IValidate {
 public:
-    virtual string Validate(string input, const string &button) = 0;
+    virtual string Validate(string input, const string &button, int &status) = 0;
 };
 
 class Validator {
 private:
     IValidate* alg;
-    string _input_text;
-    string _button_text;
     string _result_text;
     
 public:
     static bool dot_status;
+    static int brackets_count;
+    static int IsOperator(char symbol);
+    static int IsNumber(char symbol);
 
     Validator(IValidate* rule);
-    QString Validate(QString input, QString button);
+    string Validate(string input, string button, int &status);
 };
 
 class NumberValidate : public IValidate {   
 public:
-    string Validate(string input, const string &button) override;
+    string Validate(string input, const string &button, int &status) override;
 };
 
 class OperatorValidate : public IValidate {
 public:
-    string Validate(string input, const string &button) override;
+    string Validate(string input, const string &button, int &status) override;
 };
 
 class DotValidate : public IValidate {
 public:
-    string Validate(string input, const string &button) override;
+    string Validate(string input, const string &button, int &status) override;
 };
 
 class OpenBracketValidate : public IValidate {
 public:
-    string Validate(string input, const string &button) override;
+    string Validate(string input, const string &button, int &status) override;
 };
 
 class CloseBracketValidate : public IValidate {
 public:
-    string Validate(string input, const string &button) override;
+    string Validate(string input, const string &button, int &status) override;
 };
 
 class FunctionValidate : public IValidate {
 public:
-    string Validate(string input, const string &button) override;
+    string Validate(string input, const string &button, int &status) override;
 };
 
 class xValidate : public IValidate {
 public:
-    string Validate(string input, const string &button) override;
-};
-
-class ClearInput : public IValidate {
-public:
-    string Validate(string input, const string &button) override;
+    string Validate(string input, const string &button, int &status) override;
 };
 
 class ResultValidate : public IValidate {
 public:
-    string Validate(string input, const string &button) override;
+    string Validate(string input, const string &button, int &status) override;
 };
 
 class FactorialValidate : public IValidate {
 public:
-    string Validate(string input, const string &button) override;
+    string Validate(string input, const string &button, int &status) override;
 };

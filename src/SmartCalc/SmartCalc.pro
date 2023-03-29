@@ -13,7 +13,6 @@ CONFIG += c++17
 
 SOURCES += \
     Controllers/Controller.cpp \
-    Controllers/Validate/ClearInput.cpp \
     Controllers/Validate/CloseBracketValidate.cpp \
     Controllers/Validate/DotValidate.cpp \
     Controllers/Validate/FactorialValidate.cpp \

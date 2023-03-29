@@ -6,6 +6,8 @@
 #include <QApplication>
 #include <QLabel>
 #include "ui_mainwindow.h"
+#include <QMessageBox>
+#include "../Controllers/Controller.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,12 +21,11 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
-    char* FromQStringToCharArray(QString qstr_input);
-
+    void IncorrectSymbol();
 
 private:
     Ui::MainWindow *ui;
+    Controller *action;
 
 
 private slots:
@@ -37,10 +38,9 @@ private slots:
     void SetX();
     void SetFunction();
     void ClearAll();
-    void Clear();
     void Equal();
-    void DrawGraph();
-    void CreditResult();
+    // void DrawGraph();
+    // void CreditResult();
 };
 
 

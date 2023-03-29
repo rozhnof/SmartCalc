@@ -1,8 +1,9 @@
 #include "mainwindow.h"
-#include "../Controllers/Validate/Validate.h"
+#include <QErrorMessage>
 
 
-MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow)
+
+MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow), action(new Controller())
 {
     ui->setupUi(this);
     ui->input->setAlignment(Qt::AlignRight | Qt:: AlignCenter);
@@ -44,70 +45,73 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
     connect(ui->pushButton_ln, SIGNAL(clicked()), this, SLOT(SetFunction()));
 
     connect(ui->pushButton_AC, SIGNAL(clicked()), this, SLOT(ClearAll()));
-   connect(ui->pushButton_C, SIGNAL(clicked()), this, SLOT(Clear()));
 
    connect(ui->pushButton_eq, SIGNAL(clicked()), this, SLOT(Equal()));
-   connect(ui->pushButton_grafik, SIGNAL(clicked()), this, SLOT(DrawGraph()));
-   connect(ui->pushButton_CreditResult, SIGNAL(clicked()), this, SLOT(CreditResult()));
+//    connect(ui->pushButton_grafik, SIGNAL(clicked()), this, SLOT(DrawGraph()));
+//    connect(ui->pushButton_CreditResult, SIGNAL(clicked()), this, SLOT(CreditResult()));
 }
 
-char* MainWindow::FromQStringToCharArray(QString qstr_input) {
-    std::string str_input = qstr_input.toStdString();
-
-    int len = str_input.length();
-    char* char_input = new char[len + 1];
-
-    strcpy(char_input, str_input.c_str());
-
-    return char_input;
+void MainWindow::IncorrectSymbol() {
+    QMessageBox* error = new QMessageBox();
+    error->setText("Incorrect input");
+    error->setFixedSize(40, 80);
+    error->show();
 }
 
 void MainWindow::SetNumber()
 {
-    Validator check(new NumberValidate);
-    ui->input->setText(check.Validate(ui->input->text(), static_cast<QPushButton*>(sender())->text()));
+    int status;
+    ui->input->setText(this->action->Validate(new NumberValidate, ui->input->text(), static_cast<QPushButton*>(sender())->text(), status));
+    if (!status) this->IncorrectSymbol();
 }
 
 void MainWindow::SetOperator()
 {
-    Validator check(new OperatorValidate);
-    ui->input->setText(check.Validate(ui->input->text(), static_cast<QPushButton*>(sender())->text()));
+    int status;
+    ui->input->setText(this->action->Validate(new OperatorValidate, ui->input->text(), static_cast<QPushButton*>(sender())->text(), status));
+    if (!status) this->IncorrectSymbol();
 }
 
 void MainWindow::SetFactorial()
 {
-    Validator check(new OperatorValidate);
-    ui->input->setText(check.Validate(ui->input->text(), static_cast<QPushButton*>(sender())->text()));
+    int status;
+    ui->input->setText(this->action->Validate(new FactorialValidate, ui->input->text(), static_cast<QPushButton*>(sender())->text(), status));
+    if (!status) this->IncorrectSymbol();
 }
 
 void MainWindow::SetDot()
 {
-    Validator check(new DotValidate);
-    ui->input->setText(check.Validate(ui->input->text(), static_cast<QPushButton*>(sender())->text()));
+    int status;
+    ui->input->setText(this->action->Validate(new DotValidate, ui->input->text(), static_cast<QPushButton*>(sender())->text(), status));
+    if (!status) this->IncorrectSymbol();
 }
 
 void MainWindow::SetOpenBracket()
 {
-    Validator check(new OpenBracketValidate);
-    ui->input->setText(check.Validate(ui->input->text(), static_cast<QPushButton*>(sender())->text()));
+    int status;
+    ui->input->setText(this->action->Validate(new OpenBracketValidate, ui->input->text(), static_cast<QPushButton*>(sender())->text(), status));
+    if (!status) this->IncorrectSymbol();
 }
 
 void MainWindow::SetCloseBracket()
 {
-    Validator check(new CloseBracketValidate);
-    ui->input->setText(check.Validate(ui->input->text(), static_cast<QPushButton*>(sender())->text()));
+    int status;
+    ui->input->setText(this->action->Validate(new CloseBracketValidate, ui->input->text(), static_cast<QPushButton*>(sender())->text(), status));
+    if (!status) this->IncorrectSymbol();
 }
 
 void MainWindow::SetX()
 {
-    Validator check(new xValidate);
-    ui->input->setText(check.Validate(ui->input->text(), static_cast<QPushButton*>(sender())->text()));
+    int status;
+    ui->input->setText(this->action->Validate(new xValidate, ui->input->text(), static_cast<QPushButton*>(sender())->text(), status));
+    if (!status) this->IncorrectSymbol();
 }
 
 void MainWindow::SetFunction()
 {
-    Validator check(new FunctionValidate);
-    ui->input->setText(check.Validate(ui->input->text(), static_cast<QPushButton*>(sender())->text()));
+    int status;
+    ui->input->setText(this->action->Validate(new FunctionValidate, ui->input->text(), static_cast<QPushButton*>(sender())->text(), status));
+    if (!status) this->IncorrectSymbol();
 }
 
 void MainWindow::ClearAll()
@@ -115,16 +119,10 @@ void MainWindow::ClearAll()
     ui->input->setText("");
 }
 
-void MainWindow::Clear()
-{
-   Validator check(new ClearInput);
-   ui->input->setText(check.Validate(ui->input->text(), static_cast<QPushButton*>(sender())->text()));
-}
-
 
 void MainWindow::DrawGraph()
 {
-   char* char_input = FromQStringToCharArray(ui->input->text());
+    char* char_input = FromQStringToCharArray(ui->input->text());
 
     QCustomPlot *customPlot = new QCustomPlot();
     customPlot->setFixedSize(1000, 600);
@@ -179,46 +177,37 @@ void MainWindow::DrawGraph()
 
 void MainWindow::Equal()
 {
-    double x = ui->input_x->text().toDouble();
-
-    char* char_input = FromQStringToCharArray(ui->input->text());
-    char char_output[1024];
-
-    FromInfixToPostfix(char_input, char_output);
-    delete[] char_input;
-
-    long double result = Calculation(char_output, x);
-    QString qstr_input = QString::number(result, 'g', 15);
-    ui->input->setText(qstr_input);
-
+    Validator check(new ResultValidate);
+    this->action->Calculate(ui->input_x->text().toDouble());
+    ui->input->setText(QString::number(this->action->GetResult(), 'g', 16));
 }
 
-void MainWindow::CreditResult()
-{
-   Credit annuity;
-   Credit differentiated;
+// void MainWindow::CreditResult()
+// {
+//    Credit annuity;
+//    Credit differentiated;
 
-   annuity.sum = ui->loan_amount_input->value();
-   annuity.percent = ui->percent_input->value();
-   annuity.term = ui->credit_term_input->value();
+//    annuity.sum = ui->loan_amount_input->value();
+//    annuity.percent = ui->percent_input->value();
+//    annuity.term = ui->credit_term_input->value();
 
-   differentiated.sum = ui->loan_amount_input->value();
-   differentiated.percent = ui->percent_input->value();
-   differentiated.term = ui->credit_term_input->value();
+//    differentiated.sum = ui->loan_amount_input->value();
+//    differentiated.percent = ui->percent_input->value();
+//    differentiated.term = ui->credit_term_input->value();
 
-   if (annuity.sum && annuity.percent && annuity.term) {
-       AnnuityLoan(&annuity);
-       DifferentiatedLoan(&differentiated);
+//    if (annuity.sum && annuity.percent && annuity.term) {
+//        AnnuityLoan(&annuity);
+//        DifferentiatedLoan(&differentiated);
 
-       ui->monthly_payment_A->setText(QString::number(annuity.monthly_payment, 'f', 2));
-       ui->overpayment_A->setText(QString::number(annuity.overpayment, 'f', 2));
-       ui->total_payment_A->setText(QString::number(annuity.total_payment, 'f', 2));
+//        ui->monthly_payment_A->setText(QString::number(annuity.monthly_payment, 'f', 2));
+//        ui->overpayment_A->setText(QString::number(annuity.overpayment, 'f', 2));
+//        ui->total_payment_A->setText(QString::number(annuity.total_payment, 'f', 2));
 
-       ui->monthly_payment_D->setText(QString::number(differentiated.first_monthly_payment, 'f', 2)+" - "+QString::number(differentiated.monthly_payment, 'f', 2));
-       ui->overpayment_D->setText(QString::number(differentiated.overpayment, 'f', 2));
-       ui->total_payment_D->setText(QString::number(differentiated.total_payment, 'f', 2));
-   }
-}
+//        ui->monthly_payment_D->setText(QString::number(differentiated.first_monthly_payment, 'f', 2)+" - "+QString::number(differentiated.monthly_payment, 'f', 2));
+//        ui->overpayment_D->setText(QString::number(differentiated.overpayment, 'f', 2));
+//        ui->total_payment_D->setText(QString::number(differentiated.total_payment, 'f', 2));
+//    }
+// }
 
 MainWindow::~MainWindow()
 {

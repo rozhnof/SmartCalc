@@ -1,14 +1,16 @@
 #include "Validate.h"
 
 
-string ResultValidate::Validate(string input, const string &button)
+string ResultValidate::Validate(string input, const string &button, int &status)
 {
-    int status = 1;
+    status = 1;
     char last_symbol = input.back();
 
-    if (IsOperator(last_symbol)) {
+    if (Validator::IsOperator(last_symbol)) {
         status = 0;
     } else if (last_symbol == '(') {
+        status = 0;
+    } else if (input.empty()) {
         status = 0;
     }
 
