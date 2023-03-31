@@ -2,6 +2,7 @@
 #include <QString>
 #include "../Models/Model.h"
 #include "Validate/Validate.h"
+#include "Graph/Graph.h"
 
 
 using namespace std;
@@ -12,8 +13,13 @@ private:
     string _button_text;
     string _result_text;
     long double result;
+    char char_postfix[1024];
+
 
 public:
+    Graph *graph;
+
+    Controller() : graph(new Graph) {}
 
     QString Validate(IValidate *rule, QString input, QString button, int &status) {
         Validator check(rule);
@@ -25,26 +31,19 @@ public:
         return QString::fromStdString(_result_text);
     }
 
-    int Calculate(double x_value) {
+    void ConvertToPostfix() {
         char* char_infix = new char[_result_text.length() + 1];
         strcpy(char_infix, _result_text.c_str());
-        char char_postfix[1024] = {0};
         FromInfixToPostfix(char_infix, char_postfix);
+        graph->SetInputValues(char_postfix);
+    }
 
+    int Calculate(double x_value) {
         result = Calculation(char_postfix, 0);
     }
 
     long double GetResult() {
         return result;
-    }
-
-
-    int Graph() {
-        
-    }
-
-    int CreditCalc() {
-
     }
 
 };

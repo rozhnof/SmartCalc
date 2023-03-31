@@ -26,46 +26,37 @@ public:
 };
 
 class NumberValidate : public IValidate {   
-public:
     string Validate(string input, const string &button, int &status) override;
 };
 
 class OperatorValidate : public IValidate {
-public:
     string Validate(string input, const string &button, int &status) override;
 };
 
 class DotValidate : public IValidate {
-public:
     string Validate(string input, const string &button, int &status) override;
 };
 
 class OpenBracketValidate : public IValidate {
-public:
     string Validate(string input, const string &button, int &status) override;
 };
 
 class CloseBracketValidate : public IValidate {
-public:
     string Validate(string input, const string &button, int &status) override;
 };
 
 class FunctionValidate : public IValidate {
-public:
     string Validate(string input, const string &button, int &status) override;
 };
 
 class xValidate : public IValidate {
-public:
     string Validate(string input, const string &button, int &status) override;
 };
 
 class ResultValidate : public IValidate {
-public:
     string Validate(string input, const string &button, int &status) override;
 };
 
 class FactorialValidate : public IValidate {
-public:
     string Validate(string input, const string &button, int &status) override;
 };

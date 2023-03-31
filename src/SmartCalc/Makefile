@@ -343,6 +343,7 @@ DIST          = /usr/local/share/qt/mkspecs/features/spec_pre.prf \
 		/usr/local/share/qt/mkspecs/features/yacc.prf \
 		/usr/local/share/qt/mkspecs/features/lex.prf \
 		SmartCalc.pro Controllers/Controller.h \
+		Controllers/Graph/Graph.h \
 		Controllers/Validate/Validate.h \
 		Models/Model.h \
 		SmartCalc.h \
@@ -935,7 +936,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/local/share/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents Controllers/Controller.h Controllers/Validate/Validate.h Models/Model.h SmartCalc.h Views/mainwindow.h Views/qcustomplot.h $(DISTDIR)/
+	$(COPY_FILE) --parents Controllers/Controller.h Controllers/Graph/Graph.h Controllers/Validate/Validate.h Models/Model.h SmartCalc.h Views/mainwindow.h Views/qcustomplot.h $(DISTDIR)/
 	$(COPY_FILE) --parents Controllers/Controller.cpp Controllers/Validate/CloseBracketValidate.cpp Controllers/Validate/DotValidate.cpp Controllers/Validate/FactorialValidate.cpp Controllers/Validate/FunctionValidate.cpp Controllers/Validate/NumberValidate.cpp Controllers/Validate/OpenBracketValidate.cpp Controllers/Validate/OperatorValidate.cpp Controllers/Validate/ResultValidate.cpp Controllers/Validate/Validator.cpp Controllers/Validate/xValidate.cpp Models/calculation.c Models/converter.c Models/credit_calc.c Views/mainwindow.cpp Views/qcustomplot.cpp main.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents Views/mainwindow.ui $(DISTDIR)/
 
@@ -977,10 +978,6 @@ compiler_moc_header_clean:
 moc_mainwindow.cpp: Views/mainwindow.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
 		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		Views/qcustomplot.h \
-		/usr/local/lib/QtCore.framework/Headers/qmath.h \
-		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
-		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
 		/usr/local/lib/QtWidgets.framework/Headers/QApplication \
 		/usr/local/lib/QtWidgets.framework/Headers/qapplication.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QLabel \
@@ -988,6 +985,12 @@ moc_mainwindow.cpp: Views/mainwindow.h \
 		ui_mainwindow.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QMessageBox \
 		/usr/local/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		Controllers/Controller.h \
+		/usr/local/lib/QtCore.framework/Headers/QString \
+		/usr/local/lib/QtCore.framework/Headers/qstring.h \
+		Models/Model.h \
+		Controllers/Validate/Validate.h \
+		Controllers/Graph/Graph.h \
 		moc_predefs.h \
 		/usr/local/share/qt/libexec/moc
 	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib Views/mainwindow.h -o moc_mainwindow.cpp
@@ -1028,62 +1031,52 @@ Controller.o: Controllers/Controller.cpp
 
 CloseBracketValidate.o: Controllers/Validate/CloseBracketValidate.cpp Controllers/Validate/Validate.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
-		/usr/local/lib/QtCore.framework/Headers/qstring.h \
-		Models/Model.h
+		/usr/local/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CloseBracketValidate.o Controllers/Validate/CloseBracketValidate.cpp
 
 DotValidate.o: Controllers/Validate/DotValidate.cpp Controllers/Validate/Validate.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
-		/usr/local/lib/QtCore.framework/Headers/qstring.h \
-		Models/Model.h
+		/usr/local/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o DotValidate.o Controllers/Validate/DotValidate.cpp
 
 FactorialValidate.o: Controllers/Validate/FactorialValidate.cpp Controllers/Validate/Validate.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
-		/usr/local/lib/QtCore.framework/Headers/qstring.h \
-		Models/Model.h
+		/usr/local/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o FactorialValidate.o Controllers/Validate/FactorialValidate.cpp
 
 FunctionValidate.o: Controllers/Validate/FunctionValidate.cpp Controllers/Validate/Validate.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
-		/usr/local/lib/QtCore.framework/Headers/qstring.h \
-		Models/Model.h
+		/usr/local/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o FunctionValidate.o Controllers/Validate/FunctionValidate.cpp
 
 NumberValidate.o: Controllers/Validate/NumberValidate.cpp Controllers/Validate/Validate.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
-		/usr/local/lib/QtCore.framework/Headers/qstring.h \
-		Models/Model.h
+		/usr/local/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o NumberValidate.o Controllers/Validate/NumberValidate.cpp
 
 OpenBracketValidate.o: Controllers/Validate/OpenBracketValidate.cpp Controllers/Validate/Validate.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
-		/usr/local/lib/QtCore.framework/Headers/qstring.h \
-		Models/Model.h
+		/usr/local/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o OpenBracketValidate.o Controllers/Validate/OpenBracketValidate.cpp
 
 OperatorValidate.o: Controllers/Validate/OperatorValidate.cpp Controllers/Validate/Validate.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
-		/usr/local/lib/QtCore.framework/Headers/qstring.h \
-		Models/Model.h
+		/usr/local/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o OperatorValidate.o Controllers/Validate/OperatorValidate.cpp
 
 ResultValidate.o: Controllers/Validate/ResultValidate.cpp Controllers/Validate/Validate.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
-		/usr/local/lib/QtCore.framework/Headers/qstring.h \
-		Models/Model.h
+		/usr/local/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ResultValidate.o Controllers/Validate/ResultValidate.cpp
 
 Validator.o: Controllers/Validate/Validator.cpp Controllers/Validate/Validate.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
-		/usr/local/lib/QtCore.framework/Headers/qstring.h \
-		Models/Model.h
+		/usr/local/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Validator.o Controllers/Validate/Validator.cpp
 
 xValidate.o: Controllers/Validate/xValidate.cpp Controllers/Validate/Validate.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
-		/usr/local/lib/QtCore.framework/Headers/qstring.h \
-		Models/Model.h
+		/usr/local/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o xValidate.o Controllers/Validate/xValidate.cpp
 
 calculation.o: Models/calculation.c Models/Model.h
@@ -1098,10 +1091,6 @@ credit_calc.o: Models/credit_calc.c Models/Model.h
 mainwindow.o: Views/mainwindow.cpp Views/mainwindow.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
 		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		Views/qcustomplot.h \
-		/usr/local/lib/QtCore.framework/Headers/qmath.h \
-		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
-		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
 		/usr/local/lib/QtWidgets.framework/Headers/QApplication \
 		/usr/local/lib/QtWidgets.framework/Headers/qapplication.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QLabel \
@@ -1109,10 +1098,14 @@ mainwindow.o: Views/mainwindow.cpp Views/mainwindow.h \
 		ui_mainwindow.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QMessageBox \
 		/usr/local/lib/QtWidgets.framework/Headers/qmessagebox.h \
-		Controllers/Validate/Validate.h \
+		Controllers/Controller.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
 		/usr/local/lib/QtCore.framework/Headers/qstring.h \
-		Models/Model.h
+		Models/Model.h \
+		Controllers/Validate/Validate.h \
+		Controllers/Graph/Graph.h \
+		/usr/local/lib/QtWidgets.framework/Headers/QErrorMessage \
+		/usr/local/lib/QtWidgets.framework/Headers/qerrormessage.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o Views/mainwindow.cpp
 
 qcustomplot.o: Views/qcustomplot.cpp Views/qcustomplot.h \
@@ -1124,17 +1117,19 @@ qcustomplot.o: Views/qcustomplot.cpp Views/qcustomplot.h \
 main.o: main.cpp Views/mainwindow.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
 		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		Views/qcustomplot.h \
-		/usr/local/lib/QtCore.framework/Headers/qmath.h \
-		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
-		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
 		/usr/local/lib/QtWidgets.framework/Headers/QApplication \
 		/usr/local/lib/QtWidgets.framework/Headers/qapplication.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QLabel \
 		/usr/local/lib/QtWidgets.framework/Headers/qlabel.h \
 		ui_mainwindow.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QMessageBox \
-		/usr/local/lib/QtWidgets.framework/Headers/qmessagebox.h
+		/usr/local/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		Controllers/Controller.h \
+		/usr/local/lib/QtCore.framework/Headers/QString \
+		/usr/local/lib/QtCore.framework/Headers/qstring.h \
+		Models/Model.h \
+		Controllers/Validate/Validate.h \
+		Controllers/Graph/Graph.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 

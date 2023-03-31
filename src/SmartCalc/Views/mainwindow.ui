@@ -1857,7 +1857,7 @@ QPushButton:pressed {
      </widget>
     </widget>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_4">
+   <widget class="QLineEdit" name="FunctionScope">
     <property name="geometry">
      <rect>
       <x>641</x>
@@ -1889,7 +1889,7 @@ border: 1px solid rgb(34, 34, 34);
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox">
+   <widget class="QDoubleSpinBox" name="ScopeMin">
     <property name="geometry">
      <rect>
       <x>641</x>
@@ -1927,7 +1927,7 @@ border: 1px solid rgb(34, 34, 34);
      <double>-50.000000000000000</double>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
+   <widget class="QDoubleSpinBox" name="RangeMin">
     <property name="geometry">
      <rect>
       <x>729</x>
@@ -1962,7 +1962,7 @@ border: 1px solid rgb(34, 34, 34);
      <double>-2.000000000000000</double>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_5">
+   <widget class="QLineEdit" name="XDef">
     <property name="geometry">
      <rect>
       <x>820</x>
@@ -1994,7 +1994,7 @@ border: 1px solid rgb(34, 34, 34);
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+   <widget class="QDoubleSpinBox" name="ScopeMax">
     <property name="geometry">
      <rect>
       <x>641</x>
@@ -2029,7 +2029,7 @@ border: 1px solid rgb(34, 34, 34);
      <double>50.000000000000000</double>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_3">
+   <widget class="QLineEdit" name="FunctionRange">
     <property name="geometry">
      <rect>
       <x>729</x>
@@ -2061,7 +2061,7 @@ border: 1px solid rgb(34, 34, 34);
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_4">
+   <widget class="QDoubleSpinBox" name="RangeMax">
     <property name="geometry">
      <rect>
       <x>729</x>

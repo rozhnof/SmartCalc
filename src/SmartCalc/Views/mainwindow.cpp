@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
 {
     ui->setupUi(this);
     ui->input->setAlignment(Qt::AlignRight | Qt:: AlignCenter);
+    this->action->graph->ShowGraph();
 
     connect(ui->pushButton_close_bracket, SIGNAL(clicked()), this, SLOT(SetCloseBracket()));
     connect(ui->pushButton_open_bracket, SIGNAL(clicked()), this, SLOT(SetOpenBracket()));
@@ -46,8 +47,19 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
 
     connect(ui->pushButton_AC, SIGNAL(clicked()), this, SLOT(ClearAll()));
 
-   connect(ui->pushButton_eq, SIGNAL(clicked()), this, SLOT(Equal()));
-//    connect(ui->pushButton_grafik, SIGNAL(clicked()), this, SLOT(DrawGraph()));
+    connect(ui->pushButton_eq, SIGNAL(clicked()), this, SLOT(Equal()));
+
+
+
+    connect(ui->pushButton_grafik, SIGNAL(clicked()), this, SLOT(DrawGraph()));
+
+    connect(ui->ScopeMin, SIGNAL(valueChanged(double)), this, SLOT(SetScopeMin()));
+    connect(ui->ScopeMax, SIGNAL(valueChanged(double)), this, SLOT(SetScopeMax()));
+    connect(ui->RangeMin, SIGNAL(valueChanged(double)), this, SLOT(SetRangeMin()));
+    connect(ui->RangeMax, SIGNAL(valueChanged(double)), this, SLOT(SetRangeMax()));
+
+
+
 //    connect(ui->pushButton_CreditResult, SIGNAL(clicked()), this, SLOT(CreditResult()));
 }
 
@@ -122,58 +134,38 @@ void MainWindow::ClearAll()
 
 void MainWindow::DrawGraph()
 {
-    char* char_input = FromQStringToCharArray(ui->input->text());
+    int status;
+    this->action->Validate(new ResultValidate, ui->input->text(), "0", status);
+    if (status) {
+        this->action->graph->SetDefaultRangeMax(ui->RangeMax->text().toDouble());
+        this->action->graph->SetDefaultRangeMin(ui->RangeMin->text().toDouble());
+        this->action->graph->SetDefaultScopeMax(ui->ScopeMax->text().toDouble());
+        this->action->graph->SetDefaultScopeMin(ui->ScopeMax->text().toDouble());
 
-    QCustomPlot *customPlot = new QCustomPlot();
-    customPlot->setFixedSize(1000, 600);
-    customPlot->show();
-
-    double SetFunctiontion_scope_min = ui->doubleSpinBox->text().toDouble();
-    double SetFunctiontion_scope_max = ui->doubleSpinBox_2->text().toDouble();
-    double SetFunctiontion_range_min = ui->doubleSpinBox_3->text().toDouble();
-    double SetFunctiontion_range_max = ui->doubleSpinBox_4->text().toDouble();
-
-    int max = 10000;
-    QVector<double> x(max), y(max), x_input(max), y_line(max);
-
-    char char_output[1024];
-    FromInfixToPostfix(char_input, char_output);
-    delete[] char_input;
-
-    double x0 = SetFunctiontion_scope_min;
-    double y0 = SetFunctiontion_range_min;
-
-    double step_x = (x0 * -1 + SetFunctiontion_scope_max) / max;
-    double step_y = (y0 * -1 + SetFunctiontion_range_max) / max;
-
-    double input_x = ui->input_x->text().toDouble();
-
-    for (int i = 0; i < max; i++)
-    {
-        x[i] += x0;
-        y[i] = Calculation(char_output, x[i]);
-        x0 += step_x;
-
-        if (input_x != 0) {
-            x_input[i] = input_x;
-            y_line[i] += y0;
-            y0 += step_y;
-        }
+        this->action->graph->SetXValue(ui->input_x->text().toDouble());
+        this->action->graph->Draw();
+        this->action->graph->ShowGraph();        
+    } else {
+        cout << "BEBRA\n\n";
     }
-
-    customPlot->addGraph();
-    customPlot->graph(0)->setData(x, y);
-
-    if (input_x != 0) {
-        customPlot->addGraph();
-        customPlot->graph(1)->setData(x_input, y_line);
-    }
-
-    customPlot->xAxis->setLabel("x");
-    customPlot->yAxis->setLabel("y");
-    customPlot->xAxis->setRange(SetFunctiontion_scope_min, SetFunctiontion_scope_max);
-    customPlot->yAxis->setRange(SetFunctiontion_range_min, SetFunctiontion_range_max);
 }
+
+void MainWindow::SetScopeMin() {
+    this->action->graph->SetScopeMin(ui->ScopeMin->text().toDouble());
+}
+
+void MainWindow::SetScopeMax() {
+    this->action->graph->SetScopeMax(ui->ScopeMin->text().toDouble());
+}
+
+void MainWindow::SetRangeMin() {
+    this->action->graph->SetRangeMin(ui->ScopeMin->text().toDouble());
+}
+
+void MainWindow::SetRangeMax() {
+    this->action->graph->SetRangeMax(ui->ScopeMin->text().toDouble());
+}
+
 
 void MainWindow::Equal()
 {

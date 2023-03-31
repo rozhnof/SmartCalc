@@ -32,6 +32,7 @@ SOURCES += \
 
 HEADERS += \
     Controllers/Controller.h \
+    Controllers/Graph/Graph.h \
     Controllers/Validate/Validate.h \
     Models/Model.h \
     SmartCalc.h \

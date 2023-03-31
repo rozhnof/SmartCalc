@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "qcustomplot.h"
+
 #include <QApplication>
 #include <QLabel>
 #include "ui_mainwindow.h"
@@ -39,7 +39,14 @@ private slots:
     void SetFunction();
     void ClearAll();
     void Equal();
-    // void DrawGraph();
+
+    void DrawGraph();
+    void SetScopeMin();
+    void SetScopeMax();
+    void SetRangeMin();
+    void SetRangeMax();
+
+
     // void CreditResult();
 };
 

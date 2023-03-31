@@ -94,6 +94,18 @@ void DecisionTrigonometricFunction(char number, NodeNumber* *top) {
     }
 }
 
+// void SaveStack() {
+
+// }
+
+// void NodeOutput(NodeNumber* *top) {
+//     NodeNumber* tmp = *top;
+//     for (int i = 0; tmp != NULL; i++) {
+//         printf("STACK:  %Lf\n", tmp->number);
+//         tmp = tmp->next;
+//     }
+// }
+
 long double Calculation(char* output, double x) {
     char tmp_output[1024] = {0};
     for (int i = 0; output[i] != '\0'; i++) {
@@ -118,8 +130,11 @@ long double Calculation(char* output, double x) {
             DecisionTrigonometricFunction(elem[0], &top);
         }
         elem = strtok(NULL, " ");
+    // NodeOutput(&top);
+    // printf("\n\n");
     }
     long double result = top->number;
     PopNumber(&top);
+
     return result;
 }
