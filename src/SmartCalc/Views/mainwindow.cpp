@@ -136,18 +136,14 @@ void MainWindow::DrawGraph()
 {
     int status;
     this->action->Validate(new ResultValidate, ui->input->text(), "0", status);
-    if (status) {
-        this->action->graph->SetDefaultRangeMax(ui->RangeMax->text().toDouble());
-        this->action->graph->SetDefaultRangeMin(ui->RangeMin->text().toDouble());
-        this->action->graph->SetDefaultScopeMax(ui->ScopeMax->text().toDouble());
-        this->action->graph->SetDefaultScopeMin(ui->ScopeMax->text().toDouble());
+}
 
-        this->action->graph->SetXValue(ui->input_x->text().toDouble());
-        this->action->graph->Draw();
-        this->action->graph->ShowGraph();        
-    } else {
-        cout << "BEBRA\n\n";
-    }
+void MainWindow::GetGraphValues() {
+    this->action->
+}
+
+void MainWindow::GetLineValues() {
+
 }
 
 void MainWindow::SetScopeMin() {

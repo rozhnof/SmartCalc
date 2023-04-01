@@ -9,15 +9,15 @@ using namespace std;
 
 class Controller {
 private:
+    GraphBack *graph;
+
     string _input_text;
     string _button_text;
     string _result_text;
     long double result;
     char char_postfix[1024];
 
-
 public:
-    Graph *graph;
 
     Controller() : graph(new Graph) {}
 
@@ -46,5 +46,8 @@ public:
         return result;
     }
 
+    void GetGraphValues() {
+
+    }
 };
 
