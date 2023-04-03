@@ -1,5 +1,3 @@
-#include <iostream>
-#include <QString>
 #include "../Models/Model.h"
 #include "Validate/Validate.h"
 #include "Graph/Graph.h"
@@ -14,12 +12,12 @@ private:
     string _input_text;
     string _button_text;
     string _result_text;
-    long double result;
+    double result;
     char char_postfix[1024];
 
 public:
 
-    Controller() : graph(new Graph) {}
+    Controller() : graph(new GraphBack) {}
 
     QString Validate(IValidate *rule, QString input, QString button, int &status) {
         Validator check(rule);
@@ -31,23 +29,10 @@ public:
         return QString::fromStdString(_result_text);
     }
 
-    void ConvertToPostfix() {
-        char* char_infix = new char[_result_text.length() + 1];
-        strcpy(char_infix, _result_text.c_str());
-        FromInfixToPostfix(char_infix, char_postfix);
-        graph->SetInputValues(char_postfix);
-    }
-
-    int Calculate(double x_value) {
-        result = Calculation(char_postfix, 0);
-    }
-
-    long double GetResult() {
-        return result;
-    }
-
-    void GetGraphValues() {
+    double GetResult() {
 
     }
+
+
 };
 

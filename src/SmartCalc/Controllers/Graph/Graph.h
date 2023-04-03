@@ -2,7 +2,6 @@
 #include <QString>
 #include <cmath>
 #include "../../Views/qcustomplot.h"
-#include "../../Models/Model.h"
 
 using namespace std;
 
@@ -29,21 +28,21 @@ public:
     // _range_min(scope_min), 
     // _range_max(scope_max) {}
 
-    void GetDrawGraphValues(QVector<double> &x, QVector<double> &y) {
-        double x0 = _scope_min;
-        double step_x = _scope / 10000;
-        _scope = fabsl(_scope_min) + fabsl(_scope_max);
+//    void GetDrawGraphValues(QVector<double> &x, QVector<double> &y) {
+//        double x0 = _scope_min;
+//        double step_x = _scope / 10000;
+//        _scope = fabsl(_scope_min) + fabsl(_scope_max);
 
-        for (int i = 0; i < 10000; i++)
-        {
-            x[i] += x0;
-            y[i] = Calculation(char_output, x[i]);
-            x0 += step_x;
-        }
-    }
+//        for (int i = 0; i < 10000; i++)
+//        {
+//            x[i] += x0;
+//            y[i] = Calculation(char_output, x[i]);
+//            x0 += step_x;
+//        }
+//    }
 
-    void GetDrawLineValues(QVector<double> &x, QVector<double> &y) {
-        y[0] = _range_min;
-        y[1] = _range_max;
-    }
+//    void GetDrawLineValues(QVector<double> &x, QVector<double> &y) {
+//        y[0] = _range_min;
+//        y[1] = _range_max;
+//    }
 };

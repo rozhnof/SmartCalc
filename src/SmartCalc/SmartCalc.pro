@@ -35,12 +35,14 @@ HEADERS += \
     Controllers/Graph/Graph.h \
     Controllers/Validate/Validate.h \
     Models/Model.h \
-    SmartCalc.h \
+    Models/calc.h \
+    Views/IWindow.h \
     Views/mainwindow.h \
     Views/qcustomplot.h
 
 FORMS += \
-    Views/mainwindow.ui
+    Views/mainwindow.ui \
+    Views/WinWindow.ui
 
 DESTDIR += ../build/
 

@@ -1,13 +1,27 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QErrorMessage>
 #include <QMainWindow>
-
 #include <QApplication>
 #include <QLabel>
-#include "ui_mainwindow.h"
 #include <QMessageBox>
-#include "../Controllers/Controller.h"
+#include "ui_mainwindow.h"
+
+
+
+class ISystem {
+public:
+    virtual void SetParent(MainWindow window, QWidget parent);
+};
+
+class MacUI : public ISystem {
+    void SetParent(MainWindow window, QWidget parent) override {
+
+    }
+};
+
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,14 +33,11 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(ISystem *views);
     ~MainWindow();
-    void IncorrectSymbol();
 
 private:
     Ui::MainWindow *ui;
-    Controller *action;
-
 
 private slots:
     void SetNumber();
@@ -39,16 +50,7 @@ private slots:
     void SetFunction();
     void ClearAll();
     void Equal();
-
     void DrawGraph();
-    void SetScopeMin();
-    void SetScopeMax();
-    void SetRangeMin();
-    void SetRangeMax();
-
-
-    // void CreditResult();
 };
-
 
 #endif // MAINWINDOW_H
