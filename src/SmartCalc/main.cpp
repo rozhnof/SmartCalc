@@ -1,19 +1,13 @@
-#include <QErrorMessage>
-#include <QMainWindow>
 #include <QApplication>
-#include <QLabel>
-#include <QMessageBox>
-#include "ui_mainwindow.h"
-
-#include "Views/mainwindow.h"
-
+#include "Views/WinWindow.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    MainWindow calc(new MacUI);
-    calc.show();
+//    MainWindow calc;
+//    calc.show();
+
 
     return a.exec();
 }

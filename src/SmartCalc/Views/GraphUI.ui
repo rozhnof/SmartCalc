@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GraphUI</class>
+ <widget class="QWidget" name="GraphUI">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>825</width>
+    <height>681</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>354235</width>
+    <height>3453453</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color : white;</string>
+  </property>
+  <widget class="QDoubleSpinBox" name="RangeMin">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>640</y>
+     <width>66</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: white;
+color: black;
+border: 1px solid rgb(0, 32, 255);
+</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="buttonSymbols">
+    <enum>QAbstractSpinBox::NoButtons</enum>
+   </property>
+   <property name="minimum">
+    <double>-1000000.000000000000000</double>
+   </property>
+   <property name="maximum">
+    <double>1000000.000000000000000</double>
+   </property>
+   <property name="value">
+    <double>-2.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="ScopeMax">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>660</y>
+     <width>66</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: white;
+color: black;
+border: 1px solid rgb(0, 32, 255);
+</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="buttonSymbols">
+    <enum>QAbstractSpinBox::NoButtons</enum>
+   </property>
+   <property name="minimum">
+    <double>-1000000.000000000000000</double>
+   </property>
+   <property name="maximum">
+    <double>1000000.000000000000000</double>
+   </property>
+   <property name="value">
+    <double>50.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="FunctionRange">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>620</y>
+     <width>91</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: white;
+color: black;
+border: 1px solid rgb(0, 32, 255);
+</string>
+   </property>
+   <property name="text">
+    <string>Function range </string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="ScopeMin">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>640</y>
+     <width>66</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: white;
+color: black;
+border: 1px solid rgb(0, 32, 255);
+</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="buttonSymbols">
+    <enum>QAbstractSpinBox::NoButtons</enum>
+   </property>
+   <property name="keyboardTracking">
+    <bool>true</bool>
+   </property>
+   <property name="minimum">
+    <double>-1000000.000000000000000</double>
+   </property>
+   <property name="maximum">
+    <double>1000000.000000000000000</double>
+   </property>
+   <property name="value">
+    <double>-50.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="RangeMax">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>660</y>
+     <width>66</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: white;
+color: black;
+border: 1px solid rgb(0, 32, 255);
+</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="buttonSymbols">
+    <enum>QAbstractSpinBox::NoButtons</enum>
+   </property>
+   <property name="minimum">
+    <double>-1000000.000000000000000</double>
+   </property>
+   <property name="maximum">
+    <double>1000000.000000000000000</double>
+   </property>
+   <property name="value">
+    <double>2.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="FunctionScope">
+   <property name="geometry">
+    <rect>
+     <x>12</x>
+     <y>620</y>
+     <width>91</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: white;
+color: black;
+border: 1px solid rgb(0, 32, 255);
+</string>
+   </property>
+   <property name="text">
+    <string> Function scope</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QGraphicsView" name="graphicsView">
+   <property name="geometry">
+    <rect>
+     <x>12</x>
+     <y>12</y>
+     <width>800</width>
+     <height>600</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>776</width>
+     <height>482</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="XDef">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>620</y>
+     <width>87</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>20</pointsize>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: white;
+color: black;
+border: 1px solid rgb(0, 32, 255);
+</string>
+   </property>
+   <property name="text">
+    <string>X</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="input_x">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>650</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: white;
+color: black;
+border: 1px solid rgb(0, 32, 255);
+</string>
+   </property>
+   <property name="wrapping">
+    <bool>false</bool>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="buttonSymbols">
+    <enum>QAbstractSpinBox::NoButtons</enum>
+   </property>
+   <property name="minimum">
+    <double>-1000000.000000000000000</double>
+   </property>
+   <property name="maximum">
+    <double>1000000.000000000000000</double>
+   </property>
+   <property name="singleStep">
+    <double>0.010000000000000</double>
+   </property>
+   <property name="stepType">
+    <enum>QAbstractSpinBox::DefaultStepType</enum>
+   </property>
+   <property name="value">
+    <double>0.000000000000000</double>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

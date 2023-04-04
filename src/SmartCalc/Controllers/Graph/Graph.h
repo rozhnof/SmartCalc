@@ -5,28 +5,27 @@
 
 using namespace std;
 
-class GraphBack {
+//class Graph {
 
-private:
-    QCustomPlot *custom_plot;
+//private:
 
-    double _range_min;
-    double _range_max;
-    double _range;
+//    double _range_min;
+//    double _range_max;
+//    double _range;
 
-    double _scope_min;
-    double _scope_max;
-    double _scope;
+//    double _scope_min;
+//    double _scope_max;
+//    double _scope;
 
-    double _x_input;
+//    double _x_input;
 
-public:
+//public:
 
-    // GraphBack(double scope_min, double scope_max, double range_min, double range_max) : 
-    // _scope_min(scope_min), 
-    // _scope_max(scope_max),
-    // _range_min(scope_min), 
-    // _range_max(scope_max) {}
+//     Graph(double scope_min, double scope_max, double range_min, double range_max) :
+//     _scope_min(scope_min),
+//     _scope_max(scope_max),
+//     _range_min(scope_min),
+//     _range_max(scope_max) {}
 
 //    void GetDrawGraphValues(QVector<double> &x, QVector<double> &y) {
 //        double x0 = _scope_min;
@@ -41,8 +40,6 @@ public:
 //        }
 //    }
 
-//    void GetDrawLineValues(QVector<double> &x, QVector<double> &y) {
-//        y[0] = _range_min;
-//        y[1] = _range_max;
-//    }
-};
+
+//};
+
