@@ -2,7 +2,7 @@
 #define CALCSLOTS_H
 
 #include <QWidget>
-#include "GraphUI.h"
+#include "Graph.h"
 
 class CalcSlots : public QWidget
 {

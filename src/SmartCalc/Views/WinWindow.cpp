@@ -1,6 +1,7 @@
 #include "Views/WinWindow.h"
-#include "Views/GraphUI.h"
+#include "Views/Graph.h"
 #include <QMainWindow>
+#include "ui_WinWindow.h"
 
 
 WinWindow::WinWindow(QWidget *parent) : QMainWindow(parent), cSlots(new CalcSlots)

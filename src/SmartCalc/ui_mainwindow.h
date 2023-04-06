@@ -16,6 +16,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QTabWidget>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -33,40 +34,44 @@ public:
     QDoubleSpinBox *RangeMax;
     QDoubleSpinBox *input_x;
     QPushButton *pushButton_gra;
-    QPushButton *pushButton_ln;
-    QPushButton *pushButton_0;
-    QPushButton *pushButton_9;
-    QPushButton *pushButton_log;
-    QPushButton *pushButton_asin;
-    QPushButton *pushButton_cos;
-    QPushButton *pushButton_dot;
-    QPushButton *pushButton_acos;
-    QPushButton *pushButton_AC;
-    QPushButton *pushButton_x;
-    QPushButton *pushButton_sub;
+    QTabWidget *tabWidget;
+    QWidget *Calculator;
     QPushButton *pushButton_eq;
-    QPushButton *pushButton_sum;
     QPushButton *pushButton_grafik;
-    QPushButton *pushButton_mod;
-    QPushButton *pushButton_2;
-    QPushButton *pushButton_exp;
-    QPushButton *pushButton_1;
-    QPushButton *pushButton_8;
-    QPushButton *pushButton_sin;
-    QPushButton *pushButton_atan;
-    QPushButton *pushButton_3;
-    QPushButton *pushButton_close_bracket;
-    QPushButton *pushButton_div;
-    QPushButton *pushButton_open_bracket;
-    QPushButton *pushButton_sqrt;
-    QPushButton *pushButton_factorial;
-    QPushButton *pushButton_4;
-    QPushButton *pushButton_mul;
-    QPushButton *pushButton_7;
+    QPushButton *pushButton_cos;
+    QPushButton *pushButton_log;
     QPushButton *pushButton_tan;
     QPushButton *pushButton_5;
+    QPushButton *pushButton_acos;
+    QPushButton *pushButton_3;
+    QPushButton *pushButton_8;
+    QPushButton *pushButton_0;
+    QPushButton *pushButton_exp;
+    QPushButton *pushButton_factorial;
+    QPushButton *pushButton_asin;
+    QPushButton *pushButton_sub;
+    QPushButton *pushButton_ln;
+    QPushButton *pushButton_AC;
+    QPushButton *pushButton_close_bracket;
+    QPushButton *pushButton_mul;
+    QPushButton *pushButton_sin;
+    QPushButton *pushButton_x;
+    QPushButton *pushButton_2;
+    QPushButton *pushButton_9;
+    QPushButton *pushButton_4;
+    QPushButton *pushButton_atan;
+    QPushButton *pushButton_sqrt;
+    QPushButton *pushButton_7;
+    QPushButton *pushButton_sum;
     QPushButton *pushButton_6;
+    QPushButton *pushButton_dot;
+    QPushButton *pushButton_1;
+    QPushButton *pushButton_open_bracket;
+    QPushButton *pushButton_mod;
+    QPushButton *pushButton_div;
     QLabel *input;
+    QWidget *CreditCalc;
+    QWidget *DepositCalc;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -186,161 +191,19 @@ public:
 "QPushButton:pressed {\n"
 "    background-color: rgba(162, 161, 166, 128);\n"
 "}"));
-        pushButton_ln = new QPushButton(centralwidget);
-        pushButton_ln->setObjectName(QString::fromUtf8("pushButton_ln"));
-        pushButton_ln->setGeometry(QRect(170, 310, 60, 53));
-        pushButton_ln->setMinimumSize(QSize(60, 10));
-        pushButton_ln->setMaximumSize(QSize(60, 100));
-        QFont font3;
-        font3.setPointSize(18);
-        pushButton_ln->setFont(font3);
-        pushButton_ln->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	background-color: rgb(56, 56, 56);\n"
-"	border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(162, 161, 166, 128);\n"
-"}"));
-        pushButton_0 = new QPushButton(centralwidget);
-        pushButton_0->setObjectName(QString::fromUtf8("pushButton_0"));
-        pushButton_0->setGeometry(QRect(288, 414, 119, 53));
-        pushButton_0->setMinimumSize(QSize(119, 10));
-        pushButton_0->setMaximumSize(QSize(119, 100));
-        QFont font4;
-        font4.setPointSize(25);
-        pushButton_0->setFont(font4);
-        pushButton_0->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	 background-color: rgb(89, 89, 89);\n"
-"   border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(255, 255, 255, 128);\n"
-"}"));
-        pushButton_9 = new QPushButton(centralwidget);
-        pushButton_9->setObjectName(QString::fromUtf8("pushButton_9"));
-        pushButton_9->setGeometry(QRect(406, 258, 60, 53));
-        pushButton_9->setMinimumSize(QSize(60, 10));
-        pushButton_9->setMaximumSize(QSize(60, 100));
-        pushButton_9->setFont(font4);
-        pushButton_9->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	 background-color: rgb(89, 89, 89);\n"
-"   border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(255, 255, 255, 128);\n"
-"}"));
-        pushButton_log = new QPushButton(centralwidget);
-        pushButton_log->setObjectName(QString::fromUtf8("pushButton_log"));
-        pushButton_log->setGeometry(QRect(111, 310, 60, 53));
-        pushButton_log->setMinimumSize(QSize(60, 10));
-        pushButton_log->setMaximumSize(QSize(60, 100));
-        pushButton_log->setFont(font3);
-        pushButton_log->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	background-color: rgb(56, 56, 56);\n"
-"	border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(162, 161, 166, 128);\n"
-"}"));
-        pushButton_asin = new QPushButton(centralwidget);
-        pushButton_asin->setObjectName(QString::fromUtf8("pushButton_asin"));
-        pushButton_asin->setGeometry(QRect(111, 362, 60, 53));
-        pushButton_asin->setMinimumSize(QSize(60, 10));
-        pushButton_asin->setMaximumSize(QSize(60, 100));
-        pushButton_asin->setFont(font3);
-        pushButton_asin->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	background-color: rgb(56, 56, 56);\n"
-"	border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(162, 161, 166, 128);\n"
-"}"));
-        pushButton_cos = new QPushButton(centralwidget);
-        pushButton_cos->setObjectName(QString::fromUtf8("pushButton_cos"));
-        pushButton_cos->setGeometry(QRect(170, 414, 60, 53));
-        pushButton_cos->setMinimumSize(QSize(60, 10));
-        pushButton_cos->setMaximumSize(QSize(60, 100));
-        pushButton_cos->setFont(font3);
-        pushButton_cos->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	background-color: rgb(56, 56, 56);\n"
-"	border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(162, 161, 166, 128);\n"
-"}"));
-        pushButton_dot = new QPushButton(centralwidget);
-        pushButton_dot->setObjectName(QString::fromUtf8("pushButton_dot"));
-        pushButton_dot->setGeometry(QRect(406, 414, 60, 53));
-        pushButton_dot->setMinimumSize(QSize(60, 10));
-        pushButton_dot->setMaximumSize(QSize(60, 100));
-        pushButton_dot->setFont(font4);
-        pushButton_dot->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	 background-color: rgb(89, 89, 89);\n"
-"   border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(255, 255, 255, 128);\n"
-"}"));
-        pushButton_acos = new QPushButton(centralwidget);
-        pushButton_acos->setObjectName(QString::fromUtf8("pushButton_acos"));
-        pushButton_acos->setGeometry(QRect(170, 362, 60, 53));
-        pushButton_acos->setMinimumSize(QSize(60, 10));
-        pushButton_acos->setMaximumSize(QSize(60, 100));
-        pushButton_acos->setFont(font3);
-        pushButton_acos->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	background-color: rgb(56, 56, 56);\n"
-"	border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(162, 161, 166, 128);\n"
-"}"));
-        pushButton_AC = new QPushButton(centralwidget);
-        pushButton_AC->setObjectName(QString::fromUtf8("pushButton_AC"));
-        pushButton_AC->setGeometry(QRect(288, 206, 60, 53));
-        pushButton_AC->setMinimumSize(QSize(60, 10));
-        pushButton_AC->setMaximumSize(QSize(60, 100));
-        QFont font5;
-        font5.setPointSize(22);
-        pushButton_AC->setFont(font5);
-        pushButton_AC->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	 background-color: rgb(226, 153, 57);\n"
-"   border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(255, 165, 2, 130)\n"
-"}"));
-        pushButton_x = new QPushButton(centralwidget);
-        pushButton_x->setObjectName(QString::fromUtf8("pushButton_x"));
-        pushButton_x->setGeometry(QRect(111, 206, 60, 53));
-        pushButton_x->setMinimumSize(QSize(60, 10));
-        pushButton_x->setMaximumSize(QSize(60, 100));
-        pushButton_x->setFont(font3);
-        pushButton_x->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	background-color: rgb(56, 56, 56);\n"
-"	border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(162, 161, 166, 128);\n"
-"}"));
-        pushButton_sub = new QPushButton(centralwidget);
-        pushButton_sub->setObjectName(QString::fromUtf8("pushButton_sub"));
-        pushButton_sub->setGeometry(QRect(465, 310, 60, 53));
-        pushButton_sub->setMinimumSize(QSize(60, 10));
-        pushButton_sub->setMaximumSize(QSize(60, 100));
-        pushButton_sub->setFont(font4);
-        pushButton_sub->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	 background-color: rgb(226, 153, 57);\n"
-"   border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(255, 165, 2, 130)\n"
-"}"));
-        pushButton_eq = new QPushButton(centralwidget);
+        tabWidget = new QTabWidget(centralwidget);
+        tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
+        tabWidget->setGeometry(QRect(150, 210, 651, 411));
+        Calculator = new QWidget();
+        Calculator->setObjectName(QString::fromUtf8("Calculator"));
+        pushButton_eq = new QPushButton(Calculator);
         pushButton_eq->setObjectName(QString::fromUtf8("pushButton_eq"));
-        pushButton_eq->setGeometry(QRect(465, 414, 60, 53));
+        pushButton_eq->setGeometry(QRect(468, 268, 60, 53));
         pushButton_eq->setMinimumSize(QSize(60, 10));
         pushButton_eq->setMaximumSize(QSize(60, 100));
-        pushButton_eq->setFont(font4);
+        QFont font3;
+        font3.setPointSize(25);
+        pushButton_eq->setFont(font3);
         pushButton_eq->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "	 background-color: rgb(226, 153, 57);\n"
 "   border: 1px solid rgb(34, 34, 34);\n"
@@ -348,25 +211,14 @@ public:
 "QPushButton:pressed {\n"
 "    background-color: rgba(255, 165, 2, 130)\n"
 "}"));
-        pushButton_sum = new QPushButton(centralwidget);
-        pushButton_sum->setObjectName(QString::fromUtf8("pushButton_sum"));
-        pushButton_sum->setGeometry(QRect(465, 362, 60, 53));
-        pushButton_sum->setMinimumSize(QSize(60, 10));
-        pushButton_sum->setMaximumSize(QSize(60, 100));
-        pushButton_sum->setFont(font4);
-        pushButton_sum->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	 background-color: rgb(226, 153, 57);\n"
-"   border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(255, 165, 2, 130)\n"
-"}"));
-        pushButton_grafik = new QPushButton(centralwidget);
+        pushButton_grafik = new QPushButton(Calculator);
         pushButton_grafik->setObjectName(QString::fromUtf8("pushButton_grafik"));
-        pushButton_grafik->setGeometry(QRect(347, 206, 119, 53));
+        pushButton_grafik->setGeometry(QRect(350, 60, 119, 53));
         pushButton_grafik->setMinimumSize(QSize(0, 10));
         pushButton_grafik->setMaximumSize(QSize(1000, 10000));
-        pushButton_grafik->setFont(font5);
+        QFont font4;
+        font4.setPointSize(22);
+        pushButton_grafik->setFont(font4);
         pushButton_grafik->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "	 background-color: rgb(226, 153, 57);\n"
 "   border: 1px solid rgb(34, 34, 34);\n"
@@ -374,220 +226,40 @@ public:
 "QPushButton:pressed {\n"
 "    background-color: rgba(255, 165, 2, 130)\n"
 "}"));
-        pushButton_mod = new QPushButton(centralwidget);
-        pushButton_mod->setObjectName(QString::fromUtf8("pushButton_mod"));
-        pushButton_mod->setGeometry(QRect(111, 258, 60, 53));
-        pushButton_mod->setMinimumSize(QSize(60, 10));
-        pushButton_mod->setMaximumSize(QSize(60, 100));
-        pushButton_mod->setFont(font3);
-        pushButton_mod->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+        pushButton_cos = new QPushButton(Calculator);
+        pushButton_cos->setObjectName(QString::fromUtf8("pushButton_cos"));
+        pushButton_cos->setGeometry(QRect(173, 268, 60, 53));
+        pushButton_cos->setMinimumSize(QSize(60, 10));
+        pushButton_cos->setMaximumSize(QSize(60, 100));
+        QFont font5;
+        font5.setPointSize(18);
+        pushButton_cos->setFont(font5);
+        pushButton_cos->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "	background-color: rgb(56, 56, 56);\n"
 "	border: 1px solid rgb(34, 34, 34);\n"
 "}\n"
 "QPushButton:pressed {\n"
 "    background-color: rgba(162, 161, 166, 128);\n"
 "}"));
-        pushButton_2 = new QPushButton(centralwidget);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-        pushButton_2->setGeometry(QRect(347, 362, 60, 53));
-        pushButton_2->setMinimumSize(QSize(60, 10));
-        pushButton_2->setMaximumSize(QSize(60, 100));
-        pushButton_2->setFont(font4);
-        pushButton_2->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	 background-color: rgb(89, 89, 89);\n"
-"   border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(255, 255, 255, 128);\n"
-"}"));
-        pushButton_exp = new QPushButton(centralwidget);
-        pushButton_exp->setObjectName(QString::fromUtf8("pushButton_exp"));
-        pushButton_exp->setGeometry(QRect(229, 258, 60, 53));
-        pushButton_exp->setMinimumSize(QSize(60, 10));
-        pushButton_exp->setMaximumSize(QSize(60, 100));
-        pushButton_exp->setFont(font3);
-        pushButton_exp->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+        pushButton_log = new QPushButton(Calculator);
+        pushButton_log->setObjectName(QString::fromUtf8("pushButton_log"));
+        pushButton_log->setGeometry(QRect(114, 164, 60, 53));
+        pushButton_log->setMinimumSize(QSize(60, 10));
+        pushButton_log->setMaximumSize(QSize(60, 100));
+        pushButton_log->setFont(font5);
+        pushButton_log->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "	background-color: rgb(56, 56, 56);\n"
 "	border: 1px solid rgb(34, 34, 34);\n"
 "}\n"
 "QPushButton:pressed {\n"
 "    background-color: rgba(162, 161, 166, 128);\n"
 "}"));
-        pushButton_1 = new QPushButton(centralwidget);
-        pushButton_1->setObjectName(QString::fromUtf8("pushButton_1"));
-        pushButton_1->setGeometry(QRect(288, 362, 60, 53));
-        pushButton_1->setMinimumSize(QSize(60, 10));
-        pushButton_1->setMaximumSize(QSize(60, 100));
-        pushButton_1->setFont(font4);
-        pushButton_1->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	 background-color: rgb(89, 89, 89);\n"
-"   border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(255, 255, 255, 128);\n"
-"}"));
-        pushButton_8 = new QPushButton(centralwidget);
-        pushButton_8->setObjectName(QString::fromUtf8("pushButton_8"));
-        pushButton_8->setGeometry(QRect(347, 258, 60, 53));
-        pushButton_8->setMinimumSize(QSize(60, 10));
-        pushButton_8->setMaximumSize(QSize(60, 100));
-        pushButton_8->setFont(font4);
-        pushButton_8->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	 background-color: rgb(89, 89, 89);\n"
-"   border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(255, 255, 255, 128);\n"
-"}"));
-        pushButton_sin = new QPushButton(centralwidget);
-        pushButton_sin->setObjectName(QString::fromUtf8("pushButton_sin"));
-        pushButton_sin->setGeometry(QRect(111, 414, 60, 53));
-        pushButton_sin->setMinimumSize(QSize(60, 10));
-        pushButton_sin->setMaximumSize(QSize(60, 100));
-        pushButton_sin->setFont(font3);
-        pushButton_sin->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	background-color: rgb(56, 56, 56);\n"
-"	border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(162, 161, 166, 128);\n"
-"}"));
-        pushButton_atan = new QPushButton(centralwidget);
-        pushButton_atan->setObjectName(QString::fromUtf8("pushButton_atan"));
-        pushButton_atan->setGeometry(QRect(229, 362, 60, 53));
-        pushButton_atan->setMinimumSize(QSize(60, 10));
-        pushButton_atan->setMaximumSize(QSize(60, 100));
-        pushButton_atan->setFont(font3);
-        pushButton_atan->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	background-color: rgb(56, 56, 56);\n"
-"	border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(162, 161, 166, 128);\n"
-"}"));
-        pushButton_3 = new QPushButton(centralwidget);
-        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
-        pushButton_3->setGeometry(QRect(406, 362, 60, 53));
-        pushButton_3->setMinimumSize(QSize(60, 10));
-        pushButton_3->setMaximumSize(QSize(60, 100));
-        pushButton_3->setFont(font4);
-        pushButton_3->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	 background-color: rgb(89, 89, 89);\n"
-"   border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(255, 255, 255, 128);\n"
-"}"));
-        pushButton_close_bracket = new QPushButton(centralwidget);
-        pushButton_close_bracket->setObjectName(QString::fromUtf8("pushButton_close_bracket"));
-        pushButton_close_bracket->setGeometry(QRect(229, 206, 60, 53));
-        pushButton_close_bracket->setMinimumSize(QSize(60, 10));
-        pushButton_close_bracket->setMaximumSize(QSize(60, 100));
-        pushButton_close_bracket->setFont(font3);
-        pushButton_close_bracket->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	background-color: rgb(56, 56, 56);\n"
-"	border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(162, 161, 166, 128);\n"
-"}"));
-        pushButton_div = new QPushButton(centralwidget);
-        pushButton_div->setObjectName(QString::fromUtf8("pushButton_div"));
-        pushButton_div->setGeometry(QRect(465, 206, 60, 53));
-        pushButton_div->setMinimumSize(QSize(60, 10));
-        pushButton_div->setMaximumSize(QSize(60, 100));
-        pushButton_div->setFont(font4);
-        pushButton_div->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	 background-color: rgb(226, 153, 57);\n"
-"   border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(255, 165, 2, 130)\n"
-"}"));
-        pushButton_open_bracket = new QPushButton(centralwidget);
-        pushButton_open_bracket->setObjectName(QString::fromUtf8("pushButton_open_bracket"));
-        pushButton_open_bracket->setGeometry(QRect(170, 206, 60, 53));
-        pushButton_open_bracket->setMinimumSize(QSize(60, 10));
-        pushButton_open_bracket->setMaximumSize(QSize(60, 100));
-        pushButton_open_bracket->setFont(font3);
-        pushButton_open_bracket->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	background-color: rgb(56, 56, 56);\n"
-"	border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(162, 161, 166, 128);\n"
-"}"));
-        pushButton_sqrt = new QPushButton(centralwidget);
-        pushButton_sqrt->setObjectName(QString::fromUtf8("pushButton_sqrt"));
-        pushButton_sqrt->setGeometry(QRect(229, 310, 60, 53));
-        pushButton_sqrt->setMinimumSize(QSize(60, 10));
-        pushButton_sqrt->setMaximumSize(QSize(60, 100));
-        pushButton_sqrt->setFont(font3);
-        pushButton_sqrt->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	background-color: rgb(56, 56, 56);\n"
-"	border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(162, 161, 166, 128);\n"
-"}"));
-        pushButton_factorial = new QPushButton(centralwidget);
-        pushButton_factorial->setObjectName(QString::fromUtf8("pushButton_factorial"));
-        pushButton_factorial->setGeometry(QRect(170, 258, 60, 53));
-        pushButton_factorial->setMinimumSize(QSize(60, 10));
-        pushButton_factorial->setMaximumSize(QSize(60, 100));
-        pushButton_factorial->setFont(font3);
-        pushButton_factorial->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	background-color: rgb(56, 56, 56);\n"
-"	border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(162, 161, 166, 128);\n"
-"}"));
-        pushButton_4 = new QPushButton(centralwidget);
-        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
-        pushButton_4->setGeometry(QRect(288, 310, 60, 53));
-        pushButton_4->setMinimumSize(QSize(60, 10));
-        pushButton_4->setMaximumSize(QSize(60, 100));
-        pushButton_4->setFont(font4);
-        pushButton_4->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	 background-color: rgb(89, 89, 89);\n"
-"   border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(255, 255, 255, 128);\n"
-"}"));
-        pushButton_mul = new QPushButton(centralwidget);
-        pushButton_mul->setObjectName(QString::fromUtf8("pushButton_mul"));
-        pushButton_mul->setGeometry(QRect(465, 258, 60, 53));
-        pushButton_mul->setMinimumSize(QSize(60, 10));
-        pushButton_mul->setMaximumSize(QSize(60, 100));
-        pushButton_mul->setFont(font4);
-        pushButton_mul->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	 background-color: rgb(226, 153, 57);\n"
-"   border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(255, 165, 2, 130)\n"
-"}"));
-        pushButton_7 = new QPushButton(centralwidget);
-        pushButton_7->setObjectName(QString::fromUtf8("pushButton_7"));
-        pushButton_7->setGeometry(QRect(288, 258, 60, 53));
-        pushButton_7->setMinimumSize(QSize(60, 10));
-        pushButton_7->setMaximumSize(QSize(60, 100));
-        pushButton_7->setFont(font4);
-        pushButton_7->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"	 background-color: rgb(89, 89, 89);\n"
-"   border: 1px solid rgb(34, 34, 34);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgba(255, 255, 255, 128);\n"
-"}"));
-        pushButton_tan = new QPushButton(centralwidget);
+        pushButton_tan = new QPushButton(Calculator);
         pushButton_tan->setObjectName(QString::fromUtf8("pushButton_tan"));
-        pushButton_tan->setGeometry(QRect(229, 414, 60, 53));
+        pushButton_tan->setGeometry(QRect(232, 268, 60, 53));
         pushButton_tan->setMinimumSize(QSize(60, 10));
         pushButton_tan->setMaximumSize(QSize(60, 100));
-        pushButton_tan->setFont(font3);
+        pushButton_tan->setFont(font5);
         pushButton_tan->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "	background-color: rgb(56, 56, 56);\n"
 "	border: 1px solid rgb(34, 34, 34);\n"
@@ -597,12 +269,12 @@ public:
 "}"));
         pushButton_tan->setAutoExclusive(false);
         pushButton_tan->setAutoDefault(false);
-        pushButton_5 = new QPushButton(centralwidget);
+        pushButton_5 = new QPushButton(Calculator);
         pushButton_5->setObjectName(QString::fromUtf8("pushButton_5"));
-        pushButton_5->setGeometry(QRect(347, 310, 60, 53));
+        pushButton_5->setGeometry(QRect(350, 164, 60, 53));
         pushButton_5->setMinimumSize(QSize(60, 10));
         pushButton_5->setMaximumSize(QSize(60, 100));
-        pushButton_5->setFont(font4);
+        pushButton_5->setFont(font3);
         pushButton_5->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "	 background-color: rgb(89, 89, 89);\n"
 "   border: 1px solid rgb(34, 34, 34);\n"
@@ -610,12 +282,285 @@ public:
 "QPushButton:pressed {\n"
 "    background-color: rgba(255, 255, 255, 128);\n"
 "}"));
-        pushButton_6 = new QPushButton(centralwidget);
+        pushButton_acos = new QPushButton(Calculator);
+        pushButton_acos->setObjectName(QString::fromUtf8("pushButton_acos"));
+        pushButton_acos->setGeometry(QRect(173, 216, 60, 53));
+        pushButton_acos->setMinimumSize(QSize(60, 10));
+        pushButton_acos->setMaximumSize(QSize(60, 100));
+        pushButton_acos->setFont(font5);
+        pushButton_acos->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	background-color: rgb(56, 56, 56);\n"
+"	border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(162, 161, 166, 128);\n"
+"}"));
+        pushButton_3 = new QPushButton(Calculator);
+        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
+        pushButton_3->setGeometry(QRect(409, 216, 60, 53));
+        pushButton_3->setMinimumSize(QSize(60, 10));
+        pushButton_3->setMaximumSize(QSize(60, 100));
+        pushButton_3->setFont(font3);
+        pushButton_3->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	 background-color: rgb(89, 89, 89);\n"
+"   border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(255, 255, 255, 128);\n"
+"}"));
+        pushButton_8 = new QPushButton(Calculator);
+        pushButton_8->setObjectName(QString::fromUtf8("pushButton_8"));
+        pushButton_8->setGeometry(QRect(350, 112, 60, 53));
+        pushButton_8->setMinimumSize(QSize(60, 10));
+        pushButton_8->setMaximumSize(QSize(60, 100));
+        pushButton_8->setFont(font3);
+        pushButton_8->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	 background-color: rgb(89, 89, 89);\n"
+"   border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(255, 255, 255, 128);\n"
+"}"));
+        pushButton_0 = new QPushButton(Calculator);
+        pushButton_0->setObjectName(QString::fromUtf8("pushButton_0"));
+        pushButton_0->setGeometry(QRect(291, 268, 119, 53));
+        pushButton_0->setMinimumSize(QSize(119, 10));
+        pushButton_0->setMaximumSize(QSize(119, 100));
+        pushButton_0->setFont(font3);
+        pushButton_0->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	 background-color: rgb(89, 89, 89);\n"
+"   border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(255, 255, 255, 128);\n"
+"}"));
+        pushButton_exp = new QPushButton(Calculator);
+        pushButton_exp->setObjectName(QString::fromUtf8("pushButton_exp"));
+        pushButton_exp->setGeometry(QRect(232, 112, 60, 53));
+        pushButton_exp->setMinimumSize(QSize(60, 10));
+        pushButton_exp->setMaximumSize(QSize(60, 100));
+        pushButton_exp->setFont(font5);
+        pushButton_exp->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	background-color: rgb(56, 56, 56);\n"
+"	border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(162, 161, 166, 128);\n"
+"}"));
+        pushButton_factorial = new QPushButton(Calculator);
+        pushButton_factorial->setObjectName(QString::fromUtf8("pushButton_factorial"));
+        pushButton_factorial->setGeometry(QRect(173, 112, 60, 53));
+        pushButton_factorial->setMinimumSize(QSize(60, 10));
+        pushButton_factorial->setMaximumSize(QSize(60, 100));
+        pushButton_factorial->setFont(font5);
+        pushButton_factorial->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	background-color: rgb(56, 56, 56);\n"
+"	border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(162, 161, 166, 128);\n"
+"}"));
+        pushButton_asin = new QPushButton(Calculator);
+        pushButton_asin->setObjectName(QString::fromUtf8("pushButton_asin"));
+        pushButton_asin->setGeometry(QRect(114, 216, 60, 53));
+        pushButton_asin->setMinimumSize(QSize(60, 10));
+        pushButton_asin->setMaximumSize(QSize(60, 100));
+        pushButton_asin->setFont(font5);
+        pushButton_asin->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	background-color: rgb(56, 56, 56);\n"
+"	border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(162, 161, 166, 128);\n"
+"}"));
+        pushButton_sub = new QPushButton(Calculator);
+        pushButton_sub->setObjectName(QString::fromUtf8("pushButton_sub"));
+        pushButton_sub->setGeometry(QRect(468, 164, 60, 53));
+        pushButton_sub->setMinimumSize(QSize(60, 10));
+        pushButton_sub->setMaximumSize(QSize(60, 100));
+        pushButton_sub->setFont(font3);
+        pushButton_sub->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	 background-color: rgb(226, 153, 57);\n"
+"   border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(255, 165, 2, 130)\n"
+"}"));
+        pushButton_ln = new QPushButton(Calculator);
+        pushButton_ln->setObjectName(QString::fromUtf8("pushButton_ln"));
+        pushButton_ln->setGeometry(QRect(173, 164, 60, 53));
+        pushButton_ln->setMinimumSize(QSize(60, 10));
+        pushButton_ln->setMaximumSize(QSize(60, 100));
+        pushButton_ln->setFont(font5);
+        pushButton_ln->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	background-color: rgb(56, 56, 56);\n"
+"	border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(162, 161, 166, 128);\n"
+"}"));
+        pushButton_AC = new QPushButton(Calculator);
+        pushButton_AC->setObjectName(QString::fromUtf8("pushButton_AC"));
+        pushButton_AC->setGeometry(QRect(291, 60, 60, 53));
+        pushButton_AC->setMinimumSize(QSize(60, 10));
+        pushButton_AC->setMaximumSize(QSize(60, 100));
+        pushButton_AC->setFont(font4);
+        pushButton_AC->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	 background-color: rgb(226, 153, 57);\n"
+"   border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(255, 165, 2, 130)\n"
+"}"));
+        pushButton_close_bracket = new QPushButton(Calculator);
+        pushButton_close_bracket->setObjectName(QString::fromUtf8("pushButton_close_bracket"));
+        pushButton_close_bracket->setGeometry(QRect(232, 60, 60, 53));
+        pushButton_close_bracket->setMinimumSize(QSize(60, 10));
+        pushButton_close_bracket->setMaximumSize(QSize(60, 100));
+        pushButton_close_bracket->setFont(font5);
+        pushButton_close_bracket->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	background-color: rgb(56, 56, 56);\n"
+"	border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(162, 161, 166, 128);\n"
+"}"));
+        pushButton_mul = new QPushButton(Calculator);
+        pushButton_mul->setObjectName(QString::fromUtf8("pushButton_mul"));
+        pushButton_mul->setGeometry(QRect(468, 112, 60, 53));
+        pushButton_mul->setMinimumSize(QSize(60, 10));
+        pushButton_mul->setMaximumSize(QSize(60, 100));
+        pushButton_mul->setFont(font3);
+        pushButton_mul->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	 background-color: rgb(226, 153, 57);\n"
+"   border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(255, 165, 2, 130)\n"
+"}"));
+        pushButton_sin = new QPushButton(Calculator);
+        pushButton_sin->setObjectName(QString::fromUtf8("pushButton_sin"));
+        pushButton_sin->setGeometry(QRect(114, 268, 60, 53));
+        pushButton_sin->setMinimumSize(QSize(60, 10));
+        pushButton_sin->setMaximumSize(QSize(60, 100));
+        pushButton_sin->setFont(font5);
+        pushButton_sin->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	background-color: rgb(56, 56, 56);\n"
+"	border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(162, 161, 166, 128);\n"
+"}"));
+        pushButton_x = new QPushButton(Calculator);
+        pushButton_x->setObjectName(QString::fromUtf8("pushButton_x"));
+        pushButton_x->setGeometry(QRect(114, 60, 60, 53));
+        pushButton_x->setMinimumSize(QSize(60, 10));
+        pushButton_x->setMaximumSize(QSize(60, 100));
+        pushButton_x->setFont(font5);
+        pushButton_x->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	background-color: rgb(56, 56, 56);\n"
+"	border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(162, 161, 166, 128);\n"
+"}"));
+        pushButton_2 = new QPushButton(Calculator);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        pushButton_2->setGeometry(QRect(350, 216, 60, 53));
+        pushButton_2->setMinimumSize(QSize(60, 10));
+        pushButton_2->setMaximumSize(QSize(60, 100));
+        pushButton_2->setFont(font3);
+        pushButton_2->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	 background-color: rgb(89, 89, 89);\n"
+"   border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(255, 255, 255, 128);\n"
+"}"));
+        pushButton_9 = new QPushButton(Calculator);
+        pushButton_9->setObjectName(QString::fromUtf8("pushButton_9"));
+        pushButton_9->setGeometry(QRect(409, 112, 60, 53));
+        pushButton_9->setMinimumSize(QSize(60, 10));
+        pushButton_9->setMaximumSize(QSize(60, 100));
+        pushButton_9->setFont(font3);
+        pushButton_9->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	 background-color: rgb(89, 89, 89);\n"
+"   border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(255, 255, 255, 128);\n"
+"}"));
+        pushButton_4 = new QPushButton(Calculator);
+        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
+        pushButton_4->setGeometry(QRect(291, 164, 60, 53));
+        pushButton_4->setMinimumSize(QSize(60, 10));
+        pushButton_4->setMaximumSize(QSize(60, 100));
+        pushButton_4->setFont(font3);
+        pushButton_4->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	 background-color: rgb(89, 89, 89);\n"
+"   border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(255, 255, 255, 128);\n"
+"}"));
+        pushButton_atan = new QPushButton(Calculator);
+        pushButton_atan->setObjectName(QString::fromUtf8("pushButton_atan"));
+        pushButton_atan->setGeometry(QRect(232, 216, 60, 53));
+        pushButton_atan->setMinimumSize(QSize(60, 10));
+        pushButton_atan->setMaximumSize(QSize(60, 100));
+        pushButton_atan->setFont(font5);
+        pushButton_atan->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	background-color: rgb(56, 56, 56);\n"
+"	border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(162, 161, 166, 128);\n"
+"}"));
+        pushButton_sqrt = new QPushButton(Calculator);
+        pushButton_sqrt->setObjectName(QString::fromUtf8("pushButton_sqrt"));
+        pushButton_sqrt->setGeometry(QRect(232, 164, 60, 53));
+        pushButton_sqrt->setMinimumSize(QSize(60, 10));
+        pushButton_sqrt->setMaximumSize(QSize(60, 100));
+        pushButton_sqrt->setFont(font5);
+        pushButton_sqrt->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	background-color: rgb(56, 56, 56);\n"
+"	border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(162, 161, 166, 128);\n"
+"}"));
+        pushButton_7 = new QPushButton(Calculator);
+        pushButton_7->setObjectName(QString::fromUtf8("pushButton_7"));
+        pushButton_7->setGeometry(QRect(291, 112, 60, 53));
+        pushButton_7->setMinimumSize(QSize(60, 10));
+        pushButton_7->setMaximumSize(QSize(60, 100));
+        pushButton_7->setFont(font3);
+        pushButton_7->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	 background-color: rgb(89, 89, 89);\n"
+"   border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(255, 255, 255, 128);\n"
+"}"));
+        pushButton_sum = new QPushButton(Calculator);
+        pushButton_sum->setObjectName(QString::fromUtf8("pushButton_sum"));
+        pushButton_sum->setGeometry(QRect(468, 216, 60, 53));
+        pushButton_sum->setMinimumSize(QSize(60, 10));
+        pushButton_sum->setMaximumSize(QSize(60, 100));
+        pushButton_sum->setFont(font3);
+        pushButton_sum->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	 background-color: rgb(226, 153, 57);\n"
+"   border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(255, 165, 2, 130)\n"
+"}"));
+        pushButton_6 = new QPushButton(Calculator);
         pushButton_6->setObjectName(QString::fromUtf8("pushButton_6"));
-        pushButton_6->setGeometry(QRect(406, 310, 60, 53));
+        pushButton_6->setGeometry(QRect(409, 164, 60, 53));
         pushButton_6->setMinimumSize(QSize(60, 10));
         pushButton_6->setMaximumSize(QSize(60, 100));
-        pushButton_6->setFont(font4);
+        pushButton_6->setFont(font3);
         pushButton_6->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "	 background-color: rgb(89, 89, 89);\n"
 "   border: 1px solid rgb(34, 34, 34);\n"
@@ -623,17 +568,92 @@ public:
 "QPushButton:pressed {\n"
 "    background-color: rgba(255, 255, 255, 128);\n"
 "}"));
-        input = new QLabel(centralwidget);
+        pushButton_dot = new QPushButton(Calculator);
+        pushButton_dot->setObjectName(QString::fromUtf8("pushButton_dot"));
+        pushButton_dot->setGeometry(QRect(409, 268, 60, 53));
+        pushButton_dot->setMinimumSize(QSize(60, 10));
+        pushButton_dot->setMaximumSize(QSize(60, 100));
+        pushButton_dot->setFont(font3);
+        pushButton_dot->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	 background-color: rgb(89, 89, 89);\n"
+"   border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(255, 255, 255, 128);\n"
+"}"));
+        pushButton_1 = new QPushButton(Calculator);
+        pushButton_1->setObjectName(QString::fromUtf8("pushButton_1"));
+        pushButton_1->setGeometry(QRect(291, 216, 60, 53));
+        pushButton_1->setMinimumSize(QSize(60, 10));
+        pushButton_1->setMaximumSize(QSize(60, 100));
+        pushButton_1->setFont(font3);
+        pushButton_1->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	 background-color: rgb(89, 89, 89);\n"
+"   border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(255, 255, 255, 128);\n"
+"}"));
+        pushButton_open_bracket = new QPushButton(Calculator);
+        pushButton_open_bracket->setObjectName(QString::fromUtf8("pushButton_open_bracket"));
+        pushButton_open_bracket->setGeometry(QRect(173, 60, 60, 53));
+        pushButton_open_bracket->setMinimumSize(QSize(60, 10));
+        pushButton_open_bracket->setMaximumSize(QSize(60, 100));
+        pushButton_open_bracket->setFont(font5);
+        pushButton_open_bracket->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	background-color: rgb(56, 56, 56);\n"
+"	border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(162, 161, 166, 128);\n"
+"}"));
+        pushButton_mod = new QPushButton(Calculator);
+        pushButton_mod->setObjectName(QString::fromUtf8("pushButton_mod"));
+        pushButton_mod->setGeometry(QRect(114, 112, 60, 53));
+        pushButton_mod->setMinimumSize(QSize(60, 10));
+        pushButton_mod->setMaximumSize(QSize(60, 100));
+        pushButton_mod->setFont(font5);
+        pushButton_mod->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	background-color: rgb(56, 56, 56);\n"
+"	border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(162, 161, 166, 128);\n"
+"}"));
+        pushButton_div = new QPushButton(Calculator);
+        pushButton_div->setObjectName(QString::fromUtf8("pushButton_div"));
+        pushButton_div->setGeometry(QRect(468, 60, 60, 53));
+        pushButton_div->setMinimumSize(QSize(60, 10));
+        pushButton_div->setMaximumSize(QSize(60, 100));
+        pushButton_div->setFont(font3);
+        pushButton_div->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	 background-color: rgb(226, 153, 57);\n"
+"   border: 1px solid rgb(34, 34, 34);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgba(255, 165, 2, 130)\n"
+"}"));
+        input = new QLabel(Calculator);
         input->setObjectName(QString::fromUtf8("input"));
-        input->setGeometry(QRect(110, 140, 412, 62));
+        input->setGeometry(QRect(120, 0, 412, 62));
         QFont font6;
         font6.setPointSize(25);
         font6.setBold(true);
         input->setFont(font6);
-        input->setStyleSheet(QString::fromUtf8(""));
+        input->setStyleSheet(QString::fromUtf8("background-color:black;"));
+        tabWidget->addTab(Calculator, QString());
+        CreditCalc = new QWidget();
+        CreditCalc->setObjectName(QString::fromUtf8("CreditCalc"));
+        tabWidget->addTab(CreditCalc, QString());
+        DepositCalc = new QWidget();
+        DepositCalc->setObjectName(QString::fromUtf8("DepositCalc"));
+        tabWidget->addTab(DepositCalc, QString());
         MainWindow->setCentralWidget(centralwidget);
 
         retranslateUi(MainWindow);
+
+        tabWidget->setCurrentIndex(0);
+
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -645,40 +665,43 @@ public:
         XDef->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
         FunctionRange->setText(QCoreApplication::translate("MainWindow", "Function range ", nullptr));
         pushButton_gra->setText(QCoreApplication::translate("MainWindow", "Graph", nullptr));
-        pushButton_ln->setText(QCoreApplication::translate("MainWindow", "ln", nullptr));
-        pushButton_0->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        pushButton_9->setText(QCoreApplication::translate("MainWindow", "9", nullptr));
-        pushButton_log->setText(QCoreApplication::translate("MainWindow", "log", nullptr));
-        pushButton_asin->setText(QCoreApplication::translate("MainWindow", "asin", nullptr));
-        pushButton_cos->setText(QCoreApplication::translate("MainWindow", "cos", nullptr));
-        pushButton_dot->setText(QCoreApplication::translate("MainWindow", ".", nullptr));
-        pushButton_acos->setText(QCoreApplication::translate("MainWindow", "acos", nullptr));
-        pushButton_AC->setText(QCoreApplication::translate("MainWindow", "AC", nullptr));
-        pushButton_x->setText(QCoreApplication::translate("MainWindow", "x", nullptr));
-        pushButton_sub->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
         pushButton_eq->setText(QCoreApplication::translate("MainWindow", "=", nullptr));
-        pushButton_sum->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
         pushButton_grafik->setText(QCoreApplication::translate("MainWindow", "Graph", nullptr));
-        pushButton_mod->setText(QCoreApplication::translate("MainWindow", "mod", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("MainWindow", "2", nullptr));
-        pushButton_exp->setText(QCoreApplication::translate("MainWindow", "^", nullptr));
-        pushButton_1->setText(QCoreApplication::translate("MainWindow", "1", nullptr));
-        pushButton_8->setText(QCoreApplication::translate("MainWindow", "8", nullptr));
-        pushButton_sin->setText(QCoreApplication::translate("MainWindow", "sin", nullptr));
-        pushButton_atan->setText(QCoreApplication::translate("MainWindow", "atan", nullptr));
-        pushButton_3->setText(QCoreApplication::translate("MainWindow", "3", nullptr));
-        pushButton_close_bracket->setText(QCoreApplication::translate("MainWindow", ")", nullptr));
-        pushButton_div->setText(QCoreApplication::translate("MainWindow", "/", nullptr));
-        pushButton_open_bracket->setText(QCoreApplication::translate("MainWindow", "(", nullptr));
-        pushButton_sqrt->setText(QCoreApplication::translate("MainWindow", "sqrt", nullptr));
-        pushButton_factorial->setText(QCoreApplication::translate("MainWindow", "!", nullptr));
-        pushButton_4->setText(QCoreApplication::translate("MainWindow", "4", nullptr));
-        pushButton_mul->setText(QCoreApplication::translate("MainWindow", "*", nullptr));
-        pushButton_7->setText(QCoreApplication::translate("MainWindow", "7", nullptr));
+        pushButton_cos->setText(QCoreApplication::translate("MainWindow", "cos", nullptr));
+        pushButton_log->setText(QCoreApplication::translate("MainWindow", "log", nullptr));
         pushButton_tan->setText(QCoreApplication::translate("MainWindow", "tan", nullptr));
         pushButton_5->setText(QCoreApplication::translate("MainWindow", "5", nullptr));
+        pushButton_acos->setText(QCoreApplication::translate("MainWindow", "acos", nullptr));
+        pushButton_3->setText(QCoreApplication::translate("MainWindow", "3", nullptr));
+        pushButton_8->setText(QCoreApplication::translate("MainWindow", "8", nullptr));
+        pushButton_0->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        pushButton_exp->setText(QCoreApplication::translate("MainWindow", "^", nullptr));
+        pushButton_factorial->setText(QCoreApplication::translate("MainWindow", "!", nullptr));
+        pushButton_asin->setText(QCoreApplication::translate("MainWindow", "asin", nullptr));
+        pushButton_sub->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
+        pushButton_ln->setText(QCoreApplication::translate("MainWindow", "ln", nullptr));
+        pushButton_AC->setText(QCoreApplication::translate("MainWindow", "AC", nullptr));
+        pushButton_close_bracket->setText(QCoreApplication::translate("MainWindow", ")", nullptr));
+        pushButton_mul->setText(QCoreApplication::translate("MainWindow", "*", nullptr));
+        pushButton_sin->setText(QCoreApplication::translate("MainWindow", "sin", nullptr));
+        pushButton_x->setText(QCoreApplication::translate("MainWindow", "x", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("MainWindow", "2", nullptr));
+        pushButton_9->setText(QCoreApplication::translate("MainWindow", "9", nullptr));
+        pushButton_4->setText(QCoreApplication::translate("MainWindow", "4", nullptr));
+        pushButton_atan->setText(QCoreApplication::translate("MainWindow", "atan", nullptr));
+        pushButton_sqrt->setText(QCoreApplication::translate("MainWindow", "sqrt", nullptr));
+        pushButton_7->setText(QCoreApplication::translate("MainWindow", "7", nullptr));
+        pushButton_sum->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
         pushButton_6->setText(QCoreApplication::translate("MainWindow", "6", nullptr));
+        pushButton_dot->setText(QCoreApplication::translate("MainWindow", ".", nullptr));
+        pushButton_1->setText(QCoreApplication::translate("MainWindow", "1", nullptr));
+        pushButton_open_bracket->setText(QCoreApplication::translate("MainWindow", "(", nullptr));
+        pushButton_mod->setText(QCoreApplication::translate("MainWindow", "mod", nullptr));
+        pushButton_div->setText(QCoreApplication::translate("MainWindow", "/", nullptr));
         input->setText(QString());
+        tabWidget->setTabText(tabWidget->indexOf(Calculator), QCoreApplication::translate("MainWindow", "Calculator", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(CreditCalc), QCoreApplication::translate("MainWindow", "Credit Calculator", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(DepositCalc), QCoreApplication::translate("MainWindow", "Deposit Calculator", nullptr));
     } // retranslateUi
 
 };

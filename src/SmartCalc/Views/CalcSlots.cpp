@@ -48,8 +48,8 @@ void CalcSlots::ClearAll()
 
 void CalcSlots::DrawGraph()
 {
-    GraphUI *graph = new GraphUI;
-    graph->show();
+//    Graph *graph = new Graph;
+//    graph->show();
 }
 
 void CalcSlots::Equal()

@@ -1,12 +1,16 @@
 #include <QApplication>
-#include "Views/WinWindow.h"
+#include "Views/MacUI.h"
+#include "Views/BaseView.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-//    MainWindow calc;
-//    calc.show();
+
+
+    BaseView calc(new MacUI);
+    calc.show();
+
 
 
     return a.exec();

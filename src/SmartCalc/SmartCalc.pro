@@ -26,9 +26,11 @@ SOURCES += \
     Models/calculation.c \
     Models/converter.c \
     Models/credit_calc.c \
+    Views/BaseView.cpp \
     Views/CalcSlots.cpp \
-    Views/GraphUI.cpp \
-    Views/WinWindow.cpp \
+    Views/CalculatorUI.cpp \
+    Views/Graph.cpp \
+    Views/MacUI.cpp \
     Views/mainwindow.cpp \
     Views/qcustomplot.cpp \
     main.cpp
@@ -39,16 +41,18 @@ HEADERS += \
     Controllers/Validate/Validate.h \
     Models/Model.h \
     Models/calc.h \
+    Views/BaseView.h \
     Views/CalcSlots.h \
-    Views/GraphUI.h \
-    Views/WinWindow.h \
+    Views/CalculatorUI.h \
+    Views/Graph.h \
+    Views/MacUI.h \
+    Views/WinUI.h \
     Views/mainwindow.h \
     Views/qcustomplot.h
 
 FORMS += \
-    Views/GraphUI.ui \
-    Views/WinWindow.ui \
-    Views/mainwindow.ui
+    Views/Graph.ui \
+    Views/MacCalc.ui
 
 DESTDIR += ../build/
 

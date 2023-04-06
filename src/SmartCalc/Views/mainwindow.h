@@ -2,30 +2,22 @@
 #define MAINWINDOW_H
 
 
-#include "ui_mainwindow.h"
-#include "CalcSlots.h"
+#include "BaseView.h"
 
 
-
-QT_BEGIN_NAMESPACE
-namespace Ui {
-class MainWindow;
-}
-QT_END_NAMESPACE
-
-
-class MainWindow : public QMainWindow
+class MainWindow : public QWidget
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow();
     ~MainWindow();
 
-
-private:
-    Ui::MainWindow *ui;
-    CalcSlots *cSlots;
+    BaseView *calc;
+    BaseView *creditCalc;
+    BaseView *depositCalc;
+    BaseView *graph;
+    BaseView *currentView;
 };
 
 #endif // MAINWINDOW_H
