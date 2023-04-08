@@ -10,6 +10,11 @@ class CalcSlots : public QWidget
 
 public:
 
+    CalcSlots() {}
+    ~CalcSlots() {}
+
+
+
 private slots:
     void SetNumber();
     void SetOperator();
@@ -22,6 +27,7 @@ private slots:
     void ClearAll();
     void Equal();
     void DrawGraph();
+    void SwitchToWin();
 };
 
 #endif // CALCSLOTS_H

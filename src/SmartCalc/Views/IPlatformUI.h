@@ -11,7 +11,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QWidget>
-
+#include "CalcSlots.h"
 
 
 
@@ -26,8 +26,6 @@ public:
     QWidget *DepositCalc;
 
     QLabel *LabelInput;
-    QDoubleSpinBox *InputX;
-    QLineEdit *XDef;
 
     QPushButton *Button0;
     QPushButton *Button1;
@@ -41,13 +39,6 @@ public:
     QPushButton *Button9;
     QPushButton *ButtonX;
 
-    QLineEdit *FunctionScope;
-    QDoubleSpinBox *ScopeMin;
-    QDoubleSpinBox *RangeMin;
-
-    QLineEdit *FunctionRange;
-    QDoubleSpinBox *ScopeMax;
-    QDoubleSpinBox *RangeMax;
 
     QPushButton *ButtonGetResult;
     QPushButton *ButtonDrawGraph;
@@ -74,8 +65,12 @@ public:
     QPushButton *ButtonAC;
     QPushButton *ButtonDot;
 
+    QPushButton *SwitchMode;
+    CalcSlots *cSlots;
+
     IPlatformUI() {
         DefaultSettings();
+        cSlots = new CalcSlots;
     }
 
     void show() {
@@ -83,12 +78,56 @@ public:
     }
 
     void DefaultSettings() {
-                window = new QMainWindow;
-                window->setFixedSize(1000, 1000);
-                window->setObjectName(QString::fromUtf8("window"));
+        window = new QMainWindow;
+        window->setFixedSize(1000, 1000);
+        window->setObjectName(QString::fromUtf8("window"));
     }
 
     void RetranslateUI() {
+        cSlots->connect(ButtonCloseBracket, SIGNAL(clicked()), cSlots, SLOT(SetCloseBracket()));
+        cSlots->connect(ButtonOpenBracket, SIGNAL(clicked()), cSlots, SLOT(SetOpenBracket()));
+
+        cSlots->connect(Button0, SIGNAL(clicked()), cSlots, SLOT(SetNumber()));
+        cSlots->connect(Button1, SIGNAL(clicked()), cSlots, SLOT(SetNumber()));
+        cSlots->connect(Button2, SIGNAL(clicked()), cSlots, SLOT(SetNumber()));
+        cSlots->connect(Button3, SIGNAL(clicked()), cSlots, SLOT(SetNumber()));
+        cSlots->connect(Button4, SIGNAL(clicked()), cSlots, SLOT(SetNumber()));
+        cSlots->connect(Button5, SIGNAL(clicked()), cSlots, SLOT(SetNumber()));
+        cSlots->connect(Button6, SIGNAL(clicked()), cSlots, SLOT(SetNumber()));
+        cSlots->connect(Button7, SIGNAL(clicked()), cSlots, SLOT(SetNumber()));
+        cSlots->connect(Button8, SIGNAL(clicked()), cSlots, SLOT(SetNumber()));
+        cSlots->connect(Button9, SIGNAL(clicked()), cSlots, SLOT(SetNumber()));
+        cSlots->connect(ButtonX, SIGNAL(clicked()), cSlots, SLOT(SetX()));
+
+        cSlots->connect(ButtonDot, SIGNAL(clicked()), cSlots, SLOT(SetDot()));
+
+        cSlots->connect(ButtonFactorial, SIGNAL(clicked()), cSlots, SLOT(SetFactorial()));
+
+        cSlots->connect(ButtonSum, SIGNAL(clicked()), cSlots, SLOT(SetOperator()));
+        cSlots->connect(ButtonSub, SIGNAL(clicked()), cSlots, SLOT(SetOperator()));
+        cSlots->connect(ButtonMul, SIGNAL(clicked()), cSlots, SLOT(SetOperator()));
+        cSlots->connect(ButtonDiv, SIGNAL(clicked()), cSlots, SLOT(SetOperator()));
+        cSlots->connect(ButtonMod, SIGNAL(clicked()), cSlots, SLOT(SetOperator()));
+        cSlots->connect(ButtonPow, SIGNAL(clicked()), cSlots, SLOT(SetOperator()));
+
+        cSlots->connect(ButtonSin, SIGNAL(clicked()), cSlots, SLOT(SetFunction()));
+        cSlots->connect(ButtonCos, SIGNAL(clicked()), cSlots, SLOT(SetFunction()));
+        cSlots->connect(ButtonTan, SIGNAL(clicked()), cSlots, SLOT(SetFunction()));
+        cSlots->connect(ButtonAsin, SIGNAL(clicked()), cSlots, SLOT(SetFunction()));
+        cSlots->connect(ButtonAcos, SIGNAL(clicked()), cSlots, SLOT(SetFunction()));
+        cSlots->connect(ButtonAtan, SIGNAL(clicked()), cSlots, SLOT(SetFunction()));
+        cSlots->connect(ButtonLog, SIGNAL(clicked()), cSlots, SLOT(SetFunction()));
+        cSlots->connect(ButtonLn, SIGNAL(clicked()), cSlots, SLOT(SetFunction()));
+        cSlots->connect(ButtonSqrt, SIGNAL(clicked()), cSlots, SLOT(SetFunction()));
+
+        cSlots->connect(ButtonAC, SIGNAL(clicked()), cSlots, SLOT(ClearAll()));
+
+        cSlots->connect(ButtonGetResult, SIGNAL(clicked()), cSlots, SLOT(Equal()));
+        cSlots->connect(ButtonDrawGraph, SIGNAL(clicked()), cSlots, SLOT(DrawGraph()));
+
+        cSlots->connect(SwitchMode, SIGNAL(clicked()), cSlots, SLOT(SwitchToWin()));
+
+
         ButtonGetResult->setText(QCoreApplication::translate("MainWindow", "=", nullptr));
         ButtonDrawGraph->setText(QCoreApplication::translate("MainWindow", "Graph", nullptr));
         ButtonCos->setText(QCoreApplication::translate("MainWindow", "cos", nullptr));
@@ -123,6 +162,7 @@ public:
         ButtonMod->setText(QCoreApplication::translate("MainWindow", "mod", nullptr));
         ButtonDiv->setText(QCoreApplication::translate("MainWindow", "/", nullptr));
         LabelInput->setText(QString());
+        SwitchMode->setText(QCoreApplication::translate("MainWindow", "Mac", nullptr));
         MainTab->setTabText(MainTab->indexOf(Calculator), QCoreApplication::translate("MainWindow", "Calculator", nullptr));
         MainTab->setTabText(MainTab->indexOf(CreditCalc), QCoreApplication::translate("MainWindow", "Credit Calculator", nullptr));
         MainTab->setTabText(MainTab->indexOf(DepositCalc), QCoreApplication::translate("MainWindow", "Deposit Calculator", nullptr));

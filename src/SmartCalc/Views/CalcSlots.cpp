@@ -48,11 +48,16 @@ void CalcSlots::ClearAll()
 
 void CalcSlots::DrawGraph()
 {
-//    Graph *graph = new Graph;
-//    graph->show();
+    Graph *graph = new Graph;
 }
 
 void CalcSlots::Equal()
 {
 
 }
+
+void CalcSlots::SwitchToWin()
+{
+
+}
+

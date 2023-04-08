@@ -45,6 +45,7 @@ HEADERS += \
     Views/CalcSlots.h \
     Views/CalculatorUI.h \
     Views/Graph.h \
+    Views/GraphUI.h \
     Views/IPlatformUI.h \
     Views/MacUI.h \
     Views/WinUI.h \

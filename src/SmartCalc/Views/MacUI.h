@@ -13,100 +13,8 @@ public:
     }
 
     void SetupUI()  {
-        FunctionScope = new QLineEdit(window);
-        FunctionScope->setObjectName(QString::fromUtf8("FunctionScope"));
-        FunctionScope->setGeometry(QRect(641, 73, 89, 22));
-        QFont font;
-        font.setPointSize(9);
-        FunctionScope->setFont(font);
-        FunctionScope->setLayoutDirection(Qt::LeftToRight);
-        FunctionScope->setStyleSheet(QString::fromUtf8("background-color: rgb(56, 56, 56);\n"
-"border: 1px solid rgb(34, 34, 34);\n"
-""));
-        FunctionScope->setAlignment(Qt::AlignCenter);
-        FunctionScope->setReadOnly(true);
-        ScopeMin = new QDoubleSpinBox(window);
-        ScopeMin->setObjectName(QString::fromUtf8("ScopeMin"));
-        ScopeMin->setGeometry(QRect(641, 92, 93, 22));
-        ScopeMin->setFont(font);
-        ScopeMin->setStyleSheet(QString::fromUtf8("background-color: rgb(56, 56, 56);\n"
-"border: 1px solid rgb(34, 34, 34);\n"
-""));
-        ScopeMin->setAlignment(Qt::AlignCenter);
-        ScopeMin->setButtonSymbols(QAbstractSpinBox::NoButtons);
-        ScopeMin->setKeyboardTracking(true);
-        ScopeMin->setMinimum(-1000000.000000000000000);
-        ScopeMin->setMaximum(1000000.000000000000000);
-        ScopeMin->setValue(-50.000000000000000);
-        RangeMin = new QDoubleSpinBox(window);
-        RangeMin->setObjectName(QString::fromUtf8("RangeMin"));
-        RangeMin->setGeometry(QRect(729, 92, 93, 22));
-        RangeMin->setFont(font);
-        RangeMin->setStyleSheet(QString::fromUtf8("background-color: rgb(56, 56, 56);\n"
-"border: 1px solid rgb(34, 34, 34);\n"
-""));
-        RangeMin->setAlignment(Qt::AlignCenter);
-        RangeMin->setButtonSymbols(QAbstractSpinBox::NoButtons);
-        RangeMin->setMinimum(-1000000.000000000000000);
-        RangeMin->setMaximum(1000000.000000000000000);
-        RangeMin->setValue(-2.000000000000000);
-        XDef = new QLineEdit(window);
-        XDef->setObjectName(QString::fromUtf8("XDef"));
-        XDef->setGeometry(QRect(820, 73, 33, 29));
-        QFont font1;
-        font1.setPointSize(20);
-        XDef->setFont(font1);
-        XDef->setLayoutDirection(Qt::LeftToRight);
-        XDef->setStyleSheet(QString::fromUtf8("background-color: rgb(56, 56, 56);\n"
-"border: 1px solid rgb(34, 34, 34);\n"
-""));
-        XDef->setAlignment(Qt::AlignCenter);
-        XDef->setReadOnly(true);
-        ScopeMax = new QDoubleSpinBox(window);
-        ScopeMax->setObjectName(QString::fromUtf8("ScopeMax"));
-        ScopeMax->setGeometry(QRect(641, 110, 93, 22));
-        ScopeMax->setFont(font);
-        ScopeMax->setStyleSheet(QString::fromUtf8("background-color: rgb(56, 56, 56);\n"
-"border: 1px solid rgb(34, 34, 34);\n"
-""));
-        ScopeMax->setAlignment(Qt::AlignCenter);
-        ScopeMax->setButtonSymbols(QAbstractSpinBox::NoButtons);
-        ScopeMax->setMinimum(-1000000.000000000000000);
-        ScopeMax->setMaximum(1000000.000000000000000);
-        ScopeMax->setValue(50.000000000000000);
-        FunctionRange = new QLineEdit(window);
-        FunctionRange->setObjectName(QString::fromUtf8("FunctionRange"));
-        FunctionRange->setGeometry(QRect(729, 73, 93, 22));
-        FunctionRange->setFont(font);
-        FunctionRange->setLayoutDirection(Qt::LeftToRight);
-        FunctionRange->setStyleSheet(QString::fromUtf8("background-color: rgb(56, 56, 56);\n"
-"border: 1px solid rgb(34, 34, 34);\n"
-""));
-        FunctionRange->setAlignment(Qt::AlignCenter);
-        FunctionRange->setReadOnly(true);
-        RangeMax = new QDoubleSpinBox(window);
-        RangeMax->setObjectName(QString::fromUtf8("RangeMax"));
-        RangeMax->setGeometry(QRect(729, 111, 93, 21));
-        RangeMax->setFont(font);
-        RangeMax->setStyleSheet(QString::fromUtf8("background-color: rgb(56, 56, 56);\n"
-"border: 1px solid rgb(34, 34, 34);\n"
-""));
-        RangeMax->setAlignment(Qt::AlignCenter);
-        RangeMax->setButtonSymbols(QAbstractSpinBox::NoButtons);
-        RangeMax->setMinimum(-1000000.000000000000000);
-        RangeMax->setMaximum(1000000.000000000000000);
-        RangeMax->setValue(2.000000000000000);
-        InputX = new QDoubleSpinBox(window);
-        InputX->setObjectName(QString::fromUtf8("InputX"));
-        InputX->setGeometry(QRect(851, 73, 207, 29));
-        InputX->setStyleSheet(QString::fromUtf8("background-color: rgb(56, 56, 56);\n"
-"border: 1px solid rgb(34, 34, 34);\n"
-""));
-        InputX->setAlignment(Qt::AlignCenter);
-        InputX->setButtonSymbols(QAbstractSpinBox::NoButtons);
-        InputX->setMinimum(-1000000.000000000000000);
-        InputX->setMaximum(1000000.000000000000000);
-        InputX->setValue(0.000000000000000);
+
+
 
         MainTab = new QTabWidget(window);
         MainTab->setObjectName(QString::fromUtf8("MainTab"));
@@ -566,10 +474,26 @@ public:
         DepositCalc->setObjectName(QString::fromUtf8("DepositCalc"));
         MainTab->addTab(DepositCalc, QString());
 
+
+        SwitchMode = new QPushButton(Calculator);
+                SwitchMode->setObjectName(QString::fromUtf8("SwitchMode"));
+                SwitchMode->setGeometry(QRect(10, 120, 60, 53));
+                SwitchMode->setMinimumSize(QSize(60, 10));
+                SwitchMode->setMaximumSize(QSize(60, 100));
+                SwitchMode->setFont(font3);
+                SwitchMode->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+        "	 background-color: rgb(226, 153, 57);\n"
+        "   border: 1px solid rgb(34, 34, 34);\n"
+        "}\n"
+        "QPushButton:pressed {\n"
+        "    background-color: rgba(255, 165, 2, 130)\n"
+        "}"));
+
         MainTab->setCurrentIndex(0);
 
         QMetaObject::connectSlotsByName(window);
     }
+
 };
 
 #endif // MACUI_H
