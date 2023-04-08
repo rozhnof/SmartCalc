@@ -10,8 +10,8 @@ class MainWindow : public QWidget
     Q_OBJECT
 
 public:
-    MainWindow();
-    ~MainWindow();
+    MainWindow() {}
+    ~MainWindow() {}
 
     BaseView *calc;
     BaseView *creditCalc;

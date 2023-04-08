@@ -3,37 +3,35 @@
 
 #include "QWidget"
 #include "QMainWindow"
-
-
-class BaseView;
-class IPlatformUI;
+#include <QtCore/QVariant>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QDoubleSpinBox>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QTabWidget>
+#include <QtWidgets/QWidget>
+#include "IPlatformUI.h"
 
 
 class BaseView : public QWidget
 {
-
     Q_OBJECT
 
 public:
-    BaseView(IPlatformUI *platform) : _platformUi(platform){ }
+    BaseView(IPlatformUI *platform) : platformUi(platform){ }
 
-    void RetranslateUI(QWidget *MainWindow);
-    void SetupUI(QWidget *MainWindow);
+    void show() {
+        platformUi->show();
+    }
 
 protected:
-    IPlatformUI *_platformUi;
+    IPlatformUI *platformUi;
 };
 
 
 
 
-class IPlatformUI
-{
-public:
-    IPlatformUI() {}
-    void RetranslateUI(BaseView *MainWindow);
-    void SetupUI(BaseView *MainWindow);
-};
 
 
 #endif // BASEVIEW_H

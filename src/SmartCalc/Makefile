@@ -366,6 +366,7 @@ DIST          = /usr/local/share/qt/mkspecs/features/spec_pre.prf \
 		Views/CalcSlots.h \
 		Views/CalculatorUI.h \
 		Views/Graph.h \
+		Views/IPlatformUI.h \
 		Views/MacUI.h \
 		Views/WinUI.h \
 		Views/mainwindow.h \
@@ -411,7 +412,7 @@ include /usr/local/share/qt/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-../build/SmartCalc.app/Contents/MacOS/SmartCalc: ui_Graph.h ui_MacCalc.h $(OBJECTS)  
+../build/SmartCalc.app/Contents/MacOS/SmartCalc: ui_Graph.h ui_MacCalc.h ui_WinCalc.h $(OBJECTS)  
 	@test -d ../build/SmartCalc.app/Contents/MacOS/ || mkdir -p ../build/SmartCalc.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -964,9 +965,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/local/share/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents Controllers/Controller.h Controllers/Graph/Graph.h Controllers/Validate/Validate.h Models/Model.h Models/calc.h Views/BaseView.h Views/CalcSlots.h Views/CalculatorUI.h Views/Graph.h Views/MacUI.h Views/WinUI.h Views/mainwindow.h Views/qcustomplot.h $(DISTDIR)/
+	$(COPY_FILE) --parents Controllers/Controller.h Controllers/Graph/Graph.h Controllers/Validate/Validate.h Models/Model.h Models/calc.h Views/BaseView.h Views/CalcSlots.h Views/CalculatorUI.h Views/Graph.h Views/IPlatformUI.h Views/MacUI.h Views/WinUI.h Views/mainwindow.h Views/qcustomplot.h $(DISTDIR)/
 	$(COPY_FILE) --parents Controllers/Controller.cpp Controllers/Validate/CloseBracketValidate.cpp Controllers/Validate/DotValidate.cpp Controllers/Validate/FactorialValidate.cpp Controllers/Validate/FunctionValidate.cpp Controllers/Validate/NumberValidate.cpp Controllers/Validate/OpenBracketValidate.cpp Controllers/Validate/OperatorValidate.cpp Controllers/Validate/ResultValidate.cpp Controllers/Validate/Validator.cpp Controllers/Validate/xValidate.cpp Models/calculation.c Models/converter.c Models/credit_calc.c Views/BaseView.cpp Views/CalcSlots.cpp Views/CalculatorUI.cpp Views/Graph.cpp Views/MacUI.cpp Views/mainwindow.cpp Views/qcustomplot.cpp main.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents Views/Graph.ui Views/MacCalc.ui $(DISTDIR)/
+	$(COPY_FILE) --parents Views/Graph.ui Views/MacCalc.ui Views/WinCalc.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -1009,6 +1010,7 @@ moc_BaseView.cpp: Views/BaseView.h \
 		/usr/local/lib/QtWidgets.framework/Headers/qwidget.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
 		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		Views/IPlatformUI.h \
 		moc_predefs.h \
 		/usr/local/share/qt/libexec/moc
 	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib Views/BaseView.h -o moc_BaseView.cpp
@@ -1027,6 +1029,7 @@ moc_mainwindow.cpp: Views/mainwindow.h \
 		/usr/local/lib/QtWidgets.framework/Headers/qwidget.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
 		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		Views/IPlatformUI.h \
 		moc_predefs.h \
 		/usr/local/share/qt/libexec/moc
 	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib Views/mainwindow.h -o moc_mainwindow.cpp
@@ -1043,9 +1046,9 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_Graph.h ui_MacCalc.h
+compiler_uic_make_all: ui_Graph.h ui_MacCalc.h ui_WinCalc.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_Graph.h ui_MacCalc.h
+	-$(DEL_FILE) ui_Graph.h ui_MacCalc.h ui_WinCalc.h
 ui_Graph.h: Views/Graph.ui \
 		/usr/local/share/qt/libexec/uic
 	/usr/local/share/qt/libexec/uic Views/Graph.ui -o ui_Graph.h
@@ -1053,6 +1056,10 @@ ui_Graph.h: Views/Graph.ui \
 ui_MacCalc.h: Views/MacCalc.ui \
 		/usr/local/share/qt/libexec/uic
 	/usr/local/share/qt/libexec/uic Views/MacCalc.ui -o ui_MacCalc.h
+
+ui_WinCalc.h: Views/WinCalc.ui \
+		/usr/local/share/qt/libexec/uic
+	/usr/local/share/qt/libexec/uic Views/WinCalc.ui -o ui_WinCalc.h
 
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
@@ -1128,11 +1135,7 @@ converter.o: Models/converter.c Models/calc.h
 credit_calc.o: Models/credit_calc.c Models/calc.h
 	$(CC) -c $(CFLAGS) $(INCPATH) -o credit_calc.o Models/credit_calc.c
 
-BaseView.o: Views/BaseView.cpp Views/BaseView.h \
-		/usr/local/lib/QtWidgets.framework/Headers/QWidget \
-		/usr/local/lib/QtWidgets.framework/Headers/qwidget.h \
-		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
-		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h
+BaseView.o: Views/BaseView.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o BaseView.o Views/BaseView.cpp
 
 CalcSlots.o: Views/CalcSlots.cpp Views/CalcSlots.h \
@@ -1141,32 +1144,16 @@ CalcSlots.o: Views/CalcSlots.cpp Views/CalcSlots.h \
 		Views/Graph.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CalcSlots.o Views/CalcSlots.cpp
 
-CalculatorUI.o: Views/CalculatorUI.cpp Views/CalculatorUI.h \
-		Views/BaseView.h \
-		/usr/local/lib/QtWidgets.framework/Headers/QWidget \
-		/usr/local/lib/QtWidgets.framework/Headers/qwidget.h \
-		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
-		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h
+CalculatorUI.o: Views/CalculatorUI.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CalculatorUI.o Views/CalculatorUI.cpp
 
 Graph.o: Views/Graph.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Graph.o Views/Graph.cpp
 
-MacUI.o: Views/MacUI.cpp Views/MacUI.h \
-		Views/BaseView.h \
-		/usr/local/lib/QtWidgets.framework/Headers/QWidget \
-		/usr/local/lib/QtWidgets.framework/Headers/qwidget.h \
-		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
-		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h
+MacUI.o: Views/MacUI.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MacUI.o Views/MacUI.cpp
 
-mainwindow.o: Views/mainwindow.cpp Views/mainwindow.h \
-		Views/BaseView.h \
-		/usr/local/lib/QtWidgets.framework/Headers/QWidget \
-		/usr/local/lib/QtWidgets.framework/Headers/qwidget.h \
-		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
-		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		Views/Graph.h
+mainwindow.o: Views/mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o Views/mainwindow.cpp
 
 qcustomplot.o: Views/qcustomplot.cpp Views/qcustomplot.h \
@@ -1182,7 +1169,9 @@ main.o: main.cpp /usr/local/lib/QtWidgets.framework/Headers/QApplication \
 		/usr/local/lib/QtWidgets.framework/Headers/QWidget \
 		/usr/local/lib/QtWidgets.framework/Headers/qwidget.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
-		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h
+		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		Views/IPlatformUI.h \
+		Views/WinUI.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 moc_BaseView.o: moc_BaseView.cpp 

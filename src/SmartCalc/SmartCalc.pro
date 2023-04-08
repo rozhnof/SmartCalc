@@ -45,6 +45,7 @@ HEADERS += \
     Views/CalcSlots.h \
     Views/CalculatorUI.h \
     Views/Graph.h \
+    Views/IPlatformUI.h \
     Views/MacUI.h \
     Views/WinUI.h \
     Views/mainwindow.h \
@@ -52,7 +53,8 @@ HEADERS += \
 
 FORMS += \
     Views/Graph.ui \
-    Views/MacCalc.ui
+    Views/MacCalc.ui \
+    Views/WinCalc.ui
 
 DESTDIR += ../build/
 
