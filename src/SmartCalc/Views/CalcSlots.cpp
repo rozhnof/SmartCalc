@@ -48,7 +48,7 @@ void CalcSlots::ClearAll()
 
 void CalcSlots::DrawGraph()
 {
-    Graph *graph = new Graph;
+
 }
 
 void CalcSlots::Equal()
@@ -58,6 +58,6 @@ void CalcSlots::Equal()
 
 void CalcSlots::SwitchToWin()
 {
-
+    
 }
 

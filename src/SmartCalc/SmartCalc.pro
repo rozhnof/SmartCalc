@@ -38,6 +38,7 @@ SOURCES += \
 HEADERS += \
     Controllers/Controller.h \
     Controllers/Graph/Graph.h \
+    Controllers/GraphCalc/GraphCalc.h \
     Controllers/Validate/Validate.h \
     Models/Model.h \
     Models/calc.h \

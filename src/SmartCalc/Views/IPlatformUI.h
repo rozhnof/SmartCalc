@@ -67,10 +67,12 @@ public:
 
     QPushButton *SwitchMode;
     CalcSlots *cSlots;
+    Graph *graph;
 
     IPlatformUI() {
         DefaultSettings();
         cSlots = new CalcSlots;
+        graph = new Graph;
     }
 
     void show() {
@@ -126,6 +128,7 @@ public:
         cSlots->connect(ButtonDrawGraph, SIGNAL(clicked()), cSlots, SLOT(DrawGraph()));
 
         cSlots->connect(SwitchMode, SIGNAL(clicked()), cSlots, SLOT(SwitchToWin()));
+        cSlots->connect(ButtonDrawGraph, SIGNAL(clicked()), graph, SLOT(Show()));
 
 
         ButtonGetResult->setText(QCoreApplication::translate("MainWindow", "=", nullptr));

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>610</width>
-    <height>396</height>
+    <width>983</width>
+    <height>737</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -31,12 +31,12 @@
      <rect>
       <x>30</x>
       <y>0</y>
-      <width>541</width>
-      <height>371</height>
+      <width>851</width>
+      <height>651</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="Calculator">
      <attribute name="title">
@@ -45,8 +45,8 @@
      <widget class="QPushButton" name="ButtonGetResult">
       <property name="geometry">
        <rect>
-        <x>468</x>
-        <y>268</y>
+        <x>557</x>
+        <y>378</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -84,8 +84,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonDrawGraph">
       <property name="geometry">
        <rect>
-        <x>350</x>
-        <y>60</y>
+        <x>439</x>
+        <y>170</y>
         <width>119</width>
         <height>53</height>
        </rect>
@@ -123,8 +123,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonCos">
       <property name="geometry">
        <rect>
-        <x>173</x>
-        <y>268</y>
+        <x>262</x>
+        <y>378</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -162,8 +162,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonLog">
       <property name="geometry">
        <rect>
-        <x>114</x>
-        <y>164</y>
+        <x>203</x>
+        <y>274</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -201,8 +201,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonTan">
       <property name="geometry">
        <rect>
-        <x>232</x>
-        <y>268</y>
+        <x>321</x>
+        <y>378</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -246,8 +246,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="Button5">
       <property name="geometry">
        <rect>
-        <x>350</x>
-        <y>164</y>
+        <x>439</x>
+        <y>274</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -285,8 +285,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonAcos">
       <property name="geometry">
        <rect>
-        <x>173</x>
-        <y>216</y>
+        <x>262</x>
+        <y>326</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -324,8 +324,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="Button3">
       <property name="geometry">
        <rect>
-        <x>409</x>
-        <y>216</y>
+        <x>498</x>
+        <y>326</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -363,8 +363,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="Button8">
       <property name="geometry">
        <rect>
-        <x>350</x>
-        <y>112</y>
+        <x>439</x>
+        <y>222</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -402,8 +402,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="Button0">
       <property name="geometry">
        <rect>
-        <x>291</x>
-        <y>268</y>
+        <x>380</x>
+        <y>378</y>
         <width>119</width>
         <height>53</height>
        </rect>
@@ -441,8 +441,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonPow">
       <property name="geometry">
        <rect>
-        <x>232</x>
-        <y>112</y>
+        <x>321</x>
+        <y>222</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -480,8 +480,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonFactorial">
       <property name="geometry">
        <rect>
-        <x>173</x>
-        <y>112</y>
+        <x>262</x>
+        <y>222</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -519,8 +519,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonAsin">
       <property name="geometry">
        <rect>
-        <x>114</x>
-        <y>216</y>
+        <x>203</x>
+        <y>326</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -558,8 +558,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonSub">
       <property name="geometry">
        <rect>
-        <x>468</x>
-        <y>164</y>
+        <x>557</x>
+        <y>274</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -597,8 +597,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonLn">
       <property name="geometry">
        <rect>
-        <x>173</x>
-        <y>164</y>
+        <x>262</x>
+        <y>274</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -636,8 +636,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonAC">
       <property name="geometry">
        <rect>
-        <x>291</x>
-        <y>60</y>
+        <x>380</x>
+        <y>170</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -675,8 +675,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonCloseBracket">
       <property name="geometry">
        <rect>
-        <x>232</x>
-        <y>60</y>
+        <x>321</x>
+        <y>170</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -714,8 +714,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonMul">
       <property name="geometry">
        <rect>
-        <x>468</x>
-        <y>112</y>
+        <x>557</x>
+        <y>222</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -753,8 +753,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonSin">
       <property name="geometry">
        <rect>
-        <x>114</x>
-        <y>268</y>
+        <x>203</x>
+        <y>378</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -792,8 +792,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonX">
       <property name="geometry">
        <rect>
-        <x>114</x>
-        <y>60</y>
+        <x>203</x>
+        <y>170</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -831,8 +831,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="Button2">
       <property name="geometry">
        <rect>
-        <x>350</x>
-        <y>216</y>
+        <x>439</x>
+        <y>326</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -870,8 +870,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="Button9">
       <property name="geometry">
        <rect>
-        <x>409</x>
-        <y>112</y>
+        <x>498</x>
+        <y>222</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -909,8 +909,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="Button4">
       <property name="geometry">
        <rect>
-        <x>291</x>
-        <y>164</y>
+        <x>380</x>
+        <y>274</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -948,8 +948,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonAtan">
       <property name="geometry">
        <rect>
-        <x>232</x>
-        <y>216</y>
+        <x>321</x>
+        <y>326</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -987,8 +987,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonSqrt">
       <property name="geometry">
        <rect>
-        <x>232</x>
-        <y>164</y>
+        <x>321</x>
+        <y>274</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -1026,8 +1026,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="Button7">
       <property name="geometry">
        <rect>
-        <x>291</x>
-        <y>112</y>
+        <x>380</x>
+        <y>222</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -1065,8 +1065,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonSum">
       <property name="geometry">
        <rect>
-        <x>468</x>
-        <y>216</y>
+        <x>557</x>
+        <y>326</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -1104,8 +1104,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="Button6">
       <property name="geometry">
        <rect>
-        <x>409</x>
-        <y>164</y>
+        <x>498</x>
+        <y>274</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -1143,8 +1143,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonDot">
       <property name="geometry">
        <rect>
-        <x>409</x>
-        <y>268</y>
+        <x>498</x>
+        <y>378</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -1182,8 +1182,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="Button1">
       <property name="geometry">
        <rect>
-        <x>291</x>
-        <y>216</y>
+        <x>380</x>
+        <y>326</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -1221,8 +1221,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonOpenBracket">
       <property name="geometry">
        <rect>
-        <x>173</x>
-        <y>60</y>
+        <x>262</x>
+        <y>170</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -1260,8 +1260,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonMod">
       <property name="geometry">
        <rect>
-        <x>114</x>
-        <y>112</y>
+        <x>203</x>
+        <y>222</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -1299,8 +1299,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="ButtonDiv">
       <property name="geometry">
        <rect>
-        <x>468</x>
-        <y>60</y>
+        <x>557</x>
+        <y>170</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -1338,8 +1338,8 @@ QPushButton:pressed {
      <widget class="QLabel" name="LabelInput">
       <property name="geometry">
        <rect>
-        <x>120</x>
-        <y>0</y>
+        <x>209</x>
+        <y>110</y>
         <width>412</width>
         <height>62</height>
        </rect>
@@ -1360,8 +1360,8 @@ QPushButton:pressed {
      <widget class="QPushButton" name="SwitchMode">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>120</y>
+        <x>99</x>
+        <y>230</y>
         <width>60</width>
         <height>53</height>
        </rect>
@@ -1396,6 +1396,401 @@ QPushButton:pressed {
        <string>Mac</string>
       </property>
      </widget>
+    </widget>
+    <widget class="QWidget" name="Graph">
+     <attribute name="title">
+      <string>Страница</string>
+     </attribute>
+     <widget class="QDoubleSpinBox" name="RangeMax">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>580</y>
+        <width>66</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: white;
+color: black;
+border: 1px solid rgb(0, 32, 255);
+</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="minimum">
+       <double>-1000000.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>1000000.000000000000000</double>
+      </property>
+      <property name="value">
+       <double>2.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="FunctionScope">
+      <property name="geometry">
+       <rect>
+        <x>72</x>
+        <y>540</y>
+        <width>91</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: white;
+color: black;
+border: 1px solid rgb(0, 32, 255);
+</string>
+      </property>
+      <property name="text">
+       <string> Function scope</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="input_x">
+      <property name="geometry">
+       <rect>
+        <x>640</x>
+        <y>570</y>
+        <width>151</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: white;
+color: black;
+border: 1px solid rgb(0, 32, 255);
+</string>
+      </property>
+      <property name="wrapping">
+       <bool>false</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="minimum">
+       <double>-1000000.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>1000000.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>0.010000000000000</double>
+      </property>
+      <property name="stepType">
+       <enum>QAbstractSpinBox::DefaultStepType</enum>
+      </property>
+      <property name="value">
+       <double>0.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="StepXDef">
+      <property name="geometry">
+       <rect>
+        <x>510</x>
+        <y>540</y>
+        <width>87</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: white;
+color: black;
+border: 1px solid rgb(0, 32, 255);
+</string>
+      </property>
+      <property name="text">
+       <string>step</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="ScopeMax">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>580</y>
+        <width>66</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: white;
+color: black;
+border: 1px solid rgb(0, 32, 255);
+</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="minimum">
+       <double>-1000000.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>1000000.000000000000000</double>
+      </property>
+      <property name="value">
+       <double>50.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="StepX">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>570</y>
+        <width>151</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: white;
+color: black;
+border: 1px solid rgb(0, 32, 255);
+</string>
+      </property>
+      <property name="wrapping">
+       <bool>false</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="minimum">
+       <double>-1000000.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>1000000.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>0.010000000000000</double>
+      </property>
+      <property name="stepType">
+       <enum>QAbstractSpinBox::DefaultStepType</enum>
+      </property>
+      <property name="value">
+       <double>0.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="ScopeMin">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>560</y>
+        <width>66</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: white;
+color: black;
+border: 1px solid rgb(0, 32, 255);
+</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="keyboardTracking">
+       <bool>true</bool>
+      </property>
+      <property name="minimum">
+       <double>-1000000.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>1000000.000000000000000</double>
+      </property>
+      <property name="value">
+       <double>-50.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="FunctionRange">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>540</y>
+        <width>91</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: white;
+color: black;
+border: 1px solid rgb(0, 32, 255);
+</string>
+      </property>
+      <property name="text">
+       <string>Function range </string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="RangeMin">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>560</y>
+        <width>66</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: white;
+color: black;
+border: 1px solid rgb(0, 32, 255);
+</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="minimum">
+       <double>-1000000.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>1000000.000000000000000</double>
+      </property>
+      <property name="value">
+       <double>-2.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="XDef">
+      <property name="geometry">
+       <rect>
+        <x>670</x>
+        <y>540</y>
+        <width>87</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: white;
+color: black;
+border: 1px solid rgb(0, 32, 255);
+</string>
+      </property>
+      <property name="text">
+       <string>X</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QGraphicsView" name="graphicsView">
+      <property name="geometry">
+       <rect>
+        <x>-10</x>
+        <y>-30</y>
+        <width>871</width>
+        <height>661</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>776</width>
+        <height>482</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:white;
+</string>
+      </property>
+     </widget>
+     <zorder>graphicsView</zorder>
+     <zorder>RangeMax</zorder>
+     <zorder>FunctionScope</zorder>
+     <zorder>input_x</zorder>
+     <zorder>StepXDef</zorder>
+     <zorder>ScopeMax</zorder>
+     <zorder>StepX</zorder>
+     <zorder>ScopeMin</zorder>
+     <zorder>FunctionRange</zorder>
+     <zorder>RangeMin</zorder>
+     <zorder>XDef</zorder>
     </widget>
     <widget class="QWidget" name="CreditCalc">
      <attribute name="title">

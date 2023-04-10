@@ -35,6 +35,7 @@
         "array": "c",
         "utility": "c",
         "__locale": "c",
-        "tests.h": "c"
+        "tests.h": "c",
+        "iostream": "cpp"
     }
 }

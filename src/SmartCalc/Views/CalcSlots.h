@@ -14,7 +14,6 @@ public:
     ~CalcSlots() {}
 
 
-
 private slots:
     void SetNumber();
     void SetOperator();
