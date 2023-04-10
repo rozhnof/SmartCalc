@@ -331,7 +331,6 @@ DIST          = /usr/local/share/qt/mkspecs/features/spec_pre.prf \
 		/usr/local/share/qt/mkspecs/features/qt_config.prf \
 		/usr/local/share/qt/mkspecs/macx-clang/qmake.conf \
 		/usr/local/share/qt/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/local/share/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/local/share/qt/mkspecs/features/mac/sdk.prf \
 		/usr/local/share/qt/mkspecs/features/toolchain.prf \
@@ -404,7 +403,7 @@ TARGET        = ../build/SmartCalc.app/Contents/MacOS/SmartCalc
 EXPORT_QMAKE_MAC_SDK = macosx
 EXPORT_QMAKE_MAC_SDK_VERSION = 12.1
 EXPORT_QMAKE_XCODE_DEVELOPER_PATH = /Applications/Xcode.app/Contents/Developer
-EXPORT__QMAKE_STASH_ = /Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc/.qmake.stash
+EXPORT__QMAKE_STASH_ = 
 EXPORT_VALID_ARCHS = x86_64
 EXPORT_DEFAULT_ARCHS = x86_64
 EXPORT_ARCHS = $(filter $(EXPORT_VALID_ARCHS), $(if $(ARCHS), $(ARCHS), $(if $(EXPORT_DEFAULT_ARCHS), $(EXPORT_DEFAULT_ARCHS), $(EXPORT_VALID_ARCHS))))
@@ -646,7 +645,6 @@ Makefile: SmartCalc.pro /usr/local/share/qt/mkspecs/macx-clang/qmake.conf /usr/l
 		/usr/local/share/qt/mkspecs/features/qt_config.prf \
 		/usr/local/share/qt/mkspecs/macx-clang/qmake.conf \
 		/usr/local/share/qt/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/local/share/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/local/share/qt/mkspecs/features/mac/sdk.prf \
 		/usr/local/share/qt/mkspecs/features/toolchain.prf \
@@ -906,7 +904,6 @@ Makefile: SmartCalc.pro /usr/local/share/qt/mkspecs/macx-clang/qmake.conf /usr/l
 /usr/local/share/qt/mkspecs/features/qt_config.prf:
 /usr/local/share/qt/mkspecs/macx-clang/qmake.conf:
 /usr/local/share/qt/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /usr/local/share/qt/mkspecs/features/exclusive_builds.prf:
 /usr/local/share/qt/mkspecs/features/mac/sdk.prf:
 /usr/local/share/qt/mkspecs/features/toolchain.prf:
@@ -981,7 +978,6 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r ../build/SmartCalc.app
-	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -1022,10 +1018,11 @@ moc_BaseView.cpp: Views/BaseView.h \
 		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
 		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
 		Views/GraphUI.h \
+		Models/calc.h \
 		Controllers/GraphCalc/GraphCalc.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
 		/usr/local/lib/QtCore.framework/Headers/qstring.h \
-		Models/calc.h \
+		Models/Model.h \
 		moc_predefs.h \
 		/usr/local/share/qt/libexec/moc
 	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib Views/BaseView.h -o moc_BaseView.cpp
@@ -1039,10 +1036,11 @@ moc_CalcSlots.cpp: Views/CalcSlots.h \
 		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
 		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
 		Views/GraphUI.h \
+		Models/calc.h \
 		Controllers/GraphCalc/GraphCalc.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
 		/usr/local/lib/QtCore.framework/Headers/qstring.h \
-		Models/calc.h \
+		Models/Model.h \
 		moc_predefs.h \
 		/usr/local/share/qt/libexec/moc
 	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib Views/CalcSlots.h -o moc_CalcSlots.cpp
@@ -1055,10 +1053,11 @@ moc_Graph.cpp: Views/Graph.h \
 		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
 		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
 		Views/GraphUI.h \
+		Models/calc.h \
 		Controllers/GraphCalc/GraphCalc.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
 		/usr/local/lib/QtCore.framework/Headers/qstring.h \
-		Models/calc.h \
+		Models/Model.h \
 		moc_predefs.h \
 		/usr/local/share/qt/libexec/moc
 	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib Views/Graph.h -o moc_Graph.cpp
@@ -1077,10 +1076,11 @@ moc_mainwindow.cpp: Views/mainwindow.h \
 		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
 		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
 		Views/GraphUI.h \
+		Models/calc.h \
 		Controllers/GraphCalc/GraphCalc.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
 		/usr/local/lib/QtCore.framework/Headers/qstring.h \
-		Models/calc.h \
+		Models/Model.h \
 		moc_predefs.h \
 		/usr/local/share/qt/libexec/moc
 	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib Views/mainwindow.h -o moc_mainwindow.cpp
@@ -1198,10 +1198,11 @@ CalcSlots.o: Views/CalcSlots.cpp Views/CalcSlots.h \
 		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
 		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
 		Views/GraphUI.h \
+		Models/calc.h \
 		Controllers/GraphCalc/GraphCalc.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
 		/usr/local/lib/QtCore.framework/Headers/qstring.h \
-		Models/calc.h
+		Models/Model.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CalcSlots.o Views/CalcSlots.cpp
 
 CalculatorUI.o: Views/CalculatorUI.cpp 
@@ -1238,10 +1239,11 @@ main.o: main.cpp /usr/local/lib/QtWidgets.framework/Headers/QApplication \
 		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
 		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
 		Views/GraphUI.h \
+		Models/calc.h \
 		Controllers/GraphCalc/GraphCalc.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
 		/usr/local/lib/QtCore.framework/Headers/qstring.h \
-		Models/calc.h \
+		Models/Model.h \
 		Views/WinUI.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
