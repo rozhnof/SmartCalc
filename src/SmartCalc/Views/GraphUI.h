@@ -31,7 +31,7 @@ public:
     GraphUI() {
         graphUi = new QWidget;
         SetupUI();
-       RetranslateUI();
+        RetranslateUI();
     }
 
     void SetupUI()
@@ -196,7 +196,6 @@ StepXDef = new QLineEdit(graphUi);
         FunctionScope->setText(QCoreApplication::translate("GraphUI", " Function scope", nullptr));
         XDef->setText(QCoreApplication::translate("GraphUI", "X", nullptr));
     }
-
 };
 
 
