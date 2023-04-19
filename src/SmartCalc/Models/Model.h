@@ -1,17 +1,42 @@
 #include "calc.h"
+#include <string>
+
+using namespace std;
 
 class Model {
 
 private:
-    char postfix[1024] = {0};
 
+    char* _infix;
+    char* _postfix;
+    double _x;
 
 public:
-    void Convert(char* infix) {
-        FromInfixToPostfix(infix, postfix);
+
+    Model() {}
+
+    void SetInput(string infix, double x) {
+        _infix = toCharArray(infix);
+        _postfix = new char[1024];
+        FromInfixToPostfix(_infix, _postfix);
     }
 
-    double Calculate(double x) {
-        return Calculation(postfix, x);
+    double Calculate() {
+        return Calculation(_postfix, _x);
     }    
+
+    char* toCharArray(string str) {
+        char *_postfix = new char[str.size()];
+        strcpy(_postfix, str.c_str());
+        return _postfix;
+    }
+
+    string toString(char* charArray) {
+        return charArray;
+    }
+
+    ~Model() {
+        delete[] _infix;
+        delete[] _postfix;
+    }
 };

@@ -13,6 +13,13 @@
 #include <QVector>
 
 
+struct CalculatorWidgets
+{
+    unordered_map<int, QPushButton*> buttons;
+    QLabel *Input;
+} CalculatorWidgets;
+
+
 class CalculatorUI : public MainWindow
 {
     Q_OBJECT
@@ -69,10 +76,10 @@ public:
               _slot(slot) {}
     };
 
+
+
     unordered_map<int, ButtonSettings*> buttonSettings;
 
-    unordered_map<int, QPushButton*> buttons;
-    QLabel *Input;
 
     CalculatorUI() {
         SetupPlatform();
@@ -171,10 +178,7 @@ public slots:
 
     void SetCloseBracket() {
         int status = 1;
-        controller->Validate(new CloseBracketValidate, Input->text(), static_cast<QPushButton*>(sender())->text(), status);
-        if (status) {
-            Input->setText(controller->GetResult());
-        }
+        Input->setText(controller->Validate(new CloseBracketValidate, Input->text(), static_cast<QPushButton*>(sender())->text(), status));
     }
 
     void Clear() {
@@ -183,7 +187,10 @@ public slots:
 
     void GetResult() {
         int status = 1;
-        Input->setText(controller->Validate(new ResultValidate, Input->text(), static_cast<QPushButton*>(sender())->text(), status));
+        controller->Validate(new ResultValidate, Input->text(), static_cast<QPushButton*>(sender())->text(), status);
+        if (status) {
+            Input->setText(controller->GetResult());
+        }
     }
 
     void DrawGraph() {

@@ -6,30 +6,36 @@
 using namespace std;
 
 class Controller {
-private:
 
+private:
     string _input_text;
     string _button_text;
     string _result_text;
-    double result;
-    char char_postfix[1024];
+
+    double _x;
+
+    Model *model;
+
 
 public:
 
-    Controller() {}
+    Controller() {
+        model = new Model;
+    }
 
     QString Validate(IValidate *rule, QString input, QString button, int &status) {
-        Validator check(rule);
+        Validator *check = new Validator(rule);
 
         _input_text = input.toStdString();
         _button_text = button.toStdString();
-        _result_text = check.Validate(_input_text, _button_text, status);
+        _result_text = check->Validate(_input_text, _button_text, status);
 
         return QString::fromStdString(_result_text);
     }
 
-    double GetResult() {
-
+    QString GetResult() {
+        model->SetInput(_result_text, _x);
+        return QString::number(model->Calculate());
     }
 
 
