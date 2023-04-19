@@ -13,16 +13,16 @@ public:
     MacUI() {}
 
     void SetupCalculatorUI() override {
-
+        cout << "BEBRA" << endl;
     }
     void SetupGraphUI() override {
-
+        cout << "BEBRA" << endl;
     }
     void SetupCreditCalculatorUI() override {
-
+        cout << "BEBRA" << endl;
     }
     void SetupDepositCalculatorUI() override {
-
+        cout << "BEBRA" << endl;
     }
 };
 

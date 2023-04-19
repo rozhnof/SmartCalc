@@ -1,4 +1,4 @@
-QT       += core gui
+QT       -= core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -26,8 +26,8 @@ SOURCES += \
     Models/calculation.c \
     Models/converter.c \
     Models/credit_calc.c \
-    Views/MacUI.cpp \
-    Views/mainwindow.cpp \
+#    Views/MacUI.cpp \
+#    Views/mainwindow.cpp \
     Views/qcustomplot.cpp \
     main.cpp
 

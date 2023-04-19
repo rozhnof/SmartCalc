@@ -7,6 +7,7 @@
 #include <iostream>
 #include "MacUI.h"
 #include <unordered_map>
+#include "Controllers/Controller.h"
 
 class MainWindow : public QWidget
 {
@@ -23,17 +24,20 @@ public:
     QWidget *CreditCalcTab;
     QWidget *DepositCalcTab;
 
+    Controller *controller;
+
     MainWindow() {
         Window = new QWidget;
         CalcTab = new QWidget(Window);
+        controller = new Controller;
 
         Window->setFixedSize(1000, 1000);
         Window->setObjectName(QString::fromUtf8("Calculator"));
     }
 
-    void SetupPlatform(IPlatformUI *platform)
+    void SetupPlatform()
     {
-        _platform = platform;
+        _platform = new MacUI;
     }
 
     void show() {
@@ -42,10 +46,7 @@ public:
 
     ~MainWindow() {}
 
-public slots:
-    void SetNumber() {
-        cout << "EERERORR" << endl;
-    }
+
 };
 
 #endif // MAINWINDOW_H

@@ -78,7 +78,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>=</string>
+       <string>equal</string>
       </property>
      </widget>
      <widget class="QPushButton" name="ButtonDrawGraph">
@@ -279,7 +279,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>5</string>
+       <string>five</string>
       </property>
      </widget>
      <widget class="QPushButton" name="ButtonAcos">
@@ -357,7 +357,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>3</string>
+       <string>three</string>
       </property>
      </widget>
      <widget class="QPushButton" name="Button8">
@@ -396,7 +396,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>8</string>
+       <string>eight</string>
       </property>
      </widget>
      <widget class="QPushButton" name="Button0">
@@ -435,7 +435,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>0</string>
+       <string>zero</string>
       </property>
      </widget>
      <widget class="QPushButton" name="ButtonPow">
@@ -474,7 +474,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>^</string>
+       <string>pow</string>
       </property>
      </widget>
      <widget class="QPushButton" name="ButtonFactorial">
@@ -513,7 +513,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>!</string>
+       <string>factorial</string>
       </property>
      </widget>
      <widget class="QPushButton" name="ButtonAsin">
@@ -591,7 +591,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>-</string>
+       <string>sub</string>
       </property>
      </widget>
      <widget class="QPushButton" name="ButtonLn">
@@ -695,7 +695,7 @@ QPushButton:pressed {
       </property>
       <property name="font">
        <font>
-        <pointsize>18</pointsize>
+        <pointsize>8</pointsize>
        </font>
       </property>
       <property name="styleSheet">
@@ -708,7 +708,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>)</string>
+       <string>closeBracket</string>
       </property>
      </widget>
      <widget class="QPushButton" name="ButtonMul">
@@ -747,7 +747,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>*</string>
+       <string>mul</string>
       </property>
      </widget>
      <widget class="QPushButton" name="ButtonSin">
@@ -864,7 +864,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>2</string>
+       <string>two</string>
       </property>
      </widget>
      <widget class="QPushButton" name="Button9">
@@ -903,7 +903,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>9</string>
+       <string>nine</string>
       </property>
      </widget>
      <widget class="QPushButton" name="Button4">
@@ -942,7 +942,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>4</string>
+       <string>four</string>
       </property>
      </widget>
      <widget class="QPushButton" name="ButtonAtan">
@@ -1059,7 +1059,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>7</string>
+       <string>seven</string>
       </property>
      </widget>
      <widget class="QPushButton" name="ButtonSum">
@@ -1098,7 +1098,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>+</string>
+       <string>sum</string>
       </property>
      </widget>
      <widget class="QPushButton" name="Button6">
@@ -1137,7 +1137,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>6</string>
+       <string>six</string>
       </property>
      </widget>
      <widget class="QPushButton" name="ButtonDot">
@@ -1176,7 +1176,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>.</string>
+       <string>dot</string>
       </property>
      </widget>
      <widget class="QPushButton" name="Button1">
@@ -1215,7 +1215,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>1</string>
+       <string>one</string>
       </property>
      </widget>
      <widget class="QPushButton" name="ButtonOpenBracket">
@@ -1241,7 +1241,7 @@ QPushButton:pressed {
       </property>
       <property name="font">
        <font>
-        <pointsize>18</pointsize>
+        <pointsize>7</pointsize>
        </font>
       </property>
       <property name="styleSheet">
@@ -1254,7 +1254,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>(</string>
+       <string>openBracket</string>
       </property>
      </widget>
      <widget class="QPushButton" name="ButtonMod">
@@ -1332,7 +1332,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>/</string>
+       <string>div</string>
       </property>
      </widget>
      <widget class="QLabel" name="LabelInput">

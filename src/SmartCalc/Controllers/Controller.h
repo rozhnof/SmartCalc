@@ -1,13 +1,12 @@
 #include "../Models/Model.h"
 #include "Validate/Validate.h"
-#include "Graph/Graph.h"
+
 
 
 using namespace std;
 
 class Controller {
 private:
-    GraphBack *graph;
 
     string _input_text;
     string _button_text;
@@ -17,7 +16,7 @@ private:
 
 public:
 
-    Controller() : graph(new GraphBack) {}
+    Controller() {}
 
     QString Validate(IValidate *rule, QString input, QString button, int &status) {
         Validator check(rule);

@@ -3,6 +3,7 @@
         "new": "cpp",
         "__hash_table": "cpp",
         "unordered_map": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "utility": "cpp"
     }
 }

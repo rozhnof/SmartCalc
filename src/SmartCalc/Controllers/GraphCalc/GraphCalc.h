@@ -53,7 +53,7 @@ public:
     }
 
 
-    void DrawGraph(QVector <double>&x, QVector <double>&y) {
+    void DrawGraph(QVector<double> &x, QVector <double>&y) {
         double x0 = _scope_min;
         double step_x = (fabs(_scope_min) + fabs(_scope_max)) / 10000;
 
