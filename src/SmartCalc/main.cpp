@@ -10,5 +10,6 @@ int main(int argc, char *argv[])
     CalculatorUI calc;
     calc.show();
 
+
     return a.exec();
 }

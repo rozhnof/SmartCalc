@@ -8,6 +8,9 @@
 #include "MacUI.h"
 #include <unordered_map>
 #include "Controllers/Controller.h"
+#include <QResizeEvent>
+#include <QDebug>
+#include <QMainWindow>
 
 class MainWindow : public QWidget
 {
@@ -31,9 +34,13 @@ public:
         CalcTab = new QWidget(Window);
         controller = new Controller;
 
-        Window->setFixedSize(1000, 1000);
+        Window->resize(800, 600);
         Window->setObjectName(QString::fromUtf8("Calculator"));
+
+
     }
+
+    ~MainWindow() {}
 
     void SetupPlatform()
     {
@@ -44,9 +51,7 @@ public:
         Window->show();
     }
 
-    ~MainWindow() {}
-
-
+    void resizeEvent(QResizeEvent *e);
 };
 
 #endif // MAINWINDOW_H

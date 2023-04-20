@@ -29,8 +29,8 @@
    <widget class="QTabWidget" name="MainTab">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>0</y>
+      <x>50</x>
+      <y>30</y>
       <width>991</width>
       <height>811</height>
      </rect>
@@ -42,1333 +42,1325 @@
      <attribute name="title">
       <string>Calculator</string>
      </attribute>
-     <widget class="QPushButton" name="ButtonGetResult">
+     <widget class="QWidget" name="widget" native="true">
       <property name="geometry">
        <rect>
-        <x>667</x>
-        <y>326</y>
-        <width>60</width>
-        <height>53</height>
+        <x>130</x>
+        <y>140</y>
+        <width>741</width>
+        <height>501</height>
        </rect>
       </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>25</pointsize>
-       </font>
-      </property>
       <property name="styleSheet">
-       <string notr="true">QPushButton {
+       <string notr="true">background-color:black;
+</string>
+      </property>
+      <widget class="QLabel" name="LabelInput">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>0</y>
+         <width>16</width>
+         <height>29</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>25</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:black;</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="ButtonMod">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>167</y>
+         <width>60</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	background-color: rgb(56, 56, 56);
+	border: 1px solid rgb(34, 34, 34);
+}
+QPushButton:pressed {
+    background-color: rgba(162, 161, 166, 128);
+}</string>
+       </property>
+       <property name="text">
+        <string>mod</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="ButtonFactorial">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>167</y>
+         <width>60</width>
+         <height>84</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	background-color: rgb(56, 56, 56);
+	border: 1px solid rgb(34, 34, 34);
+}
+QPushButton:pressed {
+    background-color: rgba(162, 161, 166, 128);
+}</string>
+       </property>
+       <property name="text">
+        <string>factorial</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="ButtonPow">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>167</y>
+         <width>60</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	background-color: rgb(56, 56, 56);
+	border: 1px solid rgb(34, 34, 34);
+}
+QPushButton:pressed {
+    background-color: rgba(162, 161, 166, 128);
+}</string>
+       </property>
+       <property name="text">
+        <string>pow</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="Button7">
+       <property name="geometry">
+        <rect>
+         <x>340</x>
+         <y>167</y>
+         <width>60</width>
+         <height>84</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>25</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	 background-color: rgb(89, 89, 89);
+   border: 1px solid rgb(34, 34, 34);
+}
+QPushButton:pressed {
+    background-color: rgba(255, 255, 255, 128);
+}</string>
+       </property>
+       <property name="text">
+        <string>seven</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="Button8">
+       <property name="geometry">
+        <rect>
+         <x>440</x>
+         <y>167</y>
+         <width>60</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>25</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	 background-color: rgb(89, 89, 89);
+   border: 1px solid rgb(34, 34, 34);
+}
+QPushButton:pressed {
+    background-color: rgba(255, 255, 255, 128);
+}</string>
+       </property>
+       <property name="text">
+        <string>eight</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="Button9">
+       <property name="geometry">
+        <rect>
+         <x>540</x>
+         <y>167</y>
+         <width>60</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>25</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	 background-color: rgb(89, 89, 89);
+   border: 1px solid rgb(34, 34, 34);
+}
+QPushButton:pressed {
+    background-color: rgba(255, 255, 255, 128);
+}</string>
+       </property>
+       <property name="text">
+        <string>nine</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="ButtonMul">
+       <property name="geometry">
+        <rect>
+         <x>640</x>
+         <y>167</y>
+         <width>60</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>25</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
 	 background-color: rgb(226, 153, 57);
    border: 1px solid rgb(34, 34, 34);
 }
 QPushButton:pressed {
     background-color: rgba(255, 165, 2, 130)
 }</string>
-      </property>
-      <property name="text">
-       <string>equal</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonDrawGraph">
-      <property name="geometry">
-       <rect>
-        <x>549</x>
-        <y>118</y>
-        <width>119</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>1000</width>
-        <height>10000</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>22</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
+       </property>
+       <property name="text">
+        <string>mul</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="ButtonLog">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>251</y>
+         <width>60</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	background-color: rgb(56, 56, 56);
+	border: 1px solid rgb(34, 34, 34);
+}
+QPushButton:pressed {
+    background-color: rgba(162, 161, 166, 128);
+}</string>
+       </property>
+       <property name="text">
+        <string>log</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="ButtonLn">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>251</y>
+         <width>60</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	background-color: rgb(56, 56, 56);
+	border: 1px solid rgb(34, 34, 34);
+}
+QPushButton:pressed {
+    background-color: rgba(162, 161, 166, 128);
+}</string>
+       </property>
+       <property name="text">
+        <string>ln</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="ButtonSqrt">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>251</y>
+         <width>60</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	background-color: rgb(56, 56, 56);
+	border: 1px solid rgb(34, 34, 34);
+}
+QPushButton:pressed {
+    background-color: rgba(162, 161, 166, 128);
+}</string>
+       </property>
+       <property name="text">
+        <string>sqrt</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="Button4">
+       <property name="geometry">
+        <rect>
+         <x>340</x>
+         <y>251</y>
+         <width>60</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>25</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	 background-color: rgb(89, 89, 89);
+   border: 1px solid rgb(34, 34, 34);
+}
+QPushButton:pressed {
+    background-color: rgba(255, 255, 255, 128);
+}</string>
+       </property>
+       <property name="text">
+        <string>four</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="Button5">
+       <property name="geometry">
+        <rect>
+         <x>440</x>
+         <y>251</y>
+         <width>60</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>25</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	 background-color: rgb(89, 89, 89);
+   border: 1px solid rgb(34, 34, 34);
+}
+QPushButton:pressed {
+    background-color: rgba(255, 255, 255, 128);
+}</string>
+       </property>
+       <property name="text">
+        <string>five</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="Button6">
+       <property name="geometry">
+        <rect>
+         <x>540</x>
+         <y>251</y>
+         <width>60</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>25</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	 background-color: rgb(89, 89, 89);
+   border: 1px solid rgb(34, 34, 34);
+}
+QPushButton:pressed {
+    background-color: rgba(255, 255, 255, 128);
+}</string>
+       </property>
+       <property name="text">
+        <string>six</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="ButtonSub">
+       <property name="geometry">
+        <rect>
+         <x>640</x>
+         <y>251</y>
+         <width>60</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>25</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
 	 background-color: rgb(226, 153, 57);
    border: 1px solid rgb(34, 34, 34);
 }
 QPushButton:pressed {
     background-color: rgba(255, 165, 2, 130)
 }</string>
-      </property>
-      <property name="text">
-       <string>Graph</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonCos">
-      <property name="geometry">
-       <rect>
-        <x>372</x>
-        <y>326</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
+       </property>
+       <property name="text">
+        <string>sub</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="ButtonAsin">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>334</y>
+         <width>60</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
 	background-color: rgb(56, 56, 56);
 	border: 1px solid rgb(34, 34, 34);
 }
 QPushButton:pressed {
     background-color: rgba(162, 161, 166, 128);
 }</string>
-      </property>
-      <property name="text">
-       <string>cos</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonLog">
-      <property name="geometry">
-       <rect>
-        <x>313</x>
-        <y>222</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
+       </property>
+       <property name="text">
+        <string>asin</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="ButtonAcos">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>334</y>
+         <width>60</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
 	background-color: rgb(56, 56, 56);
 	border: 1px solid rgb(34, 34, 34);
 }
 QPushButton:pressed {
     background-color: rgba(162, 161, 166, 128);
 }</string>
-      </property>
-      <property name="text">
-       <string>log</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonTan">
-      <property name="geometry">
-       <rect>
-        <x>431</x>
-        <y>326</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
+       </property>
+       <property name="text">
+        <string>acos</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="ButtonAtan">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>334</y>
+         <width>60</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
 	background-color: rgb(56, 56, 56);
 	border: 1px solid rgb(34, 34, 34);
 }
 QPushButton:pressed {
     background-color: rgba(162, 161, 166, 128);
 }</string>
-      </property>
-      <property name="text">
-       <string>tan</string>
-      </property>
-      <property name="autoExclusive">
-       <bool>false</bool>
-      </property>
-      <property name="autoDefault">
-       <bool>false</bool>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="Button5">
-      <property name="geometry">
-       <rect>
-        <x>549</x>
-        <y>222</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>25</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
+       </property>
+       <property name="text">
+        <string>atan</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="Button1">
+       <property name="geometry">
+        <rect>
+         <x>340</x>
+         <y>334</y>
+         <width>60</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>25</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
 	 background-color: rgb(89, 89, 89);
    border: 1px solid rgb(34, 34, 34);
 }
 QPushButton:pressed {
     background-color: rgba(255, 255, 255, 128);
 }</string>
-      </property>
-      <property name="text">
-       <string>five</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonAcos">
-      <property name="geometry">
-       <rect>
-        <x>372</x>
-        <y>274</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-	background-color: rgb(56, 56, 56);
-	border: 1px solid rgb(34, 34, 34);
-}
-QPushButton:pressed {
-    background-color: rgba(162, 161, 166, 128);
-}</string>
-      </property>
-      <property name="text">
-       <string>acos</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="Button3">
-      <property name="geometry">
-       <rect>
-        <x>608</x>
-        <y>274</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>25</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
+       </property>
+       <property name="text">
+        <string>one</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="Button2">
+       <property name="geometry">
+        <rect>
+         <x>440</x>
+         <y>334</y>
+         <width>60</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>25</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
 	 background-color: rgb(89, 89, 89);
    border: 1px solid rgb(34, 34, 34);
 }
 QPushButton:pressed {
     background-color: rgba(255, 255, 255, 128);
 }</string>
-      </property>
-      <property name="text">
-       <string>three</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="Button8">
-      <property name="geometry">
-       <rect>
-        <x>549</x>
-        <y>170</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>25</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
+       </property>
+       <property name="text">
+        <string>two</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="Button3">
+       <property name="geometry">
+        <rect>
+         <x>540</x>
+         <y>334</y>
+         <width>60</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>25</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
 	 background-color: rgb(89, 89, 89);
    border: 1px solid rgb(34, 34, 34);
 }
 QPushButton:pressed {
     background-color: rgba(255, 255, 255, 128);
 }</string>
-      </property>
-      <property name="text">
-       <string>eight</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="Button0">
-      <property name="geometry">
-       <rect>
-        <x>490</x>
-        <y>326</y>
-        <width>119</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>119</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>119</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>25</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-	 background-color: rgb(89, 89, 89);
-   border: 1px solid rgb(34, 34, 34);
-}
-QPushButton:pressed {
-    background-color: rgba(255, 255, 255, 128);
-}</string>
-      </property>
-      <property name="text">
-       <string>zero</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonPow">
-      <property name="geometry">
-       <rect>
-        <x>431</x>
-        <y>170</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-	background-color: rgb(56, 56, 56);
-	border: 1px solid rgb(34, 34, 34);
-}
-QPushButton:pressed {
-    background-color: rgba(162, 161, 166, 128);
-}</string>
-      </property>
-      <property name="text">
-       <string>pow</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonFactorial">
-      <property name="geometry">
-       <rect>
-        <x>372</x>
-        <y>170</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-	background-color: rgb(56, 56, 56);
-	border: 1px solid rgb(34, 34, 34);
-}
-QPushButton:pressed {
-    background-color: rgba(162, 161, 166, 128);
-}</string>
-      </property>
-      <property name="text">
-       <string>factorial</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonAsin">
-      <property name="geometry">
-       <rect>
-        <x>313</x>
-        <y>274</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-	background-color: rgb(56, 56, 56);
-	border: 1px solid rgb(34, 34, 34);
-}
-QPushButton:pressed {
-    background-color: rgba(162, 161, 166, 128);
-}</string>
-      </property>
-      <property name="text">
-       <string>asin</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonSub">
-      <property name="geometry">
-       <rect>
-        <x>667</x>
-        <y>222</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>25</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
+       </property>
+       <property name="text">
+        <string>three</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="ButtonSum">
+       <property name="geometry">
+        <rect>
+         <x>640</x>
+         <y>334</y>
+         <width>60</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>25</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
 	 background-color: rgb(226, 153, 57);
    border: 1px solid rgb(34, 34, 34);
 }
 QPushButton:pressed {
     background-color: rgba(255, 165, 2, 130)
 }</string>
-      </property>
-      <property name="text">
-       <string>sub</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonLn">
-      <property name="geometry">
-       <rect>
-        <x>372</x>
-        <y>222</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
+       </property>
+       <property name="text">
+        <string>sum</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="ButtonSin">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>418</y>
+         <width>60</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
 	background-color: rgb(56, 56, 56);
 	border: 1px solid rgb(34, 34, 34);
 }
 QPushButton:pressed {
     background-color: rgba(162, 161, 166, 128);
 }</string>
-      </property>
-      <property name="text">
-       <string>ln</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonAC">
-      <property name="geometry">
-       <rect>
-        <x>490</x>
-        <y>118</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>22</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
+       </property>
+       <property name="text">
+        <string>sin</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="ButtonCos">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>418</y>
+         <width>60</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	background-color: rgb(56, 56, 56);
+	border: 1px solid rgb(34, 34, 34);
+}
+QPushButton:pressed {
+    background-color: rgba(162, 161, 166, 128);
+}</string>
+       </property>
+       <property name="text">
+        <string>cos</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="ButtonTan">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>418</y>
+         <width>60</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	background-color: rgb(56, 56, 56);
+	border: 1px solid rgb(34, 34, 34);
+}
+QPushButton:pressed {
+    background-color: rgba(162, 161, 166, 128);
+}</string>
+       </property>
+       <property name="text">
+        <string>tan</string>
+       </property>
+       <property name="autoExclusive">
+        <bool>false</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="Button0">
+       <property name="geometry">
+        <rect>
+         <x>340</x>
+         <y>418</y>
+         <width>119</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>119</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>119</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>25</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	 background-color: rgb(89, 89, 89);
+   border: 1px solid rgb(34, 34, 34);
+}
+QPushButton:pressed {
+    background-color: rgba(255, 255, 255, 128);
+}</string>
+       </property>
+       <property name="text">
+        <string>zero</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="ButtonDot">
+       <property name="geometry">
+        <rect>
+         <x>540</x>
+         <y>418</y>
+         <width>60</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>25</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	 background-color: rgb(89, 89, 89);
+   border: 1px solid rgb(34, 34, 34);
+}
+QPushButton:pressed {
+    background-color: rgba(255, 255, 255, 128);
+}</string>
+       </property>
+       <property name="text">
+        <string>dot</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="ButtonGetResult">
+       <property name="geometry">
+        <rect>
+         <x>640</x>
+         <y>418</y>
+         <width>60</width>
+         <height>83</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>25</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
 	 background-color: rgb(226, 153, 57);
    border: 1px solid rgb(34, 34, 34);
 }
 QPushButton:pressed {
     background-color: rgba(255, 165, 2, 130)
 }</string>
-      </property>
-      <property name="text">
-       <string>AC</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonCloseBracket">
-      <property name="geometry">
-       <rect>
-        <x>431</x>
-        <y>118</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>8</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
+       </property>
+       <property name="text">
+        <string>equal</string>
+       </property>
+      </widget>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>84</y>
+         <width>741</width>
+         <height>34</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="spacing">
+         <number>-1</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>1</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="ButtonX">
+          <property name="minimumSize">
+           <size>
+            <width>60</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>60</width>
+            <height>100</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>18</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
 	background-color: rgb(56, 56, 56);
 	border: 1px solid rgb(34, 34, 34);
 }
 QPushButton:pressed {
     background-color: rgba(162, 161, 166, 128);
 }</string>
-      </property>
-      <property name="text">
-       <string>closeBracket</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonMul">
-      <property name="geometry">
-       <rect>
-        <x>667</x>
-        <y>170</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>25</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
+          </property>
+          <property name="text">
+           <string>x</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="ButtonOpenBracket">
+          <property name="minimumSize">
+           <size>
+            <width>60</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>60</width>
+            <height>100</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	background-color: rgb(56, 56, 56);
+	border: 1px solid rgb(34, 34, 34);
+}
+QPushButton:pressed {
+    background-color: rgba(162, 161, 166, 128);
+}</string>
+          </property>
+          <property name="text">
+           <string>openBracket</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="ButtonCloseBracket">
+          <property name="minimumSize">
+           <size>
+            <width>60</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>60</width>
+            <height>100</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	background-color: rgb(56, 56, 56);
+	border: 1px solid rgb(34, 34, 34);
+}
+QPushButton:pressed {
+    background-color: rgba(162, 161, 166, 128);
+}</string>
+          </property>
+          <property name="text">
+           <string>closeBracket</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="ButtonAC">
+          <property name="minimumSize">
+           <size>
+            <width>60</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>60</width>
+            <height>100</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>22</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
 	 background-color: rgb(226, 153, 57);
    border: 1px solid rgb(34, 34, 34);
 }
 QPushButton:pressed {
     background-color: rgba(255, 165, 2, 130)
 }</string>
-      </property>
-      <property name="text">
-       <string>mul</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonSin">
-      <property name="geometry">
-       <rect>
-        <x>313</x>
-        <y>326</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-	background-color: rgb(56, 56, 56);
-	border: 1px solid rgb(34, 34, 34);
-}
-QPushButton:pressed {
-    background-color: rgba(162, 161, 166, 128);
-}</string>
-      </property>
-      <property name="text">
-       <string>sin</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonX">
-      <property name="geometry">
-       <rect>
-        <x>313</x>
-        <y>118</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-	background-color: rgb(56, 56, 56);
-	border: 1px solid rgb(34, 34, 34);
-}
-QPushButton:pressed {
-    background-color: rgba(162, 161, 166, 128);
-}</string>
-      </property>
-      <property name="text">
-       <string>x</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="Button2">
-      <property name="geometry">
-       <rect>
-        <x>549</x>
-        <y>274</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>25</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-	 background-color: rgb(89, 89, 89);
-   border: 1px solid rgb(34, 34, 34);
-}
-QPushButton:pressed {
-    background-color: rgba(255, 255, 255, 128);
-}</string>
-      </property>
-      <property name="text">
-       <string>two</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="Button9">
-      <property name="geometry">
-       <rect>
-        <x>608</x>
-        <y>170</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>25</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-	 background-color: rgb(89, 89, 89);
-   border: 1px solid rgb(34, 34, 34);
-}
-QPushButton:pressed {
-    background-color: rgba(255, 255, 255, 128);
-}</string>
-      </property>
-      <property name="text">
-       <string>nine</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="Button4">
-      <property name="geometry">
-       <rect>
-        <x>490</x>
-        <y>222</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>25</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-	 background-color: rgb(89, 89, 89);
-   border: 1px solid rgb(34, 34, 34);
-}
-QPushButton:pressed {
-    background-color: rgba(255, 255, 255, 128);
-}</string>
-      </property>
-      <property name="text">
-       <string>four</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonAtan">
-      <property name="geometry">
-       <rect>
-        <x>431</x>
-        <y>274</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-	background-color: rgb(56, 56, 56);
-	border: 1px solid rgb(34, 34, 34);
-}
-QPushButton:pressed {
-    background-color: rgba(162, 161, 166, 128);
-}</string>
-      </property>
-      <property name="text">
-       <string>atan</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonSqrt">
-      <property name="geometry">
-       <rect>
-        <x>431</x>
-        <y>222</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-	background-color: rgb(56, 56, 56);
-	border: 1px solid rgb(34, 34, 34);
-}
-QPushButton:pressed {
-    background-color: rgba(162, 161, 166, 128);
-}</string>
-      </property>
-      <property name="text">
-       <string>sqrt</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="Button7">
-      <property name="geometry">
-       <rect>
-        <x>490</x>
-        <y>170</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>25</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-	 background-color: rgb(89, 89, 89);
-   border: 1px solid rgb(34, 34, 34);
-}
-QPushButton:pressed {
-    background-color: rgba(255, 255, 255, 128);
-}</string>
-      </property>
-      <property name="text">
-       <string>seven</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonSum">
-      <property name="geometry">
-       <rect>
-        <x>667</x>
-        <y>274</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>25</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
+          </property>
+          <property name="text">
+           <string>AC</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="ButtonDrawGraph">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>1000</width>
+            <height>10000</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>22</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
 	 background-color: rgb(226, 153, 57);
    border: 1px solid rgb(34, 34, 34);
 }
 QPushButton:pressed {
     background-color: rgba(255, 165, 2, 130)
 }</string>
-      </property>
-      <property name="text">
-       <string>sum</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="Button6">
-      <property name="geometry">
-       <rect>
-        <x>608</x>
-        <y>222</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>25</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-	 background-color: rgb(89, 89, 89);
-   border: 1px solid rgb(34, 34, 34);
-}
-QPushButton:pressed {
-    background-color: rgba(255, 255, 255, 128);
-}</string>
-      </property>
-      <property name="text">
-       <string>six</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonDot">
-      <property name="geometry">
-       <rect>
-        <x>608</x>
-        <y>326</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>25</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-	 background-color: rgb(89, 89, 89);
-   border: 1px solid rgb(34, 34, 34);
-}
-QPushButton:pressed {
-    background-color: rgba(255, 255, 255, 128);
-}</string>
-      </property>
-      <property name="text">
-       <string>dot</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="Button1">
-      <property name="geometry">
-       <rect>
-        <x>490</x>
-        <y>274</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>25</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-	 background-color: rgb(89, 89, 89);
-   border: 1px solid rgb(34, 34, 34);
-}
-QPushButton:pressed {
-    background-color: rgba(255, 255, 255, 128);
-}</string>
-      </property>
-      <property name="text">
-       <string>one</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonOpenBracket">
-      <property name="geometry">
-       <rect>
-        <x>372</x>
-        <y>118</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>7</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-	background-color: rgb(56, 56, 56);
-	border: 1px solid rgb(34, 34, 34);
-}
-QPushButton:pressed {
-    background-color: rgba(162, 161, 166, 128);
-}</string>
-      </property>
-      <property name="text">
-       <string>openBracket</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonMod">
-      <property name="geometry">
-       <rect>
-        <x>313</x>
-        <y>170</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-	background-color: rgb(56, 56, 56);
-	border: 1px solid rgb(34, 34, 34);
-}
-QPushButton:pressed {
-    background-color: rgba(162, 161, 166, 128);
-}</string>
-      </property>
-      <property name="text">
-       <string>mod</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonDiv">
-      <property name="geometry">
-       <rect>
-        <x>667</x>
-        <y>118</y>
-        <width>60</width>
-        <height>53</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>60</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>25</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
+          </property>
+          <property name="text">
+           <string>Graph</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="ButtonDiv">
+          <property name="minimumSize">
+           <size>
+            <width>60</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>60</width>
+            <height>100</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>25</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
 	 background-color: rgb(226, 153, 57);
    border: 1px solid rgb(34, 34, 34);
 }
 QPushButton:pressed {
     background-color: rgba(255, 165, 2, 130)
 }</string>
-      </property>
-      <property name="text">
-       <string>div</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="LabelInput">
-      <property name="geometry">
-       <rect>
-        <x>310</x>
-        <y>50</y>
-        <width>412</width>
-        <height>62</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>25</pointsize>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color:black;</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="CreditCalcOpen">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
-        <y>310</y>
-        <width>121</width>
-        <height>32</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Credit Calculator</string>
-      </property>
+          </property>
+          <property name="text">
+           <string>div</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="Graph">

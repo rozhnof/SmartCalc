@@ -27,7 +27,7 @@ SOURCES += \
     Models/converter.c \
     Models/credit_calc.c \
 #    Views/MacUI.cpp \
-#    Views/mainwindow.cpp \
+    Views/mainwindow.cpp \
     Views/qcustomplot.cpp \
     main.cpp
 
