@@ -8,16 +8,14 @@
 #include "MacUI.h"
 #include <unordered_map>
 #include "Controllers/Controller.h"
-#include <QResizeEvent>
-#include <QDebug>
 #include <QMainWindow>
 
-class MainWindow : public QWidget
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    QWidget *Window;
+    QWidget *Window = this;
 
     IPlatformUI *_platform;
     QWidget *currentTab;
@@ -29,15 +27,11 @@ public:
 
     Controller *controller;
 
-    MainWindow() {
-        Window = new QWidget;
-        CalcTab = new QWidget(Window);
+    MainWindow(QWidget *parent = nullptr) : QMainWindow(parent) {
         controller = new Controller;
 
-        Window->resize(800, 600);
-        Window->setObjectName(QString::fromUtf8("Calculator"));
-
-
+        this->resize(800, 600);
+        this->setObjectName(QString::fromUtf8("Calculator"));
     }
 
     ~MainWindow() {}
@@ -46,12 +40,6 @@ public:
     {
         _platform = new MacUI;
     }
-
-    void show() {
-        Window->show();
-    }
-
-    void resizeEvent(QResizeEvent *e);
 };
 
 #endif // MAINWINDOW_H

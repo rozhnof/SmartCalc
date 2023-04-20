@@ -10,17 +10,27 @@ class MacUI : public IPlatformUI
 public:
 
     void SetSize(CalcWidgets *widgets, QWidget *Window) override  {
-        int width = Window->width()/7, height = Window->height()/5;
+        int countHorizontalButtons = 7;
+        int countVerticalButtons = 6;
+
+        int width = Window->width() / countHorizontalButtons, height = Window->height() / countVerticalButtons;
         int x, y;
 
-        widgets->Input->setGeometry(x = 0, y = 0, width * 7, height);
+        int edgeWidth = Window->width() % countHorizontalButtons + width;
+        int edgeHeight = Window->height() % countVerticalButtons + height;
+
+        QFont font = widgets->Input->font();
+        font.setPointSize((width + height ) / 4);
+        widgets->Input->setFont(font);
+
+        widgets->Input->setGeometry(x = 0, y = 0, Window->width(), height);
 
         widgets->buttons.at(ButtonX)->setGeometry(x = 0, y+=height, width, height);
         widgets->buttons.at(ButtonOpenBracket)->setGeometry(x+=widgets->buttons.at(ButtonX)->width(), y, width, height);
         widgets->buttons.at(ButtonCloseBracket)->setGeometry(x+=widgets->buttons.at(ButtonOpenBracket)->width(), y, width, height);
         widgets->buttons.at(ButtonAC)->setGeometry(x+=widgets->buttons.at(ButtonCloseBracket)->width(), y, width, height);
         widgets->buttons.at(ButtonGraph)->setGeometry(x+=widgets->buttons.at(ButtonAC)->width(), y, width * 2, height);
-        widgets->buttons.at(ButtonDiv)->setGeometry(x+=widgets->buttons.at(ButtonGraph)->width(), y, width, height);
+        widgets->buttons.at(ButtonDiv)->setGeometry(x+=widgets->buttons.at(ButtonGraph)->width(), y, edgeWidth, height);
 
         widgets->buttons.at(ButtonMod)->setGeometry(x = 0, y+=height, width, height);
         widgets->buttons.at(ButtonFactorial)->setGeometry(x+=widgets->buttons.at(ButtonMod)->width(), y, width, height);
@@ -28,7 +38,7 @@ public:
         widgets->buttons.at(Button7)->setGeometry(x+=widgets->buttons.at(ButtonPow)->width(), y, width, height);
         widgets->buttons.at(Button8)->setGeometry(x+=widgets->buttons.at(Button7)->width(), y, width, height);
         widgets->buttons.at(Button9)->setGeometry(x+=widgets->buttons.at(Button8)->width(), y, width, height);
-        widgets->buttons.at(ButtonMul)->setGeometry(x+=widgets->buttons.at(Button9)->width(), y, width, height);
+        widgets->buttons.at(ButtonMul)->setGeometry(x+=widgets->buttons.at(Button9)->width(), y, edgeWidth, height);
 
         widgets->buttons.at(ButtonLog)->setGeometry(x = 0, y+=height, width, height);
         widgets->buttons.at(ButtonLn)->setGeometry(x+=widgets->buttons.at(ButtonLog)->width(), y, width, height);
@@ -36,7 +46,7 @@ public:
         widgets->buttons.at(Button4)->setGeometry(x+=widgets->buttons.at(ButtonSqrt)->width(), y, width, height);
         widgets->buttons.at(Button5)->setGeometry(x+=widgets->buttons.at(Button4)->width(), y, width, height);
         widgets->buttons.at(Button6)->setGeometry(x+=widgets->buttons.at(Button5)->width(), y, width, height);
-        widgets->buttons.at(ButtonSub)->setGeometry(x+=widgets->buttons.at(Button6)->width(), y, width, height);
+        widgets->buttons.at(ButtonSub)->setGeometry(x+=widgets->buttons.at(Button6)->width(), y, edgeWidth, height);
 
         widgets->buttons.at(ButtonAsin)->setGeometry(x = 0, y+=height, width, height);
         widgets->buttons.at(ButtonAcos)->setGeometry(x+=widgets->buttons.at(ButtonAsin)->width(), y, width, height);
@@ -44,14 +54,14 @@ public:
         widgets->buttons.at(Button1)->setGeometry(x+=widgets->buttons.at(ButtonAtan)->width(), y, width, height);
         widgets->buttons.at(Button2)->setGeometry(x+=widgets->buttons.at(Button1)->width(), y, width, height);
         widgets->buttons.at(Button3)->setGeometry(x+=widgets->buttons.at(Button2)->width(), y, width, height);
-        widgets->buttons.at(ButtonSum)->setGeometry(x+=widgets->buttons.at(Button3)->width(), y, width, height);
+        widgets->buttons.at(ButtonSum)->setGeometry(x+=widgets->buttons.at(Button3)->width(), y, edgeWidth, height);
 
-        widgets->buttons.at(ButtonSin)->setGeometry(x = 0, y+=height, width, height);
-        widgets->buttons.at(ButtonCos)->setGeometry(x+=widgets->buttons.at(ButtonSin)->width(), y, width, height);
-        widgets->buttons.at(ButtonTan)->setGeometry(x+=widgets->buttons.at(ButtonCos)->width(), y, width, height);
-        widgets->buttons.at(Button0)->setGeometry(x+=widgets->buttons.at(ButtonTan)->width(), y, width * 2, height);
-        widgets->buttons.at(ButtonDot)->setGeometry(x+=widgets->buttons.at(Button0)->width(), y, width, height);
-        widgets->buttons.at(ButtonResult)->setGeometry(x+=widgets->buttons.at(ButtonDot)->width(), y, width, height);
+        widgets->buttons.at(ButtonSin)->setGeometry(x = 0, y+=height, width, edgeHeight);
+        widgets->buttons.at(ButtonCos)->setGeometry(x+=widgets->buttons.at(ButtonSin)->width(), y, width, edgeHeight);
+        widgets->buttons.at(ButtonTan)->setGeometry(x+=widgets->buttons.at(ButtonCos)->width(), y, width, edgeHeight);
+        widgets->buttons.at(Button0)->setGeometry(x+=widgets->buttons.at(ButtonTan)->width(), y, width * 2, edgeHeight);
+        widgets->buttons.at(ButtonDot)->setGeometry(x+=widgets->buttons.at(Button0)->width(), y, width, edgeHeight);
+        widgets->buttons.at(ButtonResult)->setGeometry(x+=widgets->buttons.at(ButtonDot)->width(), y, edgeWidth, edgeHeight);
     }
 
     MacUI() {}
@@ -70,6 +80,8 @@ public:
                               "QPushButton:pressed {"
                                 "background-color: rgba(255, 165, 2, 130);"
                               "}");
+
+
 
     }
     void SetupGraphUI() override {

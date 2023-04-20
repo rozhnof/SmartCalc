@@ -12,7 +12,7 @@
 #include "mainwindow.h"
 #include <QVector>
 #include <QResizeEvent>
-
+#include <QDebug>
 
 
 
@@ -94,6 +94,11 @@ public:
        dctButtonSettings.insert(make_pair(CalcButtons::ButtonGraph, new ButtonSettings("graph", SLOT(DrawGraph()))));
     }
 
+    void resizeEvent(QResizeEvent *e)
+    {
+        _platform->SetSize(widgets, Window);
+        QWidget::resizeEvent(e);
+    }
 
 
 

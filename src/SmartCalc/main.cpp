@@ -11,5 +11,9 @@ int main(int argc, char *argv[])
     calc.show();
 
 
+//    MainWindow calc;
+//    calc.show();
+
+
     return a.exec();
 }
