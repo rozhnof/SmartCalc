@@ -8,13 +8,9 @@
 
 using namespace std;
 
-typedef struct CalcWidgets
-{
-    unordered_map<int, QPushButton*> buttons;
-    QLabel *Input;
-} CalcWidgets;
+enum CalcObjectsEnum {
+    MainWindow,
 
-enum CalcButtons {
     Button0,
     Button1,
     Button2,
@@ -51,7 +47,9 @@ enum CalcButtons {
 
     ButtonAC,
     ButtonGraph,
-    ButtonResult
+    ButtonResult,
+
+    LabelInput
 };
 
 using namespace std;
@@ -60,8 +58,8 @@ class IPlatformUI
 {
 public:
     IPlatformUI() {}
-    virtual void SetupCalculatorUI(CalcWidgets *widgets, QWidget *Window) = 0;
-    virtual void SetSize(CalcWidgets *widgets, QWidget *Window) = 0;
+    virtual void SetupCalculatorUI(unordered_map<int, QWidget*> calcObjects) = 0;
+    virtual void SetSize(unordered_map<int, QWidget*> calcObjects) = 0;
 
     virtual void SetupGraphUI() = 0;
     virtual void SetupCreditCalculatorUI() = 0;

@@ -232,6 +232,9 @@ QPushButton:pressed {
        <property name="text">
         <string>seven</string>
        </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup</string>
+       </attribute>
       </widget>
       <widget class="QPushButton" name="Button8">
        <property name="geometry">
@@ -271,6 +274,9 @@ QPushButton:pressed {
        <property name="text">
         <string>eight</string>
        </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup</string>
+       </attribute>
       </widget>
       <widget class="QPushButton" name="Button9">
        <property name="geometry">
@@ -1136,7 +1142,7 @@ QPushButton:pressed {
         <string>equal</string>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -1773,4 +1779,7 @@ border: 1px solid rgb(0, 32, 255);
  </widget>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="buttonGroup"/>
+ </buttongroups>
 </ui>

@@ -33,70 +33,70 @@ public:
               _slot(slot) {}
     };
 
-    unordered_map<int, ButtonSettings*> dctButtonSettings;
-    CalcWidgets *widgets;
+    unordered_map<int, QWidget*> calcObjects;
+    unordered_map<int, ButtonSettings*> buttonSetup;
 
     CalculatorUI() {
         SetupPlatform();
         SetupButtons();
 
-        widgets = new CalcWidgets;
-        widgets->Input = new QLabel(Window);
+        calcObjects.insert(make_pair(CalcObjectsEnum::MainWindow, Window));
+        calcObjects.insert(make_pair(CalcObjectsEnum::LabelInput, new QLabel(calcObjects.at(CalcObjectsEnum::MainWindow))));
 
-
-        for (int i = CalcButtons::Button0; i <= CalcButtons::ButtonResult; i++) {
-            widgets->buttons.insert(make_pair(i, new QPushButton(dctButtonSettings.at(i)->_buttonText, Window)));
-            connect(widgets->buttons.at(i), SIGNAL(clicked()), this, dctButtonSettings[i]->_slot);
+        for (int i = CalcObjectsEnum::Button0; i <= CalcObjectsEnum::ButtonResult; i++) {
+            calcObjects.insert(make_pair(i, new QPushButton(buttonSetup.at(i)->_buttonText, Window)));
+            connect(calcObjects.at(i), SIGNAL(clicked()), this, buttonSetup[i]->_slot);
         }
 
 
-        _platform->SetupCalculatorUI(widgets, Window);
+
+        _platform->SetupCalculatorUI(calcObjects);
     }
 
     void SetupButtons() {
-       dctButtonSettings.insert(make_pair(CalcButtons::Button0, new ButtonSettings("0", SLOT(SetNumber()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::Button1, new ButtonSettings("1", SLOT(SetNumber()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::Button2, new ButtonSettings("2", SLOT(SetNumber()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::Button3, new ButtonSettings("3", SLOT(SetNumber()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::Button4, new ButtonSettings("4", SLOT(SetNumber()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::Button5, new ButtonSettings("5", SLOT(SetNumber()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::Button6, new ButtonSettings("6", SLOT(SetNumber()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::Button7, new ButtonSettings("7", SLOT(SetNumber()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::Button8, new ButtonSettings("8", SLOT(SetNumber()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::Button9, new ButtonSettings("9", SLOT(SetNumber()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::Button0, new ButtonSettings("0", SLOT(SetNumber()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::Button1, new ButtonSettings("1", SLOT(SetNumber()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::Button2, new ButtonSettings("2", SLOT(SetNumber()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::Button3, new ButtonSettings("3", SLOT(SetNumber()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::Button4, new ButtonSettings("4", SLOT(SetNumber()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::Button5, new ButtonSettings("5", SLOT(SetNumber()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::Button6, new ButtonSettings("6", SLOT(SetNumber()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::Button7, new ButtonSettings("7", SLOT(SetNumber()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::Button8, new ButtonSettings("8", SLOT(SetNumber()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::Button9, new ButtonSettings("9", SLOT(SetNumber()))));
 
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonSin, new ButtonSettings("sin", SLOT(SetFunction()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonCos, new ButtonSettings("cos", SLOT(SetFunction()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonTan, new ButtonSettings("tan", SLOT(SetFunction()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonAsin, new ButtonSettings("asin", SLOT(SetFunction()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonAcos, new ButtonSettings("acos", SLOT(SetFunction()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonAtan, new ButtonSettings("atan", SLOT(SetFunction()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonLog, new ButtonSettings("log", SLOT(SetFunction()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonSqrt, new ButtonSettings("sqrt", SLOT(SetFunction()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonLn, new ButtonSettings("ln", SLOT(SetFunction()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonSin, new ButtonSettings("sin", SLOT(SetFunction()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonCos, new ButtonSettings("cos", SLOT(SetFunction()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonTan, new ButtonSettings("tan", SLOT(SetFunction()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonAsin, new ButtonSettings("asin", SLOT(SetFunction()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonAcos, new ButtonSettings("acos", SLOT(SetFunction()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonAtan, new ButtonSettings("atan", SLOT(SetFunction()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonLog, new ButtonSettings("log", SLOT(SetFunction()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonSqrt, new ButtonSettings("sqrt", SLOT(SetFunction()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonLn, new ButtonSettings("ln", SLOT(SetFunction()))));
 
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonSum, new ButtonSettings("+", SLOT(SetOperator()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonSub, new ButtonSettings("-", SLOT(SetOperator()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonMul, new ButtonSettings("*", SLOT(SetOperator()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonDiv, new ButtonSettings("/", SLOT(SetOperator()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonMod, new ButtonSettings("mod", SLOT(SetOperator()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonPow, new ButtonSettings("^", SLOT(SetOperator()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonSum, new ButtonSettings("+", SLOT(SetOperator()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonSub, new ButtonSettings("-", SLOT(SetOperator()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonMul, new ButtonSettings("*", SLOT(SetOperator()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonDiv, new ButtonSettings("/", SLOT(SetOperator()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonMod, new ButtonSettings("mod", SLOT(SetOperator()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonPow, new ButtonSettings("^", SLOT(SetOperator()))));
 
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonFactorial, new ButtonSettings("!", SLOT(SetFactorial()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonFactorial, new ButtonSettings("!", SLOT(SetFactorial()))));
 
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonOpenBracket, new ButtonSettings("(", SLOT(SetOpenBracket()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonCloseBracket, new ButtonSettings(")", SLOT(SetCloseBracket()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonOpenBracket, new ButtonSettings("(", SLOT(SetOpenBracket()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonCloseBracket, new ButtonSettings(")", SLOT(SetCloseBracket()))));
 
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonDot, new ButtonSettings(".", SLOT(SetDot()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonX, new ButtonSettings("x", SLOT(SetX()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonAC, new ButtonSettings("AC", SLOT(Clear()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonResult, new ButtonSettings("=", SLOT(GetResult()))));
-       dctButtonSettings.insert(make_pair(CalcButtons::ButtonGraph, new ButtonSettings("graph", SLOT(DrawGraph()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonDot, new ButtonSettings(".", SLOT(SetDot()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonX, new ButtonSettings("x", SLOT(SetX()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonAC, new ButtonSettings("AC", SLOT(Clear()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonResult, new ButtonSettings("=", SLOT(GetResult()))));
+       buttonSetup.insert(make_pair(CalcObjectsEnum::ButtonGraph, new ButtonSettings("graph", SLOT(DrawGraph()))));
     }
 
     void resizeEvent(QResizeEvent *e)
     {
-        _platform->SetSize(widgets, Window);
+        _platform->SetSize(calcObjects);
         QWidget::resizeEvent(e);
     }
 
@@ -106,53 +106,53 @@ private slots:
 
     void SetNumber() {
         int status = 1;
-        widgets->Input->setText(controller->Validate(new NumberValidate, widgets->Input->text(), static_cast<QPushButton*>(sender())->text(), status));
+        static_cast<QLabel*>(calcObjects.at(CalcObjectsEnum::LabelInput))->setText(controller->Validate(new NumberValidate, static_cast<QLabel*>(calcObjects.at(CalcObjectsEnum::LabelInput))->text(), static_cast<QPushButton*>(sender())->text(), status));
     }
 
     void SetFunction() {
         int status = 1;
-        widgets->Input->setText(controller->Validate(new FunctionValidate, widgets->Input->text(), static_cast<QPushButton*>(sender())->text(), status));
+        static_cast<QLabel*>(calcObjects.at(CalcObjectsEnum::LabelInput))->setText(controller->Validate(new FunctionValidate, static_cast<QLabel*>(calcObjects.at(CalcObjectsEnum::LabelInput))->text(), static_cast<QPushButton*>(sender())->text(), status));
     }
 
     void SetOperator() {
         int status = 1;
-        widgets->Input->setText(controller->Validate(new OperatorValidate, widgets->Input->text(), static_cast<QPushButton*>(sender())->text(), status));
+        static_cast<QLabel*>(calcObjects.at(CalcObjectsEnum::LabelInput))->setText(controller->Validate(new OperatorValidate, static_cast<QLabel*>(calcObjects.at(CalcObjectsEnum::LabelInput))->text(), static_cast<QPushButton*>(sender())->text(), status));
     }
 
     void SetFactorial() {
         int status = 1;
-        widgets->Input->setText(controller->Validate(new FactorialValidate, widgets->Input->text(), static_cast<QPushButton*>(sender())->text(), status));
+        static_cast<QLabel*>(calcObjects.at(CalcObjectsEnum::LabelInput))->setText(controller->Validate(new FactorialValidate, static_cast<QLabel*>(calcObjects.at(CalcObjectsEnum::LabelInput))->text(), static_cast<QPushButton*>(sender())->text(), status));
     }
 
     void SetDot() {
         int status = 1;
-        widgets->Input->setText(controller->Validate(new DotValidate, widgets->Input->text(), static_cast<QPushButton*>(sender())->text(), status));
+        static_cast<QLabel*>(calcObjects.at(CalcObjectsEnum::LabelInput))->setText(controller->Validate(new DotValidate, static_cast<QLabel*>(calcObjects.at(CalcObjectsEnum::LabelInput))->text(), static_cast<QPushButton*>(sender())->text(), status));
     }
 
     void SetX() {
         int status = 1;
-        widgets->Input->setText(controller->Validate(new xValidate, widgets->Input->text(), static_cast<QPushButton*>(sender())->text(), status));
+        static_cast<QLabel*>(calcObjects.at(CalcObjectsEnum::LabelInput))->setText(controller->Validate(new xValidate, static_cast<QLabel*>(calcObjects.at(CalcObjectsEnum::LabelInput))->text(), static_cast<QPushButton*>(sender())->text(), status));
     }
 
     void SetOpenBracket() {
         int status = 1;
-        widgets->Input->setText(controller->Validate(new OpenBracketValidate, widgets->Input->text(), static_cast<QPushButton*>(sender())->text(), status));
+        static_cast<QLabel*>(calcObjects.at(CalcObjectsEnum::LabelInput))->setText(controller->Validate(new OpenBracketValidate, static_cast<QLabel*>(calcObjects.at(CalcObjectsEnum::LabelInput))->text(), static_cast<QPushButton*>(sender())->text(), status));
     }
 
     void SetCloseBracket() {
         int status = 1;
-        widgets->Input->setText(controller->Validate(new CloseBracketValidate, widgets->Input->text(), static_cast<QPushButton*>(sender())->text(), status));
+        static_cast<QLabel*>(calcObjects.at(CalcObjectsEnum::LabelInput))->setText(controller->Validate(new CloseBracketValidate, static_cast<QLabel*>(calcObjects.at(CalcObjectsEnum::LabelInput))->text(), static_cast<QPushButton*>(sender())->text(), status));
     }
 
     void Clear() {
-        widgets->Input->setText("");
+        static_cast<QLabel*>(calcObjects.at(CalcObjectsEnum::LabelInput))->setText("");
     }
 
     void GetResult() {
         int status = 1;
-        controller->Validate(new ResultValidate, widgets->Input->text(), static_cast<QPushButton*>(sender())->text(), status);
+        controller->Validate(new ResultValidate, static_cast<QLabel*>(calcObjects.at(CalcObjectsEnum::LabelInput))->text(), static_cast<QPushButton*>(sender())->text(), status);
         if (status) {
-            widgets->Input->setText(controller->GetResult());
+            static_cast<QLabel*>(calcObjects.at(CalcObjectsEnum::LabelInput))->setText(controller->GetResult());
         }
     }
 
