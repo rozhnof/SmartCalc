@@ -350,6 +350,7 @@ DIST          = /usr/local/share/qt/mkspecs/features/spec_pre.prf \
 		Models/Model.h \
 		Models/calc.h \
 		Views/CalculatorUI.h \
+		Views/CreditCalculatorUI.h \
 		Views/IPlatformUI.h \
 		Views/MacUI.h \
 		Views/WinUI.h \
@@ -943,7 +944,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/local/share/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents Controllers/Controller.h Controllers/Graph/Graph.h Controllers/GraphCalc/GraphCalc.h Controllers/Validate/Validate.h Models/Model.h Models/calc.h Views/CalculatorUI.h Views/IPlatformUI.h Views/MacUI.h Views/WinUI.h Views/mainwindow.h Views/qcustomplot.h $(DISTDIR)/
+	$(COPY_FILE) --parents Controllers/Controller.h Controllers/Graph/Graph.h Controllers/GraphCalc/GraphCalc.h Controllers/Validate/Validate.h Models/Model.h Models/calc.h Views/CalculatorUI.h Views/CreditCalculatorUI.h Views/IPlatformUI.h Views/MacUI.h Views/WinUI.h Views/mainwindow.h Views/qcustomplot.h $(DISTDIR)/
 	$(COPY_FILE) --parents Controllers/Controller.cpp Controllers/Validate/CloseBracketValidate.cpp Controllers/Validate/DotValidate.cpp Controllers/Validate/FactorialValidate.cpp Controllers/Validate/FunctionValidate.cpp Controllers/Validate/NumberValidate.cpp Controllers/Validate/OpenBracketValidate.cpp Controllers/Validate/OperatorValidate.cpp Controllers/Validate/ResultValidate.cpp Controllers/Validate/Validator.cpp Controllers/Validate/xValidate.cpp Models/calculation.c Models/converter.c Models/credit_calc.c Views/qcustomplot.cpp main.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents Views/MacCalc.ui Views/WinCalc.ui $(DISTDIR)/
 
@@ -997,6 +998,9 @@ moc_CalculatorUI.cpp: Views/CalculatorUI.h \
 		/usr/local/lib/QtCore.framework/Headers/qvector.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QLabel \
 		/usr/local/lib/QtWidgets.framework/Headers/qlabel.h \
+		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
+		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		Views/WinUI.h \
 		Controllers/Controller.h \
 		Models/Model.h \
 		Models/calc.h \
@@ -1007,8 +1011,6 @@ moc_CalculatorUI.cpp: Views/CalculatorUI.h \
 		/usr/local/lib/QtGui.framework/Headers/qevent.h \
 		/usr/local/lib/QtCore.framework/Headers/QDebug \
 		/usr/local/lib/QtCore.framework/Headers/qdebug.h \
-		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
-		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		moc_predefs.h \
 		/usr/local/share/qt/libexec/moc
 	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib Views/CalculatorUI.h -o moc_CalculatorUI.cpp
@@ -1026,18 +1028,15 @@ moc_mainwindow.cpp: Views/mainwindow.h \
 		/usr/local/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QLabel \
 		/usr/local/lib/QtWidgets.framework/Headers/qlabel.h \
+		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
+		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		Views/WinUI.h \
 		Controllers/Controller.h \
 		Models/Model.h \
 		Models/calc.h \
 		Controllers/Validate/Validate.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
 		/usr/local/lib/QtCore.framework/Headers/qstring.h \
-		/usr/local/lib/QtGui.framework/Headers/QResizeEvent \
-		/usr/local/lib/QtGui.framework/Headers/qevent.h \
-		/usr/local/lib/QtCore.framework/Headers/QDebug \
-		/usr/local/lib/QtCore.framework/Headers/qdebug.h \
-		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
-		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		moc_predefs.h \
 		/usr/local/share/qt/libexec/moc
 	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib Views/mainwindow.h -o moc_mainwindow.cpp
@@ -1161,6 +1160,9 @@ main.o: main.cpp /usr/local/lib/QtWidgets.framework/Headers/QApplication \
 		/usr/local/lib/QtCore.framework/Headers/qvector.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QLabel \
 		/usr/local/lib/QtWidgets.framework/Headers/qlabel.h \
+		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
+		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		Views/WinUI.h \
 		Controllers/Controller.h \
 		Models/Model.h \
 		Models/calc.h \
@@ -1170,9 +1172,7 @@ main.o: main.cpp /usr/local/lib/QtWidgets.framework/Headers/QApplication \
 		/usr/local/lib/QtGui.framework/Headers/QResizeEvent \
 		/usr/local/lib/QtGui.framework/Headers/qevent.h \
 		/usr/local/lib/QtCore.framework/Headers/QDebug \
-		/usr/local/lib/QtCore.framework/Headers/qdebug.h \
-		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
-		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h
+		/usr/local/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 moc_CalculatorUI.o: moc_CalculatorUI.cpp 

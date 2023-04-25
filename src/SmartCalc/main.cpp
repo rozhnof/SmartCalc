@@ -1,5 +1,6 @@
 #include <QApplication>
 #include "Views/CalculatorUI.h"
+#include "Views/CreditCalculatorUI.h"
 
 
 
@@ -7,7 +8,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    CalculatorUI calc;
+    CreditCalculatorUI calc;
     calc.show();
 
 

@@ -38,7 +38,9 @@ HEADERS += \
     Controllers/Validate/Validate.h \
     Models/Model.h \
     Models/calc.h \
+    Views/Calculator.h \
     Views/CalculatorUI.h \
+    Views/CreditCalculatorUI.h \
     Views/IPlatformUI.h \
     Views/MacUI.h \
     Views/WinUI.h \

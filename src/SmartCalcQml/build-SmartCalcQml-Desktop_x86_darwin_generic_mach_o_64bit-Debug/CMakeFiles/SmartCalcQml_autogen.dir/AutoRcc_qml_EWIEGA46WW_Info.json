@@ -1,0 +1,22 @@
+{
+	"BUILD_DIR" : "/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalcQml/build-SmartCalcQml-Desktop_x86_darwin_generic_mach_o_64bit-Debug/SmartCalcQml_autogen",
+	"CMAKE_BINARY_DIR" : "/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalcQml/build-SmartCalcQml-Desktop_x86_darwin_generic_mach_o_64bit-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalcQml/build-SmartCalcQml-Desktop_x86_darwin_generic_mach_o_64bit-Debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalcQml/SmartCalcQml",
+	"CMAKE_SOURCE_DIR" : "/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalcQml/SmartCalcQml",
+	"INCLUDE_DIR" : "/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalcQml/build-SmartCalcQml-Desktop_x86_darwin_generic_mach_o_64bit-Debug/SmartCalcQml_autogen/include",
+	"INPUTS" : 
+	[
+		"/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalcQml/SmartCalcQml/main.qml"
+	],
+	"LOCK_FILE" : "/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalcQml/build-SmartCalcQml-Desktop_x86_darwin_generic_mach_o_64bit-Debug/CMakeFiles/SmartCalcQml_autogen.dir/AutoRcc_qml_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "-name", "qml" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_qml.cpp",
+	"RCC_EXECUTABLE" : "/usr/local/share/qt/libexec/rcc",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalcQml/build-SmartCalcQml-Desktop_x86_darwin_generic_mach_o_64bit-Debug/CMakeFiles/SmartCalcQml_autogen.dir/AutoRcc_qml_EWIEGA46WW_Used.txt",
+	"SOURCE" : "/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalcQml/SmartCalcQml/qml.qrc",
+	"VERBOSITY" : 0
+}
