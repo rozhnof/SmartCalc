@@ -33,15 +33,18 @@ SOURCES += \
 
 HEADERS += \
     Controllers/Controller.h \
-    Controllers/Graph/Graph.h \
-    Controllers/GraphCalc/GraphCalc.h \
+#    Controllers/Graph/Graph.h \
+#    Controllers/GraphCalc/GraphCalc.h \
     Controllers/Validate/Validate.h \
     Models/Model.h \
     Models/calc.h \
     Views/Calculator.h \
     Views/CalculatorUI.h \
     Views/CreditCalculatorUI.h \
+    Views/DepositCalculatorUI.h \
+    Views/GraphUI.h \
     Views/IPlatformUI.h \
+    Views/IWidgets.h \
     Views/MacUI.h \
     Views/WinUI.h \
     Views/mainwindow.h \

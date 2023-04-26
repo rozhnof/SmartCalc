@@ -1,19 +1,13 @@
 #include <QApplication>
-#include "Views/CalculatorUI.h"
-#include "Views/CreditCalculatorUI.h"
-
+#include "Views/Calculator.h"
 
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    CreditCalculatorUI calc;
-    calc.show();
-
-
-//    MainWindow calc;
-//    calc.show();
+    Calculator *calc = new Calculator;
+    calc->show();
 
 
     return a.exec();

@@ -1,11 +1,8 @@
 #ifndef IPLATFORMUI_H
 #define IPLATFORMUI_H
 
-#include <QVector>
-#include <QPushButton>
-#include <unordered_map>
-#include <QLabel>
-#include <QMainWindow>
+
+#include "IWidgets.h"
 
 using namespace std;
 
@@ -48,76 +45,15 @@ public:
     }
 };
 
-typedef struct CalcWidgets {
-    QWidget *Window;
-    QLabel *Input;
-    unordered_map<int, QPushButton*> calcButtons;
-} CalcWidgets;
-
-
-typedef struct CreditCalcWidgets {
-    QWidget *Window;
-    QLabel *label;
-} CreditCalcWidgets;
-
-
-enum CalcObjectsEnum {
-    MainWindow,
-
-    Button0,
-    Button1,
-    Button2,
-    Button3,
-    Button4,
-    Button5,
-    Button6,
-    Button7,
-    Button8,
-    Button9,
-    ButtonDot,
-
-    ButtonX,
-
-    ButtonSin,
-    ButtonCos,
-    ButtonTan,
-    ButtonAsin,
-    ButtonAcos,
-    ButtonAtan,
-    ButtonLog,
-    ButtonLn,
-    ButtonSqrt,
-
-    ButtonSum,
-    ButtonSub,
-    ButtonMul,
-    ButtonDiv,
-    ButtonMod,
-    ButtonPow,
-    ButtonFactorial,
-
-    ButtonOpenBracket,
-    ButtonCloseBracket,
-
-    ButtonAC,
-    ButtonGraph,
-    ButtonResult,
-
-    LabelInput
-};
-
-using namespace std;
 
 class IPlatformUI
 {
 public:
     IPlatformUI() {}
     virtual void SetupUI(CalcWidgets *widgets) = 0;
-    virtual void SetSize(CalcWidgets *widgets) = 0;
-
-//    virtual void SetupGraphUI() = 0;
+    virtual void SetupUI(GraphWidgets *widgets) = 0;
     virtual void SetupUI(CreditCalcWidgets *widgets) = 0;
-//    virtual void SetupDepositCalculatorUI() = 0;
+    virtual void SetupUI(DepositCalcWidgets *widgets) = 0;
 };
 
 

@@ -15,14 +15,14 @@ public:
 
     Model() {}
 
-    void SetInput(string infix, double x) {
+    void SetInput(string infix) {
         _infix = toCharArray(infix);
         _postfix = new char[1024];
         FromInfixToPostfix(_infix, _postfix);
     }
 
-    double Calculate() {
-        return Calculation(_postfix, _x);
+    double Calculate(double x) {
+        return Calculation(_postfix, x);
     }    
 
     char* toCharArray(string str) {

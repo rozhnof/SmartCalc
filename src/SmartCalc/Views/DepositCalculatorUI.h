@@ -1,16 +1,17 @@
-#ifndef CREDITCALCULATORUI_H
-#define CREDITCALCULATORUI_H
+#ifndef DEPOSITCALCULATORUI_H
+#define DEPOSITCALCULATORUI_H
 
 #include "mainwindow.h"
 #include "IPlatformUI.h"
 
-class CreditCalculatorUI : public MainWindow
+
+class DepositCalculatorUI : public MainWindow
 {
 public:
-    CreditCalcWidgets *widgets;
+    DepositCalcWidgets *widgets;
 
-    CreditCalculatorUI() : MainWindow() {
-        widgets = new CreditCalcWidgets;
+    DepositCalculatorUI() : MainWindow() {
+        widgets = new DepositCalcWidgets;
 
         window = new QWidget(this);
         widgets->Window = window;
@@ -25,4 +26,5 @@ public:
 };
 
 
-#endif // CREDITCALCULATORUI_H
+
+#endif // DEPOSITCALCULATORUI_H

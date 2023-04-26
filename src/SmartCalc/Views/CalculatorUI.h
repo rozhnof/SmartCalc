@@ -25,26 +25,27 @@ class CalculatorUI : public MainWindow
 public:
     CalcWidgets *widgets;
 
-    CalculatorUI() {
+    CalculatorUI() : MainWindow() {
         widgets = new CalcWidgets;
+        window = new QWidget(this);
 
-        calcTab = new QWidget(this);
-        widgets->Window = calcTab;
-        currentTab = this;
+        widgets->mainWindow = this;
+        widgets->Window = window;
 
-
-        this->setCentralWidget(calcTab);
+        this->setCentralWidget(window);
         this->setWindowTitle("Calculator");
 
         SetupButtons();
 
-        widgets->Input = new QLabel(calcTab);
+        widgets->Input = new QLabel(window);
+    }
 
-        _platform->SetupUI(widgets);
+    void SetupUI() override {
+        (*_platform)->SetupUI(widgets);
     }
 
     QPushButton *CreateButton(QString text, const char* member) {
-        QPushButton *newButton = new QPushButton(text, calcTab);
+        QPushButton *newButton = new QPushButton(text, window);
         connect(newButton, SIGNAL(clicked()), this, member);
         return newButton;
     }
@@ -87,16 +88,8 @@ public:
        widgets->calcButtons.insert(make_pair(ButtonX, CreateButton("x", SLOT(SetX()))));
        widgets->calcButtons.insert(make_pair(ButtonAC, CreateButton("AC", SLOT(Clear()))));
        widgets->calcButtons.insert(make_pair(ButtonResult, CreateButton("=", SLOT(GetResult()))));
-       widgets->calcButtons.insert(make_pair(ButtonGraph, CreateButton("graph", SLOT(DrawGraph()))));
+       widgets->calcButtons.insert(make_pair(ButtonUnaryOperator, CreateButton("+/-", SLOT(DrawGraph()))));
     }
-
-    void resizeEvent(QResizeEvent *e)
-    {
-        _platform->SetSize(widgets);
-        QWidget::resizeEvent(e);
-    }
-
-
 
 private slots:
 

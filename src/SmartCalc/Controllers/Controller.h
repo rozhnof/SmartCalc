@@ -34,8 +34,8 @@ public:
     }
 
     QString GetResult() {
-        model->SetInput(_result_text, _x);
-        return QString::number(model->Calculate());
+        model->SetInput(_result_text);
+        return QString::number(model->Calculate(_x));
     }
 
 
