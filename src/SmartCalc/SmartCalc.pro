@@ -32,9 +32,11 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
+    Controllers/CalculatorController.h \
     Controllers/Controller.h \
 #    Controllers/Graph/Graph.h \
 #    Controllers/GraphCalc/GraphCalc.h \
+    Controllers/GraphController.h \
     Controllers/Validate/Validate.h \
     Models/Model.h \
     Models/calc.h \

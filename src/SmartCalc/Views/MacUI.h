@@ -42,17 +42,17 @@ public:
     }
 
     void SetupUI(GraphWidgets *o_widgets) override {
-        o_widgets->mainWindow->setFixedSize(800, 700);
-        o_widgets->_graph->setFixedSize(800, 600);
-        o_widgets->mainWindow->setStyleSheet("background-color: white;");
+        o_widgets->graphWindow->setFixedSize(800, 700);
+        o_widgets->graph->setFixedSize(800, 600);
+        o_widgets->graphWindow->setStyleSheet("background-color: white;");
 
-        o_widgets->_graph->setInteraction(QCP::iRangeZoom,true);
-        o_widgets->_graph->setInteraction(QCP::iRangeDrag, true);
+        o_widgets->graph->setInteraction(QCP::iRangeZoom,true);
+        o_widgets->graph->setInteraction(QCP::iRangeDrag, true);
 
-        o_widgets->_graph->xAxis->setLabel("x");
-        o_widgets->_graph->yAxis->setLabel("y");
-        o_widgets->_graph->xAxis->setRange(-5, 5);
-        o_widgets->_graph->yAxis->setRange(-5, 5);
+        o_widgets->graph->xAxis->setLabel("x");
+        o_widgets->graph->yAxis->setLabel("y");
+        o_widgets->graph->xAxis->setRange(-5, 5);
+        o_widgets->graph->yAxis->setRange(-5, 5);
 
 
     }
@@ -90,10 +90,10 @@ private:
     }
 
     void SetSize() {
-        (*widgets)->mainWindow->setFixedSize(420, 360);
+        (*widgets)->calcWindow->setFixedSize(420, 360);
 
-        int windowWidth = (*widgets)->mainWindow->width();
-        int windowHeight = (*widgets)->mainWindow->height();
+        int windowWidth = (*widgets)->calcWindow->width();
+        int windowHeight = (*widgets)->calcWindow->height();
 
         int horizontalButtons = 7;
         int verticalButtons = 6;

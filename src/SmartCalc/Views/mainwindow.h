@@ -7,7 +7,6 @@
 #include <iostream>
 #include "IPlatformUI.h"
 #include <unordered_map>
-#include "Controllers/Controller.h"
 #include <QMainWindow>
 
 
@@ -17,13 +16,8 @@ class MainWindow : public QMainWindow
 
 public:
     IPlatformUI **_platform;
-    Controller *controller;
 
-    MainWindow() : QMainWindow(nullptr)
-    {
-        controller = new Controller;
-        this->resize(840, 720);
-    }
+    MainWindow() : QMainWindow(nullptr) {}
 
     virtual void SetupUI() {}
 

@@ -74,10 +74,10 @@ private:
     }
 
     void SetSize() {
-        (*widgets)->mainWindow->setFixedSize(420, 360);
+        (*widgets)->calcWindow->setFixedSize(420, 360);
 
-        int windowWidth = (*widgets)->mainWindow->width();
-        int windowHeight = (*widgets)->mainWindow->height();
+        int windowWidth = (*widgets)->calcWindow->width();
+        int windowHeight = (*widgets)->calcWindow->height();
 
         int horizontalButtons = 7;
         int verticalButtons = 6;

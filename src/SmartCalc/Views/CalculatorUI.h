@@ -13,7 +13,7 @@
 #include <QVector>
 #include <QResizeEvent>
 #include <QDebug>
-
+#include "../Controllers/CalculatorController.h"
 
 
 
@@ -23,31 +23,33 @@ class CalculatorUI : public MainWindow
     Q_OBJECT
 
 public:
+    CalculatorController *controller;
     CalcWidgets *widgets;
 
     CalculatorUI() : MainWindow() {
-        widgets = new CalcWidgets;
-
-        widgets->calcWindow = this;
-
         this->setWindowTitle("Calculator");
 
-        SetupButtons();
+        controller = new CalculatorController;
+        widgets = new CalcWidgets;
+        widgets->calcWindow = this;
 
-        widgets->Input = new QLabel(window);
+        SetupButtons();
     }
 
     void SetupUI() override {
         (*_platform)->SetupUI(widgets);
     }
 
+private:
+
     QPushButton *CreateButton(QString text, const char* member) {
-        QPushButton *newButton = new QPushButton(text, window);
+        QPushButton *newButton = new QPushButton(text, widgets->calcWindow);
         connect(newButton, SIGNAL(clicked()), this, member);
         return newButton;
     }
 
     void SetupButtons() {
+       widgets->Input = new QLabel("0", this);
        widgets->calcButtons.insert(make_pair(Button0, CreateButton("0", SLOT(SetNumber()))));
        widgets->calcButtons.insert(make_pair(Button1, CreateButton("1", SLOT(SetNumber()))));
        widgets->calcButtons.insert(make_pair(Button2, CreateButton("2", SLOT(SetNumber()))));
@@ -89,7 +91,6 @@ public:
     }
 
 private slots:
-
 
     void SetNumber() {
         int status = 1;
@@ -139,7 +140,7 @@ private slots:
         int status = 1;
         controller->Validate(new ResultValidate, widgets->Input->text(), static_cast<QPushButton*>(sender())->text(), status);
         if (status) {
-            widgets->Input->setText(controller->GetResult());
+            widgets->Input->setText(controller->GetResult(1));
         }
     }
 

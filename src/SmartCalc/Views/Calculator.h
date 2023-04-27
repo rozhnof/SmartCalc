@@ -5,6 +5,7 @@
 #include "CreditCalculatorUI.h"
 #include "DepositCalculatorUI.h"
 #include "GraphUI.h"
+
 #include <QObject>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>

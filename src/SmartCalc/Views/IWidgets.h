@@ -21,29 +21,16 @@ typedef struct CalcWidgets {
 } CalcWidgets;
 
 typedef struct GraphWidgets  {
-    QMainWindow *mainWindow;
-    QWidget *Window;
+    QWidget *graphWindow;
+    QCustomPlot *graph;
 
-    QCustomPlot *_graph;
-    QLineEdit *Input;
+    unordered_map<int, QLineEdit*> titles;
+    unordered_map<int, QDoubleSpinBox*> values;
 
-    QDoubleSpinBox *rangeMin;
-    QDoubleSpinBox *scopeMax;
-    QLineEdit *rangeText;
-
-    QDoubleSpinBox *scopeMin;
-    QDoubleSpinBox *rangeMax;
-    QLineEdit *scopeText;
-
-    QLineEdit *xText;
-    QDoubleSpinBox *xInput;
-    QLineEdit *xStepText;
-    QDoubleSpinBox *xStep;
 } GraphWidgets;
 
 typedef struct CreditCalcWidgets  {
-    QMainWindow *mainWindow;
-    QWidget *Window;
+    QWidget *creditCalcWindow;
 
     QLineEdit *creditSum;
     QLineEdit *creditTerm;
@@ -57,15 +44,27 @@ typedef struct CreditCalcWidgets  {
 
 
 typedef struct DepositCalcWidgets  {
-    QMainWindow *mainWindow;
-    QWidget *Window;
+    QWidget *depositCalcWindow;
 
     QLabel *label;
 } DepositCalcWidgets;
 
 
 
+enum GraphObjectsEnum {
+    LineInput,
+    LineScope,
+    LineRange,
+    LineX,
+    LineStepX,
 
+    ScopeMin,
+    ScopeMax,
+    RangeMin,
+    RangeMax,
+    X,
+    StepX
+};
 
 enum CalcObjectsEnum {
     MainWindow,

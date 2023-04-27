@@ -10,10 +10,10 @@ public:
     CreditCalcWidgets *widgets;
 
     CreditCalculatorUI() : MainWindow() {
-        widgets = new CreditCalcWidgets;
+        this->setWindowTitle("Credit Calculator");
 
-        window = new QWidget(this);
-        widgets->Window = window;
+        widgets = new CreditCalcWidgets;
+        widgets->creditCalcWindow = this;
     }
 
     void SetupUI() override {

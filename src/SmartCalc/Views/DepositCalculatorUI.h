@@ -11,10 +11,11 @@ public:
     DepositCalcWidgets *widgets;
 
     DepositCalculatorUI() : MainWindow() {
+        this->setWindowTitle("Deposit Calculator");
+
         widgets = new DepositCalcWidgets;
 
-        window = new QWidget(this);
-        widgets->Window = window;
+        widgets->depositCalcWindow = this;
 
         widgets->label = new QLabel(this);
         widgets->label->setGeometry(0, 0, 400, 400);
