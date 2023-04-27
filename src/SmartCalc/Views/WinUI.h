@@ -33,7 +33,7 @@ public:
     }
 
     void SetupUI(CreditCalcWidgets *o_widgets) override {
-        o_widgets->label->setText("ЭТО КРЕДИТНЫЙ КАЛЬКУЛЯТОР НА винде");
+//        o_widgets->label->setText("ЭТО КРЕДИТНЫЙ КАЛЬКУЛЯТОР НА винде");
     }
 
     void SetupUI(DepositCalcWidgets *o_widgets) override {

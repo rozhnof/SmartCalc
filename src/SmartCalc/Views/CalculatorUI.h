@@ -27,12 +27,9 @@ public:
 
     CalculatorUI() : MainWindow() {
         widgets = new CalcWidgets;
-        window = new QWidget(this);
 
-        widgets->mainWindow = this;
-        widgets->Window = window;
+        widgets->calcWindow = this;
 
-        this->setCentralWidget(window);
         this->setWindowTitle("Calculator");
 
         SetupButtons();

@@ -317,7 +317,6 @@ DIST          = /usr/local/share/qt/mkspecs/features/spec_pre.prf \
 		/usr/local/share/qt/mkspecs/features/qt_config.prf \
 		/usr/local/share/qt/mkspecs/macx-clang/qmake.conf \
 		/usr/local/share/qt/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/local/share/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/local/share/qt/mkspecs/features/mac/sdk.prf \
 		/usr/local/share/qt/mkspecs/features/toolchain.prf \
@@ -383,7 +382,7 @@ TARGET        = ../build/SmartCalc.app/Contents/MacOS/SmartCalc
 EXPORT_QMAKE_MAC_SDK = macosx
 EXPORT_QMAKE_MAC_SDK_VERSION = 12.1
 EXPORT_QMAKE_XCODE_DEVELOPER_PATH = /Applications/Xcode.app/Contents/Developer
-EXPORT__QMAKE_STASH_ = /Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc/.qmake.stash
+EXPORT__QMAKE_STASH_ = 
 EXPORT_VALID_ARCHS = x86_64
 EXPORT_DEFAULT_ARCHS = x86_64
 EXPORT_ARCHS = $(filter $(EXPORT_VALID_ARCHS), $(if $(ARCHS), $(ARCHS), $(if $(EXPORT_DEFAULT_ARCHS), $(EXPORT_DEFAULT_ARCHS), $(EXPORT_VALID_ARCHS))))
@@ -625,7 +624,6 @@ Makefile: SmartCalc.pro /usr/local/share/qt/mkspecs/macx-clang/qmake.conf /usr/l
 		/usr/local/share/qt/mkspecs/features/qt_config.prf \
 		/usr/local/share/qt/mkspecs/macx-clang/qmake.conf \
 		/usr/local/share/qt/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/local/share/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/local/share/qt/mkspecs/features/mac/sdk.prf \
 		/usr/local/share/qt/mkspecs/features/toolchain.prf \
@@ -885,7 +883,6 @@ Makefile: SmartCalc.pro /usr/local/share/qt/mkspecs/macx-clang/qmake.conf /usr/l
 /usr/local/share/qt/mkspecs/features/qt_config.prf:
 /usr/local/share/qt/mkspecs/macx-clang/qmake.conf:
 /usr/local/share/qt/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /usr/local/share/qt/mkspecs/features/exclusive_builds.prf:
 /usr/local/share/qt/mkspecs/features/mac/sdk.prf:
 /usr/local/share/qt/mkspecs/features/toolchain.prf:
@@ -960,7 +957,6 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r ../build/SmartCalc.app
-	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -1005,6 +1001,10 @@ moc_Calculator.cpp: Views/Calculator.h \
 		/usr/local/lib/QtWidgets.framework/Headers/qlabel.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
 		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		Views/qcustomplot.h \
+		/usr/local/lib/QtCore.framework/Headers/qmath.h \
+		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
+		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
 		Controllers/Controller.h \
 		Models/Model.h \
 		Models/calc.h \
@@ -1018,10 +1018,6 @@ moc_Calculator.cpp: Views/Calculator.h \
 		Views/CreditCalculatorUI.h \
 		Views/DepositCalculatorUI.h \
 		Views/GraphUI.h \
-		Views/qcustomplot.h \
-		/usr/local/lib/QtCore.framework/Headers/qmath.h \
-		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
-		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
 		/usr/local/lib/QtCore.framework/Headers/QObject \
 		/usr/local/lib/QtCore.framework/Headers/qobject.h \
 		Views/MacUI.h \
@@ -1046,6 +1042,10 @@ moc_CalculatorUI.cpp: Views/CalculatorUI.h \
 		/usr/local/lib/QtWidgets.framework/Headers/qlabel.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
 		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		Views/qcustomplot.h \
+		/usr/local/lib/QtCore.framework/Headers/qmath.h \
+		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
+		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
 		Controllers/Controller.h \
 		Models/Model.h \
 		Models/calc.h \
@@ -1075,6 +1075,10 @@ moc_mainwindow.cpp: Views/mainwindow.h \
 		/usr/local/lib/QtWidgets.framework/Headers/qlabel.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
 		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		Views/qcustomplot.h \
+		/usr/local/lib/QtCore.framework/Headers/qmath.h \
+		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
+		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
 		Controllers/Controller.h \
 		Models/Model.h \
 		Models/calc.h \
@@ -1207,6 +1211,10 @@ main.o: main.cpp /usr/local/lib/QtWidgets.framework/Headers/QApplication \
 		/usr/local/lib/QtWidgets.framework/Headers/qlabel.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
 		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		Views/qcustomplot.h \
+		/usr/local/lib/QtCore.framework/Headers/qmath.h \
+		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
+		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
 		Controllers/Controller.h \
 		Models/Model.h \
 		Models/calc.h \
@@ -1220,10 +1228,6 @@ main.o: main.cpp /usr/local/lib/QtWidgets.framework/Headers/QApplication \
 		Views/CreditCalculatorUI.h \
 		Views/DepositCalculatorUI.h \
 		Views/GraphUI.h \
-		Views/qcustomplot.h \
-		/usr/local/lib/QtCore.framework/Headers/qmath.h \
-		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
-		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
 		/usr/local/lib/QtCore.framework/Headers/QObject \
 		/usr/local/lib/QtCore.framework/Headers/qobject.h \
 		Views/MacUI.h \

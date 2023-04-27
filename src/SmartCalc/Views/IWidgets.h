@@ -13,20 +13,19 @@
 using namespace std;
 
 
-typedef struct Widgets {
-    QMainWindow *mainWindow;
-    QWidget *Window;
-} IWidgets;
+typedef struct CalcWidgets {
+    QMainWindow *calcWindow;
 
-
-
-typedef struct CalcWidgets : Widgets {
     QLabel *Input;
     unordered_map<int, QPushButton*> calcButtons;
 } CalcWidgets;
 
-typedef struct GraphWidgets : Widgets {
+typedef struct GraphWidgets  {
+    QMainWindow *mainWindow;
+    QWidget *Window;
+
     QCustomPlot *_graph;
+    QLineEdit *Input;
 
     QDoubleSpinBox *rangeMin;
     QDoubleSpinBox *scopeMax;
@@ -42,12 +41,25 @@ typedef struct GraphWidgets : Widgets {
     QDoubleSpinBox *xStep;
 } GraphWidgets;
 
-typedef struct CreditCalcWidgets : Widgets {
-    QLabel *label;
+typedef struct CreditCalcWidgets  {
+    QMainWindow *mainWindow;
+    QWidget *Window;
+
+    QLineEdit *creditSum;
+    QLineEdit *creditTerm;
+    QLineEdit *interestRate;
+
+    QLineEdit *totalPyament;
+    QLineEdit *overpayment;
+
+    QVector<QLineEdit*> payments;
 } CreditCalcWidgets;
 
 
-typedef struct DepositCalcWidgets : Widgets {
+typedef struct DepositCalcWidgets  {
+    QMainWindow *mainWindow;
+    QWidget *Window;
+
     QLabel *label;
 } DepositCalcWidgets;
 

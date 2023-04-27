@@ -16,8 +16,6 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    QWidget *window;
-
     IPlatformUI **_platform;
     Controller *controller;
 

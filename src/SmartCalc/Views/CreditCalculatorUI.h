@@ -14,9 +14,6 @@ public:
 
         window = new QWidget(this);
         widgets->Window = window;
-
-        widgets->label = new QLabel(this);
-        widgets->label->setGeometry(0, 0, 400, 400);
     }
 
     void SetupUI() override {
