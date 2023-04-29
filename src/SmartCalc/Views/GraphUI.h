@@ -6,6 +6,8 @@
 #include "IPlatformUI.h"
 #include "../Controllers/GraphController.h"
 
+using namespace std;
+
 class GraphUI : public MainWindow
 {
 
@@ -15,7 +17,9 @@ public:
 
     GraphController *controller;
     GraphWidgets *widgets;
-    QGridLayout *gridLayout;
+
+    QWidget *layoutWidget;
+    QGridLayout *layout;
 
     int row = 1, col = 0, col_max = 3;
 
@@ -23,26 +27,72 @@ public:
         this->setWindowTitle("Graph");
 
         widgets = new GraphWidgets;
+        controller = new GraphController;
 
         widgets->graphWindow = this;
         widgets->graph = new QCustomPlot(this);
 
+        layoutWidget = new QWidget(this);
+        layout = new QGridLayout(layoutWidget);
+        this->setCentralWidget(layoutWidget);
+
+        this->setMinimumSize(400, 350);
+        this->resize(800, 700);
+
+        widgets->graphWindow->setStyleSheet("background-color: white;");
+
+        widgets->graph->setInteraction(QCP::iRangeZoom,true);
+        widgets->graph->setInteraction(QCP::iRangeDrag, true);
+
+        widgets->graph->xAxis->setLabel("x");
+        widgets->graph->yAxis->setLabel("y");
+        widgets->graph->xAxis->setRange(-5, 5);
+        widgets->graph->yAxis->setRange(-5, 5);
+
+        layout->addWidget(widgets->graph, 0, 0, 1, 4);
+
         CreateObjects();
+
+        controller->SetInput(widgets->titles.at(LineInput)->text().toStdString());
+        DrawGraph();
+        DrawLine();
     }
 
-    QLineEdit *NewObject(QString text) {
+    void SetupUI() override {
+        (*_platform)->SetupUI(widgets);
+    }
+
+    QLineEdit *NewLineEdit(QString text) {
         QLineEdit *newObject = new QLineEdit(text, this);
+        int width = 1;
+        if (text == "Input") width = 2;
+
         SetStyle(newObject);
+        newObject->setAlignment(Qt::AlignHCenter | Qt::AlignCenter);
+        SetLayout(newObject, width);
+
+        newObject->setReadOnly(true);
+
         return newObject;
     }
 
-    QDoubleSpinBox *NewObject(const char* slot) {
+    QDoubleSpinBox *NewDoubleSpinBox(const char* member) {
         QDoubleSpinBox *newObject = new QDoubleSpinBox(this);
+        int width = 1;
+
         SetStyle(newObject);
+        SetLayout(newObject, width);
+
+        newObject->setAlignment(Qt::AlignHCenter | Qt::AlignCenter);
+        newObject->setButtonSymbols(QAbstractSpinBox::NoButtons);
+
         newObject->setValue(0);
         newObject->setMinimum(-INFINITY);
         newObject->setMaximum(INFINITY);
-        connect(newObject, SIGNAL(valueChanged(double)), this, slot);
+        newObject->setSingleStep(0.1);
+
+        connect(newObject, SIGNAL(valueChanged(double)), this, member);
+
         return newObject;
     }
 
@@ -50,26 +100,36 @@ public:
         object->setStyleSheet("background-color: white;"
                                  "color: black;"
                                  "border: 1px solid blue;"
-                                 "border-radius: 10;");
+                                 "border-radius: 8;");
+    }
+
+    void SetLayout(QWidget *object, int width) {
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->addWidget(object, row, col, 1, width);
+
+        col++;
+        if (col > col_max) {
+            col = 0;
+            row++;
+        }
     }
 
     void CreateObjects() {
-//        widgets->titles.insert(make_pair(LineInput, NewObject("Input")));
-//        widgets->titles.insert(make_pair(LineScope, NewObject("Scope")));
-//        widgets->titles.insert(make_pair(LineRange, NewObject("Range")));
-//        widgets->titles.insert(make_pair(LineX, NewObject("X")));
+        widgets->titles.insert(make_pair(LineScope, NewLineEdit("Scope")));
+        widgets->titles.insert(make_pair(LineRange, NewLineEdit("Range")));
+        widgets->titles.insert(make_pair(LineX, NewLineEdit("X")));
+        widgets->titles.insert(make_pair(LineStepX, NewLineEdit("Step X")));
 
-        widgets->values.insert(make_pair(ScopeMin, NewObject(SLOT(ChangeScope()))));
-        widgets->values.insert(make_pair(ScopeMax, NewObject(SLOT(ChangeScope()))));
-        widgets->values.insert(make_pair(RangeMin, NewObject(SLOT(ChangeScope()))));
-        widgets->values.insert(make_pair(RangeMax, NewObject(SLOT(ChangeScope()))));
-        widgets->values.insert(make_pair(X, NewObject(SLOT(reDrawLine()))));
-        widgets->values.insert(make_pair(StepX, NewObject(SLOT(reDrawGraph()))));
-    }
+        widgets->values.insert(make_pair(ScopeMin, NewDoubleSpinBox(SLOT(ChangeScope()))));
+        widgets->values.insert(make_pair(RangeMin, NewDoubleSpinBox(SLOT(ChangeScope()))));
+        widgets->values.insert(make_pair(X, NewDoubleSpinBox(SLOT(reDrawLine()))));
+        widgets->values.insert(make_pair(StepX, NewDoubleSpinBox(SLOT(reDrawGraph()))));
+        widgets->values.insert(make_pair(ScopeMax, NewDoubleSpinBox(SLOT(ChangeScope()))));
+        widgets->values.insert(make_pair(RangeMax, NewDoubleSpinBox(SLOT(ChangeScope()))));
 
-
-    void SetupUI() override {
-        (*_platform)->SetupUI(widgets);
+        widgets->titles.insert(make_pair(LineInput, NewLineEdit("sin(x)")));
+        widgets->titles.at(LineInput)->setReadOnly(false);
+        connect(widgets->titles.at(LineInput), SIGNAL(returnPressed()), this, SLOT(SetInput()));
     }
 
     void DrawGraph() {
@@ -78,13 +138,20 @@ public:
         double x0 = widgets->values.at(ScopeMin)->value();
         double step_x = (fabs(x0) + fabs(widgets->values.at(ScopeMax)->value())) / 10000;
 
-        controller->SetInput("sin(x)");
 
         for (int i = 0; i < 10000; i++)
         {
             x[i] += x0;
             y[i] = controller->GetResult(x[i]);
             x0 += step_x;
+
+            if (y[i] >= widgets->values.at(RangeMax)->value() || y[i] <= widgets->values.at(RangeMin)->value()) {
+                if (i == 0) {
+                    y[i] = widgets->values.at(RangeMax)->value();
+                } else {
+                    y[i] = qQNaN();
+                }
+            }
         }
 
         widgets->graph->addGraph();
@@ -97,7 +164,7 @@ public:
         QVector<double> x(2), y(2);
 
         x[0] = widgets->values.at(X)->value();
-        x[1] = widgets->values.at(X)->value();
+        x[1] = x[0];
 
         y[0] = widgets->values.at(RangeMin)->value();
         y[1] = widgets->values.at(RangeMax)->value();
@@ -108,12 +175,19 @@ public:
     }
 
 private slots:
-    void ChangeScope() {
-//        widgets->scopeMax->setMinimum(widgets->values.at(ScopeMin)->value());
-//        widgets->scopeMin->setMaximum(widgets->values.at(ScopeMax)->value());
 
+    void SetInput() {
+        controller->SetInput(widgets->titles.at(LineInput)->text().toStdString());
         DrawGraph();
+    }
+
+    void ClearInput() {
+        widgets->titles.at(LineInput)->clear();
+    }
+
+    void ChangeScope() {
         DrawLine();
+        DrawGraph();
     }
 
     void reDrawLine()
