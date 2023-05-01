@@ -8,9 +8,6 @@
 
 using namespace std;
 
-
-
-
 class MacUI : public IPlatformUI
 {
 
@@ -34,24 +31,18 @@ public:
     }
 
     void SetupUI(CreditCalcWidgets *o_widgets) override {
-//        o_widgets->label->setText("ЭТО КРЕДИТНЫЙ КАЛЬКУЛЯТОР НА МАКЕ");
     }
 
     void SetupUI(DepositCalcWidgets *o_widgets) override {
-        o_widgets->label->setText("ЭТО ДЕПОЗИТНЫЙ КАЛЬКУЛЯТОР НА МАКЕ");
     }
 
     void SetupUI(GraphWidgets *o_widgets) override {
-
-
-
     }
 
 private:
 
 
     void SetStyleSheet() {
-
         (*widgets)->Input->setAlignment(Qt::AlignRight | Qt::AlignCenter);
         (*widgets)->Input->setStyleSheet("background-color: rgb(25, 25, 25)");
 
@@ -75,50 +66,15 @@ private:
                                      "border-color: rgb(34, 34, 34);");
         operatorButtons->SetPressedButtonStyle("background-color: rgba(255, 165, 2, 130)");
         operatorButtons->StyleApply();
-
-//        QPushButton:hover
     }
 
     void SetSize() {
-        (*widgets)->calcWindow->setFixedSize(420, 360);
-
-        int windowWidth = (*widgets)->calcWindow->width();
-        int windowHeight = (*widgets)->calcWindow->height();
-
-        int horizontalButtons = 7;
-        int verticalButtons = 6;
-
-        int width = windowWidth / horizontalButtons + 1;
-        int height = windowHeight / verticalButtons + 1;
-
-        QFont font = (*widgets)->Input->font();
-        int size_text = (width + height ) / 4;
-        font.setPointSize(size_text);
-        (*widgets)->Input->setFont(font);
-
-        QFont fontButtons;
-        fontButtons.setPointSize(size_text / 2);
-
-        int x = 0;
-        int y = 0;
-        (*widgets)->Input->setGeometry(x, y, windowWidth, height);
-
-        y += height;
-        for (int buttonCounter = 0; buttonCounter < 33; buttonCounter++) {
-
-            int coef = 1;
-            if (buttonList->indices.at(buttonCounter) == ButtonUnaryOperator || buttonList->indices.at(buttonCounter) == Button0) {
-                coef = 2;
-            }
-
-            (*widgets)->calcButtons.at(buttonList->indices.at(buttonCounter))->setGeometry(x, y, width * coef, height);
-            (*widgets)->calcButtons.at(buttonList->indices.at(buttonCounter))->setFont(fontButtons);
-            x += width * coef;
-
-            if (x > windowWidth) {
-                x = 0;
-                y += height;
-            }
+        Layout *calcLayout = new Layout(0, 0, (*widgets)->calcWindow->width(), (*widgets)->calcWindow->height(), 6, 7, 0, 0);
+        calcLayout->AddWidget((*widgets)->Input, 7, 1);
+        for(int i = 0; i < buttonList->indices.size(); i++) {
+            int width = 1;
+            if (buttonList->indices.at(i) == Button0 || buttonList->indices.at(i) == ButtonUnaryOperator) width = 2;
+            calcLayout->AddWidget((*widgets)->calcButtons.at(buttonList->indices.at(i)), width, 1);
         }
     }
 

@@ -41,17 +41,7 @@ public:
     }
 
     void SetupUI(GraphWidgets *o_widgets) override {
-        o_widgets->graphWindow->setFixedSize(800, 700);
-        o_widgets->graph->setFixedSize(800, 600);
-        o_widgets->graphWindow->setStyleSheet("background-color: white;");
 
-        o_widgets->graph->setInteraction(QCP::iRangeZoom,true);
-        o_widgets->graph->setInteraction(QCP::iRangeDrag, true);
-
-        o_widgets->graph->xAxis->setLabel("x");
-        o_widgets->graph->yAxis->setLabel("y");
-        o_widgets->graph->xAxis->setRange(-5, 5);
-        o_widgets->graph->yAxis->setRange(-5, 5);
     }
 
 private:

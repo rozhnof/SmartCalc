@@ -130,8 +130,6 @@ long double Calculation(char* output, double x) {
             DecisionTrigonometricFunction(elem[0], &top);
         }
         elem = strtok(NULL, " ");
-    // NodeOutput(&top);
-    // printf("\n\n");
     }
     long double result = top->number;
     PopNumber(&top);

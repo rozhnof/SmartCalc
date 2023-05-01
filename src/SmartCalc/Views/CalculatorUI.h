@@ -28,6 +28,7 @@ public:
 
     CalculatorUI() : MainWindow() {
         this->setWindowTitle("Calculator");
+        this->setFixedSize(420, 360);
 
         controller = new CalculatorController;
         widgets = new CalcWidgets;

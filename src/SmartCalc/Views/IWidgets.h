@@ -13,6 +13,74 @@
 using namespace std;
 
 
+
+class Layout
+{
+private:
+    int _rowsCount = 0;
+    int _colsCount = 0;
+    int _rowsMax;
+    int _colsMax;
+
+    int _spacerX;
+    int _spacerY;
+
+    int _elemWidth;
+    int _elemHeight;
+
+    int _currentX;
+    int _currentY;
+
+    int _x0;
+
+    int _remainingX;
+    int _remainingY;
+
+    int _remainingXcount;
+    int _remainingYcount;
+
+public:
+    Layout(int x0, int y0, int xMax, int yMax, int rows, int cols, int spacerX, int spacerY) :
+        _rowsMax(rows), _colsMax(cols), _spacerX(spacerX), _spacerY(spacerY), _x0(x0)
+    {
+        int generalWidth = (xMax - x0) - (_spacerX * (_colsMax - 1));
+        int generalHeight = (yMax - y0) - (_spacerY * (_rowsMax - 1));
+
+        _elemWidth = generalWidth / _colsMax;
+        _elemHeight = generalHeight / _rowsMax;
+
+        _remainingX = _remainingXcount = generalWidth % _colsMax;
+        _remainingY = _remainingYcount = generalHeight % _rowsMax;
+
+        _currentX = _x0;
+        _currentY = y0;
+    }
+
+
+    void AddWidget(QWidget* widget, int width, int height) {
+        int currentWidth = (_elemWidth * width) + ((width - 1) * _spacerX);
+        int currentHeight = (_elemHeight * height) + ((height - 1) * _spacerY);
+
+        if (_remainingXcount-- > 0) currentWidth += 1;
+        if (_remainingYcount-- > 0) currentHeight += 1;
+
+        widget->setGeometry(_currentX, _currentY, currentWidth, currentHeight);
+
+        _colsCount += width;
+        _currentX += currentWidth + _spacerX;
+
+        if (_colsCount >= _colsMax) {
+            _colsCount = 0;
+            _rowsCount += height;
+
+            _currentY += currentHeight + _spacerY;
+            _currentX = _x0;
+            _remainingXcount = _remainingX;
+        }
+    }
+};
+
+
 typedef struct CalcWidgets {
     QMainWindow *calcWindow;
 
@@ -24,7 +92,9 @@ typedef struct GraphWidgets  {
     QWidget *graphWindow;
     QCustomPlot *graph;
 
-    unordered_map<int, QLineEdit*> titles;
+    QLineEdit *Input;
+    QCheckBox* drawingLine;
+    unordered_map<int, QLabel*> titles;
     unordered_map<int, QDoubleSpinBox*> values;
 
 } GraphWidgets;
@@ -32,13 +102,7 @@ typedef struct GraphWidgets  {
 typedef struct CreditCalcWidgets  {
     QWidget *creditCalcWindow;
 
-    QLineEdit *creditSum;
-    QLineEdit *creditTerm;
-    QLineEdit *interestRate;
-
-    QLineEdit *totalPyament;
-    QLineEdit *overpayment;
-
+    unordered_map<int, QLineEdit*> values;
     QVector<QLineEdit*> payments;
 } CreditCalcWidgets;
 
@@ -50,20 +114,22 @@ typedef struct DepositCalcWidgets  {
 } DepositCalcWidgets;
 
 
+enum CreditCalcObjectsEnum {
+    CreditSum,
+    CreditTerm,
+    InterestRate,
+    TotalPyament,
+    Overpayment
+};
+
 
 enum GraphObjectsEnum {
-    LineInput,
-    LineScope,
-    LineRange,
-    LineX,
-    LineStepX,
-
     ScopeMin,
     ScopeMax,
     RangeMin,
     RangeMax,
-    X,
-    StepX
+    InputX,
+    Points
 };
 
 enum CalcObjectsEnum {

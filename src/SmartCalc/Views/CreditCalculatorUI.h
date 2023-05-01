@@ -14,7 +14,19 @@ public:
 
         widgets = new CreditCalcWidgets;
         widgets->creditCalcWindow = this;
+        this->setFixedSize(1200, 800);
     }
+
+    QLineEdit *CreateWidget(int index) {
+        QLineEdit *newWidget = new QLineEdit(this);
+        SetStyle(newWidget);
+        return newWidget;
+    }
+
+    void SetStyle(QLineEdit *widget) {
+        widget->setStyleSheet("background-color:black;");
+    }
+
 
     void SetupUI() override {
         (*_platform)->SetupUI(widgets);
