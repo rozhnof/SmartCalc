@@ -3,22 +3,15 @@
 
 #include "IPlatformUI.h"
 #include <iostream>
+#include <QWidget>
 
 
 using namespace std;
-
-
-
 
 class WinUI : public IPlatformUI
 {
 
 private:
-    CalcGroup *digitButtons;
-    CalcGroup *functionButtons;
-    CalcGroup *operatorButtons;
-
-    CalcGroup *buttonList;
 
     CalcWidgets **widgets;
 
@@ -27,120 +20,106 @@ public:
     void SetupUI(CalcWidgets *o_widgets) override {
         widgets = &o_widgets;
 
-        CreateButtonGroups();
-        SetStyleSheet();
-        SetSize();
+        SetStyle();
+        SetGeometry();
     }
 
     void SetupUI(CreditCalcWidgets *o_widgets) override {
-//        o_widgets->label->setText("ЭТО КРЕДИТНЫЙ КАЛЬКУЛЯТОР НА винде");
     }
 
     void SetupUI(DepositCalcWidgets *o_widgets) override {
-        o_widgets->label->setText("ЭТО ДЕПОЗИТНЫЙ КАЛЬКУЛЯТОР НА винде");
     }
 
     void SetupUI(GraphWidgets *o_widgets) override {
-
     }
+
 
 private:
 
-    void SetStyleSheet() {
+    void SetStyle() {
 
-        (*widgets)->Input->setAlignment(Qt::AlignRight | Qt::AlignCenter);
-        (*widgets)->Input->setStyleSheet("background-color: rgb(25, 25, 25)");
-
-        digitButtons->SetButtonStyle("background-color: rgb(120, 120, 120);"
-                                     "border-style: solid;"
-                                     "border-width: 1px 1px 0px 0px;"
-                                     "border-color: rgb(34, 34, 34);");
-        digitButtons->SetPressedButtonStyle("background-color: rgba(255, 255, 255, 128);");
-        digitButtons->StyleApply();
-
-        functionButtons->SetButtonStyle("background-color: rgb(200, 200, 200);"
-                                     "border-style: solid;"
-                                     "border-width: 1px 1px 0px 0px;"
-                                     "border-color: rgb(34, 34, 34);");
-        functionButtons->SetPressedButtonStyle("background-color: rgba(162, 161, 166, 128);");
-        functionButtons->StyleApply();
-
-        operatorButtons->SetButtonStyle("background-color: rgb(123, 234, 54);"
-                                     "border-style: solid;"
-                                     "border-width: 1px 1px 0px 0px;"
-                                     "border-color: rgb(34, 34, 34);");
-        operatorButtons->SetPressedButtonStyle("background-color: rgba(255, 165, 2, 130)");
-        operatorButtons->StyleApply();
+        (*widgets)->calcWindow->setStyleSheet(
+                                                "QWidget, QLabel#input {"
+                                                "   background-color: rgb(27, 32, 50);"
+                                                "   color: white;"
+                                                "   font-size: 26px;"
+                                                "}"
+                                                "QPushButton {"
+                                                "   background-color: rgb(46, 49, 68);"
+                                                "   color: white;"
+                                                "   font-size: 14px;"
+                                                "   border-radius: 5; "
+                                                "}"
+                                                "QPushButton:pressed {"
+                                                "   background-color: rgb(55, 58, 76);"
+                                                "}"
+                                               "QPushButton#number, QPushButton#dot {"
+                                               "    background-color: rgb(55, 58, 76);"
+                                               "    color: white;"
+                                               "    font-size: 18px;"
+                                               "    border-radius: 5; "
+                                               "}"
+                                               "QPushButton#number:pressed, QPushButton#dot:pressed {"
+                                               "    background-color: rgb(46, 49, 68);"
+                                               "}"
+                                                "QPushButton#equal {"
+                                                "   background-color: rgb(104, 181, 235);"
+                                                "   color: white;"
+                                                "   font-size: 14px;"
+                                                "   border-radius: 5; "
+                                                "}"
+                                                "QPushButton#equal:pressed {"
+                                                "   background-color: rgb(82, 144, 187); "
+                                                "}"
+                                              );
     }
 
-    void SetSize() {
-        (*widgets)->calcWindow->setFixedSize(420, 360);
+    void SetGeometry() {
+        (*widgets)->calcWindow->setFixedSize(420, 350);
+        Layout *calcLayout = new Layout(4, 0, (*widgets)->calcWindow->width() - 4, (*widgets)->calcWindow->height() - 4, 7, 7, 2, 2);
 
-        int windowWidth = (*widgets)->calcWindow->width();
-        int windowHeight = (*widgets)->calcWindow->height();
+        calcLayout->AddWidget((*widgets)->Input, 7, 2);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonX]);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonOpenBracket]);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonCloseBracket]);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonAC]);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonC]);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonUnaryOperator]);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonDiv]);
 
-        int horizontalButtons = 7;
-        int verticalButtons = 6;
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonMod]);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonPow]);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonFactorial]);
+        calcLayout->AddWidget((*widgets)->calcButtons[Button7]);
+        calcLayout->AddWidget((*widgets)->calcButtons[Button8]);
+        calcLayout->AddWidget((*widgets)->calcButtons[Button9]);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonMul]);
 
-        int width = windowWidth / horizontalButtons + 1;
-        int height = windowHeight / verticalButtons + 1;
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonLog]);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonLn]);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonSqrt]);
+        calcLayout->AddWidget((*widgets)->calcButtons[Button4]);
+        calcLayout->AddWidget((*widgets)->calcButtons[Button5]);
+        calcLayout->AddWidget((*widgets)->calcButtons[Button6]);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonSub]);
 
-        QFont font = (*widgets)->Input->font();
-        int size_text = (width + height ) / 4;
-        font.setPointSize(size_text);
-        (*widgets)->Input->setFont(font);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonAsin]);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonAcos]);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonAtan]);
+        calcLayout->AddWidget((*widgets)->calcButtons[Button1]);
+        calcLayout->AddWidget((*widgets)->calcButtons[Button2]);
+        calcLayout->AddWidget((*widgets)->calcButtons[Button3]);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonSum]);
 
-        QFont fontButtons;
-        fontButtons.setPointSize(size_text / 2);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonSin]);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonCos]);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonTan]);
+        calcLayout->AddWidget((*widgets)->calcButtons[Button0], 2);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonDot]);
+        calcLayout->AddWidget((*widgets)->calcButtons[ButtonResult]);
 
-        int x = 0;
-        int y = 0;
-        (*widgets)->Input->setGeometry(x, y, windowWidth, height);
-
-        y += height;
-        for (int buttonCounter = 0; buttonCounter < 33; buttonCounter++) {
-
-            int coef = 1;
-            if (buttonList->indices.at(buttonCounter) == ButtonUnaryOperator || buttonList->indices.at(buttonCounter) == Button0) {
-                coef = 2;
-            }
-
-            (*widgets)->calcButtons.at(buttonList->indices.at(buttonCounter))->setGeometry(x, y, width * coef, height);
-            (*widgets)->calcButtons.at(buttonList->indices.at(buttonCounter))->setFont(fontButtons);
-            x += width * coef;
-
-            if (x > windowWidth) {
-                x = 0;
-                y += height;
-            }
-        }
+        delete calcLayout;
     }
-
-    void CreateButtonGroups() {
-        digitButtons = new CalcGroup((*widgets)->calcButtons);
-        for (int i = Button0; i <= ButtonDot; i++) {
-            digitButtons->addButton(i);
-        }
-
-        functionButtons = new CalcGroup((*widgets)->calcButtons);
-        functionButtons->indices = { ButtonX, ButtonMod, ButtonFactorial, ButtonPow, ButtonOpenBracket, ButtonOpenBracket, ButtonCloseBracket };
-        for (int i = ButtonSin; i <= ButtonSqrt; i++) {
-            functionButtons->addButton(i);
-        }
-
-        operatorButtons = new CalcGroup((*widgets)->calcButtons);
-        operatorButtons->indices = { ButtonSum, ButtonSub, ButtonMul, ButtonDiv, ButtonAC, ButtonUnaryOperator, ButtonResult };
-
-        buttonList = new CalcGroup((*widgets)->calcButtons);
-        buttonList->indices = { ButtonX, ButtonOpenBracket, ButtonCloseBracket, ButtonAC, ButtonUnaryOperator, ButtonDiv,
-                                ButtonMod, ButtonFactorial, ButtonPow, Button7, Button8, Button9, ButtonMul,
-                                ButtonLog, ButtonLn, ButtonSqrt, Button4, Button5, Button6, ButtonSub,
-                                ButtonAsin, ButtonAcos, ButtonAtan, Button1, Button2, Button3, ButtonSum,
-                                ButtonSin, ButtonCos, ButtonTan, Button0, ButtonDot, ButtonResult };
-    }
-
-
-
 };
 
 #endif // WINUI_H

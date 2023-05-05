@@ -28,7 +28,6 @@ private:
     DepositCalculatorUI *_depositCalc;
     GraphUI *_graph;
 
-
     IPlatformUI *_platform;
     IPlatformUI *_winUi;
     IPlatformUI *_macUi;
@@ -43,6 +42,7 @@ private:
 
 public:
 
+
     Calculator() {
         _calc = new CalculatorUI;
         _creditCalc = new CreditCalculatorUI;
@@ -51,6 +51,7 @@ public:
 
         _winUi = new WinUI;
         _macUi = new MacUI;
+
 
         SetupPlatform();
 

@@ -60,3 +60,8 @@ class ResultValidate : public IValidate {
 class FactorialValidate : public IValidate {
     string Validate(string input, const string &button, int &status) override;
 };
+
+class UnaryOperatorValidate : public IValidate {
+    string Validate(string input, const string &button, int &status) override;
+};
+

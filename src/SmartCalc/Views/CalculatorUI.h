@@ -22,74 +22,124 @@ class CalculatorUI : public MainWindow
 {
     Q_OBJECT
 
+
+
 public:
     CalculatorController *controller;
     CalcWidgets *widgets;
 
     CalculatorUI() : MainWindow() {
         this->setWindowTitle("Calculator");
-        this->setFixedSize(420, 360);
 
         controller = new CalculatorController;
         widgets = new CalcWidgets;
         widgets->calcWindow = this;
 
-        SetupButtons();
+        CreateObjects();
+        Connects();
     }
 
     void SetupUI() override {
+        ResetSettings();
         (*_platform)->SetupUI(widgets);
     }
 
 private:
 
-    QPushButton *CreateButton(QString text, const char* member) {
-        QPushButton *newButton = new QPushButton(text, widgets->calcWindow);
-        connect(newButton, SIGNAL(clicked()), this, member);
-        return newButton;
+    void CreateObjects() {
+       widgets->Input = NewLabel("0", widgets->calcWindow, "input");
+       widgets->calcButtons.insert(make_pair(Button0, NewPushButton("0", this, "number")));
+       widgets->calcButtons.insert(make_pair(Button1, NewPushButton("1", this, "number")));
+       widgets->calcButtons.insert(make_pair(Button2, NewPushButton("2", this, "number")));
+       widgets->calcButtons.insert(make_pair(Button3, NewPushButton("3", this, "number")));
+       widgets->calcButtons.insert(make_pair(Button4, NewPushButton("4", this, "number")));
+       widgets->calcButtons.insert(make_pair(Button5, NewPushButton("5", this, "number")));
+       widgets->calcButtons.insert(make_pair(Button6, NewPushButton("6", this, "number")));
+       widgets->calcButtons.insert(make_pair(Button7, NewPushButton("7", this, "number")));
+       widgets->calcButtons.insert(make_pair(Button8, NewPushButton("8", this, "number")));
+       widgets->calcButtons.insert(make_pair(Button9, NewPushButton("9", this, "number")));
+
+       widgets->calcButtons.insert(make_pair(ButtonSin, NewPushButton("sin", this, "function")));
+       widgets->calcButtons.insert(make_pair(ButtonCos, NewPushButton("cos", this, "function")));
+       widgets->calcButtons.insert(make_pair(ButtonTan, NewPushButton("tan", this, "function")));
+       widgets->calcButtons.insert(make_pair(ButtonAsin, NewPushButton("asin", this, "function")));
+       widgets->calcButtons.insert(make_pair(ButtonAcos, NewPushButton("acos", this, "function")));
+       widgets->calcButtons.insert(make_pair(ButtonAtan, NewPushButton("atan", this, "function")));
+       widgets->calcButtons.insert(make_pair(ButtonLog, NewPushButton("log", this, "function")));
+       widgets->calcButtons.insert(make_pair(ButtonSqrt, NewPushButton("sqrt", this, "function")));
+       widgets->calcButtons.insert(make_pair(ButtonLn, NewPushButton("ln", this, "function")));
+
+       widgets->calcButtons.insert(make_pair(ButtonSum, NewPushButton("+", this, "operator")));
+       widgets->calcButtons.insert(make_pair(ButtonSub, NewPushButton("-", this, "operator")));
+       widgets->calcButtons.insert(make_pair(ButtonMul, NewPushButton("*", this, "operator")));
+       widgets->calcButtons.insert(make_pair(ButtonDiv, NewPushButton("/", this, "operator")));
+       widgets->calcButtons.insert(make_pair(ButtonMod, NewPushButton("mod", this, "mod")));
+       widgets->calcButtons.insert(make_pair(ButtonPow, NewPushButton("^", this, "pow")));
+
+       widgets->calcButtons.insert(make_pair(ButtonX, NewPushButton("x", this, "x")));
+       widgets->calcButtons.insert(make_pair(ButtonDot, NewPushButton(".", this, "dot")));
+       widgets->calcButtons.insert(make_pair(ButtonEXP, NewPushButton("EXP", this, "exp")));
+
+       widgets->calcButtons.insert(make_pair(ButtonFactorial, NewPushButton("!", this, "factorial")));
+       widgets->calcButtons.insert(make_pair(ButtonOpenBracket, NewPushButton("(", this, "bracket")));
+       widgets->calcButtons.insert(make_pair(ButtonCloseBracket, NewPushButton(")", this, "bracket")));
+       widgets->calcButtons.insert(make_pair(ButtonUnaryOperator, NewPushButton("+/-", this, "unaryOperator")));
+
+       widgets->calcButtons.insert(make_pair(ButtonC, NewPushButton("C", this, "clear")));
+       widgets->calcButtons.insert(make_pair(ButtonAC, NewPushButton("AC", this, "clear")));
+       widgets->calcButtons.insert(make_pair(ButtonResult, NewPushButton("=", this, "equal")));
     }
 
-    void SetupButtons() {
-       widgets->Input = new QLabel("0", this);
-       widgets->calcButtons.insert(make_pair(Button0, CreateButton("0", SLOT(SetNumber()))));
-       widgets->calcButtons.insert(make_pair(Button1, CreateButton("1", SLOT(SetNumber()))));
-       widgets->calcButtons.insert(make_pair(Button2, CreateButton("2", SLOT(SetNumber()))));
-       widgets->calcButtons.insert(make_pair(Button3, CreateButton("3", SLOT(SetNumber()))));
-       widgets->calcButtons.insert(make_pair(Button4, CreateButton("4", SLOT(SetNumber()))));
-       widgets->calcButtons.insert(make_pair(Button5, CreateButton("5", SLOT(SetNumber()))));
-       widgets->calcButtons.insert(make_pair(Button6, CreateButton("6", SLOT(SetNumber()))));
-       widgets->calcButtons.insert(make_pair(Button7, CreateButton("7", SLOT(SetNumber()))));
-       widgets->calcButtons.insert(make_pair(Button8, CreateButton("8", SLOT(SetNumber()))));
-       widgets->calcButtons.insert(make_pair(Button9, CreateButton("9", SLOT(SetNumber()))));
+    void Connects() {
+        connect(widgets->calcButtons[Button0], &QPushButton::clicked, this, &CalculatorUI::SetNumber);
+        connect(widgets->calcButtons[Button1], &QPushButton::clicked, this, &CalculatorUI::SetNumber);
+        connect(widgets->calcButtons[Button2], &QPushButton::clicked, this, &CalculatorUI::SetNumber);
+        connect(widgets->calcButtons[Button3], &QPushButton::clicked, this, &CalculatorUI::SetNumber);
+        connect(widgets->calcButtons[Button4], &QPushButton::clicked, this, &CalculatorUI::SetNumber);
+        connect(widgets->calcButtons[Button5], &QPushButton::clicked, this, &CalculatorUI::SetNumber);
+        connect(widgets->calcButtons[Button6], &QPushButton::clicked, this, &CalculatorUI::SetNumber);
+        connect(widgets->calcButtons[Button7], &QPushButton::clicked, this, &CalculatorUI::SetNumber);
+        connect(widgets->calcButtons[Button8], &QPushButton::clicked, this, &CalculatorUI::SetNumber);
+        connect(widgets->calcButtons[Button9], &QPushButton::clicked, this, &CalculatorUI::SetNumber);
 
-       widgets->calcButtons.insert(make_pair(ButtonSin, CreateButton("sin", SLOT(SetFunction()))));
-       widgets->calcButtons.insert(make_pair(ButtonCos, CreateButton("cos", SLOT(SetFunction()))));
-       widgets->calcButtons.insert(make_pair(ButtonTan, CreateButton("tan", SLOT(SetFunction()))));
-       widgets->calcButtons.insert(make_pair(ButtonAsin, CreateButton("asin", SLOT(SetFunction()))));
-       widgets->calcButtons.insert(make_pair(ButtonAcos, CreateButton("acos", SLOT(SetFunction()))));
-       widgets->calcButtons.insert(make_pair(ButtonAtan, CreateButton("atan", SLOT(SetFunction()))));
-       widgets->calcButtons.insert(make_pair(ButtonLog, CreateButton("log", SLOT(SetFunction()))));
-       widgets->calcButtons.insert(make_pair(ButtonSqrt, CreateButton("sqrt", SLOT(SetFunction()))));
-       widgets->calcButtons.insert(make_pair(ButtonLn, CreateButton("ln", SLOT(SetFunction()))));
+        connect(widgets->calcButtons[ButtonSin], &QPushButton::clicked, this, &CalculatorUI::SetFunction);
+        connect(widgets->calcButtons[ButtonCos], &QPushButton::clicked, this, &CalculatorUI::SetFunction);
+        connect(widgets->calcButtons[ButtonTan], &QPushButton::clicked, this, &CalculatorUI::SetFunction);
+        connect(widgets->calcButtons[ButtonAsin], &QPushButton::clicked, this, &CalculatorUI::SetFunction);
+        connect(widgets->calcButtons[ButtonAcos], &QPushButton::clicked, this, &CalculatorUI::SetFunction);
+        connect(widgets->calcButtons[ButtonAtan], &QPushButton::clicked, this, &CalculatorUI::SetFunction);
+        connect(widgets->calcButtons[ButtonLog], &QPushButton::clicked, this, &CalculatorUI::SetFunction);
+        connect(widgets->calcButtons[ButtonSqrt], &QPushButton::clicked, this, &CalculatorUI::SetFunction);
+        connect(widgets->calcButtons[ButtonLn], &QPushButton::clicked, this, &CalculatorUI::SetFunction);
 
-       widgets->calcButtons.insert(make_pair(ButtonSum, CreateButton("+", SLOT(SetOperator()))));
-       widgets->calcButtons.insert(make_pair(ButtonSub, CreateButton("-", SLOT(SetOperator()))));
-       widgets->calcButtons.insert(make_pair(ButtonMul, CreateButton("*", SLOT(SetOperator()))));
-       widgets->calcButtons.insert(make_pair(ButtonDiv, CreateButton("/", SLOT(SetOperator()))));
-       widgets->calcButtons.insert(make_pair(ButtonMod, CreateButton("mod", SLOT(SetOperator()))));
-       widgets->calcButtons.insert(make_pair(ButtonPow, CreateButton("^", SLOT(SetOperator()))));
+        connect(widgets->calcButtons[ButtonSum], &QPushButton::clicked, this, &CalculatorUI::SetOperator);
+        connect(widgets->calcButtons[ButtonSub], &QPushButton::clicked, this, &CalculatorUI::SetOperator);
+        connect(widgets->calcButtons[ButtonMul], &QPushButton::clicked, this, &CalculatorUI::SetOperator);
+        connect(widgets->calcButtons[ButtonDiv], &QPushButton::clicked, this, &CalculatorUI::SetOperator);
+        connect(widgets->calcButtons[ButtonMod], &QPushButton::clicked, this, &CalculatorUI::SetOperator);
+        connect(widgets->calcButtons[ButtonPow], &QPushButton::clicked, this, &CalculatorUI::SetOperator);
 
-       widgets->calcButtons.insert(make_pair(ButtonFactorial, CreateButton("!", SLOT(SetFactorial()))));
+        connect(widgets->calcButtons[ButtonX], &QPushButton::clicked, this, &CalculatorUI::SetX);
+        connect(widgets->calcButtons[ButtonDot], &QPushButton::clicked, this, &CalculatorUI::SetDot);
+        connect(widgets->calcButtons[ButtonEXP], &QPushButton::clicked, this, &CalculatorUI::SetExp);
 
-       widgets->calcButtons.insert(make_pair(ButtonOpenBracket, CreateButton("(", SLOT(SetOpenBracket()))));
-       widgets->calcButtons.insert(make_pair(ButtonCloseBracket, CreateButton(")", SLOT(SetCloseBracket()))));
+        connect(widgets->calcButtons[ButtonFactorial], &QPushButton::clicked, this, &CalculatorUI::SetFactorial);
+        connect(widgets->calcButtons[ButtonOpenBracket], &QPushButton::clicked, this, &CalculatorUI::SetOpenBracket);
+        connect(widgets->calcButtons[ButtonCloseBracket], &QPushButton::clicked, this, &CalculatorUI::SetCloseBracket);
+        connect(widgets->calcButtons[ButtonUnaryOperator], &QPushButton::clicked, this, &CalculatorUI::SetUnaryOperator);
 
-       widgets->calcButtons.insert(make_pair(ButtonDot, CreateButton(".", SLOT(SetDot()))));
-       widgets->calcButtons.insert(make_pair(ButtonX, CreateButton("x", SLOT(SetX()))));
-       widgets->calcButtons.insert(make_pair(ButtonAC, CreateButton("AC", SLOT(Clear()))));
-       widgets->calcButtons.insert(make_pair(ButtonResult, CreateButton("=", SLOT(GetResult()))));
-       widgets->calcButtons.insert(make_pair(ButtonUnaryOperator, CreateButton("+/-", SLOT(DrawGraph()))));
+        connect(widgets->calcButtons[ButtonC], &QPushButton::clicked, this, &CalculatorUI::Clear);
+        connect(widgets->calcButtons[ButtonAC], &QPushButton::clicked, this, &CalculatorUI::ClearAll);
+        connect(widgets->calcButtons[ButtonResult], &QPushButton::clicked, this, &CalculatorUI::Result);
     }
+
+    void ResetSettings() {
+        widgets->Input->setGeometry(0, 0, 0, 0);
+        for (int i = Button0; i <= ButtonResult; i++) {
+            widgets->calcButtons.at(i)->setGeometry(0, 0, 0, 0);
+        }
+    }
+
 
 private slots:
 
@@ -133,11 +183,25 @@ private slots:
         widgets->Input->setText(controller->Validate(new CloseBracketValidate, widgets->Input->text(), static_cast<QPushButton*>(sender())->text(), status));
     }
 
+    void SetUnaryOperator() {
+        int status = 1;
+        widgets->Input->setText(controller->Validate(new UnaryOperatorValidate, widgets->Input->text(), static_cast<QPushButton*>(sender())->text(), status));
+    }
+
+    void SetExp() {
+        int status = 1;
+        widgets->Input->setText(controller->Validate(new CloseBracketValidate, widgets->Input->text(), static_cast<QPushButton*>(sender())->text(), status));
+    }
+
     void Clear() {
         widgets->Input->setText("");
     }
 
-    void GetResult() {
+    void ClearAll() {
+        widgets->Input->setText("");
+    }
+
+    void Result() {
         int status = 1;
         controller->Validate(new ResultValidate, widgets->Input->text(), static_cast<QPushButton*>(sender())->text(), status);
         if (status) {
