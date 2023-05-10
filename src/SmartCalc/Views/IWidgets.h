@@ -140,7 +140,11 @@ typedef struct CreditCalcWidgets  {
     QWidget *creditCalcWindow;
 
     unordered_map<int, QLineEdit*> values;
-    QVector<QLineEdit*> payments;
+
+
+    QVector<double> bodyPayments;
+    QVector<double> percentPayments;
+
 } CreditCalcWidgets;
 
 
@@ -155,7 +159,7 @@ enum CreditCalcObjectsEnum {
     CreditSum,
     CreditTerm,
     InterestRate,
-    TotalPyament,
+    TotalPayment,
     Overpayment
 };
 

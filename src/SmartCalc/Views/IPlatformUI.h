@@ -8,11 +8,6 @@ using namespace std;
 
 
 
-
-
-
-
-
 class IPlatformUI
 {
 public:

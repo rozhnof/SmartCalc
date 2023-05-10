@@ -6,37 +6,12 @@
 #include "IPlatformUI.h"
 #include "../Controllers/GraphController.h"
 
-using namespace std;
 
 class GraphUI : public MainWindow
 {
 
 Q_OBJECT
-    QLabel *NewLabel(QString text, QWidget *parent, QString objectName) {
-        QLabel *newObject = new QLabel(text, parent);
-        newObject->setObjectName(objectName);
-        return newObject;
-    }
 
-    QDoubleSpinBox *NewDoubleSpinBox(QWidget *parent, QString objectName) {
-        QDoubleSpinBox *newObject = new QDoubleSpinBox(parent);
-        newObject->setObjectName(objectName);
-        newObject->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-        newObject->setButtonSymbols(QAbstractSpinBox::NoButtons);
-        return newObject;
-    }
-
-    QLineEdit *NewQLineEdit(QString text, QWidget *parent, QString objectName) {
-        QLineEdit *newObject = new QLineEdit(text, parent);
-        newObject->setObjectName(objectName);
-        return newObject;
-    }
-
-    QPushButton *NewPushButton(QString text, QWidget *parent, QString objectName) {
-        QPushButton *newObject = new QPushButton(text, parent);
-        newObject->setObjectName(objectName);
-        return newObject;
-    }
 
 public:
 
@@ -56,7 +31,7 @@ public:
         widgets->graph->addGraph();
 
         CreateObjects();
-        SettingUpObjects();
+        SetOptions();
         SetGeometry();
         SetStyle();
         Connects();
@@ -113,7 +88,7 @@ public:
         delete graphLayout;
     }
 
-    void SettingUpObjects() {
+    void SetOptions() {
         widgets->graph->xAxis->setLabel("x");
         widgets->graph->yAxis->setLabel("y");
         widgets->graph->xAxis->setRange(-5, 5);
@@ -172,10 +147,6 @@ public:
         connect(widgets->drawingLine, SIGNAL(stateChanged(int)), this, SLOT(DrawingLineState()));
         connect(widgets->Input, SIGNAL(returnPressed()), this, SLOT(SetInput()));
     }
-
-
-
-
 
     void DrawGraph() {
         int countPoints = widgets->values.at(Points)->value();
