@@ -36,7 +36,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="Calculator">
      <attribute name="title">
@@ -1746,6 +1746,26 @@ border: 1px solid rgb(0, 32, 255);
 </string>
       </property>
      </widget>
+     <widget class="QWidget" name="widget_2" native="true">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>230</y>
+        <width>120</width>
+        <height>80</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="textEdit">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>320</y>
+        <width>104</width>
+        <height>71</height>
+       </rect>
+      </property>
+     </widget>
      <zorder>graphicsView</zorder>
      <zorder>RangeMax</zorder>
      <zorder>FunctionScope</zorder>
@@ -1757,6 +1777,8 @@ border: 1px solid rgb(0, 32, 255);
      <zorder>FunctionRange</zorder>
      <zorder>RangeMin</zorder>
      <zorder>XDef</zorder>
+     <zorder>widget_2</zorder>
+     <zorder>textEdit</zorder>
     </widget>
     <widget class="QWidget" name="CreditCalc">
      <attribute name="title">

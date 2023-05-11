@@ -17,8 +17,8 @@ using namespace std;
 class Layout
 {
 private:
-    int _rowsCount = 0;
-    int _colsCount = 0;
+    double _rowsCount = 0;
+    double _colsCount = 0;
     int _rowsMax;
     int _colsMax;
 
@@ -63,7 +63,7 @@ public:
     }
 
 
-    void AddWidget(QWidget* widget, int width = 1, int height = 1) {
+    void AddWidget(QWidget* widget, double width = 1, double height = 1) {
         int currentWidth = (_elemWidth * width) + ((width - 1) * _spacerX);
         int currentHeight = (_elemHeight * height) + ((height - 1) * _spacerY);
 
@@ -139,8 +139,9 @@ typedef struct GraphWidgets  {
 typedef struct CreditCalcWidgets  {
     QWidget *creditCalcWindow;
 
-    unordered_map<int, QLineEdit*> values;
-
+    unordered_map<int, QTextEdit*> box;
+    unordered_map<int, QLabel*> boxTitle;
+    unordered_map<int, QLineEdit*> boxText;
 
     QVector<double> bodyPayments;
     QVector<double> percentPayments;
@@ -160,7 +161,8 @@ enum CreditCalcObjectsEnum {
     CreditTerm,
     InterestRate,
     TotalPayment,
-    Overpayment
+    Overpayment,
+    MonthlyPayment
 };
 
 

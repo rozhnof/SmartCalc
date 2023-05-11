@@ -3,6 +3,7 @@ QT       -= core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 QT += printsupport
+QT += charts
 
 
 CONFIG += c++17
@@ -21,6 +22,7 @@ SOURCES += \
     Controllers/Validate/OpenBracketValidate.cpp \
     Controllers/Validate/OperatorValidate.cpp \
     Controllers/Validate/ResultValidate.cpp \
+    Controllers/Validate/UnaryOperatorValidate.cpp \
     Controllers/Validate/Validator.cpp \
     Controllers/Validate/xValidate.cpp \
     Models/calculation.c \

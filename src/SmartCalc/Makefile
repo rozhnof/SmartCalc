@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
 CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
-DEFINES       = -DQT_NO_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_NO_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_CHARTS_LIB -DQT_OPENGLWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11 -Wall -Wextra -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -O2 -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11 -Wall -Wextra -fPIC $(DEFINES)
-INCPATH       = -I. -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/AGL.framework/Headers -I/usr/local/share/qt/mkspecs/macx-clang -F/usr/local/lib
+INCPATH       = -I. -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtCharts.framework/Headers -I/usr/local/lib/QtOpenGLWidgets.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtOpenGL.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/AGL.framework/Headers -I/usr/local/share/qt/mkspecs/macx-clang -F/usr/local/lib
 QMAKE         = /usr/local/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = SmartCalc1.0.0
 DISTDIR = /Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc/.tmp/SmartCalc1.0.0
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -stdlib=libc++ -headerpad_max_install_names $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11 -Wl,-rpath,@executable_path/../Frameworks -Wl,-rpath,/usr/local/lib
-LIBS          = $(SUBLIBS) -F/usr/local/lib -framework QtPrintSupport -framework ApplicationServices -framework QtWidgets -framework QtGui -framework AppKit -framework ImageIO -framework Metal -framework QtCore -framework DiskArbitration -framework IOKit -lcups -framework AGL -framework OpenGL   
+LIBS          = $(SUBLIBS) -F/usr/local/lib -framework QtPrintSupport -framework ApplicationServices -framework QtCharts -framework QtOpenGLWidgets -framework QtWidgets -framework QtOpenGL -framework QtGui -framework AppKit -framework ImageIO -framework Metal -framework QtCore -framework DiskArbitration -framework IOKit -lcups -framework AGL -framework OpenGL   
 AR            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar cq
 RANLIB        = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib -s
 SED           = sed
@@ -61,6 +61,7 @@ SOURCES       = Controllers/Controller.cpp \
 		Controllers/Validate/OpenBracketValidate.cpp \
 		Controllers/Validate/OperatorValidate.cpp \
 		Controllers/Validate/ResultValidate.cpp \
+		Controllers/Validate/UnaryOperatorValidate.cpp \
 		Controllers/Validate/Validator.cpp \
 		Controllers/Validate/xValidate.cpp \
 		Models/calculation.c \
@@ -69,7 +70,7 @@ SOURCES       = Controllers/Controller.cpp \
 		Views/qcustomplot.cpp \
 		main.cpp moc_Calculator.cpp \
 		moc_CalculatorUI.cpp \
-		moc_mainwindow.cpp \
+		moc_GraphUI.cpp \
 		moc_qcustomplot.cpp
 OBJECTS       = Controller.o \
 		CloseBracketValidate.o \
@@ -80,6 +81,7 @@ OBJECTS       = Controller.o \
 		OpenBracketValidate.o \
 		OperatorValidate.o \
 		ResultValidate.o \
+		UnaryOperatorValidate.o \
 		Validator.o \
 		xValidate.o \
 		calculation.o \
@@ -89,7 +91,7 @@ OBJECTS       = Controller.o \
 		main.o \
 		moc_Calculator.o \
 		moc_CalculatorUI.o \
-		moc_mainwindow.o \
+		moc_GraphUI.o \
 		moc_qcustomplot.o
 DIST          = /usr/local/share/qt/mkspecs/features/spec_pre.prf \
 		/usr/local/share/qt/mkspecs/features/device_config.prf \
@@ -370,6 +372,7 @@ DIST          = /usr/local/share/qt/mkspecs/features/spec_pre.prf \
 		Controllers/Validate/OpenBracketValidate.cpp \
 		Controllers/Validate/OperatorValidate.cpp \
 		Controllers/Validate/ResultValidate.cpp \
+		Controllers/Validate/UnaryOperatorValidate.cpp \
 		Controllers/Validate/Validator.cpp \
 		Controllers/Validate/xValidate.cpp \
 		Models/calculation.c \
@@ -657,7 +660,10 @@ Makefile: SmartCalc.pro /usr/local/share/qt/mkspecs/macx-clang/qmake.conf /usr/l
 		/usr/local/share/qt/mkspecs/features/lex.prf \
 		SmartCalc.pro \
 		/usr/local/lib/QtPrintSupport.framework/Resources/QtPrintSupport.prl \
+		/usr/local/lib/QtCharts.framework/Resources/QtCharts.prl \
+		/usr/local/lib/QtOpenGLWidgets.framework/Resources/QtOpenGLWidgets.prl \
 		/usr/local/lib/QtWidgets.framework/Resources/QtWidgets.prl \
+		/usr/local/lib/QtOpenGL.framework/Resources/QtOpenGL.prl \
 		/usr/local/lib/QtGui.framework/Resources/QtGui.prl \
 		/usr/local/lib/QtCore.framework/Resources/QtCore.prl
 	$(QMAKE) -o Makefile SmartCalc.pro -spec macx-clang
@@ -917,7 +923,10 @@ Makefile: SmartCalc.pro /usr/local/share/qt/mkspecs/macx-clang/qmake.conf /usr/l
 /usr/local/share/qt/mkspecs/features/lex.prf:
 SmartCalc.pro:
 /usr/local/lib/QtPrintSupport.framework/Resources/QtPrintSupport.prl:
+/usr/local/lib/QtCharts.framework/Resources/QtCharts.prl:
+/usr/local/lib/QtOpenGLWidgets.framework/Resources/QtOpenGLWidgets.prl:
 /usr/local/lib/QtWidgets.framework/Resources/QtWidgets.prl:
+/usr/local/lib/QtOpenGL.framework/Resources/QtOpenGL.prl:
 /usr/local/lib/QtGui.framework/Resources/QtGui.prl:
 /usr/local/lib/QtCore.framework/Resources/QtCore.prl:
 qmake: FORCE
@@ -951,7 +960,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/local/share/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents Controllers/CalculatorController.h Controllers/Controller.h Controllers/GraphController.h Controllers/Validate/Validate.h Models/Model.h Models/calc.h Views/Calculator.h Views/CalculatorUI.h Views/CreditCalculatorUI.h Views/DepositCalculatorUI.h Views/GraphUI.h Views/IPlatformUI.h Views/IWidgets.h Views/MacUI.h Views/WinUI.h Views/mainwindow.h Views/qcustomplot.h $(DISTDIR)/
-	$(COPY_FILE) --parents Controllers/Controller.cpp Controllers/Validate/CloseBracketValidate.cpp Controllers/Validate/DotValidate.cpp Controllers/Validate/FactorialValidate.cpp Controllers/Validate/FunctionValidate.cpp Controllers/Validate/NumberValidate.cpp Controllers/Validate/OpenBracketValidate.cpp Controllers/Validate/OperatorValidate.cpp Controllers/Validate/ResultValidate.cpp Controllers/Validate/Validator.cpp Controllers/Validate/xValidate.cpp Models/calculation.c Models/converter.c Models/credit_calc.c Views/qcustomplot.cpp main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents Controllers/Controller.cpp Controllers/Validate/CloseBracketValidate.cpp Controllers/Validate/DotValidate.cpp Controllers/Validate/FactorialValidate.cpp Controllers/Validate/FunctionValidate.cpp Controllers/Validate/NumberValidate.cpp Controllers/Validate/OpenBracketValidate.cpp Controllers/Validate/OperatorValidate.cpp Controllers/Validate/ResultValidate.cpp Controllers/Validate/UnaryOperatorValidate.cpp Controllers/Validate/Validator.cpp Controllers/Validate/xValidate.cpp Models/calculation.c Models/converter.c Models/credit_calc.c Views/qcustomplot.cpp main.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents Views/MacCalc.ui Views/WinCalc.ui $(DISTDIR)/
 
 
@@ -987,9 +996,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/local/share/qt/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -O2 -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11 -Wall -Wextra -dM -E -o moc_predefs.h /usr/local/share/qt/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_Calculator.cpp moc_CalculatorUI.cpp moc_mainwindow.cpp moc_qcustomplot.cpp
+compiler_moc_header_make_all: moc_Calculator.cpp moc_CalculatorUI.cpp moc_GraphUI.cpp moc_qcustomplot.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_Calculator.cpp moc_CalculatorUI.cpp moc_mainwindow.cpp moc_qcustomplot.cpp
+	-$(DEL_FILE) moc_Calculator.cpp moc_CalculatorUI.cpp moc_GraphUI.cpp moc_qcustomplot.cpp
 moc_Calculator.cpp: Views/Calculator.h \
 		Views/CalculatorUI.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QPushButton \
@@ -1009,6 +1018,10 @@ moc_Calculator.cpp: Views/Calculator.h \
 		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		Views/qcustomplot.h \
 		/usr/local/lib/QtCore.framework/Headers/qmath.h \
+		/usr/local/lib/QtOpenGL.framework/Headers/QOpenGLFramebufferObject \
+		/usr/local/lib/QtOpenGL.framework/Headers/qopenglframebufferobject.h \
+		/usr/local/lib/QtOpenGL.framework/Headers/QOpenGLPaintDevice \
+		/usr/local/lib/QtOpenGL.framework/Headers/qopenglpaintdevice.h \
 		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
 		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
 		/usr/local/lib/QtGui.framework/Headers/QResizeEvent \
@@ -1016,21 +1029,79 @@ moc_Calculator.cpp: Views/Calculator.h \
 		/usr/local/lib/QtCore.framework/Headers/QDebug \
 		/usr/local/lib/QtCore.framework/Headers/qdebug.h \
 		Controllers/CalculatorController.h \
+		Controllers/Controller.h \
 		Models/Model.h \
 		Models/calc.h \
 		Controllers/Validate/Validate.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
 		/usr/local/lib/QtCore.framework/Headers/qstring.h \
 		Views/CreditCalculatorUI.h \
+		/usr/local/lib/QtCharts.framework/Headers/QtCharts \
+		/usr/local/lib/QtCharts.framework/Headers/qchartglobal.h \
+		/usr/local/lib/QtCharts.framework/Headers/qabstractaxis.h \
+		/usr/local/lib/QtCharts.framework/Headers/qabstractbarseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qabstractseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qarealegendmarker.h \
+		/usr/local/lib/QtCharts.framework/Headers/qareaseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qbarcategoryaxis.h \
+		/usr/local/lib/QtCharts.framework/Headers/qbarlegendmarker.h \
+		/usr/local/lib/QtCharts.framework/Headers/qbarmodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qbarseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qbarset.h \
+		/usr/local/lib/QtCharts.framework/Headers/qboxplotlegendmarker.h \
+		/usr/local/lib/QtCharts.framework/Headers/qboxplotmodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qboxplotseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qboxset.h \
+		/usr/local/lib/QtCharts.framework/Headers/qcandlesticklegendmarker.h \
+		/usr/local/lib/QtCharts.framework/Headers/qcandlestickmodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qcandlestickseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qcandlestickset.h \
+		/usr/local/lib/QtCharts.framework/Headers/qcategoryaxis.h \
+		/usr/local/lib/QtCharts.framework/Headers/qchart.h \
+		/usr/local/lib/QtCharts.framework/Headers/qchartview.h \
+		/usr/local/lib/QtCharts.framework/Headers/qcoloraxis.h \
+		/usr/local/lib/QtCharts.framework/Headers/qdatetimeaxis.h \
+		/usr/local/lib/QtCharts.framework/Headers/qhbarmodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qhboxplotmodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qhcandlestickmodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qhorizontalbarseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qhorizontalpercentbarseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qhorizontalstackedbarseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qhpiemodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qhxymodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qlegend.h \
+		/usr/local/lib/QtCharts.framework/Headers/qlegendmarker.h \
+		/usr/local/lib/QtCharts.framework/Headers/qlineseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qlogvalueaxis.h \
+		/usr/local/lib/QtCharts.framework/Headers/qpercentbarseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qpielegendmarker.h \
+		/usr/local/lib/QtCharts.framework/Headers/qpiemodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qpieseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qpieslice.h \
+		/usr/local/lib/QtCharts.framework/Headers/qpolarchart.h \
+		/usr/local/lib/QtCharts.framework/Headers/qscatterseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qsplineseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qstackedbarseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qvalueaxis.h \
+		/usr/local/lib/QtCharts.framework/Headers/qvbarmodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qvboxplotmodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qvcandlestickmodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qvpiemodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qvxymodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qxylegendmarker.h \
+		/usr/local/lib/QtCharts.framework/Headers/qxymodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qxyseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qtchartsversion.h \
 		Views/DepositCalculatorUI.h \
 		Views/GraphUI.h \
+		Controllers/GraphController.h \
 		/usr/local/lib/QtCore.framework/Headers/QObject \
 		/usr/local/lib/QtCore.framework/Headers/qobject.h \
 		Views/MacUI.h \
 		Views/WinUI.h \
 		moc_predefs.h \
 		/usr/local/share/qt/libexec/moc
-	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib Views/Calculator.h -o moc_Calculator.cpp
+	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtCharts.framework/Headers -I/usr/local/lib/QtOpenGLWidgets.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtOpenGL.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib Views/Calculator.h -o moc_Calculator.cpp
 
 moc_CalculatorUI.cpp: Views/CalculatorUI.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QPushButton \
@@ -1050,6 +1121,10 @@ moc_CalculatorUI.cpp: Views/CalculatorUI.h \
 		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		Views/qcustomplot.h \
 		/usr/local/lib/QtCore.framework/Headers/qmath.h \
+		/usr/local/lib/QtOpenGL.framework/Headers/QOpenGLFramebufferObject \
+		/usr/local/lib/QtOpenGL.framework/Headers/qopenglframebufferobject.h \
+		/usr/local/lib/QtOpenGL.framework/Headers/QOpenGLPaintDevice \
+		/usr/local/lib/QtOpenGL.framework/Headers/qopenglpaintdevice.h \
 		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
 		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
 		/usr/local/lib/QtGui.framework/Headers/QResizeEvent \
@@ -1057,6 +1132,7 @@ moc_CalculatorUI.cpp: Views/CalculatorUI.h \
 		/usr/local/lib/QtCore.framework/Headers/QDebug \
 		/usr/local/lib/QtCore.framework/Headers/qdebug.h \
 		Controllers/CalculatorController.h \
+		Controllers/Controller.h \
 		Models/Model.h \
 		Models/calc.h \
 		Controllers/Validate/Validate.h \
@@ -1064,9 +1140,10 @@ moc_CalculatorUI.cpp: Views/CalculatorUI.h \
 		/usr/local/lib/QtCore.framework/Headers/qstring.h \
 		moc_predefs.h \
 		/usr/local/share/qt/libexec/moc
-	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib Views/CalculatorUI.h -o moc_CalculatorUI.cpp
+	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtCharts.framework/Headers -I/usr/local/lib/QtOpenGLWidgets.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtOpenGL.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib Views/CalculatorUI.h -o moc_CalculatorUI.cpp
 
-moc_mainwindow.cpp: Views/mainwindow.h \
+moc_GraphUI.cpp: Views/GraphUI.h \
+		Views/mainwindow.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QWidget \
 		/usr/local/lib/QtWidgets.framework/Headers/qwidget.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QTabWidget \
@@ -1083,19 +1160,34 @@ moc_mainwindow.cpp: Views/mainwindow.h \
 		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		Views/qcustomplot.h \
 		/usr/local/lib/QtCore.framework/Headers/qmath.h \
+		/usr/local/lib/QtOpenGL.framework/Headers/QOpenGLFramebufferObject \
+		/usr/local/lib/QtOpenGL.framework/Headers/qopenglframebufferobject.h \
+		/usr/local/lib/QtOpenGL.framework/Headers/QOpenGLPaintDevice \
+		/usr/local/lib/QtOpenGL.framework/Headers/qopenglpaintdevice.h \
 		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
 		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
+		Controllers/GraphController.h \
+		Controllers/Controller.h \
+		Models/Model.h \
+		Models/calc.h \
+		Controllers/Validate/Validate.h \
+		/usr/local/lib/QtCore.framework/Headers/QString \
+		/usr/local/lib/QtCore.framework/Headers/qstring.h \
 		moc_predefs.h \
 		/usr/local/share/qt/libexec/moc
-	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib Views/mainwindow.h -o moc_mainwindow.cpp
+	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtCharts.framework/Headers -I/usr/local/lib/QtOpenGLWidgets.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtOpenGL.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib Views/GraphUI.h -o moc_GraphUI.cpp
 
 moc_qcustomplot.cpp: Views/qcustomplot.h \
 		/usr/local/lib/QtCore.framework/Headers/qmath.h \
+		/usr/local/lib/QtOpenGL.framework/Headers/QOpenGLFramebufferObject \
+		/usr/local/lib/QtOpenGL.framework/Headers/qopenglframebufferobject.h \
+		/usr/local/lib/QtOpenGL.framework/Headers/QOpenGLPaintDevice \
+		/usr/local/lib/QtOpenGL.framework/Headers/qopenglpaintdevice.h \
 		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
 		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
 		moc_predefs.h \
 		/usr/local/share/qt/libexec/moc
-	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib Views/qcustomplot.h -o moc_qcustomplot.cpp
+	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/yesenias/Projects/C7_SmartCalc_v1.0-0/src/SmartCalc -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtCharts.framework/Headers -I/usr/local/lib/QtOpenGLWidgets.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtOpenGL.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib Views/qcustomplot.h -o moc_qcustomplot.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1167,6 +1259,11 @@ ResultValidate.o: Controllers/Validate/ResultValidate.cpp Controllers/Validate/V
 		/usr/local/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ResultValidate.o Controllers/Validate/ResultValidate.cpp
 
+UnaryOperatorValidate.o: Controllers/Validate/UnaryOperatorValidate.cpp Controllers/Validate/Validate.h \
+		/usr/local/lib/QtCore.framework/Headers/QString \
+		/usr/local/lib/QtCore.framework/Headers/qstring.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o UnaryOperatorValidate.o Controllers/Validate/UnaryOperatorValidate.cpp
+
 Validator.o: Controllers/Validate/Validator.cpp Controllers/Validate/Validate.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
 		/usr/local/lib/QtCore.framework/Headers/qstring.h
@@ -1188,6 +1285,10 @@ credit_calc.o: Models/credit_calc.c Models/calc.h
 
 qcustomplot.o: Views/qcustomplot.cpp Views/qcustomplot.h \
 		/usr/local/lib/QtCore.framework/Headers/qmath.h \
+		/usr/local/lib/QtOpenGL.framework/Headers/QOpenGLFramebufferObject \
+		/usr/local/lib/QtOpenGL.framework/Headers/qopenglframebufferobject.h \
+		/usr/local/lib/QtOpenGL.framework/Headers/QOpenGLPaintDevice \
+		/usr/local/lib/QtOpenGL.framework/Headers/qopenglpaintdevice.h \
 		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
 		/usr/local/lib/QtCore.framework/Headers/QtNumeric
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qcustomplot.o Views/qcustomplot.cpp
@@ -1213,6 +1314,10 @@ main.o: main.cpp /usr/local/lib/QtWidgets.framework/Headers/QApplication \
 		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		Views/qcustomplot.h \
 		/usr/local/lib/QtCore.framework/Headers/qmath.h \
+		/usr/local/lib/QtOpenGL.framework/Headers/QOpenGLFramebufferObject \
+		/usr/local/lib/QtOpenGL.framework/Headers/qopenglframebufferobject.h \
+		/usr/local/lib/QtOpenGL.framework/Headers/QOpenGLPaintDevice \
+		/usr/local/lib/QtOpenGL.framework/Headers/qopenglpaintdevice.h \
 		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
 		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
 		/usr/local/lib/QtGui.framework/Headers/QResizeEvent \
@@ -1220,14 +1325,72 @@ main.o: main.cpp /usr/local/lib/QtWidgets.framework/Headers/QApplication \
 		/usr/local/lib/QtCore.framework/Headers/QDebug \
 		/usr/local/lib/QtCore.framework/Headers/qdebug.h \
 		Controllers/CalculatorController.h \
+		Controllers/Controller.h \
 		Models/Model.h \
 		Models/calc.h \
 		Controllers/Validate/Validate.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
 		/usr/local/lib/QtCore.framework/Headers/qstring.h \
 		Views/CreditCalculatorUI.h \
+		/usr/local/lib/QtCharts.framework/Headers/QtCharts \
+		/usr/local/lib/QtCharts.framework/Headers/qchartglobal.h \
+		/usr/local/lib/QtCharts.framework/Headers/qabstractaxis.h \
+		/usr/local/lib/QtCharts.framework/Headers/qabstractbarseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qabstractseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qarealegendmarker.h \
+		/usr/local/lib/QtCharts.framework/Headers/qareaseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qbarcategoryaxis.h \
+		/usr/local/lib/QtCharts.framework/Headers/qbarlegendmarker.h \
+		/usr/local/lib/QtCharts.framework/Headers/qbarmodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qbarseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qbarset.h \
+		/usr/local/lib/QtCharts.framework/Headers/qboxplotlegendmarker.h \
+		/usr/local/lib/QtCharts.framework/Headers/qboxplotmodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qboxplotseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qboxset.h \
+		/usr/local/lib/QtCharts.framework/Headers/qcandlesticklegendmarker.h \
+		/usr/local/lib/QtCharts.framework/Headers/qcandlestickmodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qcandlestickseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qcandlestickset.h \
+		/usr/local/lib/QtCharts.framework/Headers/qcategoryaxis.h \
+		/usr/local/lib/QtCharts.framework/Headers/qchart.h \
+		/usr/local/lib/QtCharts.framework/Headers/qchartview.h \
+		/usr/local/lib/QtCharts.framework/Headers/qcoloraxis.h \
+		/usr/local/lib/QtCharts.framework/Headers/qdatetimeaxis.h \
+		/usr/local/lib/QtCharts.framework/Headers/qhbarmodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qhboxplotmodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qhcandlestickmodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qhorizontalbarseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qhorizontalpercentbarseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qhorizontalstackedbarseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qhpiemodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qhxymodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qlegend.h \
+		/usr/local/lib/QtCharts.framework/Headers/qlegendmarker.h \
+		/usr/local/lib/QtCharts.framework/Headers/qlineseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qlogvalueaxis.h \
+		/usr/local/lib/QtCharts.framework/Headers/qpercentbarseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qpielegendmarker.h \
+		/usr/local/lib/QtCharts.framework/Headers/qpiemodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qpieseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qpieslice.h \
+		/usr/local/lib/QtCharts.framework/Headers/qpolarchart.h \
+		/usr/local/lib/QtCharts.framework/Headers/qscatterseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qsplineseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qstackedbarseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qvalueaxis.h \
+		/usr/local/lib/QtCharts.framework/Headers/qvbarmodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qvboxplotmodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qvcandlestickmodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qvpiemodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qvxymodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qxylegendmarker.h \
+		/usr/local/lib/QtCharts.framework/Headers/qxymodelmapper.h \
+		/usr/local/lib/QtCharts.framework/Headers/qxyseries.h \
+		/usr/local/lib/QtCharts.framework/Headers/qtchartsversion.h \
 		Views/DepositCalculatorUI.h \
 		Views/GraphUI.h \
+		Controllers/GraphController.h \
 		/usr/local/lib/QtCore.framework/Headers/QObject \
 		/usr/local/lib/QtCore.framework/Headers/qobject.h \
 		Views/MacUI.h \
@@ -1240,8 +1403,8 @@ moc_Calculator.o: moc_Calculator.cpp
 moc_CalculatorUI.o: moc_CalculatorUI.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_CalculatorUI.o moc_CalculatorUI.cpp
 
-moc_mainwindow.o: moc_mainwindow.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+moc_GraphUI.o: moc_GraphUI.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_GraphUI.o moc_GraphUI.cpp
 
 moc_qcustomplot.o: moc_qcustomplot.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_qcustomplot.o moc_qcustomplot.cpp
