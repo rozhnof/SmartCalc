@@ -12,37 +12,80 @@ class MacUI : public IPlatformUI
 {
 
 private:
-    CalcWidgets *_calcWidgets;
+
 
 
 public:
 
-    void SetupUI(CalcWidgets *calcWidgets) override {
-        _calcWidgets = calcWidgets;
-
-        SetCalcStyle();
-        SetCalcGeometry();
+    void SetupUI(CalcWidgets *widgets) override {
+        SetStyle(widgets);
+        SetGeometry(widgets);
     }
 
-    void SetupUI(CreditCalcWidgets *creditCalcWidgets) override {
+    void SetupUI(CreditCalcWidgets *widgets) override {
+        SetStyle(widgets);
     }
 
-    void SetupUI(DepositCalcWidgets *depositCalcWidgets) override {
+    void SetupUI(DepositCalcWidgets *widgets) override {
     }
 
-    void SetupUI(GraphWidgets *graphWidgets) override {
+    void SetupUI(GraphWidgets *widgets) override {
 
     }
 
 
 private:
 
+    void SetStyle(CreditCalcWidgets *creditCalcWidgets) {
+        creditCalcWidgets->creditCalcWindow->setStyleSheet(
+                    "QMainWindow, QChartView {"
+                      " background-color: rgb(36, 36, 39);"
+                      "}"
+                      "QPushButton {"
+                      " background-color: rgb(217, 217, 217);"
+                      " color: rgb(37, 37, 37);"
+                      " border-radius: 10;"
+                      " font: 16px;"
+                      "}"
+                      "QComboBox {"
+                      " background-color: rgba(0, 0, 0, 0);"
+                      " color: rgb(37, 37, 37);"
+                      " font: 16px;"
+                      "}"
+                      "QTextEdit {"
+                      " background-color: rgb(217, 217, 217);"
+                      " border-radius: 10;"
+                      " font: 18px;"
+                      " color: rgb(37, 37, 37);"
+                      "}"
+                      "QPushButton:pressed {"
+                      " background-color: rgb(171, 171, 171);"
+                      "}"
+                      "QComboBox::drop-down {"
+                      "    width: 0px; "
+                      "    height: 0px; "
+                      "    border: 0px; "
+                      "}"
+                      "QComboBox QAbstractItemView {"
+                      " color: rgb(37, 37, 37);"
+                      " background-color: rgb(217, 217, 217);"
+                      " padding: 10px;"
+                      "}"
+                      "QLabel, QLineEdit { "
+                      " background-color: rgba(217, 217, 217, 0);"
+                      " font: 16px; "
+                      " color: rgb(37, 37, 37);"
+                      "}");
 
-    void SetCalcStyle() {
-        _calcWidgets->Input->setAlignment(Qt::AlignRight | Qt::AlignCenter);
+        creditCalcWidgets->boxTitle[CreditSum]->setStyleSheet("color: rgb(217, 217, 217);");
+        creditCalcWidgets->boxTitle[CreditTerm]->setStyleSheet("color: rgb(217, 217, 217);");
+        creditCalcWidgets->boxTitle[InterestRate]->setStyleSheet("color: rgb(217, 217, 217);");
+    }
 
-        _calcWidgets->calcWindow->setStyleSheet("QLabel#input { "
-                                              "     background-color: rgb(25, 25, 25); "
+    void SetStyle(CalcWidgets *widgets) {
+        widgets->Input->setAlignment(Qt::AlignRight | Qt::AlignCenter);
+        widgets->calcWindow->setStyleSheet("QLabel#input { "
+                                              "     background-color: rgb(36, 36, 39); "
                                               "     font-size: 26px;"
                                               "}"
                                               "QPushButton { "
@@ -71,49 +114,49 @@ private:
                                               "}");
     }
 
-    void SetCalcGeometry() {
-        _calcWidgets->calcWindow->setFixedSize(420, 350);
-        Layout *calcLayout = new Layout(0, 0, _calcWidgets->calcWindow->width(), _calcWidgets->calcWindow->height(), 7, 7, 0, 0);
+    void SetGeometry(CalcWidgets *widgets) {
+        widgets->calcWindow->setFixedSize(420, 350);
+        Layout *calcLayout = new Layout(0, 0, widgets->calcWindow->width(), widgets->calcWindow->height(), 7, 7, 0, 0);
 
-        calcLayout->AddWidget(_calcWidgets->Input, 7, 2);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonX]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonOpenBracket]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonCloseBracket]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonAC]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonC]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonUnaryOperator]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonDiv]);
+        calcLayout->AddWidget(widgets->Input, 7, 2);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonX]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonOpenBracket]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonCloseBracket]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonAC]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonC]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonUnaryOperator]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonDiv]);
 
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonMod]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonPow]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonFactorial]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[Button7]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[Button8]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[Button9]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonMul]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonMod]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonPow]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonFactorial]);
+        calcLayout->AddWidget(widgets->calcButtons[Button7]);
+        calcLayout->AddWidget(widgets->calcButtons[Button8]);
+        calcLayout->AddWidget(widgets->calcButtons[Button9]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonMul]);
 
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonLog]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonLn]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonSqrt]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[Button4]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[Button5]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[Button6]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonSub]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonLog]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonLn]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonSqrt]);
+        calcLayout->AddWidget(widgets->calcButtons[Button4]);
+        calcLayout->AddWidget(widgets->calcButtons[Button5]);
+        calcLayout->AddWidget(widgets->calcButtons[Button6]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonSub]);
 
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonAsin]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonAcos]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonAtan]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[Button1]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[Button2]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[Button3]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonSum]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonAsin]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonAcos]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonAtan]);
+        calcLayout->AddWidget(widgets->calcButtons[Button1]);
+        calcLayout->AddWidget(widgets->calcButtons[Button2]);
+        calcLayout->AddWidget(widgets->calcButtons[Button3]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonSum]);
 
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonSin]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonCos]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonTan]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[Button0], 2);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonDot]);
-        calcLayout->AddWidget(_calcWidgets->calcButtons[ButtonResult]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonSin]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonCos]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonTan]);
+        calcLayout->AddWidget(widgets->calcButtons[Button0], 2);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonDot]);
+        calcLayout->AddWidget(widgets->calcButtons[ButtonResult]);
 
         delete calcLayout;
     }

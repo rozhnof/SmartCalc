@@ -1765,6 +1765,9 @@ border: 1px solid rgb(0, 32, 255);
         <height>71</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
      </widget>
      <zorder>graphicsView</zorder>
      <zorder>RangeMax</zorder>
