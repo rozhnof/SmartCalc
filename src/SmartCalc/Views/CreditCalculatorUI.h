@@ -3,6 +3,7 @@
 
 #include "mainwindow.h"
 #include "IPlatformUI.h"
+#include "../Controllers/CreditCalcController.h"
 
 #include <QtCharts>
 #include <QColor>
@@ -67,6 +68,7 @@ class CreditCalculatorUI : public MainWindow
 {
 public:
     CreditCalcWidgets *widgets;
+    CreditCalcController *controller;
 
     QComboBox *montlyPaymentList;
     QComboBox *creditTermList;
@@ -82,18 +84,21 @@ public:
 
     CreditCalculatorUI() : MainWindow() {
         this->setWindowTitle("Credit Calculator");
+        controller = new CreditCalcController;
+
         widgets = new CreditCalcWidgets;
         widgets->creditCalcWindow = this;
 
         CreateObjects();
         SetGeometry();
         SetOptions();
+        AnnuityPayment();
     }
 
     void CreateObjects() {
-        widgets->box.insert(make_pair(CreditSum, new QTextEdit("$", this)));
+        widgets->box.insert(make_pair(CreditSum, new QTextEdit(this)));
         widgets->box.insert(make_pair(CreditTerm, new QTextEdit(this)));
-        widgets->box.insert(make_pair(InterestRate, new QTextEdit("%", this)));
+        widgets->box.insert(make_pair(InterestRate, new QTextEdit(this)));
         widgets->box.insert(make_pair(TotalPayment, new QTextEdit(this)));
         widgets->box.insert(make_pair(Overpayment, new QTextEdit(this)));
         widgets->box.insert(make_pair(MonthlyPayment, new QTextEdit(this)));
@@ -121,7 +126,7 @@ public:
     }
 
     void SetGeometry() {
-        this->setFixedSize(1200, 275);
+        this->setFixedSize(1200, 800);
         Layout *creditCalcLayout = new Layout(15, 50, this->width() - 15, 50 + 175, 3, 3, 15, 20);
 
         creditCalcLayout->AddWidget(widgets->box[CreditSum]);
@@ -165,9 +170,6 @@ public:
         widgets->boxText[TotalPayment]->setAlignment(Qt::AlignRight);
         widgets->boxText[Overpayment]->setAlignment(Qt::AlignRight);
 
-        widgets->box[CreditSum]->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
-        widgets->box[InterestRate]->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
-
         widgets->box[CreditSum]->setReadOnly(true);
         widgets->box[CreditTerm]->setReadOnly(true);
         widgets->box[InterestRate]->setReadOnly(true);
@@ -180,71 +182,30 @@ public:
         creditTermList->addItem("Days");
     }
 
-    void AnnuityLoan() {
-        double creditSum = widgets->boxText[CreditSum]->text().toDouble();
-        double interestRate = widgets->boxText[InterestRate]->text().toDouble();
-        double creditTerm = widgets->boxText[CreditTerm]->text().toDouble();
-
-        double monthlyInterestRate = interestRate / 12 / 100;
-
-        double totalPayment = 0;
-        double overpayment = 0;
-        double monthlyPayment = 0;
-
-        widgets->bodyPayments.clear();
-        widgets->percentPayments.clear();
-        montlyPaymentList->clear();
-
-        monthlyPayment = creditSum * monthlyInterestRate * pow(1 + monthlyInterestRate, creditTerm) / (pow(1 + monthlyInterestRate, creditTerm) - 1);
-        totalPayment = monthlyPayment * creditTerm;
-        overpayment = totalPayment - creditSum;
-
-        for (int i = 0; i < creditTerm; i++) {
-            double monthlyPercentPayment = creditSum * monthlyInterestRate;
-            double monthlyBodyPayment = monthlyPayment - monthlyPercentPayment;
-            creditSum -= monthlyPayment;
-
-            widgets->bodyPayments.append(monthlyBodyPayment);
-            widgets->percentPayments.append(monthlyPercentPayment);
-        }
-
-        montlyPaymentList->addItem(QString::number(monthlyPayment));
-        widgets->boxText[TotalPayment]->setText(QString::number(totalPayment));
-        widgets->boxText[Overpayment]->setText(QString::number(overpayment));
+    void SetInput() {
+        controller->SetCreditSum(widgets->boxText[CreditSum]->text().toDouble());
+        controller->SetCreditTerm(widgets->boxText[CreditTerm]->text().toDouble());
+        controller->SetInterestRate(widgets->boxText[InterestRate]->text().toDouble());
     }
 
-    void DifferentiatedLoan() {
-        double creditSum = widgets->boxText[CreditSum]->text().toDouble();
-        double interestRate = widgets->boxText[InterestRate]->text().toDouble();
-        double creditTerm = widgets->boxText[CreditTerm]->text().toDouble();
-        double monthlyInterestRate = interestRate / 12 / 100;
+    void GetOutput() {
+        ClearOutput();
 
-        double totalPayment = 0;
-        double overpayment = 0;
-        double monthlyPayment = 0;
-        double monthlyBodyPayment = creditSum / creditTerm;
+        for(auto var : controller->GetMonthlyPayments()) {
+            montlyPaymentList->addItem(QString::number(var));
+        }
 
+        widgets->boxText[TotalPayment]->setText(QString::number(controller->GetTotalPayment()));
+        widgets->boxText[Overpayment]->setText(QString::number(controller->GetOverpayment()));
+
+        widgets->bodyPayments.append(controller->GetMonthlyBodyPayments());
+        widgets->percentPayments.append(controller->GetMonthlyPercentPayments());
+    }
+
+    void ClearOutput() {
+        montlyPaymentList->clear();
         widgets->bodyPayments.clear();
         widgets->percentPayments.clear();
-        montlyPaymentList->clear();
-
-        double paid = creditSum;
-        for (int i = 1; i <= creditTerm; i++) {
-            double monthlyPercentPayment = (creditSum - (monthlyBodyPayment * (i - 1))) * monthlyInterestRate;
-            monthlyPayment = monthlyBodyPayment + monthlyPercentPayment;
-
-            widgets->bodyPayments.append(monthlyBodyPayment);
-            widgets->percentPayments.append(monthlyPercentPayment);
-
-            totalPayment += monthlyPayment;
-
-            montlyPaymentList->addItem(QString::number(monthlyPayment));
-
-        }
-        overpayment = totalPayment - creditSum;
-
-        widgets->boxText[TotalPayment]->setText(QString::number(totalPayment));
-        widgets->boxText[Overpayment]->setText(QString::number(overpayment));
     }
 
 
@@ -255,17 +216,22 @@ public:
 
 private slots:
     void AnnuityPayment() {
-        AnnuityLoan();
+        SetInput();
+        controller->AnnuityLoan();
+        GetOutput();
+
         DrawChartBars();
     }
 
     void DifferentiatedPayment() {
-        DifferentiatedLoan();
+        SetInput();
+        controller->DifferentiatedLoan();
+        GetOutput();
+
         DrawChartBars();
     }
 
     void DrawChartBars() {
-        this->setFixedSize(1200, 800);
         chartView = new ChartView(widgets);
         chartView->setParent(this);
         chartView->setGeometry(0, 250, 1200, 550);
