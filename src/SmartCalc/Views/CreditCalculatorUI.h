@@ -4,65 +4,10 @@
 #include "mainwindow.h"
 #include "IPlatformUI.h"
 #include "../Controllers/CreditCalcController.h"
-
-#include <QtCharts>
-#include <QColor>
 #include <cmath>
 
 using namespace std;
 
-
-class ChartView : public QChartView {
-
-    QStackedBarSeries *series;
-    QBarSet *bodyBar;
-    QBarSet *percentBar;
-
-public:
-    ChartView(CreditCalcWidgets *widgets, QChart* chart = new QChart) : QChartView(chart) {
-        this->setRenderHint(QPainter::Antialiasing);
-        chart->setAnimationOptions(QChart::SeriesAnimations);
-        chart->setTheme(QChart::ChartThemeBlueNcs);
-        chart->legend()->setVisible(true);
-        chart->legend()->setAlignment(Qt::AlignBottom);
-
-        series = new QStackedBarSeries();
-        series->setBarWidth(0.75);
-
-        bodyBar = new QBarSet("Body");
-        percentBar = new QBarSet("Percent");
-
-        bodyBar->setColor(QColor(105, 124, 194));
-        percentBar->setColor(QColor(132, 157, 245));
-
-        bodyBar->setBorderColor(QColor(27, 32, 50));
-        percentBar->setBorderColor(QColor(27, 32, 50));
-
-        bodyBar->append(widgets->bodyPayments);
-        percentBar->append(widgets->percentPayments);
-
-        series->append(bodyBar);
-        series->append(percentBar);
-
-        chart->addSeries(series);
-
-        QValueAxis *axisY = new QValueAxis();
-        axisY->setLinePenColor(QColor(27, 32, 50));
-        axisY->setGridLineColor(QColor(217, 217, 217));
-        axisY->setLabelsColor(QColor(217, 217, 217));
-        chart->addAxis(axisY, Qt::AlignLeft);
-        series->attachAxis(axisY);
-
-        chart->setBackgroundVisible(false);
-    }
-
-    ~ChartView() {
-        delete series;
-        delete bodyBar;
-        delete percentBar;
-
-    }
-};
 
 class CreditCalculatorUI : public MainWindow
 {
@@ -75,24 +20,19 @@ public:
     QPushButton *annuityPaymentButton;
     QPushButton *differentiatedPaymentButton;
 
-    ChartView* chartView;
-
-    enum PaymentPart {
-        Body,
-        Percent
-    };
-
     CreditCalculatorUI() : MainWindow() {
         this->setWindowTitle("Credit Calculator");
-        controller = new CreditCalcController;
 
+        controller = new CreditCalcController;
         widgets = new CreditCalcWidgets;
+
+        widgets->chartView = new ChartView(this);
         widgets->creditCalcWindow = this;
 
         CreateObjects();
         SetGeometry();
         SetOptions();
-        AnnuityPayment();
+        DifferentiatedPayment();
     }
 
     void CreateObjects() {
@@ -110,9 +50,9 @@ public:
         widgets->boxTitle.insert(make_pair(Overpayment, new QLabel("Overpayment", this)));
         widgets->boxTitle.insert(make_pair(MonthlyPayment, new QLabel("Montly Payments", this)));
 
-        widgets->boxText.insert(make_pair(CreditSum, new QLineEdit("10000", this)));
-        widgets->boxText.insert(make_pair(CreditTerm, new QLineEdit("12", this)));
-        widgets->boxText.insert(make_pair(InterestRate, new QLineEdit("10", this)));
+        widgets->boxText.insert(make_pair(CreditSum, NewQLineEdit("1000", this, "inputCreditSum")));
+        widgets->boxText.insert(make_pair(CreditTerm, NewQLineEdit("12", this, "inputCreditTerm")));
+        widgets->boxText.insert(make_pair(InterestRate, NewQLineEdit("10", this, "inputInterestRate")));
         widgets->boxText.insert(make_pair(TotalPayment, new QLineEdit(this)));
         widgets->boxText.insert(make_pair(Overpayment, new QLineEdit(this)));
 
@@ -127,6 +67,7 @@ public:
 
     void SetGeometry() {
         this->setFixedSize(1200, 800);
+        widgets->chartView->setGeometry(0, 250, 1200, 550);
         Layout *creditCalcLayout = new Layout(15, 50, this->width() - 15, 50 + 175, 3, 3, 15, 20);
 
         creditCalcLayout->AddWidget(widgets->box[CreditSum]);
@@ -232,10 +173,8 @@ private slots:
     }
 
     void DrawChartBars() {
-        chartView = new ChartView(widgets);
-        chartView->setParent(this);
-        chartView->setGeometry(0, 250, 1200, 550);
-        chartView->show();
+        widgets->chartView->SetData(widgets->bodyPayments, widgets->percentPayments);
+        widgets->chartView->show();
 
         if (montlyPaymentList->count() == 1) {
             montlyPaymentList->setDisabled(true);

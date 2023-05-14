@@ -31,8 +31,7 @@ public:
         ClearData();
 
         double monthlyInterestRate = interestRate / 12 / 100;
-        double tmp = pow(1 + monthlyInterestRate, creditTerm);
-        double monthlyPayment = creditSum * monthlyInterestRate * tmp / (tmp - 1);
+        double monthlyPayment = creditSum * monthlyInterestRate * pow(1 + monthlyInterestRate, creditTerm) / (pow(1 + monthlyInterestRate, creditTerm) - 1);
 
         monthlyPayments.append(monthlyPayment);
         totalPayment = monthlyPayment * creditTerm;
@@ -41,7 +40,7 @@ public:
         for (int i = 0; i < creditTerm; i++) {
             monthlyPercentPayments.append(creditSum * monthlyInterestRate);
             monthlyBodyPayments.append(monthlyPayment - monthlyPercentPayments[i]);
-            creditSum -= monthlyPayment;
+            creditSum -= monthlyBodyPayments[i];
         }
     }
 

@@ -1,4 +1,4 @@
-#ifndef MACUI_H
+src/SmartCalc/Views/MacUI.h#ifndef MACUI_H
 #define MACUI_H
 
 #include "IPlatformUI.h"
@@ -36,55 +36,9 @@ public:
 
 private:
 
-    void SetStyle(CreditCalcWidgets *creditCalcWidgets) {
-        creditCalcWidgets->creditCalcWindow->setStyleSheet(
-                    "QMainWindow, QChartView {"
-                      " background-color: rgb(36, 36, 39);"
-                      "}"
-                      "QPushButton {"
-                      " background-color: rgb(217, 217, 217);"
-                      " color: rgb(37, 37, 37);"
-                      " border-radius: 10;"
-                      " font: 16px;"
-                      "}"
-                      "QComboBox {"
-                      " background-color: rgba(0, 0, 0, 0);"
-                      " color: rgb(37, 37, 37);"
-                      " font: 16px;"
-                      "}"
-                      "QTextEdit {"
-                      " background-color: rgb(217, 217, 217);"
-                      " border-radius: 10;"
-                      " font: 18px;"
-                      " color: rgb(37, 37, 37);"
-                      "}"
-                      "QPushButton:pressed {"
-                      " background-color: rgb(171, 171, 171);"
-                      "}"
-                      "QComboBox::drop-down {"
-                      "    width: 0px; "
-                      "    height: 0px; "
-                      "    border: 0px; "
-                      "}"
-                      "QComboBox QAbstractItemView {"
-                      " color: rgb(37, 37, 37);"
-                      " background-color: rgb(217, 217, 217);"
-                      " padding: 10px;"
-                      "}"
-                      "QLabel, QLineEdit { "
-                      " background-color: rgba(217, 217, 217, 0);"
-                      " font: 16px; "
-                      " color: rgb(37, 37, 37);"
-                      "}");
-
-        creditCalcWidgets->boxTitle[CreditSum]->setStyleSheet("color: rgb(217, 217, 217);");
-        creditCalcWidgets->boxTitle[CreditTerm]->setStyleSheet("color: rgb(217, 217, 217);");
-        creditCalcWidgets->boxTitle[InterestRate]->setStyleSheet("color: rgb(217, 217, 217);");
-    }
-
     void SetStyle(CalcWidgets *widgets) {
         widgets->Input->setAlignment(Qt::AlignRight | Qt::AlignCenter);
-        widgets->calcWindow->setStyleSheet("QLabel#input { "
+        widgets->calcWindow->setStyleSheet(   "QLabel#input { "
                                               "     background-color: rgb(36, 36, 39); "
                                               "     font-size: 26px;"
                                               "}"
@@ -113,6 +67,60 @@ private:
                                               "     background-color: rgb(191, 129, 46); "
                                               "}");
     }
+
+    void SetStyle(CreditCalcWidgets *widgets) {
+        widgets->creditCalcWindow->setStyleSheet( "QMainWindow, QChartView {"
+                                                  " background-color: rgb(36, 36, 39);"
+                                                  "}"
+                                                  "QPushButton {"
+                                                  " background-color: rgb(217, 217, 217);"
+                                                  " color: rgb(37, 37, 37);"
+                                                  " border-radius: 10;"
+                                                  " font: 16px;"
+                                                  "}"
+                                                  "QComboBox {"
+                                                  " background-color: rgba(0, 0, 0, 0);"
+                                                  " color: rgb(37, 37, 37);"
+                                                  " font: 16px;"
+                                                  "}"
+                                                  "QTextEdit {"
+                                                  " background-color: rgb(217, 217, 217);"
+                                                  " border-radius: 10;"
+                                                  " font: 18px;"
+                                                  " color: rgb(37, 37, 37);"
+                                                  "}"
+                                                  "QPushButton:pressed {"
+                                                  " background-color: rgb(171, 171, 171);"
+                                                  "}"
+                                                  "QComboBox::drop-down {"
+                                                  "    width: 0px; "
+                                                  "    height: 0px; "
+                                                  "    border: 0px; "
+                                                  "}"
+                                                  "QComboBox QAbstractItemView {"
+                                                  " color: rgb(37, 37, 37);"
+                                                  " background-color: rgb(217, 217, 217);"
+                                                  " padding: 10px;"
+                                                  "}"
+                                                  "QLabel, QLineEdit { "
+                                                  " background-color: rgba(217, 217, 217, 0);"
+                                                  " font: 16px; "
+                                                  " color: rgb(37, 37, 37);"
+                                                  "}");
+
+        widgets->boxTitle[CreditSum]->setStyleSheet("color: rgb(217, 217, 217);");
+        widgets->boxTitle[CreditTerm]->setStyleSheet("color: rgb(217, 217, 217);");
+        widgets->boxTitle[InterestRate]->setStyleSheet("color: rgb(217, 217, 217);");
+
+        widgets->chartView->SetBarWidth(0.75);
+        widgets->chartView->SetBarColor(QColor(226, 153, 57), QColor(237, 177, 99));
+        widgets->chartView->SetBorderBarColor(QColor(36, 36, 39), QColor(36, 36, 39));
+        widgets->chartView->SetLabelsColor(QColor(217, 217, 217));
+        widgets->chartView->SetLinePenColor(QColor(217, 217, 217));
+        widgets->chartView->SetGridLineColor(QColor(217, 217, 217));
+    }
+
+
 
     void SetGeometry(CalcWidgets *widgets) {
         widgets->calcWindow->setFixedSize(420, 350);
