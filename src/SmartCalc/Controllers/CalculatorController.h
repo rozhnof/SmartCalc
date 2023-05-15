@@ -21,8 +21,6 @@ public:
         model = new CalculatorModel;
     }
 
-
-
     QString GetResult(double x) {
         model->SetInput(_validInput);
         return QString::number(model->Calculate(x));

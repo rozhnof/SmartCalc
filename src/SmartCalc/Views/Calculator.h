@@ -17,8 +17,6 @@
 class Calculator : public QObject
 {
 
-    Q_OBJECT
-
 private:
 
     class MainWindow *_currentTab;
@@ -52,7 +50,6 @@ public:
         _winUi = new WinUI;
         _macUi = new MacUI;
 
-
         SetupPlatform();
 
         _calc->_platform = &_platform;
@@ -62,15 +59,24 @@ public:
 
         _currentTab = _creditCalc;
 
-         AddMenu();
+        AddMenu();
+        Connects();
+    }
 
-        connect(actionCalc, &QAction::triggered, this, &Calculator::SwitchToCalc);
-        connect(actionGraph, &QAction::triggered, this, &Calculator::SwithToGraph);
-        connect(actionCreditCalc, &QAction::triggered, this, &Calculator::SwitchToCreditCalc);
-        connect(actionDepositCalc, &QAction::triggered, this, &Calculator::SwitchToDepositCalc);
-        connect(switchMode, &QAction::triggered, this, &Calculator::SwitchMode);
+    void show() {
+        _currentTab->SetupUI();
+        _currentTab->show();
+    }
 
+private:
 
+    void SetupPlatform()
+    {
+#ifdef __APPLE__
+        _platform = _macUi;
+#else
+        _platform = _winUi;
+#endif
     }
 
     void AddMenu() {
@@ -99,32 +105,19 @@ public:
         switchMode->setText("Switch Mode");
     }
 
-    void SetupPlatform()
-    {
-#ifdef __APPLE__
-        _platform = _macUi;
-#else
-        _platform = _winUi;
-#endif
+    void Connects() {
+        connect(actionCalc, &QAction::triggered, this, &Calculator::SwitchToCalc);
+        connect(actionGraph, &QAction::triggered, this, &Calculator::SwithToGraph);
+        connect(actionCreditCalc, &QAction::triggered, this, &Calculator::SwitchToCreditCalc);
+        connect(actionDepositCalc, &QAction::triggered, this, &Calculator::SwitchToDepositCalc);
+        connect(switchMode, &QAction::triggered, this, &Calculator::SwitchMode);
     }
-
-    void show() {
-        _currentTab->SetupUI();
-        _currentTab->show();
-    }
-
-
-
-private:
 
     void SwitchTo(class MainWindow *newTab) {
         _currentTab->hide();
         _currentTab = newTab;
         show();
     }
-
-
-private slots:
 
     void SwitchToCalc() {
         SwitchTo(_calc);

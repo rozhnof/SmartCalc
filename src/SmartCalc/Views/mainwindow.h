@@ -9,7 +9,6 @@
 #include <unordered_map>
 #include <QMainWindow>
 
-
 class MainWindow : public QMainWindow
 {
 

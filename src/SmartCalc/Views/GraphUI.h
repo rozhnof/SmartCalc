@@ -12,12 +12,14 @@ class GraphUI : public MainWindow
 
 Q_OBJECT
 
-
-public:
+private:
 
     GraphController *controller;
     GraphWidgets *widgets;
     Layout *graphLayout;
+
+
+public:
 
     GraphUI() : MainWindow() {
         this->setWindowTitle("Graph");
@@ -36,13 +38,11 @@ public:
         SetStyle();
         Connects();
 
-        controller->SetInput(widgets->Input->text().toStdString());
+        controller->SetInput(widgets->Input->text());
         DrawGraph();
     }
 
-    void SetupUI() override {
-        (*_platform)->SetupUI(widgets);
-    }
+private:
 
     void SetStyle() {
         setStyleSheet("QWidget { "
@@ -142,39 +142,27 @@ public:
         connect(widgets->values.at(ScopeMax), SIGNAL(valueChanged(double)), SLOT(ChangeScope()));
         connect(widgets->values.at(RangeMin), SIGNAL(valueChanged(double)), SLOT(ChangeRange()));
         connect(widgets->values.at(RangeMax), SIGNAL(valueChanged(double)), SLOT(ChangeRange()));
-        connect(widgets->values.at(Points), SIGNAL(valueChanged(double)), SLOT(ChangePoints()));
-        connect(widgets->values.at(InputX), SIGNAL(valueChanged(double)), SLOT(reDrawLine()));
+        connect(widgets->values.at(Points), SIGNAL(valueChanged(double)), SLOT(DrawGraph()));
+        connect(widgets->values.at(InputX), SIGNAL(valueChanged(double)), SLOT(DrawLine()));
         connect(widgets->drawingLine, SIGNAL(stateChanged(int)), SLOT(DrawingLineState()));
         connect(widgets->Input, SIGNAL(returnPressed()), SLOT(SetInput()));
     }
 
-    void DrawGraph() {
-        int countPoints = widgets->values.at(Points)->value();
-        QVector<double> x(countPoints, 0), y(countPoints, 0);
 
-        CalcValues(x, y, countPoints);
+private slots:
+
+    void DrawGraph() {
+        int countPoints = widgets->values[Points]->value();
+        double xMin = widgets->values[ScopeMin]->value();
+        double xMax = widgets->values[ScopeMax]->value();
+        double yMin = widgets->values[RangeMin]->value();
+        double yMax = widgets->values[RangeMax]->value();
+
+        QVector<double> x = controller->GetCollectionX(countPoints, xMin, xMax);
+        QVector<double> y = controller->GetCollectionY(x, yMin, yMax);
 
         widgets->graph->graph(0)->setData(x, y);
         widgets->graph->replot();
-    }
-
-    void CalcValues(QVector<double> &x, QVector<double> &y, int countPoints) {
-        double xMin = widgets->values.at(ScopeMin)->value();
-        double xMax = widgets->values.at(ScopeMax)->value();
-        double yMin = widgets->values.at(RangeMin)->value();
-        double yMax = widgets->values.at(RangeMax)->value();
-
-        double stepX = (fabs(xMin) + fabs(xMax)) / countPoints;
-
-        for (int i = 0; i < countPoints; i++)
-        {
-            x[i] = xMin + stepX * i;
-            y[i] = controller->GetResult(x[i]);
-
-            if (y[i] > yMax || y[i] < yMin) {
-                y[i] = qQNaN();
-            }
-        }
     }
 
     void DrawLine()
@@ -188,14 +176,10 @@ public:
         widgets->graph->replot();
     }
 
-
-private slots:
-
     void DrawingLineState() {
         bool state = widgets->drawingLine->isTristate();
         widgets->drawingLine->setTristate(!state);
         widgets->graph->graph(1)->setVisible(!state);
-
         widgets->graph->replot();
     }
 
@@ -212,27 +196,13 @@ private slots:
         DrawLine();
     }
 
-    void ChangePoints() {
-        DrawGraph();
-    }
-
     void SetInput() {
-        controller->SetInput(widgets->Input->text().toStdString());
+        controller->SetInput(widgets->Input->text());
         DrawGraph();
     }
 
     void ClearInput() {
         widgets->Input->clear();
-    }
-
-    void reDrawLine()
-    {
-        DrawLine();
-    }
-
-    void reDrawGraph()
-    {
-        DrawGraph();
     }
 };
 
