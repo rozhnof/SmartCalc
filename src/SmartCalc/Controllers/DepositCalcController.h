@@ -1,29 +1,29 @@
-#ifndef CREDITCALCCONTROLLERH
-#define CREDITCALCCONTROLLERH
+#ifndef DEPOSITCALCCONTROLLERH
+#define DEPOSITCALCCONTROLLERH
 
 #include "Controller.h"
-#include "../Models/CreditCalcModel.h"
+#include "../Models/DepositCalcModel.h"
 
 using namespace std;
 
-class CreditCalcController : public Controller {
+class DepositCalcController : public Controller {
 
 private:
 
-    CreditCalcModel *model;
+    DepositCalcModel *model;
 
 public:
 
-    CreditCalcController() {
-        model = new CreditCalcModel;
+    DepositCalcController() {
+        model = new DepositCalcModel;
     }
 
-    void SetCreditSum(double creditSum) {
-        model->creditSum = creditSum;
+    void SetDepositSum(double depositSum) {
+        model->depositSum = depositSum;
     }
 
-    void SetCreditTerm(double creditTerm) {
-        model->creditTerm = creditTerm;
+    void SetDepositTerm(double depositTerm) {
+        model->depositTerm = depositTerm;
     }
 
     void SetInterestRate(double interestRate) {
@@ -59,4 +59,4 @@ public:
     }
 };
 
-#endif // CREDITCALCCONTROLLERH
+#endif // DEPOSITCALCCONTROLLERH

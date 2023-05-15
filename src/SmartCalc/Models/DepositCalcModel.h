@@ -1,15 +1,15 @@
-#ifndef CREDITCALCMODELH
-#define CREDITCALCMODELH
+#ifndef DEPOSITCALCMODELH
+#define DEPOSITCALCMODELH
 
 #include <QVector>
 #include "Model.h"
 
-class CreditCalcModel {
+class DepositCalcModel {
 
 public:
-    double creditSum;
+    double depositSum;
     double interestRate;
-    double creditTerm;
+    double depositTerm;
 
     double totalPayment;
     double overpayment;
@@ -18,7 +18,7 @@ public:
     QVector<double> monthlyBodyPayments;
     QVector<double> monthlyPercentPayments;
 
-    CreditCalcModel() {}
+    DepositCalcModel() {}
 
     void ClearData() {
         monthlyPayments.clear();
@@ -32,33 +32,33 @@ public:
         ClearData();
 
         double monthlyInterestRate = interestRate / 12 / 100;
-        double monthlyPayment = creditSum * monthlyInterestRate * pow(1 + monthlyInterestRate, creditTerm) / (pow(1 + monthlyInterestRate, creditTerm) - 1);
+        double monthlyPayment = depositSum * monthlyInterestRate * pow(1 + monthlyInterestRate, depositTerm) / (pow(1 + monthlyInterestRate, depositTerm) - 1);
 
         monthlyPayments.append(monthlyPayment);
-        totalPayment = monthlyPayment * creditTerm;
-        overpayment = totalPayment - creditSum;
+        totalPayment = monthlyPayment * depositTerm;
+        overpayment = totalPayment - depositSum;
 
-        for (int i = 0; i < creditTerm; i++) {
-            monthlyPercentPayments.append(creditSum * monthlyInterestRate);
+        for (int i = 0; i < depositTerm; i++) {
+            monthlyPercentPayments.append(depositSum * monthlyInterestRate);
             monthlyBodyPayments.append(monthlyPayment - monthlyPercentPayments[i]);
-            creditSum -= monthlyBodyPayments[i];
+            depositSum -= monthlyBodyPayments[i];
         }
     }
 
     void DifferentiatedLoan() {
         ClearData();
 
-        double monthlyBodyPayment = creditSum / creditTerm;
+        double monthlyBodyPayment = depositSum / depositTerm;
         double monthlyInterestRate = interestRate / 12 / 100;
 
-        for (int i = 0; i < creditTerm; i++) {
-            monthlyPercentPayments.append((creditSum - (monthlyBodyPayment * (i))) * monthlyInterestRate);
+        for (int i = 0; i < depositTerm; i++) {
+            monthlyPercentPayments.append((depositSum - (monthlyBodyPayment * (i))) * monthlyInterestRate);
             monthlyPayments.append(monthlyBodyPayment + monthlyPercentPayments[i]);
             monthlyBodyPayments.append(monthlyBodyPayment);
             totalPayment += monthlyPayments[i];
         }
-        overpayment = totalPayment - creditSum;
+        overpayment = totalPayment - depositSum;
     }
 };
 
-#endif // CREDITCALCMODELH
+#endif // DEPOSITCALCMODELH

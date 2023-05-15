@@ -1,4 +1,4 @@
-src/SmartCalc/Views/MacUI.h#ifndef MACUI_H
+#ifndef MACUI_H
 #define MACUI_H
 
 #include "IPlatformUI.h"

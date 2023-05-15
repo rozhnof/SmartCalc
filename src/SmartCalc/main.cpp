@@ -9,9 +9,5 @@ int main(int argc, char *argv[])
     Calculator *calc = new Calculator;
     calc->show();
 
-//    GraphUI *graph = new GraphUI();
-//    graph->show();
-
-
     return a.exec();
 }

@@ -22,8 +22,6 @@ class CalculatorUI : public MainWindow
 {
     Q_OBJECT
 
-
-
 public:
     CalculatorController *controller;
     CalcWidgets *widgets;
@@ -47,47 +45,47 @@ public:
 private:
 
     void CreateObjects() {
-       widgets->Input = NewLabel("0", widgets->calcWindow, "input");
-       widgets->calcButtons.insert(make_pair(Button0, NewPushButton("0", this, "number")));
-       widgets->calcButtons.insert(make_pair(Button1, NewPushButton("1", this, "number")));
-       widgets->calcButtons.insert(make_pair(Button2, NewPushButton("2", this, "number")));
-       widgets->calcButtons.insert(make_pair(Button3, NewPushButton("3", this, "number")));
-       widgets->calcButtons.insert(make_pair(Button4, NewPushButton("4", this, "number")));
-       widgets->calcButtons.insert(make_pair(Button5, NewPushButton("5", this, "number")));
-       widgets->calcButtons.insert(make_pair(Button6, NewPushButton("6", this, "number")));
-       widgets->calcButtons.insert(make_pair(Button7, NewPushButton("7", this, "number")));
-       widgets->calcButtons.insert(make_pair(Button8, NewPushButton("8", this, "number")));
-       widgets->calcButtons.insert(make_pair(Button9, NewPushButton("9", this, "number")));
+       widgets->Input = NewLabel(this, "0", "input");
+       widgets->calcButtons.insert(make_pair(Button0, NewPushButton(this, "0", "number")));
+       widgets->calcButtons.insert(make_pair(Button1, NewPushButton(this, "1", "number")));
+       widgets->calcButtons.insert(make_pair(Button2, NewPushButton(this, "2", "number")));
+       widgets->calcButtons.insert(make_pair(Button3, NewPushButton(this, "3", "number")));
+       widgets->calcButtons.insert(make_pair(Button4, NewPushButton(this, "4", "number")));
+       widgets->calcButtons.insert(make_pair(Button5, NewPushButton(this, "5", "number")));
+       widgets->calcButtons.insert(make_pair(Button6, NewPushButton(this, "6", "number")));
+       widgets->calcButtons.insert(make_pair(Button7, NewPushButton(this, "7", "number")));
+       widgets->calcButtons.insert(make_pair(Button8, NewPushButton(this, "8", "number")));
+       widgets->calcButtons.insert(make_pair(Button9, NewPushButton(this, "9", "number")));
 
-       widgets->calcButtons.insert(make_pair(ButtonSin, NewPushButton("sin", this, "function")));
-       widgets->calcButtons.insert(make_pair(ButtonCos, NewPushButton("cos", this, "function")));
-       widgets->calcButtons.insert(make_pair(ButtonTan, NewPushButton("tan", this, "function")));
-       widgets->calcButtons.insert(make_pair(ButtonAsin, NewPushButton("asin", this, "function")));
-       widgets->calcButtons.insert(make_pair(ButtonAcos, NewPushButton("acos", this, "function")));
-       widgets->calcButtons.insert(make_pair(ButtonAtan, NewPushButton("atan", this, "function")));
-       widgets->calcButtons.insert(make_pair(ButtonLog, NewPushButton("log", this, "function")));
-       widgets->calcButtons.insert(make_pair(ButtonSqrt, NewPushButton("sqrt", this, "function")));
-       widgets->calcButtons.insert(make_pair(ButtonLn, NewPushButton("ln", this, "function")));
+       widgets->calcButtons.insert(make_pair(ButtonSin, NewPushButton(this, "sin", "function")));
+       widgets->calcButtons.insert(make_pair(ButtonCos, NewPushButton(this, "cos", "function")));
+       widgets->calcButtons.insert(make_pair(ButtonTan, NewPushButton(this, "tan", "function")));
+       widgets->calcButtons.insert(make_pair(ButtonAsin, NewPushButton(this, "asin", "function")));
+       widgets->calcButtons.insert(make_pair(ButtonAcos, NewPushButton(this, "acos", "function")));
+       widgets->calcButtons.insert(make_pair(ButtonAtan, NewPushButton(this, "atan", "function")));
+       widgets->calcButtons.insert(make_pair(ButtonLog, NewPushButton(this, "log", "function")));
+       widgets->calcButtons.insert(make_pair(ButtonSqrt, NewPushButton(this, "sqrt", "function")));
+       widgets->calcButtons.insert(make_pair(ButtonLn, NewPushButton(this, "ln", "function")));
 
-       widgets->calcButtons.insert(make_pair(ButtonSum, NewPushButton("+", this, "operator")));
-       widgets->calcButtons.insert(make_pair(ButtonSub, NewPushButton("-", this, "operator")));
-       widgets->calcButtons.insert(make_pair(ButtonMul, NewPushButton("*", this, "operator")));
-       widgets->calcButtons.insert(make_pair(ButtonDiv, NewPushButton("/", this, "operator")));
-       widgets->calcButtons.insert(make_pair(ButtonMod, NewPushButton("mod", this, "mod")));
-       widgets->calcButtons.insert(make_pair(ButtonPow, NewPushButton("^", this, "pow")));
+       widgets->calcButtons.insert(make_pair(ButtonSum, NewPushButton(this, "+", "operator")));
+       widgets->calcButtons.insert(make_pair(ButtonSub, NewPushButton(this, "-", "operator")));
+       widgets->calcButtons.insert(make_pair(ButtonMul, NewPushButton(this, "*", "operator")));
+       widgets->calcButtons.insert(make_pair(ButtonDiv, NewPushButton(this, "/", "operator")));
+       widgets->calcButtons.insert(make_pair(ButtonMod, NewPushButton(this, "mod", "mod")));
+       widgets->calcButtons.insert(make_pair(ButtonPow, NewPushButton(this, "^", "pow")));
 
-       widgets->calcButtons.insert(make_pair(ButtonX, NewPushButton("x", this, "x")));
-       widgets->calcButtons.insert(make_pair(ButtonDot, NewPushButton(".", this, "dot")));
-       widgets->calcButtons.insert(make_pair(ButtonEXP, NewPushButton("EXP", this, "exp")));
+       widgets->calcButtons.insert(make_pair(ButtonX, NewPushButton(this, "x", "x")));
+       widgets->calcButtons.insert(make_pair(ButtonDot, NewPushButton(this, ".", "dot")));
+       widgets->calcButtons.insert(make_pair(ButtonEXP, NewPushButton(this, "EXP", "exp")));
 
-       widgets->calcButtons.insert(make_pair(ButtonFactorial, NewPushButton("!", this, "factorial")));
-       widgets->calcButtons.insert(make_pair(ButtonOpenBracket, NewPushButton("(", this, "bracket")));
-       widgets->calcButtons.insert(make_pair(ButtonCloseBracket, NewPushButton(")", this, "bracket")));
-       widgets->calcButtons.insert(make_pair(ButtonUnaryOperator, NewPushButton("+/-", this, "unaryOperator")));
+       widgets->calcButtons.insert(make_pair(ButtonFactorial, NewPushButton(this, "!", "factorial")));
+       widgets->calcButtons.insert(make_pair(ButtonOpenBracket, NewPushButton(this, "(", "bracket")));
+       widgets->calcButtons.insert(make_pair(ButtonCloseBracket, NewPushButton(this, ")", "bracket")));
+       widgets->calcButtons.insert(make_pair(ButtonUnaryOperator, NewPushButton(this, "+/-", "unaryOperator")));
 
-       widgets->calcButtons.insert(make_pair(ButtonC, NewPushButton("C", this, "clear")));
-       widgets->calcButtons.insert(make_pair(ButtonAC, NewPushButton("AC", this, "clear")));
-       widgets->calcButtons.insert(make_pair(ButtonResult, NewPushButton("=", this, "equal")));
+       widgets->calcButtons.insert(make_pair(ButtonC, NewPushButton(this, "C", "clear")));
+       widgets->calcButtons.insert(make_pair(ButtonAC, NewPushButton(this, "AC", "clear")));
+       widgets->calcButtons.insert(make_pair(ButtonResult, NewPushButton(this, "=", "equal")));
     }
 
     void Connects() {

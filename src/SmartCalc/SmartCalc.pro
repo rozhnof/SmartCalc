@@ -13,7 +13,6 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Controllers/Controller.cpp \
     Controllers/Validate/CloseBracketValidate.cpp \
     Controllers/Validate/DotValidate.cpp \
     Controllers/Validate/FactorialValidate.cpp \
@@ -28,35 +27,36 @@ SOURCES += \
     Models/calculation.c \
     Models/converter.c \
     Models/credit_calc.c \
-#    Views/MacUI.cpp \
-#    Views/mainwindow.cpp \
     Views/qcustomplot.cpp \
     main.cpp
 
 HEADERS += \
     Controllers/CalculatorController.h \
     Controllers/Controller.h \
-#    Controllers/Graph/Graph.h \
-#    Controllers/GraphCalc/GraphCalc.h \
+    Controllers/CreditCalcController.h \
+    Controllers/DepositCalcController.h \
     Controllers/GraphController.h \
     Controllers/Validate/Validate.h \
+    Models/CalculatorModel.h \
+    Models/CreditCalcModel.h \
+    Models/DepositCalcModel.h \
+    Models/GraphModel.h \
     Models/Model.h \
     Models/calc.h \
     Views/Calculator.h \
     Views/CalculatorUI.h \
+    Views/ChartView.h \
     Views/CreditCalculatorUI.h \
     Views/DepositCalculatorUI.h \
     Views/GraphUI.h \
     Views/IPlatformUI.h \
     Views/IWidgets.h \
+    Views/Layout.h \
     Views/MacUI.h \
     Views/WinUI.h \
     Views/mainwindow.h \
     Views/qcustomplot.h
 
-FORMS += \
-    Views/MacCalc.ui \
-    Views/WinCalc.ui
 
 DESTDIR += ../build/
 

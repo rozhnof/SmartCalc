@@ -2,18 +2,19 @@
 #define GRAPHCONTROLLER_H
 
 #include "Controller.h"
+#include "../Models/GraphModel.h"
 
 using namespace std;
 
-class GraphController {
+class GraphController : public Controller {
 
 private:
 
-    Model *model;
+    GraphModel *model;
 public:
 
     GraphController() {
-        model = new Model;
+        model = new GraphModel;
     }
 
     void SetInput(string input) {

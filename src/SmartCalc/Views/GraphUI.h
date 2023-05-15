@@ -119,13 +119,13 @@ public:
     }
 
     void CreateObjects() {
-        widgets->Input = NewQLineEdit("sin(x)", this, "title");
-        widgets->titles.insert(make_pair(ScopeMin, NewLabel("x min", this, "title")));
-        widgets->titles.insert(make_pair(RangeMin, NewLabel("y min", this, "title")));
-        widgets->titles.insert(make_pair(InputX, NewLabel("  X", this, "title")));
-        widgets->titles.insert(make_pair(Points, NewLabel("Points", this, "title")));
-        widgets->titles.insert(make_pair(ScopeMax, NewLabel("x max", this, "title")));
-        widgets->titles.insert(make_pair(RangeMax, NewLabel("y max", this, "title")));
+        widgets->Input = NewQLineEdit(this, "sin(x)", "title");
+        widgets->titles.insert(make_pair(ScopeMin, NewLabel(this, "x min", "title")));
+        widgets->titles.insert(make_pair(RangeMin, NewLabel(this, "y min", "title")));
+        widgets->titles.insert(make_pair(InputX, NewLabel(this, "  X", "title")));
+        widgets->titles.insert(make_pair(Points, NewLabel(this, "Points", "title")));
+        widgets->titles.insert(make_pair(ScopeMax, NewLabel(this, "x max", "title")));
+        widgets->titles.insert(make_pair(RangeMax, NewLabel(this, "y max", "title")));
 
         widgets->values.insert(make_pair(ScopeMin, NewDoubleSpinBox(widgets->titles.at(ScopeMin), "value")));
         widgets->values.insert(make_pair(RangeMin, NewDoubleSpinBox(widgets->titles.at(RangeMin), "value")));
@@ -138,14 +138,14 @@ public:
     }
 
     void Connects() {
-        connect(widgets->values.at(ScopeMin), SIGNAL(valueChanged(double)), this, SLOT(ChangeScope()));
-        connect(widgets->values.at(ScopeMax), SIGNAL(valueChanged(double)), this, SLOT(ChangeScope()));
-        connect(widgets->values.at(RangeMin), SIGNAL(valueChanged(double)), this, SLOT(ChangeRange()));
-        connect(widgets->values.at(RangeMax), SIGNAL(valueChanged(double)), this, SLOT(ChangeRange()));
-        connect(widgets->values.at(Points), SIGNAL(valueChanged(double)), this, SLOT(ChangePoints()));
-        connect(widgets->values.at(InputX), SIGNAL(valueChanged(double)), this, SLOT(reDrawLine()));
-        connect(widgets->drawingLine, SIGNAL(stateChanged(int)), this, SLOT(DrawingLineState()));
-        connect(widgets->Input, SIGNAL(returnPressed()), this, SLOT(SetInput()));
+        connect(widgets->values.at(ScopeMin), SIGNAL(valueChanged(double)), SLOT(ChangeScope()));
+        connect(widgets->values.at(ScopeMax), SIGNAL(valueChanged(double)), SLOT(ChangeScope()));
+        connect(widgets->values.at(RangeMin), SIGNAL(valueChanged(double)), SLOT(ChangeRange()));
+        connect(widgets->values.at(RangeMax), SIGNAL(valueChanged(double)), SLOT(ChangeRange()));
+        connect(widgets->values.at(Points), SIGNAL(valueChanged(double)), SLOT(ChangePoints()));
+        connect(widgets->values.at(InputX), SIGNAL(valueChanged(double)), SLOT(reDrawLine()));
+        connect(widgets->drawingLine, SIGNAL(stateChanged(int)), SLOT(DrawingLineState()));
+        connect(widgets->Input, SIGNAL(returnPressed()), SLOT(SetInput()));
     }
 
     void DrawGraph() {

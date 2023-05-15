@@ -23,9 +23,10 @@ public:
     ~MainWindow() {}
 
 
-    QLabel *NewLabel(QString text, QWidget *parent, QString objectName) {
-        QLabel *newObject = new QLabel(text, parent);
-        newObject->setObjectName(objectName);
+    QLabel *NewLabel(QWidget *parent, QString text = "", QString objectName = "") {
+        QLabel *newObject = new QLabel(parent);
+        if (!text.isEmpty()) newObject->setText(text);
+        if (!objectName.isEmpty()) newObject->setObjectName(objectName);
         return newObject;
     }
 
@@ -37,15 +38,17 @@ public:
         return newObject;
     }
 
-    QLineEdit *NewQLineEdit(QString text, QWidget *parent, QString objectName) {
-        QLineEdit *newObject = new QLineEdit(text, parent);
-        newObject->setObjectName(objectName);
+    QLineEdit *NewQLineEdit(QWidget *parent, QString text = "", QString objectName = "") {
+        QLineEdit *newObject = new QLineEdit(parent);
+        if (!text.isEmpty()) newObject->setText(text);
+        if (!objectName.isEmpty()) newObject->setObjectName(objectName);
         return newObject;
     }
 
-    QPushButton *NewPushButton(QString text, QWidget *parent, QString objectName) {
-        QPushButton *newObject = new QPushButton(text, parent);
-        newObject->setObjectName(objectName);
+    QPushButton *NewPushButton(QWidget *parent, QString text = "", QString objectName = "") {
+        QPushButton *newObject = new QPushButton(parent);
+        if (!text.isEmpty()) newObject->setText(text);
+        if (!objectName.isEmpty()) newObject->setObjectName(objectName);
         return newObject;
     }
 };

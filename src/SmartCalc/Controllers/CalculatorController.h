@@ -2,14 +2,15 @@
 #define CALCULATORCONTROLLER_H
 
 #include "Controller.h"
+#include "../Models/CalculatorModel.h"
 
 using namespace std;
 
-class CalculatorController {
+class CalculatorController : public Controller {
 
 private:
 
-    Model *model;
+    CalculatorModel *model;
 
     string _input;
     string _validInput;
@@ -17,14 +18,10 @@ private:
 public:
 
     CalculatorController() {
-        model = new Model;
+        model = new CalculatorModel;
     }
 
-    QString Validate(IValidate *rule, QString input, QString button, int &status) {
-        Validator *check = new Validator(rule);
-        _validInput = check->Validate(input.toStdString(), button.toStdString(), status);
-        return QString::fromStdString(_validInput);
-    }
+
 
     QString GetResult(double x) {
         model->SetInput(_validInput);

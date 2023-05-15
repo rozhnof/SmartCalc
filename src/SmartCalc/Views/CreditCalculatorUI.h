@@ -50,9 +50,9 @@ public:
         widgets->boxTitle.insert(make_pair(Overpayment, new QLabel("Overpayment", this)));
         widgets->boxTitle.insert(make_pair(MonthlyPayment, new QLabel("Montly Payments", this)));
 
-        widgets->boxText.insert(make_pair(CreditSum, NewQLineEdit("1000", this, "inputCreditSum")));
-        widgets->boxText.insert(make_pair(CreditTerm, NewQLineEdit("12", this, "inputCreditTerm")));
-        widgets->boxText.insert(make_pair(InterestRate, NewQLineEdit("10", this, "inputInterestRate")));
+        widgets->boxText.insert(make_pair(CreditSum, NewQLineEdit(this, "1000", "inputCreditSum")));
+        widgets->boxText.insert(make_pair(CreditTerm, NewQLineEdit(this, "12", "inputCreditTerm")));
+        widgets->boxText.insert(make_pair(InterestRate, NewQLineEdit(this, "10", "inputInterestRate")));
         widgets->boxText.insert(make_pair(TotalPayment, new QLineEdit(this)));
         widgets->boxText.insert(make_pair(Overpayment, new QLineEdit(this)));
 
