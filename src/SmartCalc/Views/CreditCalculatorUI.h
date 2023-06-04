@@ -15,7 +15,7 @@ public:
     CreditCalcWidgets *widgets;
     CreditCalcController *controller;
 
-    QComboBox *montlyPaymentList;
+    QComboBox *monthlyPaymentList;
     QComboBox *creditTermList;
     QPushButton *annuityPaymentButton;
     QPushButton *differentiatedPaymentButton;
@@ -58,7 +58,7 @@ public:
 
         annuityPaymentButton = new QPushButton("Annuity Payment", this);
         differentiatedPaymentButton = new QPushButton("Differentiated Payment", this);
-        montlyPaymentList = new QComboBox(this);
+        monthlyPaymentList = new QComboBox(this);
         creditTermList = new QComboBox(this);
 
         connect(annuityPaymentButton, &QPushButton::clicked, this, &CreditCalculatorUI::AnnuityPayment);
@@ -66,39 +66,48 @@ public:
     }
 
     void SetGeometry() {
-        this->setFixedSize(1200, 800);
-        widgets->chartView->setGeometry(0, 250, 1200, 550);
-        Layout *creditCalcLayout = new Layout(15, 50, this->width() - 15, 50 + 175, 3, 3, 15, 20);
+        this->setFixedSize(950, 700);
+        widgets->chartView->setGeometry(0, 225, this->width(), this->height() - 225);
 
-        creditCalcLayout->AddWidget(widgets->box[CreditSum]);
-        creditCalcLayout->AddWidget(widgets->box[CreditTerm]);
-        creditCalcLayout->AddWidget(widgets->box[InterestRate]);
+        Layout2 layout;
+        layout.SetStartPoints(0, 0);
+        layout.SetEndPoints(950, 225);
+        layout.SetColumns(3);
+        layout.SetRows(3);
+        layout.SetLeftSpacing(14);
+        layout.SetRightSpacing(14);
+        layout.SetAboveSpacing(50);
+        layout.SetBottomSpacing(0);
+        layout.SetHorizontalSpacing(12);
+        layout.SetVerticalSpacing(20);
+        layout.SetAutoSize();
 
-        creditCalcLayout->AddWidget(annuityPaymentButton, 1.5);
-        creditCalcLayout->AddWidget(differentiatedPaymentButton, 1.5);
+        layout.AddWidget(widgets->box[CreditSum]);
+        layout.AddWidget(widgets->box[CreditTerm]);
+        layout.AddWidget(widgets->box[InterestRate]);
 
-        creditCalcLayout->AddWidget(widgets->box[TotalPayment]);
-        creditCalcLayout->AddWidget(widgets->box[Overpayment]);
-        creditCalcLayout->AddWidget(widgets->box[MonthlyPayment]);
+        layout.ChangeColumns(2);
+        layout.AddWidget(annuityPaymentButton);
+        layout.AddWidget(differentiatedPaymentButton);
 
+        layout.ChangeColumns(3);
+        layout.AddWidget(widgets->box[TotalPayment]);
+        layout.AddWidget(widgets->box[Overpayment]);
+        layout.AddWidget(widgets->box[MonthlyPayment]);
 
-        widgets->boxTitle[CreditSum]->setGeometry(widgets->box[CreditSum]->x(), widgets->box[CreditSum]->y() - 35, 300, 25);
-        widgets->boxTitle[CreditTerm]->setGeometry(widgets->box[CreditTerm]->x(), widgets->box[CreditTerm]->y() - 35, 300, 25);
-        widgets->boxTitle[InterestRate]->setGeometry(widgets->box[InterestRate]->x(), widgets->box[InterestRate]->y() - 35, 300, 25);
-        widgets->boxTitle[TotalPayment]->setGeometry(widgets->box[TotalPayment]->x() + 10, widgets->box[TotalPayment]->y(), 100, 45);
-        widgets->boxTitle[Overpayment]->setGeometry(widgets->box[Overpayment]->x() + 10, widgets->box[Overpayment]->y(), 100, 45);
-        widgets->boxTitle[MonthlyPayment]->setGeometry(widgets->box[MonthlyPayment]->x() + 225, widgets->box[MonthlyPayment]->y(), 125, 45);
+        layout.AddTitle(widgets->box[CreditSum], widgets->boxTitle[CreditSum], Layout2::Left, Layout2::Above, 16, 0, -10);
+        layout.AddTitle(widgets->box[CreditTerm], widgets->boxTitle[CreditTerm], Layout2::Left, Layout2::Above, 16, 0, -10);
+        layout.AddTitle(widgets->box[InterestRate], widgets->boxTitle[InterestRate], Layout2::Left, Layout2::Above, 16, 0, -10);
+        layout.AddTitle(widgets->box[TotalPayment], widgets->boxTitle[TotalPayment], Layout2::Left, Layout2::CenterV, 16, 5, 0);
+        layout.AddTitle(widgets->box[Overpayment], widgets->boxTitle[Overpayment], Layout2::Left, Layout2::CenterV, 16, 5, 0);
+        layout.AddTitle(widgets->box[MonthlyPayment], widgets->boxTitle[MonthlyPayment], Layout2::Left, Layout2::CenterV, 16, 5, 0);
 
-
-        widgets->boxText[CreditSum]->setGeometry(widgets->box[CreditSum]->x() + 10, widgets->box[CreditSum]->y(), widgets->box[CreditSum]->width() - 20, widgets->box[CreditSum]->height());
-        widgets->boxText[CreditTerm]->setGeometry(widgets->box[CreditTerm]->x() + 10, widgets->box[CreditTerm]->y(), widgets->box[CreditSum]->width() - 20, widgets->box[CreditSum]->height());
-        widgets->boxText[InterestRate]->setGeometry(widgets->box[InterestRate]->x() + 10, widgets->box[InterestRate]->y(), widgets->box[CreditSum]->width() - 20, widgets->box[CreditSum]->height());
-        widgets->boxText[TotalPayment]->setGeometry(widgets->box[TotalPayment]->x() + 150, widgets->box[TotalPayment]->y(), 200, 45);
-        widgets->boxText[Overpayment]->setGeometry(widgets->box[Overpayment]->x() + 150, widgets->box[Overpayment]->y(), 200, 45);
-        montlyPaymentList->setGeometry(widgets->box[MonthlyPayment]->x() + 10, widgets->box[MonthlyPayment]->y(), 280, 45);
-        creditTermList->setGeometry(widgets->box[CreditTerm]->x() + widgets->box[CreditTerm]->width() - 90, widgets->box[CreditTerm]->y(), 90, widgets->box[CreditSum]->height());
-
-        delete creditCalcLayout;
+        layout.AddField(widgets->box[CreditSum], widgets->boxText[CreditSum],Layout2::Left, 15);
+        layout.AddField(widgets->box[CreditTerm], widgets->boxText[CreditTerm], Layout2::Left, 15);
+        layout.AddField(widgets->box[InterestRate], widgets->boxText[InterestRate], Layout2::Left, 15);
+        layout.AddField(widgets->box[TotalPayment], widgets->boxText[TotalPayment], Layout2::Right, 15);
+        layout.AddField(widgets->box[Overpayment], widgets->boxText[Overpayment], Layout2::Right, 15);
+        layout.AddField(widgets->box[MonthlyPayment], monthlyPaymentList, Layout2::Left, widgets->box[MonthlyPayment]->width()/1.5);
     }
 
     void SetOptions() {
@@ -133,7 +142,7 @@ public:
         ClearOutput();
 
         for(auto var : controller->GetMonthlyPayments()) {
-            montlyPaymentList->addItem(QString::number(var));
+            monthlyPaymentList->addItem(QString::number(var));
         }
 
         widgets->boxText[TotalPayment]->setText(QString::number(controller->GetTotalPayment()));
@@ -144,7 +153,7 @@ public:
     }
 
     void ClearOutput() {
-        montlyPaymentList->clear();
+        monthlyPaymentList->clear();
         widgets->bodyPayments.clear();
         widgets->percentPayments.clear();
     }
@@ -176,10 +185,10 @@ private slots:
         widgets->chartView->SetData(widgets->bodyPayments, widgets->percentPayments);
         widgets->chartView->show();
 
-        if (montlyPaymentList->count() == 1) {
-            montlyPaymentList->setDisabled(true);
+        if (monthlyPaymentList->count() == 1) {
+            monthlyPaymentList->setDisabled(true);
         } else {
-             montlyPaymentList->setDisabled(false);
+             monthlyPaymentList->setDisabled(false);
         }
     }
 };

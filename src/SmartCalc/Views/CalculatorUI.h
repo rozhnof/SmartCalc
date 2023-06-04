@@ -45,7 +45,7 @@ public:
 private:
 
     void CreateObjects() {
-       widgets->Input = NewLabel(this, "0", "input");
+       widgets->Input = NewQLineEdit(this, "0", "input");
        widgets->calcButtons.insert(make_pair(Button0, NewPushButton(this, "0", "number")));
        widgets->calcButtons.insert(make_pair(Button1, NewPushButton(this, "1", "number")));
        widgets->calcButtons.insert(make_pair(Button2, NewPushButton(this, "2", "number")));
@@ -201,10 +201,10 @@ private slots:
 
     void Result() {
         int status = 1;
-        controller->Validate(new ResultValidate, widgets->Input->text(), static_cast<QPushButton*>(sender())->text(), status);
-        if (status) {
-            widgets->Input->setText(controller->GetResult(1));
-        }
+//        controller->Validate(new ResultValidate, widgets->Input->text(), static_cast<QPushButton*>(sender())->text(), status);
+//        if (status) {
+//            widgets->Input->setText(controller->GetResult(1));
+//        }
     }
 
     void DrawGraph() {

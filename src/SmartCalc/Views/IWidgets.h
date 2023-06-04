@@ -17,7 +17,7 @@ using namespace std;
 typedef struct CalcWidgets {
     QMainWindow *calcWindow;
 
-    QLabel *Input;
+    QLineEdit *Input;
     unordered_map<int, QPushButton*> calcButtons;
 } CalcWidgets;
 

@@ -2,6 +2,187 @@
 #define LAYOUT_H
 
 #include <QWidget>
+#include <QLabel>
+#include <QLineEdit>
+#include <iostream>
+using namespace std;
+
+class Layout2
+{
+private:
+    int _x0 = 0;
+    int _y0 = 0;
+
+    int _xMax;
+    int _yMax;
+
+    int _rows = 1;
+    int _columns = 1;
+
+    int _rowsCounter = 0;
+    int _columnsCounter = 0;
+
+    int _horizontalSpacing = 0;
+    int _verticalSpacing = 0;
+
+    int _leftSpacing = 0;
+    int _rightSpacing = 0;
+    int _aboveSpacing = 0;
+    int _bottomSpacing = 0;
+
+    int _widgetWidth;
+    int _widgetHeight;
+
+    int _currentX = 0;
+    int _currentY = 0;
+
+public:
+
+    Layout2() {}
+
+    void SetStartPoints(int x0, int y0) {
+        _x0 = x0;
+        _y0 = y0;
+
+        _currentX = x0;
+        _currentY = y0;
+    }
+
+    void SetEndPoints(int xMax, int yMax) {
+        _xMax = xMax;
+        _yMax = yMax;
+    }
+
+    void SetRows(int rows) {
+        _rows = rows;
+    }
+
+    void SetColumns(int columns) {
+        _columns = columns;
+    }
+
+    void SetHorizontalSpacing(int horizontalSpacing) {
+        _horizontalSpacing = horizontalSpacing;
+    }
+
+    void SetVerticalSpacing(int verticalSpacing) {
+        _verticalSpacing = verticalSpacing;
+    }
+
+    void SetDefaultElementSize(int width, int height) {
+        _widgetWidth = width;
+        _widgetHeight = height;
+    }
+
+    void SetAutoSize() {
+        _widgetWidth = ((_xMax - _rightSpacing) - (_x0 + _leftSpacing) - ((_columns - 1) * _horizontalSpacing)) / _columns;
+        _widgetHeight = ((_yMax - _bottomSpacing) - (_y0 + _aboveSpacing) - ((_rows - 1) * _verticalSpacing)) / _rows;
+    }
+
+    void SetLeftSpacing(int spacing) {
+        _leftSpacing = spacing;
+        _currentX += spacing;
+    }
+
+    void SetRightSpacing(int spacing) {
+        _rightSpacing = spacing;
+    }
+
+    void SetAboveSpacing(int spacing) {
+        _aboveSpacing = spacing;
+        _currentY += spacing;
+    }
+
+    void SetBottomSpacing(int spacing) {
+        _bottomSpacing = spacing;
+    }
+
+    void ChangeColumns(int columns) {
+        SetColumns(columns);
+        SetAutoSize();
+    }
+
+    void AddWidget(QWidget *widget, int rowSpan = 1, int columnSpan = 1) {
+        AddWidgetWithSize(widget, _widgetWidth * rowSpan, _widgetHeight * columnSpan);
+    }
+
+    void AddWidgetWithSize(QWidget *widget, int width, int height) {
+        widget->setGeometry(_currentX, _currentY, width, height);
+
+        _columnsCounter += (width / _widgetWidth) + (1 && (width % _widgetWidth));
+
+        if (_columnsCounter >= _columns) {
+            _columnsCounter = 0;
+            _currentX = _x0 + _leftSpacing;
+
+            _rowsCounter++;
+            _currentY += (height + _verticalSpacing);
+        } else {
+            _currentX += (width + _horizontalSpacing);
+        }
+    }
+
+    enum AlignH {
+        Left,
+        Right,
+        CenterH
+    };
+
+    enum AlignV {
+        Above,
+        Bottom,
+        CenterV
+    };
+
+
+    void AddTitle(QWidget* widget, QWidget* title, AlignH align0, AlignV align1, int fontSize, int horizontalSpacing, int verticalSpacing) {
+        QFont font;
+        font.setPointSize(fontSize);
+        title->setFont(font);
+
+        int x = 0;
+        int y = 0;
+        int widthHint = title->sizeHint().width();
+        int heightHint = title->sizeHint().height();
+
+        if (align0 == Left) {
+            x = widget->x() + horizontalSpacing;
+        } else if (align0 == Right) {
+            x = widget->x() + widget->width() - widthHint - horizontalSpacing;
+        } else if (align0 == CenterH) {
+            x = widget->x() + widget->width() / 2 - widthHint / 2;
+        }
+
+        if (align1 == Above) {
+            y = widget->y() - heightHint + verticalSpacing;
+        } else if (align1 == Bottom) {
+            y = widget->y() + widget->height() + verticalSpacing;
+        } else if (align1 == CenterV) {
+            y = widget->y() + widget->height() / 2 - heightHint / 2;
+        }
+        title->setGeometry(x, y, widthHint, heightHint);
+    }
+
+    void AddField(QWidget* widget, QWidget* field, AlignH align, int spacing = 0) {
+        int x = 0;
+        int width = widget->width();
+
+        int y = widget->y();
+        int height = widget->height();
+
+        if (align == AlignH::Left) {
+            x = widget->x() + spacing;
+        } else if (align == AlignH::Right) {
+            x = widget->x();
+        } else if (align == AlignH::CenterH) {
+            x = widget->x() + widget->width() / 2 - width / 2;
+        }
+        width -= spacing;
+
+        field->setGeometry(x, y, width, height);
+    }
+};
+
 
 class Layout
 {
@@ -30,7 +211,7 @@ private:
 
 public:
     enum Location {
-        Centre,
+        Center,
         Left,
         Right,
     };
@@ -75,7 +256,7 @@ public:
         }
     }
 
-    void AddWidget(QWidget* widget, QWidget *pWidget, int spacerX, int spacerY, Location loc = Centre, int width = 0) {
+    void AddWidget(QWidget* widget, QWidget *pWidget, int spacerX, int spacerY, Location loc = Center, int width = 0) {
         int x0 = 0;
         int x1 = 0;
 
@@ -84,7 +265,7 @@ public:
 
         int height = 0;
 
-        if (loc == Centre) {
+        if (loc == Center) {
             x0 = spacerX;
             x1 = pWidget->width() - spacerX;
 

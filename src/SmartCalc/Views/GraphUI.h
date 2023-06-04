@@ -65,8 +65,16 @@ private:
     }
 
     void SetGeometry() {
-        this->setFixedSize(1200, 1050);
-        widgets->graph->setFixedSize(1200, 975);
+        int screenWidth = QApplication::screens().at(0)->size().width();
+        int screenHeight = QApplication::screens().at(0)->size().height();
+
+        this->setFixedSize(screenWidth / 2, screenHeight / 2);
+        int graphWidth = this->height()*0.0714;
+        if (graphWidth < 75) {
+            graphWidth = 75;
+        }
+        widgets->graph->setFixedSize(this->width(), this->height() - graphWidth);
+
         graphLayout = new Layout(5, widgets->graph->height() + 5, this->width() - 5, this->height() - 5, 2, 4, 5, 5);
 
         graphLayout->AddWidget(widgets->titles.at(ScopeMin));
@@ -145,11 +153,17 @@ private:
         connect(widgets->values.at(Points), SIGNAL(valueChanged(double)), SLOT(DrawGraph()));
         connect(widgets->values.at(InputX), SIGNAL(valueChanged(double)), SLOT(DrawLine()));
         connect(widgets->drawingLine, SIGNAL(stateChanged(int)), SLOT(DrawingLineState()));
+        connect(widgets->Input, &QLineEdit::textChanged, this, &GraphUI::InputValidate);
         connect(widgets->Input, SIGNAL(returnPressed()), SLOT(SetInput()));
     }
 
 
 private slots:
+
+    void InputValidate() {
+        int status = 0;
+        controller->SymbolValidate(widgets->Input->text().toStdString(), status);
+    }
 
     void DrawGraph() {
         int countPoints = widgets->values[Points]->value();

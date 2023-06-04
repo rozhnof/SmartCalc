@@ -172,7 +172,13 @@ private:
 
     void SetGeometry(CalcWidgets *widgets) {
         widgets->calcWindow->setFixedSize(420, 350);
-        Layout *calcLayout = new Layout(0, 0, widgets->calcWindow->width(), widgets->calcWindow->height(), 7, 7, 0, 0);
+        Layout2 *calcLayout = new Layout2;
+
+        calcLayout->SetColumns(7);
+        calcLayout->SetRows(7);
+        calcLayout->SetStartPoints(0, 0);
+        calcLayout->SetEndPoints(420, 350);
+        calcLayout->SetAutoSize();
 
         calcLayout->AddWidget(widgets->Input, 7, 2);
         calcLayout->AddWidget(widgets->calcButtons[ButtonX]);
