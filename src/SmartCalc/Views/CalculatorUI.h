@@ -35,6 +35,8 @@ public:
 
         CreateObjects();
         Connects();
+
+
     }
 
     void SetupUI() override {
@@ -45,7 +47,7 @@ public:
 private:
 
     void CreateObjects() {
-       widgets->Input = NewQLineEdit(this, "0", "input");
+       widgets->Input = NewLabel(this, "0", "input");
        widgets->calcButtons.insert(make_pair(Button0, NewPushButton(this, "0", "number")));
        widgets->calcButtons.insert(make_pair(Button1, NewPushButton(this, "1", "number")));
        widgets->calcButtons.insert(make_pair(Button2, NewPushButton(this, "2", "number")));
@@ -143,7 +145,7 @@ private slots:
 
     void SetNumber() {
         int status = 1;
-        widgets->Input->setText(controller->Validate(new NumberValidate, widgets->Input->text(), static_cast<QPushButton*>(sender())->text(), status));
+        widgets->Input->setText(controller->Validate(new NumberValidate, widgets->Input->text(), static_cast<QPushButton*>(sender())->text(), status));        
     }
 
     void SetFunction() {

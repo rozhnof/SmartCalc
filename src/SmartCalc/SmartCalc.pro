@@ -4,7 +4,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 QT += printsupport
 QT += charts
-
+QT += core5compat
+QT += gui
 
 CONFIG += c++17
 

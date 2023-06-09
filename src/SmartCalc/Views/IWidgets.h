@@ -17,7 +17,7 @@ using namespace std;
 typedef struct CalcWidgets {
     QMainWindow *calcWindow;
 
-    QLineEdit *Input;
+    QLabel *Input;
     unordered_map<int, QPushButton*> calcButtons;
 } CalcWidgets;
 
@@ -27,9 +27,10 @@ typedef struct GraphWidgets  {
 
     QLineEdit *Input;
     QCheckBox* drawingLine;
-    unordered_map<int, QLabel*> titles;
-    unordered_map<int, QDoubleSpinBox*> values;
 
+    unordered_map<int, QTextEdit*> box;
+    unordered_map<int, QLabel*> title;
+    unordered_map<int, QDoubleSpinBox*> data;
 } GraphWidgets;
 
 typedef struct CreditCalcWidgets  {
@@ -37,8 +38,8 @@ typedef struct CreditCalcWidgets  {
     ChartView* chartView;
 
     unordered_map<int, QTextEdit*> box;
-    unordered_map<int, QLabel*> boxTitle;
-    unordered_map<int, QLineEdit*> boxText;
+    unordered_map<int, QLabel*> title;
+    unordered_map<int, QLineEdit*> data;
 
     QVector<double> bodyPayments;
     QVector<double> percentPayments;
@@ -103,6 +104,7 @@ enum CalcObjectsEnum {
 };
 
 enum GraphObjectsEnum {
+    Input,
     ScopeMin,
     ScopeMax,
     RangeMin,

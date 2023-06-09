@@ -117,9 +117,9 @@ private:
                       " color: rgb(37, 37, 37);"
                       "}");
 
-        widgets->boxTitle[CreditSum]->setStyleSheet("color: rgb(217, 217, 217);");
-        widgets->boxTitle[CreditTerm]->setStyleSheet("color: rgb(217, 217, 217);");
-        widgets->boxTitle[InterestRate]->setStyleSheet("color: rgb(217, 217, 217);");
+        widgets->title[CreditSum]->setStyleSheet("color: rgb(217, 217, 217);");
+        widgets->title[CreditTerm]->setStyleSheet("color: rgb(217, 217, 217);");
+        widgets->title[InterestRate]->setStyleSheet("color: rgb(217, 217, 217);");
 
         widgets->chartView->SetBarWidth(0.75);
         widgets->chartView->SetBarColor(QColor(105, 124, 194), QColor(132, 157, 245));
@@ -182,50 +182,60 @@ private:
     }
 
     void SetGeometry(CalcWidgets *widgets) {
+        Layout layout;
+
         widgets->calcWindow->setFixedSize(420, 350);
-        Layout *calcLayout = new Layout(4, 0, widgets->calcWindow->width() - 4, widgets->calcWindow->height() - 4, 7, 7, 2, 2);
+        layout.SetStartPoints(0, 0);
+        layout.SetEndPoints(widgets->calcWindow->width(), widgets->calcWindow->height());
+        layout.SetColumns(7);
+        layout.SetRows(7);
+        layout.SetLeftSpacing(3);
+        layout.SetRightSpacing(3);
+        layout.SetAboveSpacing(2);
+        layout.SetBottomSpacing(3);
+        layout.SetHorizontalSpacing(2);
+        layout.SetVerticalSpacing(2);
+        layout.SetAutoSize();
 
-        calcLayout->AddWidget(widgets->Input, 7, 2);
-        calcLayout->AddWidget(widgets->calcButtons[ButtonX]);
-        calcLayout->AddWidget(widgets->calcButtons[ButtonOpenBracket]);
-        calcLayout->AddWidget(widgets->calcButtons[ButtonCloseBracket]);
-        calcLayout->AddWidget(widgets->calcButtons[ButtonAC]);
-        calcLayout->AddWidget(widgets->calcButtons[ButtonC]);
-        calcLayout->AddWidget(widgets->calcButtons[ButtonUnaryOperator]);
-        calcLayout->AddWidget(widgets->calcButtons[ButtonDiv]);
+        layout.AddWidget(widgets->Input, 7, 2);
+        layout.AddWidget(widgets->calcButtons[ButtonX]);
+        layout.AddWidget(widgets->calcButtons[ButtonOpenBracket]);
+        layout.AddWidget(widgets->calcButtons[ButtonCloseBracket]);
+        layout.AddWidget(widgets->calcButtons[ButtonAC]);
+        layout.AddWidget(widgets->calcButtons[ButtonC]);
+        layout.AddWidget(widgets->calcButtons[ButtonUnaryOperator]);
+        layout.AddWidget(widgets->calcButtons[ButtonDiv]);
 
-        calcLayout->AddWidget(widgets->calcButtons[ButtonMod]);
-        calcLayout->AddWidget(widgets->calcButtons[ButtonPow]);
-        calcLayout->AddWidget(widgets->calcButtons[ButtonFactorial]);
-        calcLayout->AddWidget(widgets->calcButtons[Button7]);
-        calcLayout->AddWidget(widgets->calcButtons[Button8]);
-        calcLayout->AddWidget(widgets->calcButtons[Button9]);
-        calcLayout->AddWidget(widgets->calcButtons[ButtonMul]);
+        layout.AddWidget(widgets->calcButtons[ButtonMod]);
+        layout.AddWidget(widgets->calcButtons[ButtonPow]);
+        layout.AddWidget(widgets->calcButtons[ButtonFactorial]);
+        layout.AddWidget(widgets->calcButtons[Button7]);
+        layout.AddWidget(widgets->calcButtons[Button8]);
+        layout.AddWidget(widgets->calcButtons[Button9]);
+        layout.AddWidget(widgets->calcButtons[ButtonMul]);
 
-        calcLayout->AddWidget(widgets->calcButtons[ButtonLog]);
-        calcLayout->AddWidget(widgets->calcButtons[ButtonLn]);
-        calcLayout->AddWidget(widgets->calcButtons[ButtonSqrt]);
-        calcLayout->AddWidget(widgets->calcButtons[Button4]);
-        calcLayout->AddWidget(widgets->calcButtons[Button5]);
-        calcLayout->AddWidget(widgets->calcButtons[Button6]);
-        calcLayout->AddWidget(widgets->calcButtons[ButtonSub]);
+        layout.AddWidget(widgets->calcButtons[ButtonLog]);
+        layout.AddWidget(widgets->calcButtons[ButtonLn]);
+        layout.AddWidget(widgets->calcButtons[ButtonSqrt]);
+        layout.AddWidget(widgets->calcButtons[Button4]);
+        layout.AddWidget(widgets->calcButtons[Button5]);
+        layout.AddWidget(widgets->calcButtons[Button6]);
+        layout.AddWidget(widgets->calcButtons[ButtonSub]);
 
-        calcLayout->AddWidget(widgets->calcButtons[ButtonAsin]);
-        calcLayout->AddWidget(widgets->calcButtons[ButtonAcos]);
-        calcLayout->AddWidget(widgets->calcButtons[ButtonAtan]);
-        calcLayout->AddWidget(widgets->calcButtons[Button1]);
-        calcLayout->AddWidget(widgets->calcButtons[Button2]);
-        calcLayout->AddWidget(widgets->calcButtons[Button3]);
-        calcLayout->AddWidget(widgets->calcButtons[ButtonSum]);
+        layout.AddWidget(widgets->calcButtons[ButtonAsin]);
+        layout.AddWidget(widgets->calcButtons[ButtonAcos]);
+        layout.AddWidget(widgets->calcButtons[ButtonAtan]);
+        layout.AddWidget(widgets->calcButtons[Button1]);
+        layout.AddWidget(widgets->calcButtons[Button2]);
+        layout.AddWidget(widgets->calcButtons[Button3]);
+        layout.AddWidget(widgets->calcButtons[ButtonSum]);
 
-        calcLayout->AddWidget(widgets->calcButtons[ButtonSin]);
-        calcLayout->AddWidget(widgets->calcButtons[ButtonCos]);
-        calcLayout->AddWidget(widgets->calcButtons[ButtonTan]);
-        calcLayout->AddWidget(widgets->calcButtons[Button0], 2);
-        calcLayout->AddWidget(widgets->calcButtons[ButtonDot]);
-        calcLayout->AddWidget(widgets->calcButtons[ButtonResult]);
-
-        delete calcLayout;
+        layout.AddWidget(widgets->calcButtons[ButtonSin]);
+        layout.AddWidget(widgets->calcButtons[ButtonCos]);
+        layout.AddWidget(widgets->calcButtons[ButtonTan]);
+        layout.AddWidget(widgets->calcButtons[Button0], 2);
+        layout.AddWidget(widgets->calcButtons[ButtonDot]);
+        layout.AddWidget(widgets->calcButtons[ButtonResult]);
     }
 };
 

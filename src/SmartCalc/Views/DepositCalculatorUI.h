@@ -66,39 +66,48 @@ public:
     }
 
     void SetGeometry() {
-        this->setFixedSize(1200, 800);
-        widgets->chartView->setGeometry(0, 250, 1200, 550);
-        Layout *depositCalcLayout = new Layout(15, 50, this->width() - 15, 50 + 175, 3, 3, 15, 20);
+        this->setFixedSize(950, 700);
+        widgets->chartView->setGeometry(0, 225, this->width(), this->height() - 225);
 
-        depositCalcLayout->AddWidget(widgets->box[CreditSum]);
-        depositCalcLayout->AddWidget(widgets->box[CreditTerm]);
-        depositCalcLayout->AddWidget(widgets->box[InterestRate]);
+        Layout layout;
 
-        depositCalcLayout->AddWidget(annuityPaymentButton, 1.5);
-        depositCalcLayout->AddWidget(differentiatedPaymentButton, 1.5);
+        layout.SetStartPoints(0, 0);
+        layout.SetEndPoints(950, 225);
+        layout.SetColumns(3);
+        layout.SetRows(3);
+        layout.SetLeftSpacing(14);
+        layout.SetRightSpacing(14);
+        layout.SetAboveSpacing(50);
+        layout.SetBottomSpacing(0);
+        layout.SetHorizontalSpacing(12);
+        layout.SetVerticalSpacing(20);
+        layout.SetAutoSize();
 
-        depositCalcLayout->AddWidget(widgets->box[TotalPayment]);
-        depositCalcLayout->AddWidget(widgets->box[Overpayment]);
-        depositCalcLayout->AddWidget(widgets->box[MonthlyPayment]);
+        layout.AddWidget(widgets->box[CreditSum]);
+        layout.AddWidget(widgets->box[CreditTerm]);
+        layout.AddWidget(widgets->box[InterestRate]);
 
+        layout.ChangeColumns(2);
+        layout.AddWidget(annuityPaymentButton);
+        layout.AddWidget(differentiatedPaymentButton);
 
-        widgets->boxTitle[CreditSum]->setGeometry(widgets->box[CreditSum]->x(), widgets->box[CreditSum]->y() - 35, 300, 25);
-        widgets->boxTitle[CreditTerm]->setGeometry(widgets->box[CreditTerm]->x(), widgets->box[CreditTerm]->y() - 35, 300, 25);
-        widgets->boxTitle[InterestRate]->setGeometry(widgets->box[InterestRate]->x(), widgets->box[InterestRate]->y() - 35, 300, 25);
-        widgets->boxTitle[TotalPayment]->setGeometry(widgets->box[TotalPayment]->x() + 10, widgets->box[TotalPayment]->y(), 100, 45);
-        widgets->boxTitle[Overpayment]->setGeometry(widgets->box[Overpayment]->x() + 10, widgets->box[Overpayment]->y(), 100, 45);
-        widgets->boxTitle[MonthlyPayment]->setGeometry(widgets->box[MonthlyPayment]->x() + 225, widgets->box[MonthlyPayment]->y(), 125, 45);
+        layout.ChangeColumns(3);
+        layout.AddWidget(widgets->box[TotalPayment]);
+        layout.AddWidget(widgets->box[Overpayment]);
+        layout.AddWidget(widgets->box[MonthlyPayment]);
 
+        layout.SetTitle(widgets->box[CreditSum], widgets->boxTitle[CreditSum], Layout::Left, Layout::Above, 16, 0, -10);
+        layout.SetTitle(widgets->box[CreditTerm], widgets->boxTitle[CreditTerm], Layout::Left, Layout::Above, 16, 0, -10);
+        layout.SetTitle(widgets->box[InterestRate], widgets->boxTitle[InterestRate], Layout::Left, Layout::Above, 16, 0, -10);
+        layout.SetTitle(widgets->box[TotalPayment], widgets->boxTitle[TotalPayment], Layout::Left, Layout::CenterV, 16, 5, 0);
+        layout.SetTitle(widgets->box[Overpayment], widgets->boxTitle[Overpayment], Layout::Left, Layout::CenterV, 16, 5, 0);
+        layout.SetTitle(widgets->box[MonthlyPayment], widgets->boxTitle[MonthlyPayment], Layout::Left, Layout::CenterV, 16, 5, 0);
 
-        widgets->boxText[CreditSum]->setGeometry(widgets->box[CreditSum]->x() + 10, widgets->box[CreditSum]->y(), widgets->box[CreditSum]->width() - 20, widgets->box[CreditSum]->height());
-        widgets->boxText[CreditTerm]->setGeometry(widgets->box[CreditTerm]->x() + 10, widgets->box[CreditTerm]->y(), widgets->box[CreditSum]->width() - 20, widgets->box[CreditSum]->height());
-        widgets->boxText[InterestRate]->setGeometry(widgets->box[InterestRate]->x() + 10, widgets->box[InterestRate]->y(), widgets->box[CreditSum]->width() - 20, widgets->box[CreditSum]->height());
-        widgets->boxText[TotalPayment]->setGeometry(widgets->box[TotalPayment]->x() + 150, widgets->box[TotalPayment]->y(), 200, 45);
-        widgets->boxText[Overpayment]->setGeometry(widgets->box[Overpayment]->x() + 150, widgets->box[Overpayment]->y(), 200, 45);
-        montlyPaymentList->setGeometry(widgets->box[MonthlyPayment]->x() + 10, widgets->box[MonthlyPayment]->y(), 280, 45);
-        CreditTermList->setGeometry(widgets->box[CreditTerm]->x() + widgets->box[CreditTerm]->width() - 90, widgets->box[CreditTerm]->y(), 90, widgets->box[CreditSum]->height());
-
-        delete depositCalcLayout;
+        layout.SetField(widgets->box[CreditSum], widgets->boxText[CreditSum],Layout::Left, 15);
+        layout.SetField(widgets->box[CreditTerm], widgets->boxText[CreditTerm], Layout::Left, 15);
+        layout.SetField(widgets->box[InterestRate], widgets->boxText[InterestRate], Layout::Left, 15);
+        layout.SetField(widgets->box[TotalPayment], widgets->boxText[TotalPayment], Layout::Right, 15);
+        layout.SetField(widgets->box[Overpayment], widgets->boxText[Overpayment], Layout::Right, 15);
     }
 
     void SetOptions() {

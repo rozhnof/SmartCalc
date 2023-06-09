@@ -20,6 +20,8 @@ public:
     QPushButton *annuityPaymentButton;
     QPushButton *differentiatedPaymentButton;
 
+    Layout layout;
+
     CreditCalculatorUI() : MainWindow() {
         this->setWindowTitle("Credit Calculator");
 
@@ -43,18 +45,18 @@ public:
         widgets->box.insert(make_pair(Overpayment, new QTextEdit(this)));
         widgets->box.insert(make_pair(MonthlyPayment, new QTextEdit(this)));
 
-        widgets->boxTitle.insert(make_pair(CreditSum, new QLabel("Credit Sum", this)));
-        widgets->boxTitle.insert(make_pair(CreditTerm, new QLabel("Credit Term", this)));
-        widgets->boxTitle.insert(make_pair(InterestRate, new QLabel("Interest Rate", this)));
-        widgets->boxTitle.insert(make_pair(TotalPayment, new QLabel("Total Payment", this)));
-        widgets->boxTitle.insert(make_pair(Overpayment, new QLabel("Overpayment", this)));
-        widgets->boxTitle.insert(make_pair(MonthlyPayment, new QLabel("Montly Payments", this)));
+        widgets->title.insert(make_pair(CreditSum, new QLabel("Credit Sum", this)));
+        widgets->title.insert(make_pair(CreditTerm, new QLabel("Credit Term", this)));
+        widgets->title.insert(make_pair(InterestRate, new QLabel("Interest Rate", this)));
+        widgets->title.insert(make_pair(TotalPayment, new QLabel("Total Payment", this)));
+        widgets->title.insert(make_pair(Overpayment, new QLabel("Overpayment", this)));
+        widgets->title.insert(make_pair(MonthlyPayment, new QLabel("Montly Payments", this)));
 
-        widgets->boxText.insert(make_pair(CreditSum, NewQLineEdit(this, "1000", "inputCreditSum")));
-        widgets->boxText.insert(make_pair(CreditTerm, NewQLineEdit(this, "12", "inputCreditTerm")));
-        widgets->boxText.insert(make_pair(InterestRate, NewQLineEdit(this, "10", "inputInterestRate")));
-        widgets->boxText.insert(make_pair(TotalPayment, new QLineEdit(this)));
-        widgets->boxText.insert(make_pair(Overpayment, new QLineEdit(this)));
+        widgets->data.insert(make_pair(CreditSum, NewQLineEdit(this, "1000", "inputCreditSum")));
+        widgets->data.insert(make_pair(CreditTerm, NewQLineEdit(this, "12", "inputCreditTerm")));
+        widgets->data.insert(make_pair(InterestRate, NewQLineEdit(this, "10", "inputInterestRate")));
+        widgets->data.insert(make_pair(TotalPayment, new QLineEdit(this)));
+        widgets->data.insert(make_pair(Overpayment, new QLineEdit(this)));
 
         annuityPaymentButton = new QPushButton("Annuity Payment", this);
         differentiatedPaymentButton = new QPushButton("Differentiated Payment", this);
@@ -69,7 +71,6 @@ public:
         this->setFixedSize(950, 700);
         widgets->chartView->setGeometry(0, 225, this->width(), this->height() - 225);
 
-        Layout2 layout;
         layout.SetStartPoints(0, 0);
         layout.SetEndPoints(950, 225);
         layout.SetColumns(3);
@@ -95,30 +96,32 @@ public:
         layout.AddWidget(widgets->box[Overpayment]);
         layout.AddWidget(widgets->box[MonthlyPayment]);
 
-        layout.AddTitle(widgets->box[CreditSum], widgets->boxTitle[CreditSum], Layout2::Left, Layout2::Above, 16, 0, -10);
-        layout.AddTitle(widgets->box[CreditTerm], widgets->boxTitle[CreditTerm], Layout2::Left, Layout2::Above, 16, 0, -10);
-        layout.AddTitle(widgets->box[InterestRate], widgets->boxTitle[InterestRate], Layout2::Left, Layout2::Above, 16, 0, -10);
-        layout.AddTitle(widgets->box[TotalPayment], widgets->boxTitle[TotalPayment], Layout2::Left, Layout2::CenterV, 16, 5, 0);
-        layout.AddTitle(widgets->box[Overpayment], widgets->boxTitle[Overpayment], Layout2::Left, Layout2::CenterV, 16, 5, 0);
-        layout.AddTitle(widgets->box[MonthlyPayment], widgets->boxTitle[MonthlyPayment], Layout2::Left, Layout2::CenterV, 16, 5, 0);
+        layout.SetTitle(widgets->box[CreditSum], widgets->title[CreditSum], Layout::Left, Layout::Above, 16, 0, -10);
+        layout.SetTitle(widgets->box[CreditTerm], widgets->title[CreditTerm], Layout::Left, Layout::Above, 16, 0, -10);
+        layout.SetTitle(widgets->box[InterestRate], widgets->title[InterestRate], Layout::Left, Layout::Above, 16, 0, -10);
+        layout.SetTitle(widgets->box[TotalPayment], widgets->title[TotalPayment], Layout::Left, Layout::CenterV, 16, 5, 0);
+        layout.SetTitle(widgets->box[Overpayment], widgets->title[Overpayment], Layout::Left, Layout::CenterV, 16, 5, 0);
+        layout.SetTitle(widgets->box[MonthlyPayment], widgets->title[MonthlyPayment], Layout::Left, Layout::CenterV, 16, 5, 0);
 
-        layout.AddField(widgets->box[CreditSum], widgets->boxText[CreditSum],Layout2::Left, 15);
-        layout.AddField(widgets->box[CreditTerm], widgets->boxText[CreditTerm], Layout2::Left, 15);
-        layout.AddField(widgets->box[InterestRate], widgets->boxText[InterestRate], Layout2::Left, 15);
-        layout.AddField(widgets->box[TotalPayment], widgets->boxText[TotalPayment], Layout2::Right, 15);
-        layout.AddField(widgets->box[Overpayment], widgets->boxText[Overpayment], Layout2::Right, 15);
-        layout.AddField(widgets->box[MonthlyPayment], monthlyPaymentList, Layout2::Left, widgets->box[MonthlyPayment]->width()/1.5);
+        layout.SetField(widgets->box[CreditSum], widgets->data[CreditSum],Layout::Left, 15);
+        layout.SetField(widgets->box[CreditTerm], widgets->data[CreditTerm], Layout::Left, 15);
+        layout.SetField(widgets->box[InterestRate], widgets->data[InterestRate], Layout::Left, 15);
+        layout.SetField(widgets->box[TotalPayment], widgets->data[TotalPayment], Layout::Right, 15);
+        layout.SetField(widgets->box[Overpayment], widgets->data[Overpayment], Layout::Right, 15);
+
+        layout.SetField(widgets->box[MonthlyPayment], monthlyPaymentList, Layout::Left, widgets->box[MonthlyPayment]->width()/2);
+        layout.SetField(widgets->box[CreditTerm], creditTermList, Layout::Left, widgets->box[CreditTerm]->width() - creditTermList->sizeHint().width());
     }
 
     void SetOptions() {
-        widgets->boxText[TotalPayment]->setReadOnly(true);
-        widgets->boxText[Overpayment]->setReadOnly(true);
+        widgets->data[TotalPayment]->setReadOnly(true);
+        widgets->data[Overpayment]->setReadOnly(true);
 
-        widgets->boxText[CreditSum]->setAlignment(Qt::AlignLeft);
-        widgets->boxText[CreditTerm]->setAlignment(Qt::AlignLeft);
-        widgets->boxText[InterestRate]->setAlignment(Qt::AlignLeft);
-        widgets->boxText[TotalPayment]->setAlignment(Qt::AlignRight);
-        widgets->boxText[Overpayment]->setAlignment(Qt::AlignRight);
+        widgets->data[CreditSum]->setAlignment(Qt::AlignLeft);
+        widgets->data[CreditTerm]->setAlignment(Qt::AlignLeft);
+        widgets->data[InterestRate]->setAlignment(Qt::AlignLeft);
+        widgets->data[TotalPayment]->setAlignment(Qt::AlignRight);
+        widgets->data[Overpayment]->setAlignment(Qt::AlignRight);
 
         widgets->box[CreditSum]->setReadOnly(true);
         widgets->box[CreditTerm]->setReadOnly(true);
@@ -127,26 +130,30 @@ public:
         widgets->box[Overpayment]->setReadOnly(true);
         widgets->box[MonthlyPayment]->setReadOnly(true);
 
+        widgets->data[CreditSum]->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,10}[.][0-9]{0,2}"), this));
+        widgets->data[CreditTerm]->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{0,2}"), this));
+        widgets->data[InterestRate]->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,2}[.][0-9]{0,2}"), this));
+
         creditTermList->addItem("Month");
         creditTermList->addItem("Years");
         creditTermList->addItem("Days");
     }
 
     void SetInput() {
-        controller->SetCreditSum(widgets->boxText[CreditSum]->text().toDouble());
-        controller->SetCreditTerm(widgets->boxText[CreditTerm]->text().toDouble());
-        controller->SetInterestRate(widgets->boxText[InterestRate]->text().toDouble());
+        controller->SetCreditSum(widgets->data[CreditSum]->text().toDouble());
+        controller->SetCreditTerm(widgets->data[CreditTerm]->text().toDouble());
+        controller->SetInterestRate(widgets->data[InterestRate]->text().toDouble());
     }
 
     void GetOutput() {
         ClearOutput();
 
         for(auto var : controller->GetMonthlyPayments()) {
-            monthlyPaymentList->addItem(QString::number(var));
+            monthlyPaymentList->addItem(QString::number(var, 'f', 2));
         }
 
-        widgets->boxText[TotalPayment]->setText(QString::number(controller->GetTotalPayment()));
-        widgets->boxText[Overpayment]->setText(QString::number(controller->GetOverpayment()));
+        widgets->data[TotalPayment]->setText(QString::number(controller->GetTotalPayment(), 'f', 2));
+        widgets->data[Overpayment]->setText(QString::number(controller->GetOverpayment(), 'f', 2));
 
         widgets->bodyPayments.append(controller->GetMonthlyBodyPayments());
         widgets->percentPayments.append(controller->GetMonthlyPercentPayments());
@@ -165,6 +172,7 @@ public:
 
 
 private slots:
+
     void AnnuityPayment() {
         SetInput();
         controller->AnnuityLoan();

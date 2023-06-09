@@ -1,5 +1,6 @@
 #include "Validate.h"
 
+#include <vector>
 
 Validator::Validator(IValidate* rule) {
     alg = rule;
