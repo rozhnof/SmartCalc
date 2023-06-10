@@ -5,7 +5,6 @@
 #include "mainwindow.h"
 #include "IPlatformUI.h"
 #include "../Controllers/GraphController.h"
-#include <QRegExp>
 
 class GraphUI : public MainWindow
 {
@@ -136,6 +135,13 @@ private:
         widgets->data.at(InputX)->setValue(0);
         widgets->data.at(Points)->setValue(10000);
 
+        QString rx = "(([0-9]{1,10}([.][0-9]{1,10})?))|x|-|[(]|((sin|cos|tan|asin|acos|atan|log|ln|sqrt)[(])((((([0-9]{1,10}([.][0-9]{1,10})?))|x)[+-*/^])|((sin|cos|tan|asin|acos|atan|log|ln|sqrt)[(]))*";
+
+
+
+
+        widgets->Input->setValidator(new QRegularExpressionValidator(QRegularExpression(rx), this));
+
         widgets->graph->graph(1)->setVisible(false);
     }
 
@@ -174,29 +180,9 @@ private:
         connect(widgets->data[InputX], &QDoubleSpinBox::valueChanged, this, &GraphUI::DrawLine);
         connect(widgets->drawingLine, &QCheckBox::stateChanged, this, &GraphUI::DrawingLineState);
         connect(widgets->Input, &QLineEdit::returnPressed, this, &GraphUI::SetInput);
-        connect(widgets->Input, &QLineEdit::textChanged, this, &GraphUI::ValidateInput);
     }
 
 private slots:
-
-    void ValidateInput() {
-        if (!widgets->Input->text().isEmpty() && widgets->Input->text().size() > _prevInputSize) {
-            bool status = controller->Validate(widgets->Input->text().back().toLatin1());
-            if (!status) {
-                QString input = widgets->Input->text();
-                input.chop(1);
-                widgets->Input->setText(input);
-            }
-        } else if (widgets->Input->text().size() < _prevInputSize) {
-//            if (!widgets->Input->text().isEmpty()) {
-//                controller->Validate(widgets->Input->text().back().toLatin1());
-//            } else {
-                controller->Validate("");
-                widgets->Input->setText("");
-//            }
-        }
-        _prevInputSize = widgets->Input->text().size();
-    }
 
     void DrawGraph() {
         int countPoints = widgets->data[Points]->value();
@@ -244,12 +230,8 @@ private slots:
     }
 
     void SetInput() {
-        if (controller->Validate(widgets->Input->text()) == true) {
-            controller->SetInput(widgets->Input->text());
-            DrawGraph();
-        } else {
-            widgets->Input->setText("");
-        }
+        controller->SetInput(widgets->Input->text());
+        DrawGraph();
     }
 
     void ClearInput() {
