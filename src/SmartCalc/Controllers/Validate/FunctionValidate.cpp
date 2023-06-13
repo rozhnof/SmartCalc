@@ -6,7 +6,7 @@ string FunctionValidate::Validate(string input, const string &button, int &statu
     status = 0;
     char last_symbol = input.back();
 
-    if (last_symbol == '(' || Validator::IsOperator(last_symbol)) {
+    if (last_symbol == '(' || Validator::IsOperator(string{last_symbol})) {
         status = 1;
     } else if (input.empty()) {
         status = 1;

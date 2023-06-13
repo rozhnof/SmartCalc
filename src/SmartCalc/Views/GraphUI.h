@@ -20,7 +20,6 @@ private:
 
     GraphController *controller;
     GraphWidgets *widgets;
-    string pattern;
 
     int _prevInputSize = 0;
 
@@ -42,7 +41,6 @@ public:
         SetGeometry();
         SetStyle();
         Connects();
-        SetInputPattern();
     }
 
 private:
@@ -145,16 +143,6 @@ private:
         widgets->graph->graph(1)->setVisible(false);
     }
 
-    void SetInputPattern() {
-        QString numbers = "([0-9]{1,10}([.][0-9]{1,10})?)";
-        QString functions = "(sin|cos|tan|asin|acos|atan|log|ln|sqrt)[(]";
-        QString operators = "([+|-|/|*|^]|(mod))";
-//        pattern = QString("((%1%2|(%3))[(]*)*").arg(numbers, operators, functions).toStdString();
-        pattern = QString("abc").arg(numbers, operators, functions).toStdString();
-    }
-
-
-
     void CreateObjects() {
         widgets->box.insert(make_pair(ScopeMin, new QTextEdit(this)));
         widgets->box.insert(make_pair(RangeMin, new QTextEdit(this)));
@@ -192,14 +180,7 @@ private:
         connect(widgets->Input, &QLineEdit::returnPressed, this, &GraphUI::SetInput);
     }
 
-    int InputValidator() {
-        std::regex regex(pattern);
-        return std::regex_search(widgets->Input->text().toStdString(), regex);
-    }
-
 private slots:
-
-
 
     void DrawGraph() {
         int countPoints = widgets->data[Points]->value();
@@ -247,15 +228,13 @@ private slots:
     }
 
     void SetInput() {
-        if (InputValidator()) {
+        if (controller->ResultValidate(widgets->Input->text())) {
+            cout << "OK" << endl;
 //            controller->SetInput(widgets->Input->text());
 //            DrawGraph();
-            cout << "ok" << endl;
         } else {
             cout << "ERROR" << endl;
         }
-
-
     }
 
     void ClearInput() {

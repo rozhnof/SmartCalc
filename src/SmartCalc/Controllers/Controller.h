@@ -22,5 +22,8 @@ public:
         return QString::fromStdString(_validInput);
     }
 
-
+    bool ResultValidate(QString input) {
+        Validator check;
+        return check.FullValidate(input.toStdString());
+    }
 };

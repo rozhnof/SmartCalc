@@ -36,6 +36,19 @@
         "utility": "c",
         "__locale": "c",
         "tests.h": "c",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "numbers": "cpp",
+        "iosfwd": "cpp",
+        "string": "cpp",
+        "__hash_table": "cpp",
+        "__split_buffer": "cpp",
+        "__tree": "cpp",
+        "initializer_list": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+        "regex": "cpp",
+        "string_view": "cpp",
+        "unordered_map": "cpp",
+        "ranges": "cpp"
     }
 }
