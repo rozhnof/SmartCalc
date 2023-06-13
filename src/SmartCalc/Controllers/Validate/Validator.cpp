@@ -10,7 +10,7 @@ string Validator::Validate(string input, string button, int &status) {
 }
 
 int Validator::IsOperator(string lexema) {
-    vector<string> operators = {"+", "-", "/", "*", "^", "mod"};
+    vector<string> operators = {"+", "-", "/", "*", "^", "%"};
 
     for (auto it : operators) {
         if (lexema.substr(0, it.size()) == it) return true;

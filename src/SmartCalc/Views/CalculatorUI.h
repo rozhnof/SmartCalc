@@ -35,8 +35,6 @@ public:
 
         CreateObjects();
         Connects();
-
-
     }
 
     void SetupUI() override {
@@ -73,7 +71,7 @@ private:
        widgets->calcButtons.insert(make_pair(ButtonSub, NewPushButton(this, "-", "operator")));
        widgets->calcButtons.insert(make_pair(ButtonMul, NewPushButton(this, "*", "operator")));
        widgets->calcButtons.insert(make_pair(ButtonDiv, NewPushButton(this, "/", "operator")));
-       widgets->calcButtons.insert(make_pair(ButtonMod, NewPushButton(this, "mod", "mod")));
+       widgets->calcButtons.insert(make_pair(ButtonMod, NewPushButton(this, "%", "mod")));
        widgets->calcButtons.insert(make_pair(ButtonPow, NewPushButton(this, "^", "pow")));
 
        widgets->calcButtons.insert(make_pair(ButtonX, NewPushButton(this, "x", "x")));
@@ -202,11 +200,10 @@ private slots:
     }
 
     void Result() {
-        int status = 1;
-//        controller->Validate(new ResultValidate, widgets->Input->text(), static_cast<QPushButton*>(sender())->text(), status);
-//        if (status) {
-//            widgets->Input->setText(controller->GetResult(1));
-//        }
+        int status = controller->ResultValidate(widgets->Input->text());
+
+        if (status) cout << "OK" << endl;
+        else cout << "ERROR" << endl;
     }
 
     void DrawGraph() {

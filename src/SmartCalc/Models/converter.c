@@ -170,8 +170,8 @@ void Converter(char* input, char* output, ConvertHelper* val) {
             }
         } else if (IsOperator(input[val->in_idx])) {
             PushOutAndPush(input[val->in_idx], output, val);
-        } else if (!strncmp(input + val->in_idx, "mod", 3)) {
-            PushOutAndPush(MOD, output, val);
+        } else if (input[val->in_idx] == '%') {
+            PushOutAndPush('%', output, val);
             val->in_idx += 2;
         }
         output[val->out_idx++] = ' ';

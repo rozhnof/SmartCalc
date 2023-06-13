@@ -21,7 +21,6 @@ extern "C" {
 #define SQRT 7
 #define LN 8
 #define LOG 9
-#define MOD 'M'
 
 
 typedef struct Credit {

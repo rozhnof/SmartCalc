@@ -49,7 +49,7 @@ void CalculateTwoNumbersFromStack(char operation, NodeNumber* *top) {
         result = number1 / number2;
     } else if (operation == '^') {
         result = pow(number1, number2);
-    } else if (operation == 'M') {
+    } else if (operation == '%') {
         result = fmodl(number1, number2);
     } 
 
@@ -120,7 +120,7 @@ long double Calculation(char* output, double x) {
             PushNumber(x, &top);
         } else if (IsNumber(elem[0])) {
             PushStrNumber(elem, &top);
-        } else if ((IsOperator(elem[0]) || elem[0] == MOD ) && elem[0] != '~') {
+        } else if ((IsOperator(elem[0]) || elem[0] == '%' ) && elem[0] != '~') {
             CalculateTwoNumbersFromStack(elem[0], &top);
         } else if (elem[0] == '!') {
             Factorial(&top);
