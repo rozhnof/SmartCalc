@@ -2,7 +2,7 @@
 #define IPLATFORMUI_H
 
 
-#include "IWidgets.h"
+#include "Widgets.h"
 
 using namespace std;
 

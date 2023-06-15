@@ -44,7 +44,7 @@ HEADERS += \
     Views/DepositCalculatorUI.h \
     Views/GraphUI.h \
     Views/IPlatformUI.h \
-    Views/IWidgets.h \
+    Views/Widgets.h \
     Views/Layout.h \
     Views/MacUI.h \
     Views/WinUI.h \

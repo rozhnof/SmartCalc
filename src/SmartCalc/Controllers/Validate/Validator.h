@@ -1,23 +1,26 @@
 #include <iostream>
-
+#include <algorithm>
 
 class Validator {
 private:
-    bool _number = true;
-    bool _operator = true;
-    bool _unaryOperator = true;
-    bool _function = true;
-    bool _openBracket = true;
-    bool _closeBracket = false;
-    bool _x = true;
-    bool _dot = false;
-    bool _factorial = false;
-    bool _exp = false;
+    int status = 0;
+
+    enum Lexemas {
+        NUMBER = 0b0000000001,
+        OPERATOR = 0b0000000010,
+        UNARY_OPERATOR = 0b0000000100,
+        FUNCTION = 0b0000001000,
+        OPEN_BRACKET = 0b0000010000,
+        CLOSE_BRACKET = 0b0000100000,
+        X = 0b0001000000,
+        DOT = 0b0010000000,
+        FACTORIAL = 0b0100000000,
+        EXP = 0b1000000000
+    };
 
     int _bracketCount = 0;
     int _dotCount = 0;
 
-    bool _validateStatus = true;
     bool _functionStatus = true;
 
     int _size;
@@ -26,28 +29,23 @@ private:
 public:
     Validator(const std::string &input) : _input(input), _size(input.size()) {}
 
-    bool IsUnaryOperator(char lexema) {
+    bool isUnaryOperator(char &lexema) {
         if (lexema == '+' || lexema == '-') {
             return true;
         }
         return false;
     }
 
-    bool IsOperator(const char &lexema) {
+    bool isOperator(const char &lexema) {
         std::vector<char> operators = {'+', '-', '/', '*', '^', '%'};
-
-        for (auto it : operators) {
-            if (lexema == it) return true;
-        }
-
-        return false;
+        return std::find(operators.begin(), operators.end(), lexema) != operators.end();
     }
 
-    bool IsNumber(const char &symbol) {
+    bool isNumber(const char &symbol) {
         return (symbol >= '0' && symbol <= '9');
     }
 
-    int IsFunction(const std::string &lexema, int &functionSize) {
+    int isFunction(const std::string &lexema, int &functionSize) {
         std::vector<std::string> functions = {"sin", "cos", "tan", "asin", "acos", "atan", "sqrt", "ln", "log"};
 
         for (auto &it : functions) {
@@ -61,21 +59,23 @@ public:
     }
 
     bool Validate() {
+        status = NUMBER | UNARY_OPERATOR | FUNCTION | OPEN_BRACKET | X;
+
         if (_size == 0) {
             return false;
         }
 
         int functionSize = 0;
-        if (!IsNumber(_input[0]) && _input[0] != 'x' && !IsFunction(_input, functionSize) && _input[0] != '(' && !IsUnaryOperator(_input[0])) {
+        if (!isNumber(_input[0]) && _input[0] != 'x' && !isFunction(_input, functionSize) && _input[0] != '(' && !isUnaryOperator(_input[0])) {
             return false;
         }
 
         for (int i = 0; i < _size; i++) {
-            if (IsNumber(_input[i])) {
+            if (isNumber(_input[i])) {
                 SetNumber();
-            } else if (IsOperator(_input[i])) {
+            } else if (isOperator(_input[i])) {
                 SetOperator();
-            } else if (IsFunction(_input.substr(i), functionSize)) {
+            } else if (isFunction(_input.substr(i), functionSize)) {
                 SetFunction();
                 i += (functionSize - 1);
             } else if (_input[i] == 'x') {
@@ -93,194 +93,103 @@ public:
             } else {
                 return false;
             }
+
+            if (!status) {
+                return false;
+            }
         }
 
-        if (_bracketCount < 0 || _input.back() == '(' || IsOperator(_input.back()) || !_functionStatus) {
+        if (_bracketCount != 0 || _input.back() == '(' || isOperator(_input.back()) || !(status)) {
             return false;
         }
 
-        return _validateStatus && _functionStatus;
+        return (status && _functionStatus);
     }
 
     void SetNumber() {
-        if (_number) {
-            _number = true;
-            _operator = true;
-            _closeBracket = true;
-            _dot = true;
-            _exp = true;
-
-            _function = false;
-            _openBracket = false;
-            _x = false;
-            _unaryOperator = false;
+        if (status & NUMBER) {
+            status = NUMBER | OPERATOR | DOT | EXP | CLOSE_BRACKET;
 
             if (_dotCount == 0) {
-                _factorial = true;
-            } else {
-                _factorial = false;
+                status |= FACTORIAL;
             }
         } else {
-            _validateStatus = false;
+            status = 0;
         }
     }
 
     void SetOperator() {
-        if (_operator) {
-            _number = true;
-             _function = true;
-             _openBracket = true;
-             _x = true;
-             _unaryOperator = true;
-
-            _operator = false;
-            _closeBracket = false;
-            _dot = false;
-            _factorial = false;
-            _exp = false;
+        if (status & OPERATOR) {
+            status = NUMBER | FUNCTION | OPEN_BRACKET | X | UNARY_OPERATOR;
             _dotCount = 0;
-        } else if (_unaryOperator) {
-            _number = true;
-            _operator = false;
-            _function = true;
-            _openBracket = true;
-            _closeBracket = false;
-            _x = true;
-            _dot = false;
-            _unaryOperator = false;
-            _factorial = false;
-            _exp = false;
+        } else if (status & UNARY_OPERATOR) {
+            status = NUMBER | FUNCTION | OPEN_BRACKET | X;
+            _dotCount = 0;
         } else {
-            _validateStatus = false;
+            status = 0;
         }
     }
 
     void SetFunction() {
-        if (_function) {
-            _number = false;
-            _operator = false;
-            _function = false;
-            _openBracket = true;
-            _closeBracket = false;
-            _x = false;
-            _dot = false;
-            _unaryOperator = false;
-            _factorial = false;
-            _exp = false;
-
+        if (status & FUNCTION) {
+            status = OPEN_BRACKET;
             _functionStatus = false;
         } else {
-            _validateStatus = false;
+            status = 0;
         }
     }
 
     void SetFactorial() {
-        if (_factorial) {
-            _number = false;
-            _operator = true;
-            _function = false;
-            _openBracket = false;
-            _closeBracket = false;
-            _x = false;
-            _dot = false;
-            _unaryOperator = true;
-            _factorial = false;
-            _exp = false;
+        if (status & FACTORIAL) {
+            status = OPERATOR;
         } else {
-            _validateStatus = false;
+            status = 0;
         }
     }
 
     void SetX() {
-        if (_x) {
-            _number = false;
-            _operator = true;
-            _function = false;
-            _openBracket = false;
-            _closeBracket = true;
-            _x = false;
-            _dot = false;
-            _unaryOperator = true;
-            _factorial = false;
-            _exp = false;
+        if (status & X) {
+            status = OPERATOR | CLOSE_BRACKET;
         } else {
-            _validateStatus = false;
+            status = 0;
         }
     }
 
     void SetOpenBracket() {
-        if (_openBracket) {
-            _number = true;
-            _operator = false;
-            _function = true;
-            _openBracket = true;
-            _closeBracket = false;
-            _x = true;
-            _dot = false;
-            _unaryOperator = true;
-            _factorial = false;
-            _exp = false;
+        if (status & OPEN_BRACKET) {
+            status = NUMBER | FUNCTION | OPEN_BRACKET | X | UNARY_OPERATOR;
 
             _bracketCount++;
         } else {
-            _validateStatus = false;
+            status = 0;
         }
     }
 
     void SetCloseBracket() {
-        if (_closeBracket) {
-            _number = false;
-            _operator = true;
-            _function = false;
-            _openBracket = false;
-            _closeBracket = true;
-            _x = false;
-            _dot = false;
-            _unaryOperator = true;
-            _factorial = false;
-            _exp = false;
-
+        if (status & CLOSE_BRACKET) {
+            status = OPERATOR | CLOSE_BRACKET;
             _functionStatus = true;
+
             _bracketCount--;
         } else {
-            _validateStatus = false;
+            status = 0;
         }
     }
 
     void SetDot() {
-        if (_dot && _dotCount == 0) {
-            _number = true;
-            _operator = false;
-            _function = false;
-            _openBracket = false;
-            _closeBracket = false;
-            _x = false;
-            _dot = false;
-            _unaryOperator = false;
-            _factorial = false;
-            _exp = false;
-
+        if (status & DOT) {
+            status = NUMBER;
             _dotCount++;
         } else {
-            _validateStatus = false;
+            status = 0;
         }
     }
 
     void SetExp() {
-        if (_exp) {
-            _unaryOperator = true;
-            _number = true;
-
-            _operator = false;
-            _function = false;
-            _openBracket = false;
-            _closeBracket = false;
-            _x = false;
-            _dot = false;
-            _factorial = false;
-            _exp = false;
+        if (status & EXP) {
+            status = UNARY_OPERATOR | NUMBER;
         } else {
-            _validateStatus = false;
+            status = 0;
         }
     }
 };

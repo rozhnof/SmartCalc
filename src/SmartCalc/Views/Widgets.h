@@ -1,4 +1,4 @@
-    #ifndef IWIDGETS_H
+#ifndef IWIDGETS_H
 #define IWIDGETS_H
 
 #include <QVector>
@@ -129,10 +129,6 @@ enum DepositCalcObjectsEnum {
     DepositOverpayment,
     DepositMonthlyPayment
 };
-
-
-
-
 
 
 #endif // IWIDGETS_H

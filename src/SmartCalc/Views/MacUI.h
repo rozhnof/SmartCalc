@@ -1,7 +1,7 @@
 #ifndef MACUI_H
 #define MACUI_H
 
-#include "IPlatformUI.h"
+#include "Widgets.h"
 #include <iostream>
 #include <QWidget>
 

@@ -12,9 +12,6 @@ class Controller {
 private:
     Model *model;
 
-    string _input;
-    string _validInput;
-
 public:
     bool ResultValidate(QString input) {
         Validator check(input.toStdString());

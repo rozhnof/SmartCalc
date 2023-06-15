@@ -3,7 +3,6 @@
 
 
 #include "mainwindow.h"
-#include "IPlatformUI.h"
 #include "../Controllers/GraphController.h"
 
 
@@ -17,7 +16,7 @@ private:
     GraphController *controller;
     GraphWidgets *widgets;
 
-    int _prevInputSize = 0;
+    bool _graphStatus = false;
 
 public:
 
@@ -179,17 +178,20 @@ private:
 private slots:
 
     void DrawGraph() {
-        int countPoints = widgets->data[Points]->value();
-        double xMin = widgets->data[ScopeMin]->value();
-        double xMax = widgets->data[ScopeMax]->value();
-        double yMin = widgets->data[RangeMin]->value();
-        double yMax = widgets->data[RangeMax]->value();
+        if (_graphStatus) {
+            int countPoints = widgets->data[Points]->value();
+            double xMin = widgets->data[ScopeMin]->value();
+            double xMax = widgets->data[ScopeMax]->value();
+            double yMin = widgets->data[RangeMin]->value();
+            double yMax = widgets->data[RangeMax]->value();
 
-        QVector<double> x = controller->GetCollectionX(countPoints, xMin, xMax);
-        QVector<double> y = controller->GetCollectionY(x, yMin, yMax);
+            QVector<double> x = controller->GetCollectionX(countPoints, xMin, xMax);
+            QVector<double> y = controller->GetCollectionY(x, yMin, yMax);
 
-        widgets->graph->graph(0)->setData(x, y);
-        widgets->graph->replot();
+            widgets->graph->graph(0)->setData(x, y);
+            widgets->graph->graph(0)->setVisible(true);
+            widgets->graph->replot();
+        }
     }
 
     void DrawLine()
@@ -207,6 +209,7 @@ private slots:
         bool state = widgets->drawingLine->isTristate();
         widgets->drawingLine->setTristate(!state);
         widgets->graph->graph(1)->setVisible(!state);
+        DrawLine();
         widgets->graph->replot();
     }
 
@@ -224,9 +227,14 @@ private slots:
     }
 
     void SetInput() {
-        if (controller->ResultValidate(widgets->Input->text())) {
+        _graphStatus = controller->ResultValidate(widgets->Input->text());
+
+        if (_graphStatus) {
             controller->SetInput(widgets->Input->text());
             DrawGraph();
+        } else {
+            widgets->graph->graph(0)->setVisible(false);
+            widgets->graph->replot();
         }
     }
 

@@ -1,7 +1,7 @@
 #ifndef WINUI_H
 #define WINUI_H
 
-#include "IPlatformUI.h"
+#include "Widgets.h"
 #include <iostream>
 #include <QWidget>
 
