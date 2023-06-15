@@ -33,10 +33,11 @@ public:
 private:
 
     void SetStyle(CalcWidgets *widgets) {
-        widgets->Input->setAlignment(Qt::AlignRight | Qt::AlignCenter);
+        widgets->Input->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
         widgets->calcWindow->setStyleSheet(   "QLabel#input { "
                                               "     background-color: rgb(36, 36, 39); "
                                               "     font-size: 26px;"
+                                              "     border: none"
                                               "}"
                                               "QPushButton { "
                                               "     background-color: rgb(56, 56, 56);"
@@ -54,12 +55,12 @@ private:
                                               "QPushButton#number:pressed, QPushButton#dot:pressed { "
                                               "     background-color: rgb(155, 155, 155); "
                                               "}"
-                                              "QPushButton#operator, QPushButton#clear, QPushButton#unaryOperator, QPushButton#equal { "
+                                              "QPushButton#operator, QPushButton#clear, QPushButton#unaryOperator, QPushButton#equal, QPushButton#exp { "
                                               "     background-color: rgb(226, 153, 57);"
                                               "     border-style: solid;"
                                               "     border-width: 1px 1px 0px 0px;"
                                               "     border-color: rgb(34, 34, 34); }"
-                                              "QPushButton#operator:pressed, QPushButton#clear:pressed, QPushButton#unaryOperator:pressed, QPushButton#equal:pressed { "
+                                              "QPushButton#operator:pressed, QPushButton#clear:pressed, QPushButton#unaryOperator:pressed, QPushButton#equal:pressed, QPushButton#exp:pressed { "
                                               "     background-color: rgb(191, 129, 46); "
                                               "}");
     }
@@ -190,9 +191,9 @@ private:
         layout.AddWidget(widgets->calcButtons[ButtonX]);
         layout.AddWidget(widgets->calcButtons[ButtonOpenBracket]);
         layout.AddWidget(widgets->calcButtons[ButtonCloseBracket]);
-        layout.AddWidget(widgets->calcButtons[ButtonAC]);
-        layout.AddWidget(widgets->calcButtons[ButtonC]);
-        layout.AddWidget(widgets->calcButtons[ButtonUnaryOperator]);
+        layout.AddWidget(widgets->allClear);
+        layout.AddWidget(widgets->clear);
+        layout.AddWidget(widgets->calcButtons[ButtonEXP]);
         layout.AddWidget(widgets->calcButtons[ButtonDiv]);
 
         layout.AddWidget(widgets->calcButtons[ButtonMod]);
@@ -224,7 +225,7 @@ private:
         layout.AddWidget(widgets->calcButtons[ButtonTan]);
         layout.AddWidget(widgets->calcButtons[Button0], 2);
         layout.AddWidget(widgets->calcButtons[ButtonDot]);
-        layout.AddWidget(widgets->calcButtons[ButtonResult]);
+        layout.AddWidget(widgets->result);
     }
 };
 

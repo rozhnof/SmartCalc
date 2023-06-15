@@ -36,6 +36,15 @@ private:
     int _currentX = 0;
     int _currentY = 0;
 
+    int _currentColSpan = 1;
+    int _currentRowSpan = 1;
+
+    int _xRemaining = 0;
+    int _yRemaining = 0;
+
+    int _countXRemaining = 0;
+    int _countYRemaining = 0;
+
 public:
 
     Layout() {}
@@ -77,6 +86,9 @@ public:
     void SetAutoSize() {
         _widgetWidth = ((_xMax - _rightSpacing) - (_x0 + _leftSpacing) - ((_columns - 1) * _horizontalSpacing)) / _columns;
         _widgetHeight = ((_yMax - _bottomSpacing) - (_y0 + _aboveSpacing) - ((_rows - 1) * _verticalSpacing)) / _rows;
+
+        _xRemaining = _countXRemaining = ((_xMax - _x0) - (_rightSpacing + _leftSpacing) - ((_columns - 1) * _horizontalSpacing)) % _widgetWidth;
+        _yRemaining = _countYRemaining = ((_yMax - _y0) - (_bottomSpacing + _aboveSpacing) - ((_rows - 1) * _verticalSpacing)) % _widgetHeight;
     }
 
     void SetLeftSpacing(int spacing) {
@@ -103,16 +115,29 @@ public:
     }
 
     void AddWidget(QWidget *widget, int colSpan = 1, int rowSpan = 1) {
+        _currentColSpan = colSpan;
+        _currentRowSpan = rowSpan;
         AddWidgetWithSize(widget, _widgetWidth * colSpan + _horizontalSpacing * (colSpan - 1), _widgetHeight * rowSpan + _verticalSpacing * (rowSpan - 1));
     }
 
     void AddWidgetWithSize(QWidget *widget, int width, int height) {
+        if (_countXRemaining > 0) {
+            width++;
+            _countXRemaining--;
+        }
+        if (_countYRemaining > 0) {
+            height++;
+        }
+
         widget->setGeometry(_currentX, _currentY, width, height);
 
-        _columnsCounter += (width / _widgetWidth) + (1 && (width % _widgetWidth));
+        _columnsCounter += _currentColSpan;
+        SetDefaultSpan();
 
         if (_columnsCounter >= _columns) {
             _columnsCounter = 0;
+            _countYRemaining--;
+            _countXRemaining = _xRemaining;
             _currentX = _x0 + _leftSpacing;
 
             _rowsCounter++;
@@ -120,6 +145,13 @@ public:
         } else {
             _currentX += (width + _horizontalSpacing);
         }
+
+        widget->show();
+    }
+
+    void SetDefaultSpan() {
+        _currentColSpan = 1;
+        _currentRowSpan = 1;
     }
 
     enum AlignH {

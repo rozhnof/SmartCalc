@@ -17,7 +17,11 @@ using namespace std;
 typedef struct CalcWidgets {
     QMainWindow *calcWindow;
 
-    QLabel *Input;
+    QLineEdit *Input;
+    QPushButton *allClear;
+    QPushButton *clear;
+    QPushButton *result;
+
     unordered_map<int, QPushButton*> calcButtons;
 } CalcWidgets;
 
@@ -95,12 +99,7 @@ enum CalcObjectsEnum {
 
     ButtonOpenBracket,
     ButtonCloseBracket,
-
-    ButtonC,
-    ButtonAC,
-    ButtonUnaryOperator,
-    ButtonEXP,
-    ButtonResult,
+    ButtonEXP
 };
 
 enum GraphObjectsEnum {

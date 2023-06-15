@@ -9,9 +9,6 @@ QT += gui
 
 CONFIG += c++17
 
-LIBS += -L/usr/local/lib -lpcrecpp
-INCLUDEPATH += /usr/local/include \
-    /Users/yesenias/goinfre/homebrew/include
 
 
 
@@ -21,17 +18,6 @@ INCLUDEPATH += /usr/local/include \
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Controllers/Validate/CloseBracketValidate.cpp \
-    Controllers/Validate/DotValidate.cpp \
-    Controllers/Validate/FactorialValidate.cpp \
-    Controllers/Validate/FunctionValidate.cpp \
-    Controllers/Validate/NumberValidate.cpp \
-    Controllers/Validate/OpenBracketValidate.cpp \
-    Controllers/Validate/OperatorValidate.cpp \
-    Controllers/Validate/ResultValidate.cpp \
-    Controllers/Validate/UnaryOperatorValidate.cpp \
-    Controllers/Validate/Validator.cpp \
-    Controllers/Validate/xValidate.cpp \
     Models/calculation.c \
     Models/converter.c \
     Models/credit_calc.c \
@@ -44,7 +30,7 @@ HEADERS += \
     Controllers/CreditCalcController.h \
     Controllers/DepositCalcController.h \
     Controllers/GraphController.h \
-    Controllers/Validate/Validate.h \
+    Controllers/Validate/Validator.h \
     Models/CalculatorModel.h \
     Models/CreditCalcModel.h \
     Models/DepositCalcModel.h \

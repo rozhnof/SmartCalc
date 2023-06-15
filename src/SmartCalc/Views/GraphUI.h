@@ -5,10 +5,6 @@
 #include "mainwindow.h"
 #include "IPlatformUI.h"
 #include "../Controllers/GraphController.h"
-#include <pcrecpp.h>
-#include <boost/regex.hpp>
-#include <regex>
-
 
 
 class GraphUI : public MainWindow
@@ -229,11 +225,8 @@ private slots:
 
     void SetInput() {
         if (controller->ResultValidate(widgets->Input->text())) {
-            cout << "OK" << endl;
-//            controller->SetInput(widgets->Input->text());
-//            DrawGraph();
-        } else {
-            cout << "ERROR" << endl;
+            controller->SetInput(widgets->Input->text());
+            DrawGraph();
         }
     }
 

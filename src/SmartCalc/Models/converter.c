@@ -84,6 +84,15 @@ void ReadNumber(char* input, char* output, ConvertHelper* val) {
     while (IsNumber(input[val->in_idx]) || input[val->in_idx] == '.') {
         output[val->out_idx++] = input[val->in_idx++];
     }
+    if (input[val->in_idx] == 'e' || input[val->in_idx] == 'E') {
+        output[val->out_idx++] = input[val->in_idx++];
+        if (input[val->in_idx] == '+' || input[val->in_idx] == '-') {
+            output[val->out_idx++] = input[val->in_idx++];
+        }
+        while (IsNumber(input[val->in_idx])) {
+            output[val->out_idx++] = input[val->in_idx++];
+        }
+    }
     val->in_idx--;
 }
 

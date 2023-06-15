@@ -32,10 +32,12 @@ public:
 private:
 
     void SetStyle(CalcWidgets *widgets) {
+        widgets->Input->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
         widgets->calcWindow->setStyleSheet(     "QWidget, QLabel#input {"
                                                 "   background-color: rgb(27, 32, 50);"
                                                 "   color: white;"
                                                 "   font-size: 26px;"
+                                                "   border: none;"
                                                 "}"
                                                 "QPushButton {"
                                                 "   background-color: rgb(46, 49, 68);"
@@ -201,9 +203,9 @@ private:
         layout.AddWidget(widgets->calcButtons[ButtonX]);
         layout.AddWidget(widgets->calcButtons[ButtonOpenBracket]);
         layout.AddWidget(widgets->calcButtons[ButtonCloseBracket]);
-        layout.AddWidget(widgets->calcButtons[ButtonAC]);
-        layout.AddWidget(widgets->calcButtons[ButtonC]);
-        layout.AddWidget(widgets->calcButtons[ButtonUnaryOperator]);
+        layout.AddWidget(widgets->allClear);
+        layout.AddWidget(widgets->clear);
+        layout.AddWidget(widgets->calcButtons[ButtonEXP]);
         layout.AddWidget(widgets->calcButtons[ButtonDiv]);
 
         layout.AddWidget(widgets->calcButtons[ButtonMod]);
@@ -235,7 +237,7 @@ private:
         layout.AddWidget(widgets->calcButtons[ButtonTan]);
         layout.AddWidget(widgets->calcButtons[Button0], 2);
         layout.AddWidget(widgets->calcButtons[ButtonDot]);
-        layout.AddWidget(widgets->calcButtons[ButtonResult]);
+        layout.AddWidget(widgets->result);
     }
 };
 

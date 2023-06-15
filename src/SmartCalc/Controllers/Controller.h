@@ -2,7 +2,7 @@
 
 #include "../Models/Model.h"
 #include <QString>
-#include "Validate/Validate.h"
+#include "Validate/Validator.h"
 
 using namespace std;
 
@@ -16,14 +16,8 @@ private:
     string _validInput;
 
 public:
-    QString Validate(IValidate *rule, QString input, QString button, int &status) {
-        Validator *check = new Validator(rule);
-        _validInput = check->Validate(input.toStdString(), button.toStdString(), status);
-        return QString::fromStdString(_validInput);
-    }
-
     bool ResultValidate(QString input) {
-        Validator check;
-        return check.FullValidate(input.toStdString());
+        Validator check(input.toStdString());
+        return check.Validate();
     }
 };

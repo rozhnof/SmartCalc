@@ -10,20 +10,14 @@ class CalculatorController : public Controller {
 
 private:
 
-    CalculatorModel *model;
-
-    string _input;
-    string _validInput;
-
 public:
 
-    CalculatorController() {
-        model = new CalculatorModel;
-    }
+    CalculatorController() {}
 
-    QString GetResult(double x) {
-        model->SetInput(_validInput);
-        return QString::number(model->Calculate(x));
+    double GetResult(QString input, double x) {
+        CalculatorModel model;
+        model.SetInput(input.toStdString());
+        return model.Calculate(x);
     }
 };
 
