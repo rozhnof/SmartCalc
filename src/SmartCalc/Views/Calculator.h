@@ -57,7 +57,7 @@ public:
         _depositCalc->_platform = &_platform;
         _graph->_platform = &_platform;
 
-        _currentTab = _calc;
+        _currentTab = _depositCalc;
 
         AddMenu();
         Connects();

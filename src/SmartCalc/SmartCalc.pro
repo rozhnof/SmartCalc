@@ -10,7 +10,7 @@ QT += gui
 CONFIG += c++17
 
 
-
+RESOURCES = Resources/resources.qrc
 
 
 # You can make your code fail to compile if it uses deprecated APIs.
@@ -20,7 +20,6 @@ CONFIG += c++17
 SOURCES += \
     Models/calculation.c \
     Models/converter.c \
-    Models/credit_calc.c \
     Views/qcustomplot.cpp \
     main.cpp
 
@@ -39,6 +38,7 @@ HEADERS += \
     Models/calc.h \
     Views/Calculator.h \
     Views/CalculatorUI.h \
+    Views/Calendar.h \
     Views/ChartView.h \
     Views/CreditCalculatorUI.h \
     Views/DepositCalculatorUI.h \
@@ -61,3 +61,6 @@ DESTDIR += ../build/
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    Resources/resources.qrc
