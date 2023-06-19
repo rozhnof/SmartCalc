@@ -25,8 +25,6 @@ public:
     CalcWidgets *widgets;
 
     CalculatorUI() : MainWindow() {
-        this->setWindowTitle("Calculator");
-
         controller = new CalculatorController;
         widgets = new CalcWidgets;
         widgets->calcWindow = this;
@@ -43,7 +41,7 @@ public:
 private:
 
     void CreateObjects() {
-       widgets->Input = NewQLineEdit(this, "0", "input");
+       widgets->Input = NewLineEdit(this, "0", "input");
        widgets->allClear = NewPushButton(this, "AC", "clear");
        widgets->clear = NewPushButton(this, "C", "clear");
        widgets->result = NewPushButton(this, "=", "equal");

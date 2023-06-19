@@ -21,6 +21,18 @@ public:
 
     ~MainWindow() {}
 
+    QCheckBox *NewCheckBox(QWidget *parent, QString text = "", QString objectName = "") {
+        QCheckBox *newObject = new QCheckBox(parent);
+        if (!objectName.isEmpty()) newObject->setObjectName(objectName);
+        if (!text.isEmpty()) newObject->setText(text);
+        return newObject;
+    }
+
+    QWidget *NewWidget(QWidget *parent, QString objectName = "") {
+        QWidget *newObject = new QWidget(parent);
+        if (!objectName.isEmpty()) newObject->setObjectName(objectName);
+        return newObject;
+    }
 
     QLabel *NewLabel(QWidget *parent, QString text = "", QString objectName = "") {
         QLabel *newObject = new QLabel(parent);
@@ -37,7 +49,7 @@ public:
         return newObject;
     }
 
-    QLineEdit *NewQLineEdit(QWidget *parent, QString text = "", QString objectName = "") {
+    QLineEdit *NewLineEdit(QWidget *parent, QString text = "", QString objectName = "") {
         QLineEdit *newObject = new QLineEdit(parent);
         if (!text.isEmpty()) newObject->setText(text);
         if (!objectName.isEmpty()) newObject->setObjectName(objectName);

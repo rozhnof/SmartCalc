@@ -45,6 +45,8 @@ private:
     int _countXRemaining = 0;
     int _countYRemaining = 0;
 
+    int _lastWidth = 0;
+    int _lastHeight = 0;
 public:
 
     Layout() {}
@@ -114,11 +116,22 @@ public:
         SetAutoSize();
     }
 
-    void AddWidget(QWidget *widget, int colSpan = 1, int rowSpan = 1) {
+    void AddWidget(QWidget *widget, double colSpan = 1, double rowSpan = 1) {
         _currentColSpan = colSpan;
         _currentRowSpan = rowSpan;
         AddWidgetWithSize(widget, _widgetWidth * colSpan + _horizontalSpacing * (colSpan - 1), _widgetHeight * rowSpan + _verticalSpacing * (rowSpan - 1));
     }
+
+    void NextRow() {
+        _columnsCounter = 0;
+        _countYRemaining--;
+        _countXRemaining = _xRemaining;
+        _currentX = _x0 + _leftSpacing;
+
+        _rowsCounter++;
+        _currentY += (_lastHeight + _verticalSpacing);
+    }
+
 
     void AddWidgetWithSize(QWidget *widget, int width, int height) {
         if (_countXRemaining > 0) {
@@ -130,18 +143,14 @@ public:
         }
 
         widget->setGeometry(_currentX, _currentY, width, height);
+        _lastWidth = width;
+        _lastHeight = height;
 
         _columnsCounter += _currentColSpan;
         SetDefaultSpan();
 
         if (_columnsCounter >= _columns) {
-            _columnsCounter = 0;
-            _countYRemaining--;
-            _countXRemaining = _xRemaining;
-            _currentX = _x0 + _leftSpacing;
-
-            _rowsCounter++;
-            _currentY += (height + _verticalSpacing);
+            NextRow();
         } else {
             _currentX += (width + _horizontalSpacing);
         }

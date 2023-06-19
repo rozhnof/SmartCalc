@@ -132,7 +132,106 @@ private:
     }
 
     void SetStyle(DepositCalcWidgets *widgets) {
+        QString styleSheet = R"(
+            QWidget#deposit_calculator_window {
+                background-color: rgb(27, 32, 50);
+            }
+            QWidget#container {
+                background-color: rgb(46, 49, 68);
+                border: none;
+                border-radius: 10;
+            }
+            QWidget#box {
+                background-color: rgb(217, 217, 217);
+                border: none;
+                border-radius: 10;
+            }
+            QWidget#title {
+                background-color: rgba(0, 0, 0, 0);
+                color: rgb(217, 217, 217);
+            }
+            QWidget#data {
+                background-color: rgba(0, 0, 0, 0);
+                color: rgb(37, 37, 37);
+                font-size: 16px;
+            }
+            QPushButton#button {
+                background-color: rgb(217, 217, 217);
+                border-radius: 10;
+                color: rgb(37, 37, 37);
+                font-size: 16px;
+            }
+            QPushButton#button_left {
+                background-color: rgb(217, 217, 217);
+                border-top-left-radius: 10;
+                border-bottom-left-radius: 10;
+                color: rgb(37, 37, 37);
+                font-size: 16px;
+            }
+            QPushButton#button_right {
+                background-color: rgb(217, 217, 217);
+                border-top-right-radius: 10;
+                border-bottom-right-radius: 10;
+                color: rgb(37, 37, 37);
+                font-size: 16px;
+            }
+            QWidget#box_right {
+                background-color: rgb(217, 217, 217);
+                border-top-right-radius: 10;
+                border-bottom-right-radius: 10;
+            }
+            QPushButton#button:hover, QPushButton#button_left:hover, QPushButton#button_right:hover {
+                background-color: rgb(194, 194, 194);
+            }
+            QPushButton#button:pressed, QPushButton#button_left:hover, QPushButton#button_right:hover {
+                background-color: rgb(171, 171, 171);
+            }
+            QCheckBox {
+                background-color: rgba(0, 0, 0, 0);
+                font-size: 16px;
+            }
+            QCheckBox::indicator {
+                background-color: rgba(27, 32, 50, 1);
+                border: 1px solid rgba(217, 217, 217, 1);
+                border-radius: 5;
+                width: 18px;
+                height: 18px;
+            }
+            QCheckBox::indicator:checked {
+                background-color: rgba(217, 217, 217, 1);
+            }
+            QWidget#calendar_background {
+                background-color: rgba(245, 246, 250, 1);
+            }
+            QTableView::item:hover {
+                background-color: rgba(37, 41, 59, 1);
+            }
+            QTableView {
+                background-color: rgba(27, 32, 50, 1);
+                selection-background-color: rgba(46, 49, 68, 1);
+                border: none;
+                border-radius: 10;
+                gridline-color: rgba(46, 49, 68, 1);
+            }
+            QHeaderView::section {
+                background-color: rgba(27, 32, 50, 1);
+                border: 1px solid rgba(46, 49, 68, 1);
+                font-weight: bold;
+            }
+            QTableView::corner {
+                background-color: rgb(27, 32, 50);
+                border: none;
+            }
+        )";
+        widgets->depositCalcWindow->setStyleSheet(styleSheet);
 
+        for (auto it : widgets->boxData) {
+            it.second->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+        }
+
+        widgets->boxData[ACCURED_INTEREST]->setReadOnly(true);
+        widgets->boxData[TOTAL_AMOUNT]->setReadOnly(true);
+        widgets->boxData[TAX_AMOUNT]->setReadOnly(true);
     }
 
     void SetGeometry(CalcWidgets *widgets) {

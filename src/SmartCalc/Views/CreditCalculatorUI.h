@@ -23,8 +23,6 @@ public:
     Layout layout;
 
     CreditCalculatorUI() : MainWindow() {
-        this->setWindowTitle("Credit Calculator");
-
         controller = new CreditCalcController;
         widgets = new CreditCalcWidgets;
 
@@ -52,9 +50,9 @@ public:
         widgets->title.insert(make_pair(Overpayment, new QLabel("Overpayment", this)));
         widgets->title.insert(make_pair(MonthlyPayment, new QLabel("Montly Payments", this)));
 
-        widgets->data.insert(make_pair(CreditSum, NewQLineEdit(this, "1000", "inputCreditSum")));
-        widgets->data.insert(make_pair(CreditTerm, NewQLineEdit(this, "12", "inputCreditTerm")));
-        widgets->data.insert(make_pair(InterestRate, NewQLineEdit(this, "10", "inputInterestRate")));
+        widgets->data.insert(make_pair(CreditSum, NewLineEdit(this, "1000", "inputCreditSum")));
+        widgets->data.insert(make_pair(CreditTerm, NewLineEdit(this, "12", "inputCreditTerm")));
+        widgets->data.insert(make_pair(InterestRate, NewLineEdit(this, "10", "inputInterestRate")));
         widgets->data.insert(make_pair(TotalPayment, new QLineEdit(this)));
         widgets->data.insert(make_pair(Overpayment, new QLineEdit(this)));
 

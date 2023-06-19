@@ -50,6 +50,16 @@ public:
         _winUi = new WinUI;
         _macUi = new MacUI;
 
+        _calc->setWindowTitle("Calculator");
+        _creditCalc->setWindowTitle("Credit Calculator");
+        _depositCalc->setWindowTitle("Deposit Calculator");
+        _graph->setWindowTitle("Graph");
+
+        _calc->setObjectName("calculator_window");
+        _creditCalc->setObjectName("credit_calculator_window");
+        _depositCalc->setObjectName("deposit_calculator_window");
+        _graph->setObjectName("graph_window");
+
         SetupPlatform();
 
         _calc->_platform = &_platform;

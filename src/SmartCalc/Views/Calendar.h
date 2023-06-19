@@ -20,7 +20,7 @@
 class Calendar : public QCalendarWidget
 {
 public:
-    Calendar(QWidget *parent, QRect size) : QCalendarWidget(parent) {
+    Calendar(QWidget *parent) : QCalendarWidget(parent) {
         this->setGridVisible(false);
         this->setSelectionMode(QCalendarWidget::SingleSelection);
         this->setFirstDayOfWeek(Qt::DayOfWeek::Monday);
@@ -28,20 +28,8 @@ public:
         this->setVerticalHeaderFormat(QCalendarWidget::NoVerticalHeader);
         this->setMaximumDate(QDate(2100, 1, 1));
         this->setMinimumDate(QDate(2000, 1, 1));
-        this->setGeometry(size);
 
         SetWeekdayTextColor(QColor(108, 112, 119));
-
-
-        this->setStyleSheet("QWidget#qt_calendar_navigationbar"
-                            "{"
-                            "   background-color: rgb(255,255,255);"
-                            "   color: rgb(40, 43, 48);"
-                            "}"
-                            "QCalendarWidget QTableView"
-                            "{"
-                            "    background-color: white;"
-                            "}");
 
         SetButtons();
     }
@@ -83,7 +71,6 @@ public:
         QToolButton *toolButtonRight = this->findChild<QToolButton*>("qt_calendar_nextmonth");
         QToolButton *yearBox = this->findChild<QToolButton*>("qt_calendar_yearbutton");
         QSpinBox *yearEdit = this->findChild<QSpinBox*>("qt_calendar_yearedit");
-        QLineEdit *yearSpinBox = this->findChild<QLineEdit*>("qt_spinbox_lineedit");
         QToolButton *monthMenu = this->findChild<QToolButton*>("qt_calendar_monthbutton");
 
 
@@ -113,6 +100,15 @@ public:
         layout->addWidget(calendarArea);
         layout->addWidget(calendar);
 
+        this->setStyleSheet("QWidget#qt_calendar_navigationbar"
+                            "{"
+                            "   background-color: rgb(255,255,255);"
+                            "   color: rgb(40, 43, 48);"
+                            "}"
+                            "QCalendarWidget QTableView"
+                            "{"
+                            "    background-color: white;"
+                            "}");
 
         yearBox->setStyleSheet("QToolButton { "
                                "    color: rgb(89, 100, 231);"
@@ -159,6 +155,7 @@ public:
                                  "  border-radius: 5;"
                                  "}"
                                  );
+
 
 
         yearEdit->setButtonSymbols(QAbstractSpinBox::NoButtons);

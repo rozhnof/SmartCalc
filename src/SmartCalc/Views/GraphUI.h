@@ -21,8 +21,6 @@ private:
 public:
 
     GraphUI() : MainWindow() {
-        this->setWindowTitle("Graph");
-
         widgets = new GraphWidgets;
         controller = new GraphController;
 
@@ -153,7 +151,7 @@ private:
         widgets->data.insert(make_pair(ScopeMax, NewDoubleSpinBox(this, "data")));
         widgets->data.insert(make_pair(RangeMax, NewDoubleSpinBox(this, "data")));
 
-        widgets->Input = NewQLineEdit(this, "", "input");
+        widgets->Input = NewLineEdit(this, "", "input");
         widgets->title.insert(make_pair(ScopeMin, NewLabel(this, "x min", "title")));
         widgets->title.insert(make_pair(RangeMin, NewLabel(this, "y min", "title")));
         widgets->title.insert(make_pair(InputX, NewLabel(this, "  X", "title")));

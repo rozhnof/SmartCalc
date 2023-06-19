@@ -7,6 +7,7 @@
 #include <QLabel>
 #include <QMainWindow>
 #include "qcustomplot.h"
+#include "Calendar.h"
 
 #include "Layout.h"
 #include "ChartView.h"
@@ -53,14 +54,36 @@ typedef struct CreditCalcWidgets  {
 
 typedef struct DepositCalcWidgets  {
     QWidget *depositCalcWindow;
-    ChartView* chartView;
+    Calendar *calendar;
+    QWidget *backgroundCalendar;
 
-    unordered_map<int, QTextEdit*> box;
+    QTableWidget *tableWidget;
+
+    QWidget* mainInputContainer;
+    QWidget* addInputContainer;
+    QWidget* outputContainer;
+
+    QToolButton *placementPeriod;
+    QToolButton *frequencyOfPayments;
+
+    QPushButton *topUp;
+    QPushButton *takeOff;
+    QPushButton *dateButton;
+    QPushButton *dateOfPlacement;
+
+    QPushButton *setTopUpList;
+    QPushButton *setTakeOffList;
+    QPushButton *setGeneralList;
+
+    QPushButton *calculate;
+
+    QCheckBox *interestCapitalization;
+
+    unordered_map<int, QWidget*> box;
     unordered_map<int, QLabel*> boxTitle;
-    unordered_map<int, QLineEdit*> boxText;
+    unordered_map<int, QLineEdit*> boxData;
 
-    QVector<double> bodyPayments;
-    QVector<double> percentPayments;
+
 } DepositCalcWidgets;
 
 
@@ -122,12 +145,17 @@ enum CreditCalcObjectsEnum {
 };
 
 enum DepositCalcObjectsEnum {
-    DepositSum,
-    DepositTerm,
-    DepositInterestRate,
-    DepositTotalPayment,
-    DepositOverpayment,
-    DepositMonthlyPayment
+    DEPOSIT_AMOUNT,
+    INTEREST_RATE,
+    PLACEMENT_PERIOD,
+    FREQUENCY_OF_PAYMENTS,
+    DATE_OF_PLACEMENT,
+    TAX_RATE,
+    DATE,
+    SUM,
+    ACCURED_INTEREST,
+    TOTAL_AMOUNT,
+    TAX_AMOUNT
 };
 
 
