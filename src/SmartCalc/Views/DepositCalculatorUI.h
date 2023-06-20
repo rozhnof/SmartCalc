@@ -8,12 +8,15 @@
 #include "Calendar.h"
 #include <QDate>
 #include <QCursor>
+#include <QVector>
+#include <QAction>
 
 using namespace std;
 
 
 class DepositCalculatorUI : public MainWindow
 {
+    QToolButton *calendarSender;
 public:
     DepositCalcWidgets *widgets;
     DepositCalcController *controller;
@@ -34,6 +37,7 @@ public:
         SetTable();
         Connects();
         SetTableData();
+        SetFrequencyOfPaymentsButton();
     }
 
     void CreateObjects() {
@@ -46,7 +50,6 @@ public:
         widgets->box.insert(make_pair(DEPOSIT_AMOUNT, NewWidget(this, "box")));
         widgets->box.insert(make_pair(INTEREST_RATE, NewWidget(this, "box")));
         widgets->box.insert(make_pair(PLACEMENT_PERIOD, NewWidget(this, "box")));
-        widgets->box.insert(make_pair(FREQUENCY_OF_PAYMENTS, NewWidget(this, "box")));
         widgets->box.insert(make_pair(SUM, NewWidget(this, "box_right")));
         widgets->box.insert(make_pair(TAX_RATE, NewWidget(this, "box")));
         widgets->box.insert(make_pair(ACCURED_INTEREST, NewWidget(this, "box")));
@@ -68,7 +71,6 @@ public:
         widgets->boxData.insert(make_pair(DEPOSIT_AMOUNT, NewLineEdit(this, "", "data")));
         widgets->boxData.insert(make_pair(INTEREST_RATE, NewLineEdit(this, "", "data")));
         widgets->boxData.insert(make_pair(PLACEMENT_PERIOD, NewLineEdit(this, "", "data")));
-        widgets->boxData.insert(make_pair(FREQUENCY_OF_PAYMENTS, NewLineEdit(this, "", "data")));
         widgets->boxData.insert(make_pair(TAX_RATE, NewLineEdit(this, "", "data")));
         widgets->boxData.insert(make_pair(SUM, NewLineEdit(this, "", "data")));
         widgets->boxData.insert(make_pair(ACCURED_INTEREST, NewLineEdit(this, "", "data")));
@@ -83,9 +85,11 @@ public:
         widgets->calculate = NewPushButton(this, "Calculate", "button");
         widgets->dateButton = NewPushButton(this, QDate::currentDate().toString("dd-MM-yyyy"), "button_left");
         widgets->dateOfPlacement = NewPushButton(this, QDate::currentDate().toString("dd-MM-yyyy"), "button");
+        widgets->frequencyOfPayments = NewPushButton(this, "", "button");
 
         widgets->interestCapitalization = NewCheckBox(this, "Interest Capitalization", "check_box");
         widgets->tableWidget = new QTableWidget(this);
+        widgets->tableWidget->setObjectName("data_table");
 
         widgets->backgroundCalendar = NewWidget(this, "calendar_background");
         widgets->calendar = new Calendar(widgets->backgroundCalendar);
@@ -94,6 +98,40 @@ public:
 
     void Connects() {
         connect(widgets->dateButton, &QPushButton::clicked, this, &DepositCalculatorUI::CalendarShow);
+        connect(widgets->dateOfPlacement, &QPushButton::clicked, this, &DepositCalculatorUI::CalendarShow);
+        connect(widgets->calendar, &QCalendarWidget::clicked, this, &DepositCalculatorUI::SetDate);
+
+    }
+
+    enum Frequencies {
+        DAILY,
+        WEEKLY,
+        MONTHLY,
+        QUARTERLY,
+        SEMI_ANNUALLY,
+        AT_MATURITY,
+        END_OF_TERM
+    };
+
+    void SetFrequencyOfPaymentsButton() {
+        widgets->frequenciesMenu = new QMenu(widgets->frequencyOfPayments);
+        unordered_map<Frequencies, QString> frequencies;
+
+        frequencies.insert(std::make_pair(DAILY, "Daily"));
+        frequencies.insert(std::make_pair(WEEKLY, "Weekly"));
+        frequencies.insert(std::make_pair(MONTHLY, "Monthly"));
+        frequencies.insert(std::make_pair(QUARTERLY, "Quarterly"));
+        frequencies.insert(std::make_pair(SEMI_ANNUALLY, "Semi-Annually"));
+        frequencies.insert(std::make_pair(AT_MATURITY, "At Maturity"));
+        frequencies.insert(std::make_pair(END_OF_TERM, "End of Term"));
+
+        for (auto it : frequencies) {
+            QAction* action = new QAction(it.second);
+            widgets->frequenciesMenu->addAction(action);
+            connect(action, &QAction::triggered, this, &DepositCalculatorUI::SetCurrentFrequency);
+        }
+
+//        widgets->frequenciesMenu->setActiveAction(frequencies[MONTHLY]);
     }
 
     void SetOutputContainer() {
@@ -229,17 +267,16 @@ public:
         layout.AddWidget(widgets->box[DEPOSIT_AMOUNT]);
         layout.AddWidget(widgets->box[INTEREST_RATE]);
         layout.AddWidget(widgets->box[PLACEMENT_PERIOD]);
-        layout.AddWidget(widgets->box[FREQUENCY_OF_PAYMENTS]);
+        layout.AddWidget(widgets->frequencyOfPayments);
 
         layout.SetTitle(widgets->box[DEPOSIT_AMOUNT], widgets->boxTitle[DEPOSIT_AMOUNT], Layout::CenterH, Layout::Above, 16, 0, -10);
         layout.SetTitle(widgets->box[INTEREST_RATE], widgets->boxTitle[INTEREST_RATE], Layout::CenterH, Layout::Above, 16, 0, -10);
         layout.SetTitle(widgets->box[PLACEMENT_PERIOD], widgets->boxTitle[PLACEMENT_PERIOD], Layout::CenterH, Layout::Above, 16, 0, -10);
-        layout.SetTitle(widgets->box[FREQUENCY_OF_PAYMENTS], widgets->boxTitle[FREQUENCY_OF_PAYMENTS], Layout::CenterH, Layout::Above, 16, 0, -10);
+        layout.SetTitle(widgets->frequencyOfPayments, widgets->boxTitle[FREQUENCY_OF_PAYMENTS], Layout::CenterH, Layout::Above, 16, 0, -10);
 
         layout.SetField(widgets->box[DEPOSIT_AMOUNT], widgets->boxData[DEPOSIT_AMOUNT], Layout::Left, 5);
         layout.SetField(widgets->box[INTEREST_RATE], widgets->boxData[INTEREST_RATE], Layout::Left, 5);
         layout.SetField(widgets->box[PLACEMENT_PERIOD], widgets->boxData[PLACEMENT_PERIOD], Layout::Left, 5);
-        layout.SetField(widgets->box[FREQUENCY_OF_PAYMENTS], widgets->boxData[FREQUENCY_OF_PAYMENTS], Layout::Left, 5);
     }
 
     void SetInputValidator() {
@@ -247,7 +284,6 @@ public:
         widgets->boxData[INTEREST_RATE]->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,3}([.][0-9]{1,2})?"), this));
         widgets->boxData[TAX_RATE]->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,3}([.][0-9]{1,2})?"), this));
         widgets->boxData[SUM]->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,10}([.][0-9]{1,2})?"), this));
-        widgets->boxData[FREQUENCY_OF_PAYMENTS]->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,7}"), this));
         widgets->boxData[PLACEMENT_PERIOD]->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,7}"), this));
     }
 
@@ -257,14 +293,23 @@ public:
     }
 
 private slots:
+    void SetCurrentFrequency() {
+        widgets->frequencyOfPayments->setText(static_cast<QAction*>(sender())->text());
+    }
 
     void CalendarShow() {
+        calendarSender = static_cast<QToolButton*>(sender());
         QPoint windowPos = mapFromGlobal(QCursor::pos());
         widgets->backgroundCalendar->setGeometry(windowPos.x(), windowPos.y(), 300, 300);
         widgets->calendar->setGeometry(10, 10, widgets->backgroundCalendar->width() - 15, widgets->backgroundCalendar->height() - 20);
         widgets->backgroundCalendar->show();
     }
 
+    void SetDate() {
+        widgets->backgroundCalendar->hide();
+        QDate selectedDate(widgets->calendar->selectedDate());
+        calendarSender->setText(selectedDate.toString("dd-MM-yyyy"));
+    }
 };
 
 

@@ -200,27 +200,39 @@ private:
             QCheckBox::indicator:checked {
                 background-color: rgba(217, 217, 217, 1);
             }
-            QWidget#calendar_background {
-                background-color: rgba(245, 246, 250, 1);
+            QTableView#data_table::item:hover {
+                background-color: rgba(46, 49, 68, 1);
+                padding-left: 2;
             }
-            QTableView::item:hover {
-                background-color: rgba(37, 41, 59, 1);
-            }
-            QTableView {
-                background-color: rgba(27, 32, 50, 1);
-                selection-background-color: rgba(46, 49, 68, 1);
+            QTableView#data_table {
+                background-color: rgb(27, 32, 50);
                 border: none;
                 border-radius: 10;
                 gridline-color: rgba(46, 49, 68, 1);
             }
-            QHeaderView::section {
+            QTableView#data_table::item:selected {
+                background-color: rgba(37, 41, 59, 1);
+            }
+            QTableView#data_table QHeaderView::section {
                 background-color: rgba(27, 32, 50, 1);
                 border: 1px solid rgba(46, 49, 68, 1);
                 font-weight: bold;
             }
-            QTableView::corner {
-                background-color: rgb(27, 32, 50);
-                border: none;
+            QTableView#data_table QHeaderView::section:checked {
+                background-color: rgba(46, 49, 68, 1);
+            }
+            QTableView#data_table QHeaderView::section:pressed, QTableView#data_table QTableCornerButton:pressed {
+                background-color: rgba(37, 41, 59, 1);
+            }
+            QTableView#data_table QHeaderView::section:hover {
+                background-color: rgba(46, 49, 68, 1);
+            }
+            QTableView#data_table QTableCornerButton {
+                background-color: rgba(46, 49, 68, 1);
+                border: 1px solid rgb(46, 49, 68);
+            }
+            QWidget#calendar_background {
+                background-color: rgba(245, 246, 250, 1);
             }
         )";
         widgets->depositCalcWindow->setStyleSheet(styleSheet);

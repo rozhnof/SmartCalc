@@ -64,7 +64,7 @@ typedef struct DepositCalcWidgets  {
     QWidget* outputContainer;
 
     QToolButton *placementPeriod;
-    QToolButton *frequencyOfPayments;
+    QPushButton *frequencyOfPayments;
 
     QPushButton *topUp;
     QPushButton *takeOff;
@@ -78,6 +78,7 @@ typedef struct DepositCalcWidgets  {
     QPushButton *calculate;
 
     QCheckBox *interestCapitalization;
+    QMenu *frequenciesMenu;
 
     unordered_map<int, QWidget*> box;
     unordered_map<int, QLabel*> boxTitle;
