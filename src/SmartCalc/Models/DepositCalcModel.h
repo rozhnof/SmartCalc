@@ -3,61 +3,85 @@
 
 #include <QVector>
 #include "Model.h"
+#include <iostream>
+#include <QDate>
 
 class DepositCalcModel {
+private:
+    double _depositAmount;
+    double _interestRate;
+    int _placementPeriod;
+    QVector<QDate> _frequencyOfPaymentsList;
+    QDate _startDate;
+    bool _interestCapitalization = false;
+
+    double _accuredInterest = 0;
+    double _totalAmount = 0;
+    double _taxAmount = 0;
 
 public:
-    double depositSum;
-    double interestRate;
-    double depositTerm;
-
-    double totalPayment;
-    double overpayment;
-
-    QVector<double> monthlyPayments;
-    QVector<double> monthlyBodyPayments;
-    QVector<double> monthlyPercentPayments;
-
-    DepositCalcModel() {}
-
-    void ClearData() {
-        monthlyPayments.clear();
-        monthlyBodyPayments.clear();
-        monthlyPercentPayments.clear();
-        totalPayment = 0;
-        overpayment = 0;
+    void setDepositAmount(const double &depositAmount) {
+        _depositAmount = depositAmount;
     }
 
-    void AnnuityLoan() {
-        ClearData();
-
-        double monthlyInterestRate = interestRate / 12 / 100;
-        double monthlyPayment = depositSum * monthlyInterestRate * pow(1 + monthlyInterestRate, depositTerm) / (pow(1 + monthlyInterestRate, depositTerm) - 1);
-
-        monthlyPayments.append(monthlyPayment);
-        totalPayment = monthlyPayment * depositTerm;
-        overpayment = totalPayment - depositSum;
-
-        for (int i = 0; i < depositTerm; i++) {
-            monthlyPercentPayments.append(depositSum * monthlyInterestRate);
-            monthlyBodyPayments.append(monthlyPayment - monthlyPercentPayments[i]);
-            depositSum -= monthlyBodyPayments[i];
-        }
+    void setInterestRate(const double &interestRate) {
+        _interestRate = interestRate;
     }
 
-    void DifferentiatedLoan() {
-        ClearData();
+    void setPlacementPeriod(const int &placementPeriod) {
+        _placementPeriod = placementPeriod;
+    }
 
-        double monthlyBodyPayment = depositSum / depositTerm;
-        double monthlyInterestRate = interestRate / 12 / 100;
+    void setFrequencyOfPayments(const QVector<QDate> &frequencyOfPaymentsList) {
+        _frequencyOfPaymentsList = frequencyOfPaymentsList;
+    }
 
-        for (int i = 0; i < depositTerm; i++) {
-            monthlyPercentPayments.append((depositSum - (monthlyBodyPayment * (i))) * monthlyInterestRate);
-            monthlyPayments.append(monthlyBodyPayment + monthlyPercentPayments[i]);
-            monthlyBodyPayments.append(monthlyBodyPayment);
-            totalPayment += monthlyPayments[i];
+    void setStartDate(const QDate &startDate) {
+        _startDate = startDate;
+    }
+
+    void setInterestCapitalization(const bool &interestCapitalization) {
+        _interestCapitalization = interestCapitalization;
+    }
+
+    double getAccuredInterest() const {
+        return _accuredInterest;
+    }
+
+    double getTotalAmount() const {
+        return _totalAmount;
+    }
+
+    double getTaxAmount() const {
+        return _taxAmount;
+    }
+
+    void Calculate() {
+        QDate currentDate = _startDate;
+        QDate endDate = _startDate.addDays(_placementPeriod);
+        int accumulatedInterestForPeriod = 0;
+        _accuredInterest = 0;
+
+        _totalAmount = _depositAmount;
+        while (currentDate <= endDate) {
+            double dailyInterestRate = _interestRate / currentDate.daysInYear() / 100;
+            for (int year = currentDate.year(); currentDate <= endDate && year == currentDate.year(); currentDate = currentDate.addDays(1)) {
+                accumulatedInterestForPeriod += _totalAmount * dailyInterestRate;
+                if (_frequencyOfPaymentsList.contains(currentDate)) {
+                    if (_interestCapitalization == true) {
+                        _totalAmount += accumulatedInterestForPeriod;
+                    }
+                    _accuredInterest += accumulatedInterestForPeriod;
+                    accumulatedInterestForPeriod = 0;
+                }
+            }
         }
-        overpayment = totalPayment - depositSum;
+        _accuredInterest += accumulatedInterestForPeriod;
+        if (_interestCapitalization == false) {
+            _totalAmount += accumulatedInterestForPeriod;
+        } else {
+            _totalAmount += _accuredInterest;
+        }
     }
 };
 

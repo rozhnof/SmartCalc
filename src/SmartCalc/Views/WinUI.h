@@ -180,6 +180,11 @@ private:
                 border-top-right-radius: 10;
                 border-bottom-right-radius: 10;
             }
+            QWidget#box_left {
+                background-color: rgb(217, 217, 217);
+                border-top-left-radius: 10;
+                border-bottom-left-radius: 10;
+            }
             QPushButton#button:hover, QPushButton#button_left:hover, QPushButton#button_right:hover {
                 background-color: rgb(194, 194, 194);
             }
@@ -233,6 +238,18 @@ private:
             }
             QWidget#calendar_background {
                 background-color: rgba(245, 246, 250, 1);
+            }
+            QPushButton::menu-indicator {
+                width: 0px;
+            }
+            QPushButton QMenu {
+                background-color: rgb(255, 255, 255);
+                color: rgb(72, 75, 79);
+            }
+            QPushButton QMenu::item:selected {
+                background-color: rgb(230,230,230);
+                border: 1px rgb(230,230,230);
+                border-radius: 5;
             }
         )";
         widgets->depositCalcWindow->setStyleSheet(styleSheet);

@@ -18,44 +18,23 @@ public:
         model = new DepositCalcModel;
     }
 
-    void SetDepositSum(double depositSum) {
-        model->depositSum = depositSum;
+    void setDepositCalculatorInput(const double &depositAmount, const double &interestRate, const int &placementPeriod, const QVector<QDate> &frequencyOfPaymentsList, const QDate &startDate, const bool &interestCapitalization) {
+        model->setDepositAmount(depositAmount);
+        model->setInterestRate(interestRate);
+        model->setPlacementPeriod(placementPeriod);
+        model->setFrequencyOfPayments(frequencyOfPaymentsList);
+        model->setStartDate(startDate);
+        model->setInterestCapitalization(interestCapitalization);
     }
 
-    void SetDepositTerm(double depositTerm) {
-        model->depositTerm = depositTerm;
+    void getDepositCalculatorOutput(double &accuredInterest, double &totalAmount, double &taxAmount) {
+        accuredInterest = model->getAccuredInterest();
+        totalAmount = model->getTotalAmount();
+        taxAmount = model->getTaxAmount();
     }
 
-    void SetInterestRate(double interestRate) {
-        model->interestRate = interestRate;
-    }
-
-    double GetTotalPayment() {
-        return model->totalPayment;
-    }
-
-    double GetOverpayment() {
-        return model->overpayment;
-    }
-
-    QVector<double> GetMonthlyPayments() {
-        return model->monthlyPayments;
-    }
-
-    QVector<double> GetMonthlyBodyPayments() {
-        return model->monthlyBodyPayments;
-    }
-
-    QVector<double> GetMonthlyPercentPayments() {
-        return model->monthlyPercentPayments;
-    }
-
-    void AnnuityLoan() {
-        model->AnnuityLoan();
-    }
-
-    void DifferentiatedLoan() {
-        model->DifferentiatedLoan();
+    void DepositCalculate() {
+        model->Calculate();
     }
 };
 

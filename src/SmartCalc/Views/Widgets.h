@@ -63,7 +63,7 @@ typedef struct DepositCalcWidgets  {
     QWidget* addInputContainer;
     QWidget* outputContainer;
 
-    QToolButton *placementPeriod;
+    QPushButton *placementPeriod;
     QPushButton *frequencyOfPayments;
 
     QPushButton *topUp;
@@ -78,12 +78,14 @@ typedef struct DepositCalcWidgets  {
     QPushButton *calculate;
 
     QCheckBox *interestCapitalization;
-    QMenu *frequenciesMenu;
+
+    QMenu *periodMenu;
+    unordered_map<int, QAction*> periodActions;
 
     unordered_map<int, QWidget*> box;
     unordered_map<int, QLabel*> boxTitle;
     unordered_map<int, QLineEdit*> boxData;
-
+    unordered_map<int, QString> operationTypes;
 
 } DepositCalcWidgets;
 

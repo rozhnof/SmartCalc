@@ -171,9 +171,29 @@ private:
         connect(widgets->data[InputX], &QDoubleSpinBox::valueChanged, this, &GraphUI::DrawLine);
         connect(widgets->drawingLine, &QCheckBox::stateChanged, this, &GraphUI::DrawingLineState);
         connect(widgets->Input, &QLineEdit::returnPressed, this, &GraphUI::SetInput);
+        connect(widgets->Input, &QLineEdit::textChanged, this, &GraphUI::RealTimeValodate);
     }
 
 private slots:
+
+    void RealTimeValodate() {
+        int status = controller->ResultValidate(widgets->Input->text());
+
+        if (status) {
+            widgets->Input->setStyleSheet(""
+                          " background-color: white;"
+                          " border: 1px solid blue;"
+                          " border-radius: 8;"
+
+                          );
+        } else {
+            widgets->Input->setStyleSheet(
+                          " background-color: white;"
+                          " border: 1px solid red;"
+                          " border-radius: 8;"
+                          );
+        }
+    }
 
     void DrawGraph() {
         if (_graphStatus) {
