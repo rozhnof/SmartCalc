@@ -13,7 +13,7 @@ private:
     int _placementPeriod;
     QVector<QDate> _frequencyOfPaymentsList;
     QDate _startDate;
-    bool _interestCapitalization = false;
+    bool _interestCapitalization;
 
     double _accuredInterest = 0;
     double _totalAmount = 0;
@@ -59,7 +59,7 @@ public:
     void Calculate() {
         QDate currentDate = _startDate;
         QDate endDate = _startDate.addDays(_placementPeriod);
-        int accumulatedInterestForPeriod = 0;
+        double accumulatedInterestForPeriod = 0;
         _accuredInterest = 0;
 
         _totalAmount = _depositAmount;
@@ -77,7 +77,7 @@ public:
             }
         }
         _accuredInterest += accumulatedInterestForPeriod;
-        if (_interestCapitalization == false) {
+        if (_interestCapitalization == true) {
             _totalAmount += accumulatedInterestForPeriod;
         } else {
             _totalAmount += _accuredInterest;

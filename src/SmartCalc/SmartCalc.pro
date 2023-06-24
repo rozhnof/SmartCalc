@@ -9,8 +9,7 @@ QT += gui
 
 CONFIG += c++17
 
-LIBS += -L/usr/local/lib/QtPrintSupport.framework/Versions/A/
-RESOURCES = Resources/resources.qrc
+
 
 
 # You can make your code fail to compile if it uses deprecated APIs.

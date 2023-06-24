@@ -88,16 +88,16 @@ public:
         widgets->boxData.insert(make_pair(TOTAL_AMOUNT, NewLineEdit(this, "", "data")));
         widgets->boxData.insert(make_pair(TAX_AMOUNT, NewLineEdit(this, "", "data")));
 
-        widgets->setTopUpList = NewPushButton(this, "Top Up List", "button");
-        widgets->setTakeOffList = NewPushButton(this, "Take Off List", "button");
-        widgets->setGeneralList = NewPushButton(this, "General List", "button");
-        widgets->topUp = NewPushButton(this, "Top Up", "button_left");
-        widgets->takeOff = NewPushButton(this, "Take Off", "button_right");
-        widgets->calculate = NewPushButton(this, "Calculate", "button");
+        widgets->setTopUpListButton = NewPushButton(this, "Top Up List", "button");
+        widgets->setTakeOffListButton = NewPushButton(this, "Take Off List", "button");
+        widgets->setGeneralListButton = NewPushButton(this, "General List", "button");
+        widgets->topUpButton = NewPushButton(this, "Top Up", "button_left");
+        widgets->takeOffButton = NewPushButton(this, "Take Off", "button_right");
+        widgets->calculateButton = NewPushButton(this, "Calculate", "button");
         widgets->dateButton = NewPushButton(this, QDate::currentDate().toString("dd-MM-yyyy"), "button_left");
-        widgets->dateOfPlacement = NewPushButton(this, QDate::currentDate().toString("dd-MM-yyyy"), "button");
-        widgets->frequencyOfPayments = NewPushButton(this, "", "button");
-        widgets->placementPeriod = NewPushButton(this, "Month", "button_right");
+        widgets->dateOfPlacementButton = NewPushButton(this, QDate::currentDate().toString("dd-MM-yyyy"), "button");
+        widgets->frequencyOfPaymentsButton = NewPushButton(this, "", "button");
+        widgets->placementPeriodButton = NewPushButton(this, "Month", "button_right");
 
         widgets->interestCapitalization = NewCheckBox(this, "Interest Capitalization", "check_box");
         widgets->tableWidget = new QTableWidget(this);
@@ -112,15 +112,15 @@ public:
         double depositAmount = widgets->boxData[DEPOSIT_AMOUNT]->text().toDouble();
         double interestRate = widgets->boxData[INTEREST_RATE]->text().toDouble();
         double placementPeriod = widgets->boxData[PLACEMENT_PERIOD]->text().toDouble();
-        int frequencyOfPayments = widgets->frequencyOfPayments->menu()->activeAction()->data().toInt();
+        int frequencyOfPayments = MONTHLY;
+
         bool interestCapitalization = widgets->interestCapitalization->isChecked();
 
-        std::cout << interestCapitalization << std::endl;
-
         QVector<QDate> frequencyOfPaymentsList;
-        QDate startDate = QDate::fromString(widgets->dateOfPlacement->text(), "dd-MM-yyyy");
+        QDate startDate = QDate::fromString(widgets->dateOfPlacementButton->text(), "dd-MM-yyyy");
         QDate endDate = startDate.addDays(placementPeriod);
         QDate itDate = startDate;
+
 
         while (itDate < endDate) {
             if (frequencyOfPayments == DAILY) {
@@ -140,6 +140,7 @@ public:
             }
             frequencyOfPaymentsList.append(itDate);
         }
+
         controller->setDepositCalculatorInput(depositAmount, interestRate, placementPeriod, frequencyOfPaymentsList, startDate, interestCapitalization);
     }
 
@@ -157,9 +158,9 @@ public:
 
     void Connects() {
         connect(widgets->dateButton, &QPushButton::clicked, this, &DepositCalculatorUI::CalendarShow);
-        connect(widgets->dateOfPlacement, &QPushButton::clicked, this, &DepositCalculatorUI::CalendarShow);
+        connect(widgets->dateOfPlacementButton, &QPushButton::clicked, this, &DepositCalculatorUI::CalendarShow);
         connect(widgets->calendar, &QCalendarWidget::clicked, this, &DepositCalculatorUI::SetDate);
-        connect(widgets->calculate, &QPushButton::clicked, this, &DepositCalculatorUI::Calculate);
+        connect(widgets->calculateButton, &QPushButton::clicked, this, &DepositCalculatorUI::Calculate);
     }
 
     enum Frequencies {
@@ -180,30 +181,24 @@ public:
     };
 
     void SetFrequencyOfPaymentsButton() {
-        QMenu *frequencyMenu = new QMenu(widgets->frequencyOfPayments);
+//        unordered_map<int, QString> freqMap;
+//        freqMap.insert(make_pair(DAILY, "Daily"));
+//        freqMap.insert(make_pair(WEEKLY, "Weekly"));
+//        freqMap.insert(make_pair(MONTHLY, "Monthly"));
+//        freqMap.insert(make_pair(QUARTERLY, "Quarterly"));
+//        freqMap.insert(make_pair(SEMI_ANNUALLY, "Semi-Annually"));
+//        freqMap.insert(make_pair(YEARLY, "Yearly"));
 
-        unordered_map<Frequencies, QString> freqMap;
-        freqMap.insert({DAILY, "Daily"});
-        freqMap.insert({WEEKLY, "Weekly"});
-        freqMap.insert({MONTHLY, "Monthly"});
-        freqMap.insert({QUARTERLY, "Quarterly"});
-        freqMap.insert({SEMI_ANNUALLY, "Semi-Annually"});
-        freqMap.insert({YEARLY, "Yearly"});
-        freqMap.insert({END_OF_TERM, "End of Term"});
-
-        for (auto it : freqMap) {
-            QAction *action = new QAction(it.second, frequencyMenu);
-            action->setData(it.first);
-            frequencyMenu->addAction(action);
-            connect(action, &QAction::triggered, this, &DepositCalculatorUI::SetFrequency);
-        }
-
-        widgets->frequencyOfPayments->setMenu(frequencyMenu);
-        SetFrequencyButtonAction(frequencyMenu->actions()[MONTHLY]);
+//        for (const auto &it : freqMap) {
+//            QAction *action = new QAction(it.second, widgets->frequencyOfPaymentsButton->menu());
+//            action->setData(it.first);
+//            widgets->frequencyOfPaymentsButton->menu()->addAction(action);
+//            connect(action, &QAction::triggered, this, &DepositCalculatorUI::SetFrequency);
+//        }
     }
 
     void SetPlacementPeriodButton() {
-        widgets->periodMenu = new QMenu(widgets->placementPeriod);
+        widgets->periodMenu = new QMenu(widgets->placementPeriodButton);
 
         widgets->periodActions.insert(std::make_pair(DAILY, new QAction("Days", widgets->periodMenu)));
         widgets->periodActions.insert(std::make_pair(WEEKLY, new QAction("Weeks", widgets->periodMenu)));
@@ -214,7 +209,7 @@ public:
             widgets->periodMenu->addAction(it.second);
             connect(it.second, &QAction::triggered, this, &DepositCalculatorUI::SetPeriod);
         }
-        widgets->placementPeriod->setMenu(widgets->periodMenu);
+        widgets->placementPeriodButton->setMenu(widgets->periodMenu);
 
         SetPeriodButtonAction(widgets->periodActions[MONTHS]);
     }
@@ -308,7 +303,7 @@ public:
         layout.SetHorizontalSpacing(10);
         layout.SetAutoSize();
 
-        layout.AddWidget(widgets->dateOfPlacement);
+        layout.AddWidget(widgets->dateOfPlacementButton);
         layout.SetHorizontalSpacing(2);
         layout.AddWidget(widgets->dateButton, 0.5);
         layout.SetHorizontalSpacing(10);
@@ -317,16 +312,16 @@ public:
         layout.NextRow();
         layout.AddWidget(widgets->box[TAX_RATE]);
         layout.SetHorizontalSpacing(2);
-        layout.AddWidget(widgets->topUp, 0.5);
+        layout.AddWidget(widgets->topUpButton, 0.5);
         layout.SetHorizontalSpacing(10);
-        layout.AddWidget(widgets->takeOff, 0.5);
-        layout.AddWidget(widgets->calculate);
+        layout.AddWidget(widgets->takeOffButton, 0.5);
+        layout.AddWidget(widgets->calculateButton);
         layout.NextRow();
-        layout.AddWidget(widgets->setTopUpList);
-        layout.AddWidget(widgets->setTakeOffList);
-        layout.AddWidget(widgets->setGeneralList);
+        layout.AddWidget(widgets->setTopUpListButton);
+        layout.AddWidget(widgets->setTakeOffListButton);
+        layout.AddWidget(widgets->setGeneralListButton);
 
-        layout.SetTitle(widgets->dateOfPlacement, widgets->boxTitle[DATE_OF_PLACEMENT], Layout::CenterH, Layout::Above, 16, 0, -10);
+        layout.SetTitle(widgets->dateOfPlacementButton, widgets->boxTitle[DATE_OF_PLACEMENT], Layout::CenterH, Layout::Above, 16, 0, -10);
         layout.SetTitle(widgets->box[SUM], widgets->boxTitle[SUM], Layout::CenterH, Layout::Above, 16, 0, -10);
         layout.SetTitle(widgets->box[TAX_RATE], widgets->boxTitle[TAX_RATE], Layout::CenterH, Layout::Above, 16, 0, -10);
         layout.SetTitle(widgets->dateButton, widgets->boxTitle[DATE], Layout::CenterH, Layout::Above, 16, 0, -10);
@@ -355,14 +350,14 @@ public:
         layout.AddWidget(widgets->box[INTEREST_RATE]);
         layout.ChangeColumns(2);
         layout.AddWidget(widgets->box[PLACEMENT_PERIOD]);
-        layout.AddWidget(widgets->placementPeriod);
+        layout.AddWidget(widgets->placementPeriodButton);
         layout.ChangeColumns(1);
-        layout.AddWidget(widgets->frequencyOfPayments);
+        layout.AddWidget(widgets->frequencyOfPaymentsButton);
 
         layout.SetTitle(widgets->box[DEPOSIT_AMOUNT], widgets->boxTitle[DEPOSIT_AMOUNT], Layout::CenterH, Layout::Above, 16, 0, -10);
         layout.SetTitle(widgets->box[INTEREST_RATE], widgets->boxTitle[INTEREST_RATE], Layout::CenterH, Layout::Above, 16, 0, -10);
         layout.SetTitle(widgets->box[PLACEMENT_PERIOD], widgets->boxTitle[PLACEMENT_PERIOD], Layout::Left, Layout::Above, 16, widgets->box[PLACEMENT_PERIOD]->width()/2 + 10, -10);
-        layout.SetTitle(widgets->frequencyOfPayments, widgets->boxTitle[FREQUENCY_OF_PAYMENTS], Layout::CenterH, Layout::Above, 16, 0, -10);
+        layout.SetTitle(widgets->frequencyOfPaymentsButton, widgets->boxTitle[FREQUENCY_OF_PAYMENTS], Layout::CenterH, Layout::Above, 16, 0, -10);
 
         layout.SetField(widgets->box[DEPOSIT_AMOUNT], widgets->boxData[DEPOSIT_AMOUNT], Layout::Left, 5);
         layout.SetField(widgets->box[INTEREST_RATE], widgets->boxData[INTEREST_RATE], Layout::Left, 5);
@@ -383,13 +378,13 @@ public:
     }
 
     void SetFrequencyButtonAction(QAction *action) {
-        widgets->frequencyOfPayments->menu()->setActiveAction(action);
-        widgets->frequencyOfPayments->setText(action->text());
+        widgets->frequencyOfPaymentsButton->menu()->setActiveAction(action);
+        widgets->frequencyOfPaymentsButton->setText(action->text());
     }
 
     void SetPeriodButtonAction(QAction *action) {
         widgets->periodMenu->setActiveAction(action);
-        widgets->placementPeriod->setText(action->text());
+        widgets->placementPeriodButton->setText(action->text());
     }
 
 private slots:

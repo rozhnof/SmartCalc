@@ -63,19 +63,19 @@ typedef struct DepositCalcWidgets  {
     QWidget* addInputContainer;
     QWidget* outputContainer;
 
-    QPushButton *placementPeriod;
-    QPushButton *frequencyOfPayments;
+    QPushButton *placementPeriodButton;
+    QPushButton *frequencyOfPaymentsButton;
 
-    QPushButton *topUp;
-    QPushButton *takeOff;
+    QPushButton *topUpButton;
+    QPushButton *takeOffButton;
     QPushButton *dateButton;
-    QPushButton *dateOfPlacement;
+    QPushButton *dateOfPlacementButton;
 
-    QPushButton *setTopUpList;
-    QPushButton *setTakeOffList;
-    QPushButton *setGeneralList;
+    QPushButton *setTopUpListButton;
+    QPushButton *setTakeOffListButton;
+    QPushButton *setGeneralListButton;
 
-    QPushButton *calculate;
+    QPushButton *calculateButton;
 
     QCheckBox *interestCapitalization;
 
