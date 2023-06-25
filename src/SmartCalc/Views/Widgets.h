@@ -57,14 +57,14 @@ typedef struct DepositCalcWidgets  {
     Calendar *calendar;
     QWidget *backgroundCalendar;
 
-    QTableWidget *tableWidget;
+    QTableWidget *generalTable;
+    QTableWidget *topUpTable;
+    QTableWidget *takeOffTable;
 
     QWidget* mainInputContainer;
     QWidget* addInputContainer;
     QWidget* outputContainer;
-
-    QPushButton *placementPeriodButton;
-    QPushButton *frequencyOfPaymentsButton;
+    QWidget* tablesContainer;
 
     QPushButton *topUpButton;
     QPushButton *takeOffButton;
@@ -75,12 +75,20 @@ typedef struct DepositCalcWidgets  {
     QPushButton *setTakeOffListButton;
     QPushButton *setGeneralListButton;
 
-    QPushButton *calculateButton;
-
     QCheckBox *interestCapitalization;
 
-    QMenu *periodMenu;
-    unordered_map<int, QAction*> periodActions;
+    QPushButton *calculateButton;
+
+
+    QToolButton *frequencyOfPaymentsButton;
+    pair<int, QAction*> frequencyActiveAction;
+
+    QToolButton *placementPeriodButton;
+    pair<int, QAction*> periodActiveAction;
+
+    multimap<QDate, double> generalList;
+    multimap<QDate, double> topUpList;
+    multimap<QDate, double> takeOffList;
 
     unordered_map<int, QWidget*> box;
     unordered_map<int, QLabel*> boxTitle;

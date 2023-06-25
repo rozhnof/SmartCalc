@@ -62,6 +62,13 @@ public:
         if (!objectName.isEmpty()) newObject->setObjectName(objectName);
         return newObject;
     }
+
+    QToolButton *NewToolButton(QWidget *parent, QString text = "", QString objectName = "") {
+        QToolButton *newObject = new QToolButton(parent);
+        if (!text.isEmpty()) newObject->setText(text);
+        if (!objectName.isEmpty()) newObject->setObjectName(objectName);
+        return newObject;
+    }
 };
 
 #endif // MAINWINDOW_H

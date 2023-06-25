@@ -18,13 +18,22 @@ public:
         model = new DepositCalcModel;
     }
 
-    void setDepositCalculatorInput(const double &depositAmount, const double &interestRate, const int &placementPeriod, const QVector<QDate> &frequencyOfPaymentsList, const QDate &startDate, const bool &interestCapitalization) {
+    void setDepositCalculatorInput(const double &depositAmount, const double &interestRate, const QVector<QDate> &frequencyOfPaymentsList, const QDate &startDate, const QDate &endDate, const bool &interestCapitalization, const double &taxRate) {
         model->setDepositAmount(depositAmount);
         model->setInterestRate(interestRate);
-        model->setPlacementPeriod(placementPeriod);
         model->setFrequencyOfPayments(frequencyOfPaymentsList);
         model->setStartDate(startDate);
+        model->setEndDate(endDate);
         model->setInterestCapitalization(interestCapitalization);
+        model->setTaxRate(taxRate);
+    }
+
+    void setTopUpList(const multimap<QDate, double> &topUpList) {
+        model->setTopUpList(topUpList);
+    }
+
+    void setTakeOffList(const multimap<QDate, double> &takeOffList) {
+        model->setTakeOffList(takeOffList);
     }
 
     void getDepositCalculatorOutput(double &accuredInterest, double &totalAmount, double &taxAmount) {
@@ -33,8 +42,16 @@ public:
         taxAmount = model->getTaxAmount();
     }
 
+    QVector<std::tuple<QDate, QString, double, double>> getGeneralList() const {
+        return model->getGeneralList();
+    }
+
     void DepositCalculate() {
         model->Calculate();
+    }
+
+    bool Validate(const double &depositAmount, const double &interestRate, const QVector<QDate> &frequencyOfPaymentsList, const QDate &startDate, const QDate &endDate, const bool &interestCapitalization, const double &taxRate, const multimap<QDate, double> &topUpList, const multimap<QDate, double> &takeOffList) {
+
     }
 };
 

@@ -8,7 +8,7 @@ void PopNumber(NodeNumber* *top) {
     tmp = NULL;
 }
 
-void PushNumber(long double number, NodeNumber* *top) {
+void PushNumber(double number, NodeNumber* *top) {
     NodeNumber* elem = malloc(sizeof(NodeNumber));
 
     elem->next = *top;
@@ -20,7 +20,7 @@ void PushNumber(long double number, NodeNumber* *top) {
 void PushStrNumber(char* str_number, NodeNumber* *top) {
     NodeNumber* elem = malloc(sizeof(NodeNumber));
 
-    long double number = 0;
+    double number = 0;
     number = atof(str_number);
 
     elem->next = *top;
@@ -31,12 +31,12 @@ void PushStrNumber(char* str_number, NodeNumber* *top) {
 
 
 void CalculateTwoNumbersFromStack(char operation, NodeNumber* *top) {
-    long double result = 0;
+    double result = 0;
 
-    long double number2 = (**top).number;
+    double number2 = (**top).number;
     PopNumber(top);
 
-    long double number1 = (**top).number;
+    double number1 = (**top).number;
     PopNumber(top);
 
     if (operation == '+') {
@@ -57,8 +57,8 @@ void CalculateTwoNumbersFromStack(char operation, NodeNumber* *top) {
 }
 
 void Factorial(NodeNumber* *top) {
-    long double number = (**top).number;
-    long double result = 1;
+    double number = (**top).number;
+    double result = 1;
 
     while (number > 0) {
         result *= number;
@@ -119,7 +119,7 @@ double Calculation(char* output, double x) {
         }
         elem = strtok(NULL, " ");
     }
-    long double result = top->number;
+    double result = top->number;
     PopNumber(&top);
 
     return result;

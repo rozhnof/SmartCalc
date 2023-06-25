@@ -12,7 +12,7 @@ extern "C" {
 #include <math.h>
 
 
-#define SIN 1
+#define SIN 10
 #define COS 2
 #define TAN 3
 #define ASIN 4
@@ -45,7 +45,7 @@ typedef struct NodeOperator {
 typedef struct NodeNumber NodeNumber;
 
 struct NodeNumber {
-    long double number;
+    double number;
     NodeNumber* next;
 };
 
@@ -78,7 +78,7 @@ void Converter(char* input, char* output, ConvertHelper* val);
 
 double Calculation(char* output, double x);
 void PopNumber(NodeNumber* *top);
-void PushNumber(long double number, NodeNumber* *top);
+void PushNumber(double number, NodeNumber* *top);
 void PushStrNumber(char* str_number, NodeNumber* *top);
 void CalculateTwoNumbersFromStack(char operation, NodeNumber* *top);
 void Factorial(NodeNumber* *top);
