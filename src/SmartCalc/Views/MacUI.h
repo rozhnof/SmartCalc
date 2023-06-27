@@ -26,10 +26,6 @@ public:
         SetStyle(widgets);
     }
 
-    void SetupUI(DepositCalcWidgets *widgets) override {
-        SetStyle(widgets);
-    }
-
 private:
 
     void SetStyle(CalcWidgets *widgets) {

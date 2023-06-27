@@ -24,16 +24,14 @@ SOURCES += \
 
 HEADERS += \
     Controllers/CalculatorController.h \
-    Controllers/Controller.h \
     Controllers/CreditCalcController.h \
     Controllers/DepositCalcController.h \
     Controllers/GraphController.h \
-    Controllers/Validate/Validator.h \
+    Controllers/Validator.h \
     Models/CalculatorModel.h \
     Models/CreditCalcModel.h \
     Models/DepositCalcModel.h \
     Models/GraphModel.h \
-    Models/Model.h \
     Models/calc.h \
     Views/Calculator.h \
     Views/CalculatorUI.h \

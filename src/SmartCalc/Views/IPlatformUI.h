@@ -14,7 +14,6 @@ public:
     IPlatformUI() {}
     virtual void SetupUI(CalcWidgets *widgets) = 0;
     virtual void SetupUI(CreditCalcWidgets *widgets) = 0;
-    virtual void SetupUI(DepositCalcWidgets *widgets) = 0;
 };
 
 

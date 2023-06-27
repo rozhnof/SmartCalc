@@ -1,29 +1,30 @@
 #ifndef GRAPHMODEL_H
 #define GRAPHMODEL_H
 
-#include "Model.h"
-#include "Calc.h"
+#include "../Services/Service.h"
+
 
 class GraphModel {
 
 private:
+    Service service;
 
-    char _infix[256];
-    char _postfix[256];
-    double _x;
+    GraphInput _input;
+    GraphOutput _output;
+    std::string _postfix;
 
 public:
 
     GraphModel() {}
     ~GraphModel() {}
 
-    void SetInput(string infix) {
-        strcpy(_infix, infix.c_str());
-        FromInfixToPostfix(_infix, _postfix);
+    void setInput(const GraphInput &input) {
+        _input = input;
+        _postfix = service.GetPostfixNotation(input.infix);
     }
-
-    double Calculate(double x) {
-        return Calculation(_postfix, x);
+    
+    GraphOutput Calculate() {
+        return service.GetGraphResult(_input, _postfix);
     }
 };
 

@@ -42,16 +42,8 @@ public:
         SetPlacementPeriodButton();
 
         Connects();
-    }
 
-    enum OperationTypes {
-        REPLENISHMENT,
-        WITHDRAWAL
-    };
-
-    void SetOperationTypes() {
-        widgets->operationTypes.insert(make_pair(REPLENISHMENT, "REPLENISHMENT"));
-        widgets->operationTypes.insert(make_pair(REPLENISHMENT, "WITHDRAWAL"));
+        SetStyle();
     }
 
     void CreateObjects() {
@@ -439,11 +431,6 @@ public:
         table->setItem(currentRow, 3, new QTableWidgetItem(depositSum));
     }
 
-
-    void SetupUI() override {
-        (*_platform)->SetupUI(widgets);
-    }
-
     void SetFrequencyButtonActiveAction(QAction *action) {
         widgets->frequencyActiveAction.first = action->data().toInt();
         widgets->frequencyActiveAction.second = action;
@@ -472,6 +459,138 @@ public:
         }
     }
 
+    void SetStyle() {
+        QString styleSheet = R"(
+            QWidget#deposit_calculator_window, QWidget#table_container{
+                background-color: rgb(27, 32, 50);
+            }
+            QWidget#container {
+                background-color: rgb(46, 49, 68);
+                border: none;
+                border-radius: 10;
+            }
+            QWidget#box {
+                background-color: rgb(217, 217, 217);
+                border: none;
+                border-radius: 10;
+            }
+            QWidget#title {
+                background-color: rgba(0, 0, 0, 0);
+                color: rgb(217, 217, 217);
+            }
+            QWidget#data {
+                background-color: rgba(0, 0, 0, 0);
+                color: rgb(37, 37, 37);
+                font-size: 16px;
+            }
+            QPushButton#button, QToolButton#button {
+                background-color: rgb(217, 217, 217);
+                border-radius: 10;
+                color: rgb(37, 37, 37);
+                font-size: 16px;
+            }
+            QPushButton#button_left {
+                background-color: rgb(217, 217, 217);
+                border-top-left-radius: 10;
+                border-bottom-left-radius: 10;
+                color: rgb(37, 37, 37);
+                font-size: 16px;
+            }
+            QPushButton#button_right, QToolButton#button_right {
+                background-color: rgb(217, 217, 217);
+                border-top-right-radius: 10;
+                border-bottom-right-radius: 10;
+                color: rgb(37, 37, 37);
+                font-size: 16px;
+            }
+            QWidget#box_right {
+                background-color: rgb(217, 217, 217);
+                border-top-right-radius: 10;
+                border-bottom-right-radius: 10;
+            }
+            QWidget#box_left {
+                background-color: rgb(217, 217, 217);
+                border-top-left-radius: 10;
+                border-bottom-left-radius: 10;
+            }
+            QPushButton#button:hover, QPushButton#button_left:hover, QPushButton#button_right:hover, QToolButton#button:hover, QToolButton#button_right:hover {
+                background-color: rgb(194, 194, 194);
+            }
+            QPushButton#button:pressed, QPushButton#button_left:pressed, QPushButton#button_right:pressed, QToolButton#button:pressed, QToolButton#button_right:pressed {
+                background-color: rgb(171, 171, 171);
+            }
+            QCheckBox {
+                background-color: rgba(0, 0, 0, 0);
+                font-size: 16px;
+            }
+            QCheckBox::indicator {
+                background-color: rgba(27, 32, 50, 1);
+                border: 1px solid rgba(217, 217, 217, 1);
+                border-radius: 5;
+                width: 18px;
+                height: 18px;
+            }
+            QCheckBox::indicator:checked {
+                background-color: rgba(217, 217, 217, 1);
+            }
+            QTableView#data_table::item:hover {
+                background-color: rgba(46, 49, 68, 1);
+                padding-left: 2;
+            }
+            QTableView#data_table {
+                background-color: rgb(27, 32, 50);
+                border: none;
+                border-radius: 10;
+                gridline-color: rgba(46, 49, 68, 1);
+            }
+            QTableView#data_table::item:selected {
+                background-color: rgba(37, 41, 59, 1);
+            }
+            QTableView#data_table QHeaderView::section {
+                background-color: rgba(27, 32, 50, 1);
+                border: 1px solid rgba(46, 49, 68, 1);
+                font-weight: bold;
+            }
+            QTableView#data_table QHeaderView::section:checked {
+                background-color: rgba(46, 49, 68, 1);
+            }
+            QTableView#data_table QHeaderView::section:pressed, QTableView#data_table QTableCornerButton:pressed {
+                background-color: rgba(37, 41, 59, 1);
+            }
+            QTableView#data_table QHeaderView::section:hover {
+                background-color: rgba(46, 49, 68, 1);
+            }
+            QTableView#data_table QTableCornerButton {
+                background-color: rgba(46, 49, 68, 1);
+                border: 1px solid rgb(46, 49, 68);
+            }
+            QWidget#calendar_background {
+                background-color: rgba(245, 246, 250, 1);
+            }
+            QToolButton#button::menu-indicator, QToolButton#button_right::menu-indicator {
+                width: 0px;
+            }
+            QToolButton#button QMenu, QToolButton#button_right QMenu {
+                background-color: rgb(255, 255, 255);
+                color: rgb(72, 75, 79);
+            }
+            QToolButton#button QMenu::item:selected, QToolButton#button_right QMenu::item:selected {
+                background-color: rgb(230,230,230);
+                border: 1px rgb(230,230,230);
+                border-radius: 5;
+            }
+        )";
+        widgets->depositCalcWindow->setStyleSheet(styleSheet);
+
+        for (auto it : widgets->boxData) {
+            it.second->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+        }
+
+        widgets->boxData[ACCURED_INTEREST]->setReadOnly(true);
+        widgets->boxData[TOTAL_AMOUNT]->setReadOnly(true);
+        widgets->boxData[TAX_AMOUNT]->setReadOnly(true);
+    }
+
 private slots:
 
     void ShowGeneralTable() {
@@ -493,28 +612,32 @@ private slots:
     }
 
     void AddTopUp() {
-        QDate date = QDate::fromString(widgets->dateButton->text(), "dd-MM-yyyy");
-        double sum = widgets->boxData[SUM]->text().toDouble();
+        if (widgets->topUpList.size() < 50) {
+            QDate date = QDate::fromString(widgets->dateButton->text(), "dd-MM-yyyy");
+            double sum = widgets->boxData[SUM]->text().toDouble();
 
-        widgets->topUpList.insert(make_pair(date, sum));
-        widgets->topUpTable->setRowCount(0);
-        for (auto it : widgets->topUpList) {
-            SetRow(widgets->topUpTable, it.first.toString("dd-MM-yyyy"), QString::number(it.second, 'f', 2));
+            widgets->topUpList.insert(make_pair(date, sum));
+            widgets->topUpTable->setRowCount(0);
+
+            for (auto it : widgets->topUpList) {
+                SetRow(widgets->topUpTable, it.first.toString("dd-MM-yyyy"), QString::number(it.second, 'f', 2));
+            }
         }
-
         ShowTopUpTable();
     }
 
     void AddTakeOff() {
-        QDate date = QDate::fromString(widgets->dateButton->text(), "dd-MM-yyyy");
-        double sum = widgets->boxData[SUM]->text().toDouble();
+        if (widgets->takeOffList.size() < 50) {
+            QDate date = QDate::fromString(widgets->dateButton->text(), "dd-MM-yyyy");
+            double sum = widgets->boxData[SUM]->text().toDouble();
 
-        widgets->takeOffList.insert(make_pair(date, sum));
-        widgets->takeOffTable->setRowCount(0);
-        for (auto it : widgets->takeOffList) {
-            SetRow(widgets->takeOffTable, it.first.toString("dd-MM-yyyy"), QString::number(it.second, 'f', 2));
+            widgets->takeOffList.insert(make_pair(date, sum));
+            widgets->takeOffTable->setRowCount(0);
+
+            for (auto it : widgets->takeOffList) {
+                SetRow(widgets->takeOffTable, it.first.toString("dd-MM-yyyy"), QString::number(it.second, 'f', 2));
+            }
         }
-
         ShowTakeOffTable();
     }
 
