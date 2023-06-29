@@ -1,10 +1,11 @@
-#ifndef LAYOUT_H
-#define LAYOUT_H
+#pragma once
+
 
 #include <QWidget>
 #include <QLabel>
 #include <QLineEdit>
 #include <iostream>
+
 using namespace std;
 
 class Layout
@@ -226,6 +227,3 @@ public:
         field->setGeometry(x, y, width, height);
     }
 };
-
-
-#endif // LAYOUT_H

@@ -1,5 +1,5 @@
-#ifndef CREDITCALCULATORUI_H
-#define CREDITCALCULATORUI_H
+#pragma once
+
 
 #include "mainwindow.h"
 #include "IPlatformUI.h"
@@ -32,7 +32,7 @@ public:
         CreateObjects();
         SetGeometry();
         SetOptions();
-        DifferentiatedPayment();
+//        DifferentiatedPayment();
     }
 
     void CreateObjects() {
@@ -138,23 +138,23 @@ public:
     }
 
     void SetInput() {
-        controller->SetCreditSum(widgets->data[CreditSum]->text().toDouble());
-        controller->SetCreditTerm(widgets->data[CreditTerm]->text().toDouble());
-        controller->SetInterestRate(widgets->data[InterestRate]->text().toDouble());
+//        controller->SetCreditSum(widgets->data[CreditSum]->text().toDouble());
+//        controller->SetCreditTerm(widgets->data[CreditTerm]->text().toDouble());
+//        controller->SetInterestRate(widgets->data[InterestRate]->text().toDouble());
     }
 
     void GetOutput() {
-        ClearOutput();
+//        ClearOutput();
 
-        for(auto var : controller->GetMonthlyPayments()) {
-            monthlyPaymentList->addItem(QString::number(var, 'f', 2));
-        }
+//        for(auto var : controller->GetMonthlyPayments()) {
+//            monthlyPaymentList->addItem(QString::number(var, 'f', 2));
+//        }
 
-        widgets->data[TotalPayment]->setText(QString::number(controller->GetTotalPayment(), 'f', 2));
-        widgets->data[Overpayment]->setText(QString::number(controller->GetOverpayment(), 'f', 2));
+//        widgets->data[TotalPayment]->setText(QString::number(controller->GetTotalPayment(), 'f', 2));
+//        widgets->data[Overpayment]->setText(QString::number(controller->GetOverpayment(), 'f', 2));
 
-        widgets->bodyPayments.append(controller->GetMonthlyBodyPayments());
-        widgets->percentPayments.append(controller->GetMonthlyPercentPayments());
+//        widgets->bodyPayments.append(controller->GetMonthlyBodyPayments());
+//        widgets->percentPayments.append(controller->GetMonthlyPercentPayments());
     }
 
     void ClearOutput() {
@@ -168,37 +168,29 @@ public:
         (*_platform)->SetupUI(widgets);
     }
 
+    void Calculate(Service::CreditPaymentsType type) {
+        CreditCalculatorInput input;
+        SetInput();
+
+        if (controller->Validate(input)) {
+            controller->Calculate(type);
+            GetOutput();
+            DrawChartBars();
+        }
+    }
 
 private slots:
 
     void AnnuityPayment() {
-        SetInput();
-        controller->AnnuityLoan();
-        GetOutput();
-
-        DrawChartBars();
+        Calculate(Service::ANNUITY);
     }
 
     void DifferentiatedPayment() {
-        SetInput();
-        controller->DifferentiatedLoan();
-        GetOutput();
-
-        DrawChartBars();
+        Calculate(Service::DIFFERENTIATED);
     }
 
     void DrawChartBars() {
         widgets->chartView->SetData(widgets->bodyPayments, widgets->percentPayments);
         widgets->chartView->show();
-
-        if (monthlyPaymentList->count() == 1) {
-            monthlyPaymentList->setDisabled(true);
-        } else {
-             monthlyPaymentList->setDisabled(false);
-        }
     }
 };
-
-
-
-#endif // CREDITCALCULATORUI_H

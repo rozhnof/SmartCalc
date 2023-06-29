@@ -1,5 +1,5 @@
-#ifndef CALCULATORUI_H
-#define CALCULATORUI_H
+#pragma once
+
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -120,10 +120,11 @@ private slots:
     }
 
     void Result() {
-        if (controller->ResultValidate(widgets->Input->text())) {
-            widgets->Input->setText(QString::number(controller->GetResult(widgets->Input->text(), 0), 'g', 8));
+        QString input = widgets->Input->text();
+        double x = 0;
+
+        if (controller->Validate(input)) {
+            widgets->Input->setText(QString::number(controller->GetResult(input, x), 'g', 8));
         }
     }
 };
-
-#endif // CALCULATORUI_H

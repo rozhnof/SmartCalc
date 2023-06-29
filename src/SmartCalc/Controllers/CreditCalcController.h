@@ -1,12 +1,11 @@
-#ifndef CREDITCALCCONTROLLERH
-#define CREDITCALCCONTROLLERH
+#pragma once
 
-#include "Controller.h"
+
 #include "../Models/CreditCalcModel.h"
+#include "Validators/CreditCalcValidator.h"
 
-using namespace std;
 
-class CreditCalcController : public Controller {
+class CreditCalcController {
 
 private:
 
@@ -18,45 +17,17 @@ public:
         model = new CreditCalcModel;
     }
 
-    void SetCreditSum(double creditSum) {
-        model->creditSum = creditSum;
+    void setInput(CreditCalculatorInput input) {
+        model->setInput(input);
     }
 
-    void SetCreditTerm(double creditTerm) {
-        model->creditTerm = creditTerm;
+    bool Validate(CreditCalculatorInput input) {
+        CreditCalcValidator validator(input);
+        return validator.Validate();
     }
 
-    void SetInterestRate(double interestRate) {
-        model->interestRate = interestRate;
+    CreditCalculatorOutput Calculate(Service::CreditPaymentsType type) {
+        model->Calculate(type);
     }
 
-    double GetTotalPayment() {
-        return model->totalPayment;
-    }
-
-    double GetOverpayment() {
-        return model->overpayment;
-    }
-
-    QVector<double> GetMonthlyPayments() {
-        return model->monthlyPayments;
-    }
-
-    QVector<double> GetMonthlyBodyPayments() {
-        return model->monthlyBodyPayments;
-    }
-
-    QVector<double> GetMonthlyPercentPayments() {
-        return model->monthlyPercentPayments;
-    }
-
-    void AnnuityLoan() {
-        model->AnnuityLoan();
-    }
-
-    void DifferentiatedLoan() {
-        model->DifferentiatedLoan();
-    }
 };
-
-#endif // CREDITCALCCONTROLLERH

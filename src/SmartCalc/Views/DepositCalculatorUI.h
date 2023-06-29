@@ -1,5 +1,5 @@
-#ifndef DEPOSITCALCULATORUI_H
-#define DEPOSITCALCULATORUI_H
+#pragma once
+
 
 #include "mainwindow.h"
 #include "IPlatformUI.h"
@@ -11,8 +11,8 @@
 #include <QVector>
 #include <QAction>
 
-using namespace std;
 
+using namespace std;
 
 class DepositCalculatorUI : public MainWindow
 {
@@ -104,12 +104,18 @@ public:
         widgets->topUpTable->setObjectName("data_table");
 
         widgets->takeOffTable = new QTableWidget(this);
-        widgets->topUpTable->setObjectName("data_table");
+        widgets->takeOffTable->setObjectName("data_table");
 
         widgets->backgroundCalendar = NewWidget(this, "calendar_background");
         widgets->calendar = new Calendar(widgets->backgroundCalendar);
         widgets->backgroundCalendar->hide();
     }
+
+    class date {
+        int year;
+        int month;
+        int day;
+    };
 
     void SetInput() {
         double depositAmount = widgets->boxData[DEPOSIT_AMOUNT]->text().toDouble();
@@ -135,6 +141,8 @@ public:
         }
 
         QDate itDate = startDate;
+
+
 
         while (itDate < endDate) {
             if (frequencyOfPayments == DAILY) {
@@ -162,7 +170,7 @@ public:
             frequencyOfPaymentsList.append(endDate);
         }
 
-        controller->setDepositCalculatorInput(depositAmount, interestRate, frequencyOfPaymentsList, startDate, endDate, interestCapitalization, taxRate);
+//        controller->setDepositCalculatorInput(depositAmount, interestRate, frequencyOfPaymentsList, startDate, endDate, interestCapitalization, taxRate);
     }
 
     void SetOutput() {
@@ -170,7 +178,7 @@ public:
         double totalAmount = 0;
         double taxAmount = 0;
 
-        controller->getDepositCalculatorOutput(accuredInterest, totalAmount, taxAmount);
+//        controller->getDepositCalculatorOutput(accuredInterest, totalAmount, taxAmount);
 
         widgets->boxData[ACCURED_INTEREST]->setText(QString::number(accuredInterest, 'f', 2));
         widgets->boxData[TOTAL_AMOUNT]->setText(QString::number(totalAmount, 'f', 2));
@@ -446,17 +454,17 @@ public:
     }
 
     void FillGeneralList() {
-        widgets->generalTable->setRowCount(0);
-        QVector<std::tuple<QDate, QString, double, double>> generalList = controller->getGeneralList();
+//        widgets->generalTable->setRowCount(0);
+//        QVector<std::tuple<QDate, QString, double, double>> generalList = controller->getGeneralList();
 
-        for (const auto& tuple : generalList) {
-             QString date = std::get<0>(tuple).toString("dd-MM-yyyy");
-             QString type = std::get<1>(tuple);
-             QString operationSum = QString::number(std::get<2>(tuple));
-             QString depositSum = QString::number(std::get<3>(tuple));
+//        for (const auto& tuple : generalList) {
+//             QString date = std::get<0>(tuple).toString("dd-MM-yyyy");
+//             QString type = std::get<1>(tuple);
+//             QString operationSum = QString::number(std::get<2>(tuple));
+//             QString depositSum = QString::number(std::get<3>(tuple));
 
-             SetRow(widgets->generalTable, date, type, operationSum, depositSum);
-        }
+//             SetRow(widgets->generalTable, date, type, operationSum, depositSum);
+//        }
     }
 
     void SetStyle() {
@@ -643,17 +651,15 @@ private slots:
 
 
     void Calculate() {
+        DepositCalculatorInput input;
         SetInput();
-        if (!widgets->topUpList.empty()) {
-            controller->setTopUpList(widgets->topUpList);
+
+        if (controller->Validate(input)) {
+            controller->setInput(input);
+            SetOutput();
+            FillGeneralList();
+            ShowGeneralTable();
         }
-        if (!widgets->takeOffList.empty()) {
-            controller->setTakeOffList(widgets->takeOffList);
-        }
-        controller->DepositCalculate();
-        SetOutput();
-        FillGeneralList();
-        ShowGeneralTable();
     }
 
     void SetPeriod() {
@@ -684,7 +690,3 @@ private slots:
         calendarSender->setText(selectedDate.toString("dd-MM-yyyy"));
     }
 };
-
-
-
-#endif // DEPOSITCALCULATORUI_H

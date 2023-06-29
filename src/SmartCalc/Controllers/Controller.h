@@ -2,7 +2,7 @@
 
 #include "../Models/Model.h"
 #include <QString>
-#include "Validate/Validator.h"
+#include "Validator.h"
 
 using namespace std;
 

@@ -1,5 +1,5 @@
-#ifndef WINUI_H
-#define WINUI_H
+#pragma once
+
 
 #include "IPlatformUI.h"
 #include <iostream>
@@ -186,5 +186,3 @@ private:
         layout.AddWidget(widgets->result);
     }
 };
-
-#endif // WINUI_H

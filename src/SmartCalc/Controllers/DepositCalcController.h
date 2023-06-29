@@ -1,12 +1,11 @@
-#ifndef DEPOSITCALCCONTROLLERH
-#define DEPOSITCALCCONTROLLERH
+#pragma once
 
-#include "Controller.h"
+
 #include "../Models/DepositCalcModel.h"
+#include "Validators/DepositCalcValidator.h"
 
-using namespace std;
 
-class DepositCalcController : public Controller {
+class DepositCalcController {
 
 private:
 
@@ -18,41 +17,17 @@ public:
         model = new DepositCalcModel;
     }
 
-    void setDepositCalculatorInput(const double &depositAmount, const double &interestRate, const QVector<QDate> &frequencyOfPaymentsList, const QDate &startDate, const QDate &endDate, const bool &interestCapitalization, const double &taxRate) {
-        model->setDepositAmount(depositAmount);
-        model->setInterestRate(interestRate);
-        model->setFrequencyOfPayments(frequencyOfPaymentsList);
-        model->setStartDate(startDate);
-        model->setEndDate(endDate);
-        model->setInterestCapitalization(interestCapitalization);
-        model->setTaxRate(taxRate);
+    void setInput(DepositCalculatorInput input) {
+        model->setInput(input);
     }
 
-    void setTopUpList(const multimap<QDate, double> &topUpList) {
-        model->setTopUpList(topUpList);
+    bool Validate(DepositCalculatorInput input) {
+        DepositCalcValidator validator(input);
+        return validator.Validate();
     }
 
-    void setTakeOffList(const multimap<QDate, double> &takeOffList) {
-        model->setTakeOffList(takeOffList);
-    }
-
-    void getDepositCalculatorOutput(double &accuredInterest, double &totalAmount, double &taxAmount) {
-        accuredInterest = model->getAccuredInterest();
-        totalAmount = model->getTotalAmount();
-        taxAmount = model->getTaxAmount();
-    }
-
-    QVector<std::tuple<QDate, QString, double, double>> getGeneralList() const {
-        return model->getGeneralList();
-    }
-
-    void DepositCalculate() {
+    DepositCalculatorOutput Calculate() {
         model->Calculate();
-    }
-
-    bool Validate(const double &depositAmount, const double &interestRate, const QVector<QDate> &frequencyOfPaymentsList, const QDate &startDate, const QDate &endDate, const bool &interestCapitalization, const double &taxRate, const multimap<QDate, double> &topUpList, const multimap<QDate, double> &takeOffList) {
-
     }
 };
 
-#endif // DEPOSITCALCCONTROLLERH

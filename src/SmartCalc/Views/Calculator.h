@@ -1,5 +1,5 @@
-#ifndef CALCULATOR_H
-#define CALCULATOR_H
+#pragma once
+
 
 #include "CalculatorUI.h"
 #include "CreditCalculatorUI.h"
@@ -155,6 +155,3 @@ private:
     }
 
 };
-
-
-#endif // CALCULATOR_H

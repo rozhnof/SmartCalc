@@ -1,5 +1,4 @@
-#ifndef CALENDAR_H
-#define CALENDAR_H
+#pragma once
 
 
 #include <QCalendarWidget>
@@ -157,5 +156,3 @@ public:
         );
     }
 };
-
-#endif // CALENDAR_H

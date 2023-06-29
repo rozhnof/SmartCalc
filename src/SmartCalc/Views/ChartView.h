@@ -1,5 +1,5 @@
-#ifndef CHARTVIEW_H
-#define CHARTVIEW_H
+#pragma once
+
 
 #include <QtCharts>
 #include <QColor>
@@ -99,5 +99,3 @@ public:
 
     }
 };
-
-#endif // CHARTVIEW_H

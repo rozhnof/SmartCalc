@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 
 #include <QWidget>
@@ -70,5 +69,3 @@ public:
         return newObject;
     }
 };
-
-#endif // MAINWINDOW_H

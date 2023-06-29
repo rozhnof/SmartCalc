@@ -1,5 +1,4 @@
-#ifndef IPLATFORMUI_H
-#define IPLATFORMUI_H
+#pragma once
 
 
 #include "Widgets.h"
@@ -15,6 +14,3 @@ public:
     virtual void SetupUI(CalcWidgets *widgets) = 0;
     virtual void SetupUI(CreditCalcWidgets *widgets) = 0;
 };
-
-
-#endif // IPLATFORMUI_H

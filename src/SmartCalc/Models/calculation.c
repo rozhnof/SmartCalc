@@ -68,10 +68,6 @@ void Factorial(NodeNumber* *top) {
     (**top).number = result;
 }
 
-int IsTrigonometricFunction(char number) {
-    return (number >= 1 && number <= 9);
-}
-
 void DecisionTrigonometricFunction(char number, NodeNumber* *top) {
     if (number == SIN) {
         (**top).number = sinl((**top).number);
@@ -103,7 +99,7 @@ double Calculation(char* output, double x) {
     NodeNumber* top = NULL;
 
     char* elem = strtok(tmp_output, " ");
-    while (elem != NULL) {
+    while (elem != NULL && *elem != '\0') {
         if (elem[0] == 'x') {
             PushNumber(x, &top);
         } else if (IsNumber(elem[0])) {
@@ -114,7 +110,7 @@ double Calculation(char* output, double x) {
             Factorial(&top);
         } else if (elem[0] == '~') {
             top->number = 0 - top->number;
-        } else if (IsTrigonometricFunction(elem[0])) {
+        } else if (isFunction(elem[0])) {
             DecisionTrigonometricFunction(elem[0], &top);
         }
         elem = strtok(NULL, " ");

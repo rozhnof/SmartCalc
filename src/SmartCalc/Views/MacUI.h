@@ -1,5 +1,5 @@
-#ifndef MACUI_H
-#define MACUI_H
+#pragma once
+
 
 #include "IPlatformUI.h"
 #include <iostream>
@@ -176,5 +176,3 @@ private:
         layout.AddWidget(widgets->result);
     }
 };
-
-#endif // MACUI_H

@@ -1,7 +1,13 @@
+#pragma once
+
+
 #include <iostream>
 #include <algorithm>
+#include <QString>
+#include <unordered_map>
 
-class Validator {
+
+class InfixNotationValidator {
 private:
     int status = 0;
 
@@ -23,34 +29,39 @@ private:
 
     bool _functionStatus = true;
 
-    int _size;
-    std::string _input;
+    QString &_input;
 
 public:
-    Validator(const std::string &input) : _input(input), _size(input.size()) {}
+    InfixNotationValidator(QString &input) : _input(input) {}
 
-    bool isUnaryOperator(char &lexema) {
+    bool isUnaryOperator(QChar &lexema) {
         if (lexema == '+' || lexema == '-') {
             return true;
         }
         return false;
     }
 
-    bool isOperator(const char &lexema) {
-        std::vector<char> operators = {'+', '-', '/', '*', '^', '%'};
-        return std::find(operators.begin(), operators.end(), lexema) != operators.end();
+    bool isOperator(const QChar &lexema) {
+        QString operators = "+-/*^%";
+
+        if (operators.indexOf(lexema) != -1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    bool isNumber(const char &symbol) {
+    bool isNumber(const QChar &symbol) {
         return (symbol >= '0' && symbol <= '9');
     }
 
-    int isFunction(const std::string &lexema, int &functionSize) {
-        std::vector<std::string> functions = {"sin", "cos", "tan", "asin", "acos", "atan", "sqrt", "ln", "log"};
+    int isFunction(QString &lexema, int startIndex) {
+        std::unordered_map<QChar, QString> functions{{'s',"sin"}, {'c', "cos"}, {'t', "tan"}, {'S', "asin"}, {'C', "acos"}, {'T', "atan"}, {'q', "sqrt"}, {'l', "ln"}, {'L', "log"}};
 
         for (auto &it : functions) {
-            if (lexema.size() >= it.size() && lexema.substr(0, it.size()) == it) {
-                functionSize = it.size();
+            int funtionSize = it.second.size();
+            if (lexema.size() >= funtionSize && lexema.mid(startIndex, funtionSize) == it.second) {
+                lexema.replace(startIndex, funtionSize, it.first);
                 return true;
             }
         }
@@ -61,23 +72,17 @@ public:
     bool Validate() {
         status = NUMBER | UNARY_OPERATOR | FUNCTION | OPEN_BRACKET | X;
 
-        if (_size == 0) {
+        if (_input.size() == 0) {
             return false;
         }
 
-        int functionSize = 0;
-        if (!isNumber(_input[0]) && _input[0] != 'x' && !isFunction(_input, functionSize) && _input[0] != '(' && !isUnaryOperator(_input[0])) {
-            return false;
-        }
-
-        for (int i = 0; i < _size; i++) {
+        for (int i = 0; i < _input.size(); i++) {
             if (isNumber(_input[i])) {
                 SetNumber();
             } else if (isOperator(_input[i])) {
                 SetOperator();
-            } else if (isFunction(_input.substr(i), functionSize)) {
+            } else if (isFunction(_input, i)) {
                 SetFunction();
-                i += (functionSize - 1);
             } else if (_input[i] == 'x') {
                 SetX();
             } else if (_input[i] == '(') {

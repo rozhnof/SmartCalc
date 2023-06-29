@@ -1,5 +1,5 @@
-#ifndef IWIDGETS_H
-#define IWIDGETS_H
+#pragma once
+
 
 #include <QVector>
 #include <QPushButton>
@@ -168,6 +168,3 @@ enum DepositCalcObjectsEnum {
     TOTAL_AMOUNT,
     TAX_AMOUNT
 };
-
-
-#endif // IWIDGETS_H

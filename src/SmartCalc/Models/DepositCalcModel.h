@@ -1,5 +1,5 @@
-#ifndef DEPOSITCALCMODELH
-#define DEPOSITCALCMODELH
+#pragma once
+
 
 #include "../Services/Service.h"
 
@@ -13,7 +13,7 @@ private:
 
 public:
 
-    CreditCalcModel() {}
+    DepositCalcModel() {}
 
     void setInput(const DepositCalculatorInput &input) {
         _input = input;
@@ -23,5 +23,3 @@ public:
         return service.GetDepositCalculationResult(_input);
     }
 };
-
-#endif // DEPOSITCALCMODELH

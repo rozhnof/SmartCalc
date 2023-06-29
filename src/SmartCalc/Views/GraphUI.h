@@ -1,5 +1,4 @@
-#ifndef GRAPHUI_H
-#define GRAPHUI_H
+#pragma once
 
 
 #include "mainwindow.h"
@@ -177,39 +176,39 @@ private:
 private slots:
 
     void RealTimeValodate() {
-        int status = controller->ResultValidate(widgets->Input->text());
+//        int status = controller->ResultValidate(widgets->Input->text());
 
-        if (status) {
-            widgets->Input->setStyleSheet(""
-                          " background-color: white;"
-                          " border: 1px solid blue;"
-                          " border-radius: 8;"
+//        if (status) {
+//            widgets->Input->setStyleSheet(""
+//                          " background-color: white;"
+//                          " border: 1px solid blue;"
+//                          " border-radius: 8;"
 
-                          );
-        } else {
-            widgets->Input->setStyleSheet(
-                          " background-color: white;"
-                          " border: 1px solid red;"
-                          " border-radius: 8;"
-                          );
-        }
+//                          );
+//        } else {
+//            widgets->Input->setStyleSheet(
+//                          " background-color: white;"
+//                          " border: 1px solid red;"
+//                          " border-radius: 8;"
+//                          );
+//        }
     }
 
     void DrawGraph() {
-        if (_graphStatus) {
-            int countPoints = widgets->data[Points]->value();
-            double xMin = widgets->data[ScopeMin]->value();
-            double xMax = widgets->data[ScopeMax]->value();
-            double yMin = widgets->data[RangeMin]->value();
-            double yMax = widgets->data[RangeMax]->value();
+//        if (_graphStatus) {
+//            int countPoints = widgets->data[Points]->value();
+//            double xMin = widgets->data[ScopeMin]->value();
+//            double xMax = widgets->data[ScopeMax]->value();
+//            double yMin = widgets->data[RangeMin]->value();
+//            double yMax = widgets->data[RangeMax]->value();
 
-            QVector<double> x = controller->GetCollectionX(countPoints, xMin, xMax);
-            QVector<double> y = controller->GetCollectionY(x, yMin, yMax);
+//            QVector<double> x = controller->GetCollectionX(countPoints, xMin, xMax);
+//            QVector<double> y = controller->GetCollectionY(x, yMin, yMax);
 
-            widgets->graph->graph(0)->setData(x, y);
-            widgets->graph->graph(0)->setVisible(true);
-            widgets->graph->replot();
-        }
+//            widgets->graph->graph(0)->setData(x, y);
+//            widgets->graph->graph(0)->setVisible(true);
+//            widgets->graph->replot();
+//        }
     }
 
     void DrawLine()
@@ -245,23 +244,20 @@ private slots:
     }
 
     void SetInput() {
-        _graphStatus = controller->ResultValidate(widgets->Input->text());
+//        _graphStatus = controller->ResultValidate(widgets->Input->text());
 
-        if (_graphStatus) {
-            controller->SetInput(widgets->Input->text());
-            DrawGraph();
-        } else {
-            widgets->graph->graph(0)->setVisible(false);
-            widgets->graph->replot();
-        }
+//        if (_graphStatus) {
+//            controller->SetInput(widgets->Input->text());
+//            DrawGraph();
+//        } else {
+//            widgets->graph->graph(0)->setVisible(false);
+//            widgets->graph->replot();
+//        }
     }
 
     void ClearInput() {
         widgets->Input->clear();
     }
 };
-
-
-#endif // GRAPHUI_H
 
 

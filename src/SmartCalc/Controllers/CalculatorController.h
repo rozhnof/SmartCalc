@@ -1,25 +1,25 @@
-#ifndef CALCULATORCONTROLLER_H
-#define CALCULATORCONTROLLER_H
+#pragma once
 
-#include "Controller.h"
+
 #include "../Models/CalculatorModel.h"
+#include "Validators/CalcValidator.h"
+#include <QString>
 
-using namespace std;
 
-class CalculatorController : public Controller {
-
-private:
+class CalculatorController {
 
 public:
 
     CalculatorController() {}
 
-    double GetResult(QString input, double x) {
+    bool Validate(QString &input) {
+        InfixNotationValidator validator(input);
+        return validator.Validate();
+    }
+
+    double GetResult(QString &input, double &x) {
         CalculatorModel model;
-        model.SetInput(input.toStdString());
-        return model.Calculate(x);
+        return model.Calculate(input.toStdString(), x);
     }
 };
 
-
-#endif // CALCULATORCONTROLLER_H

@@ -30,6 +30,8 @@ int Priority(char symbol) {
         result = 2;
     } else if (symbol == '/') {
         result = 2;
+    } else if (symbol == '%') {
+        result = 2;
     } else if (symbol == '+') {
         result = 1;
     } else if (symbol == '-') {
@@ -43,7 +45,7 @@ int IsNumber(char symbol) {
 }
 
 int IsOperator(char symbol) {
-    return (symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/' || symbol == '^' || symbol == '~');
+    return (symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/' || symbol == '^' || symbol == '~' || symbol == '%' );
 }
 
 void PushOutAll(char* output, ConvertHelper* val) {
@@ -111,38 +113,26 @@ int IsUnaryOperator(char* input, int input_index) {
     return result;
 }
 
-int Function(char* input, char* output, ConvertHelper* val) {
-    int result = 1;
+int isFunction(char symbol) {
+    int result = 0;
 
-    if (!strncmp(input, "sin", 3)) {
-        DecisionFunction(input + 3, output, SIN, val);
-    } else if (!strncmp(input, "cos", 3)) {
-        DecisionFunction(input + 3, output, COS, val);
-    } else if (!strncmp(input, "tan", 3)) {
-        DecisionFunction(input + 3, output, TAN, val);
-    } else if (!strncmp(input, "asin", 4)) {
-        DecisionFunction(input + 4, output, ASIN, val);
-    } else if (!strncmp(input, "acos", 4)) {
-        DecisionFunction(input + 4, output, ACOS, val);
-    } else if (!strncmp(input, "atan", 4)) {
-        DecisionFunction(input + 4, output, ATAN, val);
-    } else if (!strncmp(input, "sqrt", 4)) {
-        DecisionFunction(input + 4, output, SQRT, val);
-    } else if (!strncmp(input, "ln", 2)) {
-        DecisionFunction(input + 2, output, LN, val);
-    } else if (!strncmp(input, "log", 3)) {
-        DecisionFunction(input + 3, output, LOG, val);
-    } else {
-        result = 0;
+    char functions[] = {SIN, COS, TAN, ASIN, ACOS, ATAN, LOG, LN, SQRT};
+
+    for (int i = 0; i < strlen(functions); i++) {
+        if (symbol == functions[i]) {
+            result = 1;
+            break;
+        }
     }
+
     return result;
 }
 
-int DecisionFunction(char* input, char* output, char function, ConvertHelper* val) {
-    PushOperator(function, val);
+int DecisionFunction(char* input, char* output, ConvertHelper* val) {
+    PushOperator(input[0], val);
 
     char f_output[1024] = {0};
-    Converter(input, f_output, val);  
+    Converter(input + 1, f_output, val);
     strcat(output, f_output);
 
     return 0;
@@ -166,9 +156,8 @@ void Converter(char* input, char* output, ConvertHelper* val) {
             ReadNumber(input, output, val);
         } else if (input[val->in_idx] == '!') {
             output[val->out_idx++] = '!';
-        } else if (Function(input + val->in_idx, output + val->out_idx, val)) {
-            val->in_idx = strlen(input) - 1;
-            val->out_idx = strlen(output);
+        } else if (isFunction(input[val->in_idx])) {
+            DecisionFunction(input + val->in_idx, output, val);
         } else if (input[val->in_idx] == '(') {
             PushOperator('(', val);
         } else if (input[val->in_idx] == ')') {
@@ -179,9 +168,6 @@ void Converter(char* input, char* output, ConvertHelper* val) {
             }
         } else if (IsOperator(input[val->in_idx])) {
             PushOutAndPush(input[val->in_idx], output, val);
-        } else if (input[val->in_idx] == '%') {
-            PushOutAndPush('%', output, val);
-            val->in_idx += 2;
         }
         output[val->out_idx++] = ' ';
         val->in_idx++;

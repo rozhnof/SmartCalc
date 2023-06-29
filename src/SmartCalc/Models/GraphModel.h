@@ -1,5 +1,5 @@
-#ifndef GRAPHMODEL_H
-#define GRAPHMODEL_H
+#pragma once
+
 
 #include "../Services/Service.h"
 
@@ -28,5 +28,3 @@ public:
     }
 };
 
-
-#endif // GRAPHMODEL_H

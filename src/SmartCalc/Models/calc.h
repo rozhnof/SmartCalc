@@ -12,15 +12,15 @@ extern "C" {
 #include <math.h>
 
 
-#define SIN 10
-#define COS 2
-#define TAN 3
-#define ASIN 4
-#define ACOS 5
-#define ATAN 6
-#define SQRT 7
-#define LN 8
-#define LOG 9
+#define SIN 's'
+#define COS 'c'
+#define TAN 't'
+#define ASIN 'S'
+#define ACOS 'C'
+#define ATAN 'T'
+#define SQRT 'Q'
+#define LN 'l'
+#define LOG 'L'
 
 
 typedef struct Credit {
@@ -71,8 +71,8 @@ void PushOut(char* output, ConvertHelper* val);
 int PushOutConditions(char symbol, ConvertHelper* val);
 void ReadNumber(char* input, char* output, ConvertHelper* val); 
 int IsUnaryOperator(char* input, int input_index);
-int Function(char* input, char* output, ConvertHelper* val);
-int DecisionFunction(char* input, char* output, char function, ConvertHelper* val);
+int isFunction(char symbol);
+int DecisionFunction(char* input, char* output, ConvertHelper* val);
 void PushOutAndPush(char symbol, char* output, ConvertHelper* val);
 void Converter(char* input, char* output, ConvertHelper* val);
 
