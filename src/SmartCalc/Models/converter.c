@@ -24,8 +24,6 @@ int Priority(char symbol) {
         result = 4;
     } else if (symbol == '^') {
         result = 3;
-    } else if (symbol == 'M') {
-        result = 2;
     } else if (symbol == '*') {
         result = 2;
     } else if (symbol == '/') {
@@ -61,13 +59,10 @@ int OperatorIsLeftAssociativity(char symbol) {
 }
 
 void PushOutOperatorsBetweenBrackets(char* output, ConvertHelper* val) {
-    while (val->top != NULL && val->top->oper != '(') {        
+    while (val->top->oper != '(') {        
         PushOut(output, val);
     }
-
-    if (val->top != NULL && val->top->oper == '(') {
-        PopOperator(val);
-    }
+    PopOperator(val);
 }
 
 void PushOut(char* output, ConvertHelper* val) {
@@ -77,10 +72,17 @@ void PushOut(char* output, ConvertHelper* val) {
 }
 
 int PushOutConditions(char symbol, ConvertHelper* val) {
-    return (val->top != NULL && (Priority(val->top->oper) >= Priority(symbol) || 
-                    (OperatorIsLeftAssociativity(val->top->oper) && 
-                    Priority(val->top->oper) == Priority(symbol))));
+    return val->top != NULL && (isFunction(val->top->oper) || Priority(val->top->oper) >= Priority(symbol) || 
+    (OperatorIsLeftAssociativity(val->top->oper) && Priority(val->top->oper) == Priority(symbol)));
 }
+
+void PushOutAndPush(char symbol, char* output, ConvertHelper* val) {
+    while (PushOutConditions(symbol, val)) {
+        PushOut(output, val);
+    }
+    PushOperator(symbol, val);
+}
+
 
 void ReadNumber(char* input, char* output, ConvertHelper* val) { 
     while (IsNumber(input[val->in_idx]) || input[val->in_idx] == '.') {
@@ -138,12 +140,6 @@ int DecisionFunction(char* input, char* output, ConvertHelper* val) {
     return 0;
 }
 
-void PushOutAndPush(char symbol, char* output, ConvertHelper* val) {
-    while (PushOutConditions(symbol, val)) {
-        PushOut(output, val);
-    }
-    PushOperator(symbol, val);
-}
 
 void Converter(char* input, char* output, ConvertHelper* val) {
     val->in_idx = 0;
@@ -157,7 +153,7 @@ void Converter(char* input, char* output, ConvertHelper* val) {
         } else if (input[val->in_idx] == '!') {
             output[val->out_idx++] = '!';
         } else if (isFunction(input[val->in_idx])) {
-            DecisionFunction(input + val->in_idx, output, val);
+            PushOperator(input[val->in_idx], val);
         } else if (input[val->in_idx] == '(') {
             PushOperator('(', val);
         } else if (input[val->in_idx] == ')') {
