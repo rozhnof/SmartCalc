@@ -4,10 +4,26 @@
 #include "../Models/calc.h"
 #include <string>
 #include <vector>
+#include <iostream>
+
+
+struct Day {
+    int day;
+    int month;
+    int year;
+    
+    int daysInYear;
+
+    std::vector<double> topUpList;
+    std::vector<double> takeOffList;
+
+    bool isPaymentDay;
+};
 
 
 struct GraphInput {
     std::string infix;
+    std::string postfix;
 
     int countPoints;
     double xMin;
@@ -38,26 +54,19 @@ struct CreditCalculatorOutput {
 };
 
 struct DepositCalculatorInput {
-    double depositSum;
-    double depositTerm;
+    double depositAmount;
     double interestRate;
     double taxRate;
-
     bool interestCapitalization;
-
-    std::chrono::time_point<std::chrono::system_clock> startDate;
-    std::chrono::time_point<std::chrono::system_clock> frequencyOfPayments;
-
-    std::vector<std::pair<double, double>> topUpList;
-    std::vector<std::pair<double, double>> takeOffList;
+    std::vector<Day> daysInPeriod;
 };
 
 struct DepositCalculatorOutput {
     double accuredInterest;
-    double totalSum;
-    double taxSum;
+    double totalAmount;
+    double taxAmount;
 
-    std::tuple<double, double, double, double> generalList;
+    std::vector<std::tuple<Day, std::string, double, double>> generalList;
 };
 
 class Service
@@ -88,22 +97,18 @@ public:
     }
 
     double GetCalculationResult(const std::string &postfix, const double &x) {
-        char *postfixChr = new char[postfix.size() + 1];
-
-        double calcResult = Calculation(postfixChr, x);
-        delete[] postfixChr;
-
-        return calcResult;
+        const char* postfixChr = postfix.c_str();
+        return Calculation(postfixChr, x);
     }
 
-    GraphOutput GetGraphResult(const GraphInput &input, const std::string &postfix) {
+    GraphOutput GetGraphResult(const GraphInput &input) {
         GraphOutput output;
 
         double stepX = (fabs(input.xMin) + fabs(input.xMax)) / input.countPoints;
         for (int i = 0; i < input.countPoints; i++)
         {
             output.xPoints.push_back(input.xMin + stepX * i);
-            output.yPoints.push_back(GetCalculationResult(postfix, output.xPoints[i]));
+            output.yPoints.push_back(GetCalculationResult(input.postfix, output.xPoints[i]));
 
             if (output.yPoints[i] > input.yMax || output.yPoints[i] < input.yMin) {
                 output.yPoints[i] = NAN;
@@ -132,53 +137,48 @@ public:
     DepositCalculatorOutput GetDepositCalculationResult(const DepositCalculatorInput &input) {
         DepositCalculatorOutput output;
 
-//        QDate currentDate = _startDate;
-//        double accumulatedInterestForPeriod = 0;
-//        double depositSum = _depositAmount;
+        double accumulatedInterestForPeriod = 0;
+        output.totalAmount = input.depositAmount;
 
-//        while (currentDate <= _endDate) {
-//            double dailyInterestRate = _interestRate / currentDate.daysInYear() / 100;
+        for (auto itDay : input.daysInPeriod) {
+            double dailyInterestRate = input.interestRate / itDay.daysInYear / 100;
 
-//            for (int year = currentDate.year(); currentDate <= _endDate && year == currentDate.year();) {
-//                currentDate = currentDate.addDays(1);
-//                accumulatedInterestForPeriod += depositSum * dailyInterestRate;
+            if (itDay.isPaymentDay) {
+                std::string operationType;
+                if (input.interestCapitalization == true) {
+                    output.totalAmount += accumulatedInterestForPeriod;
+                    operationType = "Капитализация процентов";
+                } else {
+                    operationType = "Начисление процентов";
+                }
 
-//                if (_frequencyOfPaymentsList.contains(currentDate)) {
-//                    QString operation_type;
-//                    if (_interestCapitalization == true) {
-//                        depositSum += accumulatedInterestForPeriod;
-//                        operation_type = "Капитализация процентов";
-//                    } else {
-//                        operation_type = "Начисление процентов";
-//                    }
-//                    _generalList.append(std::make_tuple(currentDate, operation_type, accumulatedInterestForPeriod, depositSum));
-//                    _accuredInterest += accumulatedInterestForPeriod;
-//                    accumulatedInterestForPeriod = 0;
-//                }
+                output.generalList.push_back(std::make_tuple(itDay, operationType, accumulatedInterestForPeriod, output.totalAmount));
+                output.accuredInterest += accumulatedInterestForPeriod;
+                accumulatedInterestForPeriod = 0;
+            }
 
-//                auto rangeTopUp = _topUpList.equal_range(currentDate);
-//                for (auto it = rangeTopUp.first; it != rangeTopUp.second; ++it) {
-//                    depositSum += it->second;
-//                    _generalList.append(std::make_tuple(currentDate, "Пополнение", it->second, depositSum));
-//                }
+            for (auto it : itDay.topUpList) {
+                output.totalAmount += it;
+                output.generalList.push_back(std::make_tuple(itDay, "Пополнение", it, output.totalAmount));
+            }
 
-//                auto rangeTakeOff = _takeOffList.equal_range(currentDate);
-//                for (auto it = rangeTakeOff.first; it != rangeTakeOff.second; ++it) {
-//                    depositSum -= it->second;
-//                    _generalList.append(std::make_tuple(currentDate, "Снятие", it->second, depositSum));
-//                }
-//            }
-//        }
-//        _taxAmount = _accuredInterest / 100 * _taxRate;
-//        _accuredInterest -= _taxAmount;
-//        _totalAmount = depositSum + _accuredInterest;
+            for (auto it : itDay.takeOffList) {
+                output.totalAmount -= it;
+                output.generalList.push_back(std::make_tuple(itDay, "Снятие", it, output.totalAmount));
+            }
 
-//        return output;
+            accumulatedInterestForPeriod += output.totalAmount * dailyInterestRate;
+        }
+        output.taxAmount = output.accuredInterest / 100 * input.taxRate;
+        output.accuredInterest -= output.taxAmount;
+        output.totalAmount -= output.taxAmount;
+
+        return output;
     }
 
 private:
 
-    CreditCalculatorOutput& AnnuityLoan(const CreditCalculatorInput &input) {
+    CreditCalculatorOutput AnnuityLoan(const CreditCalculatorInput &input) {
         CreditCalculatorOutput output;
 
         double monthlyInterestRate = input.interestRate / 12 / 100;
@@ -198,7 +198,7 @@ private:
         return output;
     }
 
-    CreditCalculatorOutput& DifferentiatedLoan(const CreditCalculatorInput &input) {
+    CreditCalculatorOutput DifferentiatedLoan(const CreditCalculatorInput &input) {
         CreditCalculatorOutput output;
 
         double monthlyBodyPayment = input.creditSum / input.creditTerm;

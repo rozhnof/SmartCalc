@@ -2,7 +2,7 @@
 
 
 #include "../Models/CalculatorModel.h"
-#include "Validators/CalcValidator.h"
+#include "Validators/InfixNotationValidator.h"
 #include <QString>
 
 

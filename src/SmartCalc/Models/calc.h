@@ -76,7 +76,7 @@ int DecisionFunction(char* input, char* output, ConvertHelper* val);
 void PushOutAndPush(char symbol, char* output, ConvertHelper* val);
 void Converter(char* input, char* output, ConvertHelper* val);
 
-double Calculation(char* output, double x);
+double Calculation(const char* postfix, double x);
 void PopNumber(NodeNumber* *top);
 void PushNumber(double number, NodeNumber* *top);
 void PushStrNumber(char* str_number, NodeNumber* *top);

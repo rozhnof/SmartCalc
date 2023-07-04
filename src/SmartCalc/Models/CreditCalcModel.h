@@ -15,12 +15,32 @@ public:
 
     CreditCalcModel() {}
 
-    void setInput(const CreditCalculatorInput &input) {
+    void setInput(const CreditCalculatorInput input) {
         _input = input;
     }
 
-    CreditCalculatorOutput Calculate(Service::CreditPaymentsType type) {
-        return service.GetCreditCalculationResult(_input, type);
+    void Calculate(Service::CreditPaymentsType type) {
+        _output = service.GetCreditCalculationResult(_input, type);
+    }
+
+    double getTotalPayment() {
+        return _output.totalPayment;
+    }
+
+    double getOverpayment() {
+        return _output.overpayment;
+    }
+
+    std::vector<double> getMonthlyPayments() {
+        return _output.monthlyPayments;
+    }
+
+    std::vector<double> getMonthlyBodyPayments() {
+        return _output.monthlyBodyPayments;
+    }
+
+    std::vector<double> getMonthlyPercentPayments() {
+        return _output.monthlyPercentPayments;
     }
 };
 

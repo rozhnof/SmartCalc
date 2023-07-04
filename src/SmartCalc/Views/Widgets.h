@@ -49,6 +49,11 @@ typedef struct CreditCalcWidgets  {
     QVector<double> bodyPayments;
     QVector<double> percentPayments;
 
+    QComboBox *monthlyPaymentList;
+    QComboBox *creditTermList;
+    QPushButton *annuityPaymentButton;
+    QPushButton *differentiatedPaymentButton;
+
 } CreditCalcWidgets;
 
 

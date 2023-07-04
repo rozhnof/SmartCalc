@@ -51,7 +51,7 @@ public:
         chart->removeSeries(series);
     }
 
-    void SetData(QVector<double>& newBodyBar, QVector<double>& newPercentBar) {
+    void SetData(QVector<double> newBodyBar, QVector<double> newPercentBar) {
         if (series->count()) Clear();
 
         bodyBar->append(newBodyBar);

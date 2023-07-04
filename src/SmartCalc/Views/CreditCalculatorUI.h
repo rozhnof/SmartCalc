@@ -15,13 +15,6 @@ public:
     CreditCalcWidgets *widgets;
     CreditCalcController *controller;
 
-    QComboBox *monthlyPaymentList;
-    QComboBox *creditTermList;
-    QPushButton *annuityPaymentButton;
-    QPushButton *differentiatedPaymentButton;
-
-    Layout layout;
-
     CreditCalculatorUI() : MainWindow() {
         controller = new CreditCalcController;
         widgets = new CreditCalcWidgets;
@@ -32,7 +25,7 @@ public:
         CreateObjects();
         SetGeometry();
         SetOptions();
-//        DifferentiatedPayment();
+        DifferentiatedPayment();
     }
 
     void CreateObjects() {
@@ -56,18 +49,20 @@ public:
         widgets->data.insert(make_pair(TotalPayment, new QLineEdit(this)));
         widgets->data.insert(make_pair(Overpayment, new QLineEdit(this)));
 
-        annuityPaymentButton = new QPushButton("Annuity Payment", this);
-        differentiatedPaymentButton = new QPushButton("Differentiated Payment", this);
-        monthlyPaymentList = new QComboBox(this);
-        creditTermList = new QComboBox(this);
+        widgets->annuityPaymentButton = new QPushButton("Annuity Payment", this);
+        widgets->differentiatedPaymentButton = new QPushButton("Differentiated Payment", this);
+        widgets->monthlyPaymentList = new QComboBox(this);
+        widgets->creditTermList = new QComboBox(this);
 
-        connect(annuityPaymentButton, &QPushButton::clicked, this, &CreditCalculatorUI::AnnuityPayment);
-        connect(differentiatedPaymentButton, &QPushButton::clicked, this, &CreditCalculatorUI::DifferentiatedPayment);
+        connect(widgets->annuityPaymentButton, &QPushButton::clicked, this, &CreditCalculatorUI::AnnuityPayment);
+        connect(widgets->differentiatedPaymentButton, &QPushButton::clicked, this, &CreditCalculatorUI::DifferentiatedPayment);
     }
 
     void SetGeometry() {
         this->setFixedSize(950, 700);
         widgets->chartView->setGeometry(0, 225, this->width(), this->height() - 225);
+
+        Layout layout;
 
         layout.SetStartPoints(0, 0);
         layout.SetEndPoints(950, 225);
@@ -86,8 +81,8 @@ public:
         layout.AddWidget(widgets->box[InterestRate]);
 
         layout.ChangeColumns(2);
-        layout.AddWidget(annuityPaymentButton);
-        layout.AddWidget(differentiatedPaymentButton);
+        layout.AddWidget(widgets->annuityPaymentButton);
+        layout.AddWidget(widgets->differentiatedPaymentButton);
 
         layout.ChangeColumns(3);
         layout.AddWidget(widgets->box[TotalPayment]);
@@ -107,8 +102,8 @@ public:
         layout.SetField(widgets->box[TotalPayment], widgets->data[TotalPayment], Layout::Right, 15);
         layout.SetField(widgets->box[Overpayment], widgets->data[Overpayment], Layout::Right, 15);
 
-        layout.SetField(widgets->box[MonthlyPayment], monthlyPaymentList, Layout::Left, widgets->box[MonthlyPayment]->width()/2);
-        layout.SetField(widgets->box[CreditTerm], creditTermList, Layout::Left, widgets->box[CreditTerm]->width() - creditTermList->sizeHint().width());
+        layout.SetField(widgets->box[MonthlyPayment], widgets->monthlyPaymentList, Layout::Left, widgets->box[MonthlyPayment]->width()/2);
+        layout.SetField(widgets->box[CreditTerm], widgets->creditTermList, Layout::Left, widgets->box[CreditTerm]->width() - widgets->creditTermList->sizeHint().width());
     }
 
     void SetOptions() {
@@ -132,33 +127,31 @@ public:
         widgets->data[CreditTerm]->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{0,2}"), this));
         widgets->data[InterestRate]->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,2}[.][0-9]{0,2}"), this));
 
-        creditTermList->addItem("Month");
-        creditTermList->addItem("Years");
-        creditTermList->addItem("Days");
+        widgets->creditTermList->addItem("Month");
+        widgets->creditTermList->addItem("Years");
+        widgets->creditTermList->addItem("Days");
     }
 
-    void SetInput() {
-//        controller->SetCreditSum(widgets->data[CreditSum]->text().toDouble());
-//        controller->SetCreditTerm(widgets->data[CreditTerm]->text().toDouble());
-//        controller->SetInterestRate(widgets->data[InterestRate]->text().toDouble());
+    bool SetInput() {
+        double creditSum = widgets->data[CreditSum]->text().toDouble();
+        double creditTerm = widgets->data[CreditTerm]->text().toDouble();
+        double interestRate = widgets->data[InterestRate]->text().toDouble();
+
+        return controller->setInput(creditSum, creditTerm, interestRate);
     }
 
     void GetOutput() {
-//        ClearOutput();
+        widgets->monthlyPaymentList->clear();
+        for (auto it : controller->getMonthlyPayments()) {
+            widgets->monthlyPaymentList->addItem(QString::number(it, 'f', 2));
+        }
 
-//        for(auto var : controller->GetMonthlyPayments()) {
-//            monthlyPaymentList->addItem(QString::number(var, 'f', 2));
-//        }
-
-//        widgets->data[TotalPayment]->setText(QString::number(controller->GetTotalPayment(), 'f', 2));
-//        widgets->data[Overpayment]->setText(QString::number(controller->GetOverpayment(), 'f', 2));
-
-//        widgets->bodyPayments.append(controller->GetMonthlyBodyPayments());
-//        widgets->percentPayments.append(controller->GetMonthlyPercentPayments());
+        widgets->data[TotalPayment]->setText(QString::number(controller->getTotalPayment(), 'f', 2));
+        widgets->data[Overpayment]->setText(QString::number(controller->getOverpayment(), 'f', 2));
     }
 
     void ClearOutput() {
-        monthlyPaymentList->clear();
+        widgets->monthlyPaymentList->clear();
         widgets->bodyPayments.clear();
         widgets->percentPayments.clear();
     }
@@ -169,10 +162,7 @@ public:
     }
 
     void Calculate(Service::CreditPaymentsType type) {
-        CreditCalculatorInput input;
-        SetInput();
-
-        if (controller->Validate(input)) {
+        if (SetInput()) {
             controller->Calculate(type);
             GetOutput();
             DrawChartBars();
@@ -190,7 +180,7 @@ private slots:
     }
 
     void DrawChartBars() {
-        widgets->chartView->SetData(widgets->bodyPayments, widgets->percentPayments);
+        widgets->chartView->SetData(controller->getMonthlyBodyPayments(), controller->getMonthlyPercentPayments());
         widgets->chartView->show();
     }
 };

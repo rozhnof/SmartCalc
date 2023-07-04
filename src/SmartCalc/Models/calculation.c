@@ -90,10 +90,10 @@ void DecisionTrigonometricFunction(char number, NodeNumber* *top) {
     }
 }
 
-double Calculation(char* output, double x) {
+double Calculation(const char* postfix, double x) {
     char tmp_output[1024] = {0};
-    for (int i = 0; output[i] != '\0'; i++) {
-        tmp_output[i] = output[i];
+    for (int i = 0; postfix[i] != '\0'; i++) {
+        tmp_output[i] = postfix[i];
     }
 
     NodeNumber* top = NULL;

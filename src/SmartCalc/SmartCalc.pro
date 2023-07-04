@@ -27,10 +27,10 @@ HEADERS += \
     Controllers/CreditCalcController.h \
     Controllers/DepositCalcController.h \
     Controllers/GraphController.h \
-    Controllers/Validators/CalcValidator.h \
     Controllers/Validators/CreditCalcValidator.h \
     Controllers/Validators/DepositCalcValidator.h \
     Controllers/Validators/GraphValidator.h \
+    Controllers/Validators/InfixNotationValidator.h \
     Models/CalculatorModel.h \
     Models/CreditCalcModel.h \
     Models/DepositCalcModel.h \

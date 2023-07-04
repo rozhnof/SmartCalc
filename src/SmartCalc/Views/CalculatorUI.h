@@ -76,7 +76,7 @@ private:
 
        widgets->calcButtons.insert(make_pair(ButtonX, NewPushButton(this, "x", "x")));
        widgets->calcButtons.insert(make_pair(ButtonDot, NewPushButton(this, ".", "dot")));
-       widgets->calcButtons.insert(make_pair(ButtonEXP, NewPushButton(this, "EXP", "exp")));
+       widgets->calcButtons.insert(make_pair(ButtonEXP, NewPushButton(this, "e", "exp")));
 
        widgets->calcButtons.insert(make_pair(ButtonFactorial, NewPushButton(this, "!", "factorial")));
        widgets->calcButtons.insert(make_pair(ButtonOpenBracket, NewPushButton(this, "(", "bracket")));
