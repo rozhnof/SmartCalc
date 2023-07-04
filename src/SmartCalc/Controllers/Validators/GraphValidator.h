@@ -17,13 +17,13 @@ public:
     bool Validate() {
         bool status = true;
 
-        if (_input.countPoints <= 0) {
-            status = false;
-        } else if (_input.xMax < _input.xMin) {
-            status = false;
-        } else if (_input.yMax < _input.yMin) {
-            status = false;
-        }
+       if (_input.countPoints <= 0) {
+           status = false;
+       } else if (_input.xMax < _input.xMin) {
+           status = false;
+       } else if (_input.yMax < _input.yMin) {
+           status = false;
+       }
 
         return status;
     }

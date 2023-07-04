@@ -35,7 +35,7 @@ public:
 
     bool isUnaryOperator(QChar &lexema) {
         if (lexema == '+') {
-            lexema = '';
+            lexema = ' ';
             return true;
         } else if (lexema == '-') {
             lexema = '~';
@@ -87,7 +87,7 @@ public:
             } else if (isFunction(_input, i)) {
                 SetFunction();
             } else if (_input[i] == 'x') {
-                Se VAR_X();
+                SetX();
             } else if (_input[i] == '(') {
                 SetOpenBracket();
             } else if (_input[i] == ')') {
@@ -107,7 +107,7 @@ public:
     }
 
     bool LastCharacterCheck() {
-        if (!status && _bracketCount != 0 || _input.back() == '(' || isOperator(_input.back())) {
+        if (!status || _bracketCount != 0 || _input.back() == '(' || isOperator(_input.back())) {
             return false;
         } else {
             return true;
@@ -152,7 +152,7 @@ public:
         }
     }
 
-    void Se VAR_X() {
+    void SetX() {
         if (status & VAR_X) {
             status = OPERATOR | CLOSE_BRACKET;
         } else {
@@ -191,7 +191,7 @@ public:
     void SetExp() {
         if (status & EXP) {
             status = UNARY_OPERATOR | NUMBER;
-        } else if (status & CONST_E {
+        } else if (status & CONST_E) {
             status = OPERATOR | CLOSE_BRACKET;
         } else {
             status = 0;

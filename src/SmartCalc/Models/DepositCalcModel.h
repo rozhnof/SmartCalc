@@ -19,7 +19,23 @@ public:
         _input = input;
     }
 
-    DepositCalculatorOutput Calculate() {
-        return service.GetDepositCalculationResult(_input);
+    void Calculate() {
+        _output =  service.GetDepositCalculationResult(_input);
+    }
+
+    double getTotalAmount() {
+        return _output.totalAmount;
+    }
+
+    double getTaxAmount() {
+        return _output.taxAmount;
+    }
+
+    double getAccuredInterest() {
+        return _output.accuredInterest;
+    }
+
+    std::vector<std::tuple<Day, std::string, double, double>> getGeneralList() {
+        return _output.generalList;
     }
 };

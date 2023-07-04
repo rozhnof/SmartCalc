@@ -120,7 +120,7 @@ int isFunction(char symbol) {
 
     char functions[] = {SIN, COS, TAN, ASIN, ACOS, ATAN, LOG, LN, SQRT};
 
-    for (int i = 0; i < strlen(functions); i++) {
+    for (size_t i = 0; i < strlen(functions); i++) {
         if (symbol == functions[i]) {
             result = 1;
             break;

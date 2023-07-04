@@ -17,9 +17,7 @@ public:
     bool Validate() {
         bool status = true;
 
-        if (_input.depositSum <= 0) {
-            status = false;
-        } else if (_input.depositTerm <= 0) {
+        if (_input.depositAmount <= 0) {
             status = false;
         } else if (_input.interestRate < 0) {
             status = false;

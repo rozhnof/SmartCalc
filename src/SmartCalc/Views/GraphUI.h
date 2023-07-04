@@ -3,7 +3,7 @@
 
 #include "mainwindow.h"
 #include "../Controllers/GraphController.h"
-
+#include "qcustomplot.h"
 
 class GraphUI : public MainWindow
 {
@@ -14,8 +14,6 @@ private:
 
     GraphController *controller;
     GraphWidgets *widgets;
-
-    bool _graphStatus = false;
 
 public:
 
@@ -150,7 +148,7 @@ private:
         widgets->data.insert(make_pair(ScopeMax, NewDoubleSpinBox(this, "data")));
         widgets->data.insert(make_pair(RangeMax, NewDoubleSpinBox(this, "data")));
 
-        widgets->Input = NewLineEdit(this, "", "input");
+        widgets->Input = NewLineEdit(this, "sin(x)", "input");
         widgets->title.insert(make_pair(ScopeMin, NewLabel(this, "x min", "title")));
         widgets->title.insert(make_pair(RangeMin, NewLabel(this, "y min", "title")));
         widgets->title.insert(make_pair(InputX, NewLabel(this, "  X", "title")));
@@ -162,54 +160,12 @@ private:
     }
 
     void Connects() {
-        connect(widgets->data[ScopeMin], &QDoubleSpinBox::valueChanged, this, &GraphUI::ChangeScope);
-        connect(widgets->data[ScopeMax], &QDoubleSpinBox::valueChanged, this, &GraphUI::ChangeScope);
-        connect(widgets->data[RangeMin], &QDoubleSpinBox::valueChanged, this, &GraphUI::ChangeScope);
-        connect(widgets->data[RangeMax], &QDoubleSpinBox::valueChanged, this, &GraphUI::ChangeScope);
-        connect(widgets->data[Points], &QDoubleSpinBox::valueChanged, this, &GraphUI::DrawGraph);
         connect(widgets->data[InputX], &QDoubleSpinBox::valueChanged, this, &GraphUI::DrawLine);
         connect(widgets->drawingLine, &QCheckBox::stateChanged, this, &GraphUI::DrawingLineState);
-        connect(widgets->Input, &QLineEdit::returnPressed, this, &GraphUI::SetInput);
-        connect(widgets->Input, &QLineEdit::textChanged, this, &GraphUI::RealTimeValodate);
+        connect(widgets->Input, &QLineEdit::returnPressed, this, &GraphUI::DrawGraph);
     }
 
 private slots:
-
-    void RealTimeValodate() {
-//        int status = controller->ResultValidate(widgets->Input->text());
-
-//        if (status) {
-//            widgets->Input->setStyleSheet(""
-//                          " background-color: white;"
-//                          " border: 1px solid blue;"
-//                          " border-radius: 8;"
-
-//                          );
-//        } else {
-//            widgets->Input->setStyleSheet(
-//                          " background-color: white;"
-//                          " border: 1px solid red;"
-//                          " border-radius: 8;"
-//                          );
-//        }
-    }
-
-    void DrawGraph() {
-//        if (_graphStatus) {
-//            int countPoints = widgets->data[Points]->value();
-//            double xMin = widgets->data[ScopeMin]->value();
-//            double xMax = widgets->data[ScopeMax]->value();
-//            double yMin = widgets->data[RangeMin]->value();
-//            double yMax = widgets->data[RangeMax]->value();
-
-//            QVector<double> x = controller->GetCollectionX(countPoints, xMin, xMax);
-//            QVector<double> y = controller->GetCollectionY(x, yMin, yMax);
-
-//            widgets->graph->graph(0)->setData(x, y);
-//            widgets->graph->graph(0)->setVisible(true);
-//            widgets->graph->replot();
-//        }
-    }
 
     void DrawLine()
     {
@@ -222,37 +178,34 @@ private slots:
         widgets->graph->replot();
     }
 
-    void DrawingLineState() {
-        bool state = widgets->drawingLine->isTristate();
-        widgets->drawingLine->setTristate(!state);
-        widgets->graph->graph(1)->setVisible(!state);
-        DrawLine();
+    void DrawingLineState() {        
+        bool status = widgets->drawingLine->isChecked();
+
+        if (status) {
+            DrawLine();
+        }
+
+        widgets->graph->graph(1)->setVisible(status);
         widgets->graph->replot();
     }
 
-    void ChangeScope() {
-        widgets->data.at(ScopeMin)->setMaximum(widgets->data.at(ScopeMax)->value());
-        widgets->data.at(ScopeMax)->setMinimum(widgets->data.at(ScopeMin)->value());
-        DrawGraph();
-    }
+    void DrawGraph() {
+        QString input = widgets->Input->text();
+        double countPoints = widgets->data[Points]->text().toDouble();
+        double xMin = widgets->data[ScopeMin]->text().toDouble();
+        double xMax = widgets->data[ScopeMax]->text().toDouble();
+        double yMin = widgets->data[RangeMin]->text().toDouble();
+        double yMax = widgets->data[RangeMax]->text().toDouble();
 
-    void ChangeRange() {
-        widgets->data.at(RangeMin)->setMaximum(widgets->data.at(RangeMax)->value());
-        widgets->data.at(RangeMax)->setMinimum(widgets->data.at(RangeMin)->value());
-        DrawGraph();
-        DrawLine();
-    }
+        bool status = controller->setInput(input, countPoints, xMin, xMax, yMin, yMax);
 
-    void SetInput() {
-//        _graphStatus = controller->ResultValidate(widgets->Input->text());
+        if (status) {
+            controller->Calculate();
+            widgets->graph->graph(0)->setData(controller->getCollectionX(), controller->getCollectionY());
+        }
 
-//        if (_graphStatus) {
-//            controller->SetInput(widgets->Input->text());
-//            DrawGraph();
-//        } else {
-//            widgets->graph->graph(0)->setVisible(false);
-//            widgets->graph->replot();
-//        }
+        widgets->graph->graph(0)->setVisible(true);
+        widgets->graph->replot();
     }
 
     void ClearInput() {

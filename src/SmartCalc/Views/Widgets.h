@@ -49,6 +49,11 @@ typedef struct CreditCalcWidgets  {
     QVector<double> bodyPayments;
     QVector<double> percentPayments;
 
+    QComboBox *monthlyPaymentList;
+    QComboBox *creditTermList;
+    QPushButton *annuityPaymentButton;
+    QPushButton *differentiatedPaymentButton;
+
 } CreditCalcWidgets;
 
 
@@ -162,8 +167,8 @@ enum DepositCalcObjectsEnum {
     FREQUENCY_OF_PAYMENTS,
     DATE_OF_PLACEMENT,
     TAX_RATE,
-    DATE,
-    SUM,
+    OPERATION_DATE,
+    OPERATION_SUM,
     ACCURED_INTEREST,
     TOTAL_AMOUNT,
     TAX_AMOUNT
