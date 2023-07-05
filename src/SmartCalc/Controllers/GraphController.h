@@ -11,6 +11,7 @@ class GraphController {
 
 private:
     GraphModel *model;
+    InfixNotationValidator validator;
 
 public:
 
@@ -42,8 +43,7 @@ public:
     }
 
     bool Validate(QString &infix) {
-        InfixNotationValidator validator(infix);
-        return validator.Validate();
+        return validator.Validate(infix);
     }
 
     bool Validate(GraphInput &input) {

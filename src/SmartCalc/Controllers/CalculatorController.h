@@ -8,13 +8,13 @@
 
 class CalculatorController {
 
+    InfixNotationValidator validator;
 public:
 
     CalculatorController() {}
 
     bool Validate(QString &input) {
-        InfixNotationValidator validator(input);
-        return validator.Validate();
+        return validator.Validate(input);
     }
 
     double GetResult(QString &input, double &x) {

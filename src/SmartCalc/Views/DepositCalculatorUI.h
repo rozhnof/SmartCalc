@@ -79,16 +79,21 @@ public:
         widgets->boxData.insert(make_pair(TOTAL_AMOUNT, NewLineEdit(this, "", "data")));
         widgets->boxData.insert(make_pair(TAX_AMOUNT, NewLineEdit(this, "", "data")));
 
-        widgets->setTopUpListButton = NewPushButton(this, "Top Up List", "button");
-        widgets->setTakeOffListButton = NewPushButton(this, "Take Off List", "button");
-        widgets->setGeneralListButton = NewPushButton(this, "General List", "button");
-        widgets->topUpButton = NewPushButton(this, "Top Up", "button_left");
-        widgets->takeOffButton = NewPushButton(this, "Take Off", "button_right");
         widgets->calculateButton = NewPushButton(this, "Calculate", "button");
-        widgets->dateButton = NewPushButton(this, QDate::currentDate().toString("dd-MM-yyyy"), "button_left");
         widgets->dateOfPlacementButton = NewPushButton(this, QDate::currentDate().toString("dd-MM-yyyy"), "button");
         widgets->frequencyOfPaymentsButton = NewToolButton(this, "", "button");
+
+        widgets->setTopUpListButton = NewPushButton(this, "Top Up List", "button_left");
+        widgets->setTakeOffListButton = NewPushButton(this, "Take Off List", "button_left");
+        widgets->setGeneralListButton = NewPushButton(this, "General List", "button_left");
+        widgets->topUpButton = NewPushButton(this, "Top Up", "button_left");
+        widgets->dateButton = NewPushButton(this, QDate::currentDate().toString("dd-MM-yyyy"), "button_left");
+
+        widgets->takeOffButton = NewPushButton(this, "Take Off", "button_right");
         widgets->placementPeriodButton = NewToolButton(this, "", "button_right");
+        widgets->buttonClearGeneralTable = NewPushButton(this, "Clear", "button_right");
+        widgets->buttonClearTakeOffTable = NewPushButton(this, "Clear", "button_right");
+        widgets->buttonClearTopUpTable = NewPushButton(this, "Clear", "button_right");
 
         widgets->interestCapitalization = NewCheckBox(this, "Interest Capitalization", "check_box");
 
@@ -203,6 +208,9 @@ public:
         connect(widgets->setGeneralListButton, &QPushButton::clicked, this, &DepositCalculatorUI::ShowGeneralTable);
         connect(widgets->setTopUpListButton, &QPushButton::clicked, this, &DepositCalculatorUI::ShowTopUpTable);
         connect(widgets->setTakeOffListButton, &QPushButton::clicked, this, &DepositCalculatorUI::ShowTakeOffTable);
+        connect(widgets->buttonClearTakeOffTable, &QPushButton::clicked, this, &DepositCalculatorUI::ClearTakeOffList);
+        connect(widgets->buttonClearTopUpTable, &QPushButton::clicked, this, &DepositCalculatorUI::ClearTopUpList);
+        connect(widgets->buttonClearGeneralTable, &QPushButton::clicked, this, &DepositCalculatorUI::ClearGeneralList);
     }
 
     enum Frequencies {
@@ -366,9 +374,18 @@ public:
         layout.AddWidget(widgets->takeOffButton, 0.5);
         layout.AddWidget(widgets->calculateButton);
         layout.NextRow();
-        layout.AddWidget(widgets->setTopUpListButton);
-        layout.AddWidget(widgets->setTakeOffListButton);
-        layout.AddWidget(widgets->setGeneralListButton);
+        layout.SetHorizontalSpacing(2);
+        layout.AddWidget(widgets->setTopUpListButton, 0.5);
+        layout.SetHorizontalSpacing(10);
+        layout.AddWidget(widgets->buttonClearTopUpTable, 0.5);
+        layout.SetHorizontalSpacing(2);
+        layout.AddWidget(widgets->setTakeOffListButton, 0.5);
+        layout.SetHorizontalSpacing(10);
+        layout.AddWidget(widgets->buttonClearTakeOffTable, 0.5);
+        layout.SetHorizontalSpacing(2);
+        layout.AddWidget(widgets->setGeneralListButton, 0.5);
+        layout.SetHorizontalSpacing(10);
+        layout.AddWidget(widgets->buttonClearGeneralTable, 0.5);
 
         layout.SetTitle(widgets->dateOfPlacementButton, widgets->boxTitle[DATE_OF_PLACEMENT], Layout::CenterH, Layout::Above, 16, 0, -10);
         layout.SetTitle(widgets->box[OPERATION_SUM], widgets->boxTitle[OPERATION_SUM], Layout::CenterH, Layout::Above, 16, 0, -10);
@@ -578,11 +595,11 @@ public:
             QToolButton#button::menu-indicator, QToolButton#button_right::menu-indicator {
                 width: 0px;
             }
-            QToolButton#button QMenu, QToolButton#button_right QMenu {
+            QToolButton QMenu {
                 background-color: rgb(255, 255, 255);
                 color: rgb(72, 75, 79);
             }
-            QToolButton#button QMenu::item:selected, QToolButton#button_right QMenu::item:selected {
+            QToolButton QMenu::item:selected {
                 background-color: rgb(230,230,230);
                 border: 1px rgb(230,230,230);
                 border-radius: 5;
@@ -600,6 +617,21 @@ public:
     }
 
 private slots:
+
+    void ClearTakeOffList() {
+        widgets->takeOffList.clear();
+        widgets->takeOffTable->setRowCount(0);
+    }
+
+    void ClearTopUpList() {
+        widgets->topUpList.clear();
+        widgets->topUpTable->setRowCount(0);
+    }
+
+    void ClearGeneralList() {
+        widgets->generalList.clear();
+        widgets->generalTable->setRowCount(0);
+    }
 
     void ShowGeneralTable() {
         widgets->takeOffTable->hide();
@@ -653,7 +685,6 @@ private slots:
     void Calculate() {
         if (SetInput()) {
             controller->Calculate();
-
             SetOutput();
             FillGeneralList();
             ShowGeneralTable();

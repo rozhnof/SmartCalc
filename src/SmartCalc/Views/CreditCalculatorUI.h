@@ -52,7 +52,6 @@ public:
         widgets->annuityPaymentButton = new QPushButton("Annuity Payment", this);
         widgets->differentiatedPaymentButton = new QPushButton("Differentiated Payment", this);
         widgets->monthlyPaymentList = new QComboBox(this);
-        widgets->creditTermList = new QComboBox(this);
 
         connect(widgets->annuityPaymentButton, &QPushButton::clicked, this, &CreditCalculatorUI::AnnuityPayment);
         connect(widgets->differentiatedPaymentButton, &QPushButton::clicked, this, &CreditCalculatorUI::DifferentiatedPayment);
@@ -103,7 +102,6 @@ public:
         layout.SetField(widgets->box[Overpayment], widgets->data[Overpayment], Layout::Right, 15);
 
         layout.SetField(widgets->box[MonthlyPayment], widgets->monthlyPaymentList, Layout::Left, widgets->box[MonthlyPayment]->width()/2);
-        layout.SetField(widgets->box[CreditTerm], widgets->creditTermList, Layout::Left, widgets->box[CreditTerm]->width() - widgets->creditTermList->sizeHint().width());
     }
 
     void SetOptions() {
@@ -126,10 +124,6 @@ public:
         widgets->data[CreditSum]->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,10}[.][0-9]{0,2}"), this));
         widgets->data[CreditTerm]->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{0,2}"), this));
         widgets->data[InterestRate]->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,2}[.][0-9]{0,2}"), this));
-
-        widgets->creditTermList->addItem("Month");
-        widgets->creditTermList->addItem("Years");
-        widgets->creditTermList->addItem("Days");
     }
 
     bool SetInput() {
@@ -152,8 +146,8 @@ public:
 
     void ClearOutput() {
         widgets->monthlyPaymentList->clear();
-        widgets->bodyPayments.clear();
-        widgets->percentPayments.clear();
+        widgets->bodyPaymentCollection.clear();
+        widgets->percentPaymentCollection.clear();
     }
 
 

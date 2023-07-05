@@ -9,9 +9,7 @@
 
 class InfixNotationValidator {
 private:
-    int status = 0;
-
-    enum Lexemas {
+    enum Lexema {
         NUMBER = 0b0000000001,
         OPERATOR = 0b0000000010,
         UNARY_OPERATOR = 0b0000000100,
@@ -25,13 +23,18 @@ private:
         CONST_E = 0b10000000000
     };
 
-    int _bracketCount = 0;
-    int _dotCount = 0;
+    struct Status {
+        int lexemaStatus;
+        bool functionStatus;
+        bool expStatus;
+        int bracketCount;
+        int dotCount;
+    };
 
-    QString &_input;
+    Status status = {};
 
 public:
-    InfixNotationValidator(QString &input) : _input(input) {}
+    InfixNotationValidator() {}
 
     bool isUnaryOperator(QChar &lexema) {
         if (lexema == '+') {
@@ -59,7 +62,7 @@ public:
     }
 
     int isFunction(QString &lexema, int startIndex) {
-        std::unordered_map<QChar, QString> functions{{'s',"sin"}, {'c', "cos"}, {'t', "tan"}, {'S', "asin"}, {'C', "acos"}, {'T', "atan"}, {'q', "sqrt"}, {'l', "ln"}, {'L', "log"}};
+        std::unordered_map<QChar, QString> functions{{SIN,"sin"}, {COS, "cos"}, {TAN, "tan"}, {ASIN, "asin"}, {ACOS, "acos"}, {ATAN, "atan"}, {SQRT, "sqrt"}, {LN, "ln"}, {LOG, "log"}};
 
         for (auto &it : functions) {
             int funtionSize = it.second.size();
@@ -72,42 +75,48 @@ public:
         return false;
     }
 
-    bool Validate() {
-        status = NUMBER | UNARY_OPERATOR | FUNCTION | OPEN_BRACKET | VAR_X;
+    bool Validate(QString &input) {
+        status.lexemaStatus = NUMBER | UNARY_OPERATOR | FUNCTION | OPEN_BRACKET | VAR_X;
+        status.functionStatus = true;
+        status.expStatus = true;
+        status.bracketCount = 0;
+        status.dotCount = 0;
 
-        if (_input.size() == 0) {
-            status = 0;
+        if (input.size() == 0) {
+            status.lexemaStatus = 0;
         }
 
-        for (int i = 0; i < _input.size() && status; i++) {
-            if (isNumber(_input[i])) {
+        for (int i = 0; i < input.size() && status.lexemaStatus; i++) {
+            if (isNumber(input[i])) {
                 SetNumber();
-            } else if (isOperator(_input[i])) {
+            } else if (isOperator(input[i])) {
                 SetOperator();
-            } else if (isFunction(_input, i)) {
+            } else if (isFunction(input, i)) {
                 SetFunction();
-            } else if (_input[i] == 'x') {
+            } else if (input[i] == 'x') {
                 SetX();
-            } else if (_input[i] == '(') {
+            } else if (input[i] == '(') {
                 SetOpenBracket();
-            } else if (_input[i] == ')') {
+            } else if (input[i] == ')') {
                 SetCloseBracket();
-            } else if (_input[i] == '.') {
+            } else if (input[i] == '.') {
                 SetDot();
-            } else if (_input[i] == '!') {
+            } else if (input[i] == '!') {
                 SetFactorial();
-            } else if (_input[i] == 'e' || _input[i] == 'E') {
+            } else if (input[i] == 'e' || input[i] == 'E') {
                 SetExp();
             } else {
-                status = 0;
+                status.lexemaStatus = 0;
             }
         }
-        status = LastCharacterCheck();
-        return status;
+
+        return FinalValidation(input);
     }
 
-    bool LastCharacterCheck() {
-        if (!status || _bracketCount != 0 || _input.back() == '(' || isOperator(_input.back())) {
+    bool FinalValidation(QString &input) {
+        if (!status.lexemaStatus || !status.functionStatus || !status.expStatus || status.bracketCount != 0) {
+            return false;
+        } else if (input.back() == '(' || input.back() == '.' || isOperator(input.back())) {
             return false;
         } else {
             return true;
@@ -115,86 +124,92 @@ public:
     }
 
     void SetNumber() {
-        if (status & NUMBER) {
-            status = NUMBER | OPERATOR | DOT | EXP | CLOSE_BRACKET;
-            if (_dotCount == 0) {
-                status |= FACTORIAL;
+        if (status.lexemaStatus & NUMBER) {
+            status.lexemaStatus = NUMBER | OPERATOR | DOT | EXP | CLOSE_BRACKET;
+            if (status.dotCount == 0) {
+                status.lexemaStatus |= FACTORIAL;
+                status.expStatus = true;
+            } else {
+                status.expStatus = false;
             }
         } else {
-            status = 0;
+            status.lexemaStatus = 0;
         }
     }
 
     void SetOperator() {
-        if (status & OPERATOR) {
-            status = NUMBER | FUNCTION | OPEN_BRACKET | VAR_X | CONST_E | UNARY_OPERATOR;
-        } else if (status & UNARY_OPERATOR) {
-            status = NUMBER | FUNCTION | OPEN_BRACKET | VAR_X | CONST_E;
+        if (status.lexemaStatus & OPERATOR) {
+            status.lexemaStatus = NUMBER | FUNCTION | OPEN_BRACKET | VAR_X | CONST_E | UNARY_OPERATOR;
+        } else if (status.lexemaStatus & UNARY_OPERATOR) {
+            status.lexemaStatus = NUMBER | FUNCTION | OPEN_BRACKET | VAR_X | CONST_E;
         } else {
-            status = 0;
+            status.lexemaStatus = 0;
         }
-        _dotCount = 0;
+        status.dotCount = 0;
     }
 
     void SetFunction() {
-        if (status & FUNCTION) {
-            status = OPEN_BRACKET;
+        if (status.lexemaStatus & FUNCTION) {
+            status.lexemaStatus = OPEN_BRACKET;
+            status.functionStatus = false;
         } else {
-            status = 0;
+            status.lexemaStatus = 0;
         }
     }
 
     void SetFactorial() {
-        if (status & FACTORIAL) {
-            status = OPERATOR;
+        if (status.lexemaStatus & FACTORIAL) {
+            status.lexemaStatus = OPERATOR;
         } else {
-            status = 0;
+            status.lexemaStatus = 0;
         }
     }
 
     void SetX() {
-        if (status & VAR_X) {
-            status = OPERATOR | CLOSE_BRACKET;
+        if (status.lexemaStatus & VAR_X) {
+            status.lexemaStatus = OPERATOR | CLOSE_BRACKET;
         } else {
-            status = 0;
+            status.lexemaStatus = 0;
         }
     }
 
     void SetOpenBracket() {
-        if (status & OPEN_BRACKET) {
-            status = NUMBER | FUNCTION | OPEN_BRACKET | VAR_X | CONST_E| UNARY_OPERATOR;
-
-            _bracketCount++;
+        if (status.lexemaStatus & OPEN_BRACKET) {
+            status.lexemaStatus = NUMBER | FUNCTION | OPEN_BRACKET | VAR_X | CONST_E| UNARY_OPERATOR;
+            status.functionStatus = true;
+            status.bracketCount++;
         } else {
-            status = 0;
+            status.lexemaStatus = 0;
         }
     }
 
     void SetCloseBracket() {
-        if (status & CLOSE_BRACKET) {
-            status = OPERATOR | CLOSE_BRACKET;
-            _bracketCount--;
+        if (status.lexemaStatus & CLOSE_BRACKET) {
+            status.lexemaStatus = OPERATOR | CLOSE_BRACKET;
+            status.bracketCount--;
         } else {
-            status = 0;
+            status.lexemaStatus = 0;
         }
     }
 
     void SetDot() {
-        if (status & DOT) {
-            status = NUMBER;
-            _dotCount++;
+        if (status.lexemaStatus & DOT) {
+            status.lexemaStatus = NUMBER;
+            status.dotCount++;
         } else {
-            status = 0;
+            status.lexemaStatus = 0;
         }
     }
 
     void SetExp() {
-        if (status & EXP) {
-            status = UNARY_OPERATOR | NUMBER;
-        } else if (status & CONST_E) {
-            status = OPERATOR | CLOSE_BRACKET;
+        if (status.lexemaStatus & EXP) {
+            status.lexemaStatus = UNARY_OPERATOR | NUMBER;
+            status.dotCount = 0;
+            status.expStatus = false;
+        } else if (status.lexemaStatus & CONST_E) {
+            status.lexemaStatus = OPERATOR | CLOSE_BRACKET;
         } else {
-            status = 0;
+            status.lexemaStatus = 0;
         }
     }
 };

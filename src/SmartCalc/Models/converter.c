@@ -169,6 +169,7 @@ void Converter(char* input, char* output, ConvertHelper* val) {
         val->in_idx++;
     }
     PushOutAll(output, val);
+    output[val->out_idx] = '\0';
 }
 
 void FromInfixToPostfix(char* input, char* output) {

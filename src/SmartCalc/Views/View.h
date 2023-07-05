@@ -30,14 +30,6 @@ private:
     IPlatformUI *_winUi;
     IPlatformUI *_macUi;
 
-    QMenuBar *menuBar;
-    QMenu *menuMode;
-    QAction *actionCalc;
-    QAction *actionGraph;
-    QAction *actionCreditCalc;
-    QAction *actionDepositCalc;
-    QAction *switchMode;
-
 public:
 
 
@@ -70,7 +62,6 @@ public:
         _currentTab = _calc;
 
         AddMenu();
-        Connects();
     }
 
     void show() {
@@ -90,14 +81,13 @@ private:
     }
 
     void AddMenu() {
-        menuBar = new QMenuBar(nullptr);
-        menuMode = new QMenu(menuBar);
-
-        actionCalc = new QAction;
-        actionGraph = new QAction;
-        actionCreditCalc = new QAction;
-        actionDepositCalc = new QAction;
-        switchMode = new QAction;
+        QMenuBar *menuBar = new QMenuBar(_currentTab);
+        QMenu *menuMode = new QMenu(menuBar);
+        QAction *actionCalc = new QAction(menuMode);
+        QAction *actionGraph = new QAction(menuMode);
+        QAction *actionCreditCalc = new QAction(menuMode);
+        QAction *actionDepositCalc = new QAction(menuMode);
+        QAction *switchMode = new QAction(menuMode);
 
         menuMode->setTitle("Mode");
         menuBar->addAction(menuMode->menuAction());
@@ -113,9 +103,9 @@ private:
         actionCreditCalc->setText("Credit Calculator");
         actionDepositCalc->setText("Deposit Calculator");
         switchMode->setText("Switch Mode");
-    }
 
-    void Connects() {
+        _currentTab->setMenuBar(menuBar);
+
         connect(actionCalc, &QAction::triggered, this, &Calculator::SwitchToCalc);
         connect(actionGraph, &QAction::triggered, this, &Calculator::SwithToGraph);
         connect(actionCreditCalc, &QAction::triggered, this, &Calculator::SwitchToCreditCalc);

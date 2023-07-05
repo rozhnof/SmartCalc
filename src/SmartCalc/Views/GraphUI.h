@@ -77,7 +77,7 @@ private:
         layout.AddWidget(widgets->box[Points]);
         layout.AddWidget(widgets->box[ScopeMax]);
         layout.AddWidget(widgets->box[RangeMax]);
-        layout.AddWidget(widgets->Input, 2, 1);
+        layout.AddWidget(widgets->inputLineEdit, 2, 1);
 
         layout.SetTitle(widgets->box[ScopeMin], widgets->title.at(ScopeMin), Layout::Left, Layout::CenterV, 16, 5, 0);
         layout.SetTitle(widgets->box[RangeMin], widgets->title.at(RangeMin), Layout::Left, Layout::CenterV, 16, 5, 0);
@@ -85,7 +85,7 @@ private:
         layout.SetTitle(widgets->box[Points], widgets->title.at(Points), Layout::Left, Layout::CenterV, 16, 5, 0);
         layout.SetTitle(widgets->box[ScopeMax], widgets->title.at(ScopeMax), Layout::Left, Layout::CenterV, 16, 5, 0);
         layout.SetTitle(widgets->box[RangeMax], widgets->title.at(RangeMax), Layout::Left, Layout::CenterV, 16, 5, 0);
-        layout.SetTitle(widgets->box[InputX], widgets->drawingLine, Layout::Left, Layout::CenterV, 16, 5 + widgets->title[InputX]->width(), 0);
+        layout.SetTitle(widgets->box[InputX], widgets->checkBoxLineDrawing, Layout::Left, Layout::CenterV, 16, 5 + widgets->title[InputX]->width(), 0);
 
         layout.SetField(widgets->box[ScopeMin], widgets->data[ScopeMin], Layout::CenterH, 0);
         layout.SetField(widgets->box[RangeMin], widgets->data[RangeMin], Layout::CenterH, 0);
@@ -103,7 +103,7 @@ private:
 
         widgets->graph->setInteraction(QCP::iRangeZoom,true);
         widgets->graph->setInteraction(QCP::iRangeDrag, true);
-        widgets->Input->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+        widgets->inputLineEdit->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
         for (auto it : widgets->data) {
             it.second->setAlignment(Qt::AlignRight);
@@ -148,7 +148,7 @@ private:
         widgets->data.insert(make_pair(ScopeMax, NewDoubleSpinBox(this, "data")));
         widgets->data.insert(make_pair(RangeMax, NewDoubleSpinBox(this, "data")));
 
-        widgets->Input = NewLineEdit(this, "sin(x)", "input");
+        widgets->inputLineEdit = NewLineEdit(this, "sin(x)", "input");
         widgets->title.insert(make_pair(ScopeMin, NewLabel(this, "x min", "title")));
         widgets->title.insert(make_pair(RangeMin, NewLabel(this, "y min", "title")));
         widgets->title.insert(make_pair(InputX, NewLabel(this, "  X", "title")));
@@ -156,13 +156,13 @@ private:
         widgets->title.insert(make_pair(ScopeMax, NewLabel(this, "x max", "title")));
         widgets->title.insert(make_pair(RangeMax, NewLabel(this, "y max", "title")));
 
-        widgets->drawingLine = new QCheckBox(this);
+        widgets->checkBoxLineDrawing = new QCheckBox(this);
     }
 
     void Connects() {
         connect(widgets->data[InputX], &QDoubleSpinBox::valueChanged, this, &GraphUI::DrawLine);
-        connect(widgets->drawingLine, &QCheckBox::stateChanged, this, &GraphUI::DrawingLineState);
-        connect(widgets->Input, &QLineEdit::returnPressed, this, &GraphUI::DrawGraph);
+        connect(widgets->checkBoxLineDrawing, &QCheckBox::stateChanged, this, &GraphUI::DrawingLineState);
+        connect(widgets->inputLineEdit, &QLineEdit::returnPressed, this, &GraphUI::DrawGraph);
     }
 
 private slots:
@@ -179,7 +179,7 @@ private slots:
     }
 
     void DrawingLineState() {        
-        bool status = widgets->drawingLine->isChecked();
+        bool status = widgets->checkBoxLineDrawing->isChecked();
 
         if (status) {
             DrawLine();
@@ -190,7 +190,7 @@ private slots:
     }
 
     void DrawGraph() {
-        QString input = widgets->Input->text();
+        QString input = widgets->inputLineEdit->text();
         double countPoints = widgets->data[Points]->text().toDouble();
         double xMin = widgets->data[ScopeMin]->text().toDouble();
         double xMax = widgets->data[ScopeMax]->text().toDouble();
@@ -209,7 +209,7 @@ private slots:
     }
 
     void ClearInput() {
-        widgets->Input->clear();
+        widgets->inputLineEdit->clear();
     }
 };
 

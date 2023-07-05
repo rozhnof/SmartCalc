@@ -16,22 +16,22 @@ using namespace std;
 
 
 typedef struct CalcWidgets {
-    QMainWindow *calcWindow;
+    QMainWindow *calculatorWindow;
 
-    QLineEdit *Input;
-    QPushButton *allClear;
-    QPushButton *clear;
-    QPushButton *result;
+    QLineEdit *inputLineEdit;
+    QPushButton *buttonAllClear;
+    QPushButton *buttonClear;
+    QPushButton *buttonEqual;
 
-    unordered_map<int, QPushButton*> calcButtons;
+    unordered_map<int, QPushButton*> buttonDictionary;
 } CalcWidgets;
 
 typedef struct GraphWidgets  {
     QWidget *graphWindow;
     QCustomPlot *graph;
 
-    QLineEdit *Input;
-    QCheckBox* drawingLine;
+    QLineEdit *inputLineEdit;
+    QCheckBox* checkBoxLineDrawing;
 
     unordered_map<int, QTextEdit*> box;
     unordered_map<int, QLabel*> title;
@@ -46,11 +46,10 @@ typedef struct CreditCalcWidgets  {
     unordered_map<int, QLabel*> title;
     unordered_map<int, QLineEdit*> data;
 
-    QVector<double> bodyPayments;
-    QVector<double> percentPayments;
+    QVector<double> bodyPaymentCollection;
+    QVector<double> percentPaymentCollection;
 
     QComboBox *monthlyPaymentList;
-    QComboBox *creditTermList;
     QPushButton *annuityPaymentButton;
     QPushButton *differentiatedPaymentButton;
 
@@ -95,6 +94,10 @@ typedef struct DepositCalcWidgets  {
     multimap<QDate, double> topUpList;
     multimap<QDate, double> takeOffList;
 
+    QPushButton *buttonClearGeneralTable;
+    QPushButton *buttonClearTopUpTable;
+    QPushButton *buttonClearTakeOffTable;
+
     unordered_map<int, QWidget*> box;
     unordered_map<int, QLabel*> boxTitle;
     unordered_map<int, QLineEdit*> boxData;
@@ -103,7 +106,7 @@ typedef struct DepositCalcWidgets  {
 } DepositCalcWidgets;
 
 
-enum CalcObjectsEnum {
+enum CalcWidgetsEnum {
     Button0,
     Button1,
     Button2,
@@ -141,7 +144,7 @@ enum CalcObjectsEnum {
     ButtonEXP
 };
 
-enum GraphObjectsEnum {
+enum GraphWidgetsEnum {
     Input,
     ScopeMin,
     ScopeMax,
@@ -151,7 +154,7 @@ enum GraphObjectsEnum {
     Points
 };
 
-enum CreditCalcObjectsEnum {
+enum CreditCalcWidgetsEnum {
     CreditSum,
     CreditTerm,
     InterestRate,
@@ -160,7 +163,7 @@ enum CreditCalcObjectsEnum {
     MonthlyPayment
 };
 
-enum DepositCalcObjectsEnum {
+enum DepositCalcWidgetsEnum {
     DEPOSIT_AMOUNT,
     INTEREST_RATE,
     PLACEMENT_PERIOD,
