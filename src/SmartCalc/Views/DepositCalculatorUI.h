@@ -52,7 +52,7 @@ public:
         widgets->box.insert(make_pair(DEPOSIT_AMOUNT, NewWidget(this, "box")));
         widgets->box.insert(make_pair(INTEREST_RATE, NewWidget(this, "box")));
         widgets->box.insert(make_pair(PLACEMENT_PERIOD, NewWidget(this, "box_left")));
-        widgets->box.insert(make_pair(SUM, NewWidget(this, "box_right")));
+        widgets->box.insert(make_pair(OPERATION_SUM, NewWidget(this, "box_right")));
         widgets->box.insert(make_pair(TAX_RATE, NewWidget(this, "box")));
         widgets->box.insert(make_pair(ACCURED_INTEREST, NewWidget(this, "box")));
         widgets->box.insert(make_pair(TOTAL_AMOUNT, NewWidget(this, "box")));
@@ -63,8 +63,8 @@ public:
         widgets->boxTitle.insert(make_pair(PLACEMENT_PERIOD, NewLabel(this, "Placement period", "title")));
         widgets->boxTitle.insert(make_pair(FREQUENCY_OF_PAYMENTS, NewLabel(this, "Frequency of Payments", "title")));
         widgets->boxTitle.insert(make_pair(DATE_OF_PLACEMENT, NewLabel(this, "Date of Placement", "title")));
-        widgets->boxTitle.insert(make_pair(DATE, NewLabel(this, "Date", "title")));
-        widgets->boxTitle.insert(make_pair(SUM, NewLabel(this, "Sum", "title")));
+        widgets->boxTitle.insert(make_pair(OPERATION_DATE, NewLabel(this, "Date", "title")));
+        widgets->boxTitle.insert(make_pair(OPERATION_SUM, NewLabel(this, "Sum", "title")));
         widgets->boxTitle.insert(make_pair(TAX_RATE, NewLabel(this, "Tax Rate", "title")));
         widgets->boxTitle.insert(make_pair(ACCURED_INTEREST, NewLabel(this, "Accrued Interest", "title")));
         widgets->boxTitle.insert(make_pair(TOTAL_AMOUNT, NewLabel(this, "Total Amount", "title")));
@@ -74,7 +74,7 @@ public:
         widgets->boxData.insert(make_pair(INTEREST_RATE, NewLineEdit(this, "10", "data")));
         widgets->boxData.insert(make_pair(PLACEMENT_PERIOD, NewLineEdit(this, "10", "data")));
         widgets->boxData.insert(make_pair(TAX_RATE, NewLineEdit(this, "", "data")));
-        widgets->boxData.insert(make_pair(SUM, NewLineEdit(this, "", "data")));
+        widgets->boxData.insert(make_pair(OPERATION_SUM, NewLineEdit(this, "", "data")));
         widgets->boxData.insert(make_pair(ACCURED_INTEREST, NewLineEdit(this, "", "data")));
         widgets->boxData.insert(make_pair(TOTAL_AMOUNT, NewLineEdit(this, "", "data")));
         widgets->boxData.insert(make_pair(TAX_AMOUNT, NewLineEdit(this, "", "data")));
@@ -356,7 +356,7 @@ public:
         layout.SetHorizontalSpacing(2);
         layout.AddWidget(widgets->dateButton, 0.5);
         layout.SetHorizontalSpacing(10);
-        layout.AddWidget(widgets->box[SUM], 0.5);
+        layout.AddWidget(widgets->box[OPERATION_SUM], 0.5);
         layout.AddWidget(widgets->interestCapitalization);
         layout.NextRow();
         layout.AddWidget(widgets->box[TAX_RATE]);
@@ -371,12 +371,12 @@ public:
         layout.AddWidget(widgets->setGeneralListButton);
 
         layout.SetTitle(widgets->dateOfPlacementButton, widgets->boxTitle[DATE_OF_PLACEMENT], Layout::CenterH, Layout::Above, 16, 0, -10);
-        layout.SetTitle(widgets->box[SUM], widgets->boxTitle[SUM], Layout::CenterH, Layout::Above, 16, 0, -10);
+        layout.SetTitle(widgets->box[OPERATION_SUM], widgets->boxTitle[OPERATION_SUM], Layout::CenterH, Layout::Above, 16, 0, -10);
         layout.SetTitle(widgets->box[TAX_RATE], widgets->boxTitle[TAX_RATE], Layout::CenterH, Layout::Above, 16, 0, -10);
-        layout.SetTitle(widgets->dateButton, widgets->boxTitle[DATE], Layout::CenterH, Layout::Above, 16, 0, -10);
+        layout.SetTitle(widgets->dateButton, widgets->boxTitle[OPERATION_DATE], Layout::CenterH, Layout::Above, 16, 0, -10);
 
         layout.SetField(widgets->box[TAX_RATE], widgets->boxData[TAX_RATE], Layout::CenterH, 0);
-        layout.SetField(widgets->box[SUM], widgets->boxData[SUM], Layout::CenterH, 0);
+        layout.SetField(widgets->box[OPERATION_SUM], widgets->boxData[OPERATION_SUM], Layout::CenterH, 0);
     }
 
     void SetMainInputContainer() {
@@ -417,7 +417,7 @@ public:
         widgets->boxData[DEPOSIT_AMOUNT]->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,10}([.][0-9]{1,2})?"), this));
         widgets->boxData[INTEREST_RATE]->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,3}([.][0-9]{1,2})?"), this));
         widgets->boxData[TAX_RATE]->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,2}([.][0-9]{1,2})?"), this));
-        widgets->boxData[SUM]->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,10}([.][0-9]{1,2})?"), this));
+        widgets->boxData[OPERATION_SUM]->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,10}([.][0-9]{1,2})?"), this));
         widgets->boxData[PLACEMENT_PERIOD]->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,2}"), this));
     }
 
@@ -622,7 +622,7 @@ private slots:
     void AddTopUp() {
         if (widgets->topUpList.size() < 50) {
             QDate date = QDate::fromString(widgets->dateButton->text(), "dd-MM-yyyy");
-            double sum = widgets->boxData[SUM]->text().toDouble();
+            double sum = widgets->boxData[OPERATION_SUM]->text().toDouble();
 
             widgets->topUpList.insert(make_pair(date, sum));
             widgets->topUpTable->setRowCount(0);
@@ -637,7 +637,7 @@ private slots:
     void AddTakeOff() {
         if (widgets->takeOffList.size() < 50) {
             QDate date = QDate::fromString(widgets->dateButton->text(), "dd-MM-yyyy");
-            double sum = widgets->boxData[SUM]->text().toDouble();
+            double sum = widgets->boxData[OPERATION_SUM]->text().toDouble();
 
             widgets->takeOffList.insert(make_pair(date, sum));
             widgets->takeOffTable->setRowCount(0);

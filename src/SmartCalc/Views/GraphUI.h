@@ -3,7 +3,7 @@
 
 #include "mainwindow.h"
 #include "../Controllers/GraphController.h"
-
+#include "qcustomplot.h"
 
 class GraphUI : public MainWindow
 {

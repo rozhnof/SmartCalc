@@ -1,14 +1,8 @@
-QT       -= core gui
+QT       -= core gui printsupport charts core5compat gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-QT += printsupport
-QT += charts
-QT += core5compat
-QT += gui
-
 CONFIG += c++17
-
 
 
 
@@ -37,7 +31,7 @@ HEADERS += \
     Models/GraphModel.h \
     Models/calc.h \
     Services/Service.h \
-    Views/Calculator.h \
+    Views/View.h \
     Views/CalculatorUI.h \
     Views/Calendar.h \
     Views/ChartView.h \
@@ -63,5 +57,3 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-RESOURCES += \
-    Resources/resources.qrc

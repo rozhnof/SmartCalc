@@ -1,5 +1,5 @@
 #include <QApplication>
-#include "Views/Calculator.h"
+#include "Views/View.h"
 
 
 int main(int argc, char *argv[])

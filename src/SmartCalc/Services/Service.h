@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <tuple>
 
 
 struct Day {
@@ -124,11 +125,9 @@ public:
         {
         case ANNUITY:
             output = AnnuityLoan(input);
-
+            break;
         case DIFFERENTIATED:
             output = DifferentiatedLoan(input);
-        
-        default:
             break;
         }
         return output;

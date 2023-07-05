@@ -113,12 +113,6 @@ private:
         widgets->chartView->SetGridLineColor(QColor(217, 217, 217));
     }
 
-    void SetStyle(DepositCalcWidgets *widgets) {
-
-    }
-
-
-
     void SetGeometry(CalcWidgets *widgets) {
         Layout layout;
 
