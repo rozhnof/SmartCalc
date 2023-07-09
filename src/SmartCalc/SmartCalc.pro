@@ -2,7 +2,7 @@ QT       -= core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++17
+CONFIG += c++11
 
 QT += printsupport charts core5compat gui widgets
 
@@ -11,8 +11,8 @@ QT += printsupport charts core5compat gui widgets
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Models/calculation.c \
-    Models/converter.c \
+    Services/calculation.c \
+    Services/converter.c \
     Views/qcustomplot.cpp \
     main.cpp
 
@@ -29,7 +29,8 @@ HEADERS += \
     Models/CreditCalcModel.h \
     Models/DepositCalcModel.h \
     Models/GraphModel.h \
-    Models/calc.h \
+    Services/calc.h \
+    Services/IO.h \
     Services/Service.h \
     Views/View.h \
     Views/CalculatorUI.h \
@@ -48,8 +49,6 @@ HEADERS += \
 
 
 DESTDIR += ../build/
-
-
 
 
 # Default rules for deployment.

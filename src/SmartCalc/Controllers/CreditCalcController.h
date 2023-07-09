@@ -7,14 +7,10 @@
 
 class CreditCalcController {
 private:
-    CreditCalcModel *model;
+    CreditCalcModel _model;
+    CreditCalcValidator _validator;
 
 public:
-
-    CreditCalcController() {
-        model = new CreditCalcModel;
-    }
-
     bool setInput(double creditSum, double creditTerm, double interestRate) {
         CreditCalculatorInput input;
 
@@ -25,41 +21,40 @@ public:
         bool status = Validate(input);
 
         if (status) {
-            model->setInput(input);
+            _model.setInput(input);
         }
 
         return status;
     }
 
-    bool Validate(CreditCalculatorInput input) {
-        CreditCalcValidator validator(input);
-        return validator.Validate();
+    bool Validate(CreditCalculatorInput &input) {
+        return _validator.Validate(input);
     }
 
     void Calculate(Service::CreditPaymentsType type) {
-        model->Calculate(type);
+        _model.Calculate(type);
     }
 
     double getTotalPayment() {
-        return model->getTotalPayment();
+        return _model.getTotalPayment();
     }
 
     double getOverpayment() {
-        return model->getOverpayment();
+        return _model.getOverpayment();
     }
 
     QVector<double> getMonthlyPayments() {
-        std::vector<double> monthlyPayments = model->getMonthlyPayments();
+        std::vector<double> monthlyPayments = _model.getMonthlyPayments();
         return QVector<double>(monthlyPayments.begin(), monthlyPayments.end());
     }
 
     QVector<double> getMonthlyBodyPayments() {
-        std::vector<double> monthlyBodyPayments = model->getMonthlyBodyPayments();
+        std::vector<double> monthlyBodyPayments = _model.getMonthlyBodyPayments();
         return QVector<double>(monthlyBodyPayments.begin(), monthlyBodyPayments.end());
     }
 
     QVector<double> getMonthlyPercentPayments() {
-        std::vector<double> monthlyPercentPayments = model->getMonthlyPercentPayments();
+        std::vector<double> monthlyPercentPayments = _model.getMonthlyPercentPayments();
         return QVector<double>(monthlyPercentPayments.begin(), monthlyPercentPayments.end());
     }
 };

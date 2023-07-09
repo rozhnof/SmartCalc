@@ -8,20 +8,15 @@
 
 
 class DepositCalcValidator {
-private:
-    DepositCalculatorInput _input;
-
 public:
-    DepositCalcValidator(DepositCalculatorInput &input) : _input(input) {}
-
-    bool Validate() {
+    bool Validate(const DepositCalculatorInput &input) {
         bool status = true;
 
-        if (_input.depositAmount <= 0) {
+        if (input.depositAmount <= 0) {
             status = false;
-        } else if (_input.interestRate < 0) {
+        } else if (input.interestRate < 0) {
             status = false;
-        } else if (_input.taxRate < 0) {
+        } else if (input.taxRate < 0) {
             status = false;
         }
 

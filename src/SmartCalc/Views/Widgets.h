@@ -8,8 +8,6 @@
 #include <QMainWindow>
 #include "qcustomplot.h"
 #include "Calendar.h"
-
-#include "Layout.h"
 #include "ChartView.h"
 
 using namespace std;
@@ -17,11 +15,16 @@ using namespace std;
 
 typedef struct CalcWidgets {
     QMainWindow *calculatorWindow;
+    QWidget *inputXWidget;
 
     QLineEdit *inputLineEdit;
+    QLineEdit *inputXLineEdit;
+
     QPushButton *buttonAllClear;
     QPushButton *buttonClear;
     QPushButton *buttonEqual;
+
+    QPropertyAnimation *animation;
 
     unordered_map<int, QPushButton*> buttonDictionary;
 } CalcWidgets;
@@ -107,72 +110,72 @@ typedef struct DepositCalcWidgets  {
 
 
 enum CalcWidgetsEnum {
-    Button0,
-    Button1,
-    Button2,
-    Button3,
-    Button4,
-    Button5,
-    Button6,
-    Button7,
-    Button8,
-    Button9,
-    ButtonDot,
+    BUTTON_0,
+    BUTTON_1,
+    BUTTON_2,
+    BUTTON_3,
+    BUTTON_4,
+    BUTTON_5,
+    BUTTON_6,
+    BUTTON_7,
+    BUTTON_8,
+    BUTTON_9,
+    BUTTON_DOT,
 
-    ButtonX,
+    BUTTON_X,
 
-    ButtonSin,
-    ButtonCos,
-    ButtonTan,
-    ButtonAsin,
-    ButtonAcos,
-    ButtonAtan,
-    ButtonLog,
-    ButtonLn,
-    ButtonSqrt,
+    BUTTON_SIN,
+    BUTTON_COS,
+    BUTTON_TAN,
+    BUTTON_ASIN,
+    BUTTON_ACOS,
+    BUTTON_ATAN,
+    BUTTON_LOG,
+    BUTTON_LN,
+    BUTTON_SQRT,
 
-    ButtonSum,
-    ButtonSub,
-    ButtonMul,
-    ButtonDiv,
-    ButtonMod,
-    ButtonPow,
-    ButtonFactorial,
+    BUTTON_SUM,
+    BUTTON_SUB,
+    BUTTON_MUL,
+    BUTTON_DIV,
+    BUTTON_MOD,
+    BUTTON_POW,
+    BUTTON_FACTORIAL,
 
-    ButtonOpenBracket,
-    ButtonCloseBracket,
-    ButtonEXP
+    BUTTON_OPEN_BRACKET,
+    BUTTON_CLOSE_BRACKET,
+    BUTTON_EXP
 };
 
 enum GraphWidgetsEnum {
-    Input,
-    ScopeMin,
-    ScopeMax,
-    RangeMin,
-    RangeMax,
-    InputX,
-    Points
+    INPUT,
+    SCOPE_MIN,
+    SCOPE_MAX,
+    RANGE_MIN,
+    RANGE_MAX,
+    INPUT_X,
+    POINTS
 };
 
 enum CreditCalcWidgetsEnum {
-    CreditSum,
-    CreditTerm,
-    InterestRate,
-    TotalPayment,
-    Overpayment,
-    MonthlyPayment
+    CREDIT_SUM,
+    CREDIT_TERM,
+    CREDIT_INTEREST_RATE,
+    CREDIT_TOTAL_PAYMENT,
+    CREDIT_OVERPAYMENT,
+    CREDIT_MONTHLY_PAYMENT
 };
 
 enum DepositCalcWidgetsEnum {
     DEPOSIT_AMOUNT,
-    INTEREST_RATE,
-    PLACEMENT_PERIOD,
-    FREQUENCY_OF_PAYMENTS,
-    DATE_OF_PLACEMENT,
-    TAX_RATE,
-    OPERATION_DATE,
-    OPERATION_SUM,
-    ACCURED_INTEREST,
-    TOTAL_AMOUNT,
-    TAX_AMOUNT
+    DEPOSIT_INTEREST_RATE,
+    DEPOSIT_PLACEMENT_PERIOD,
+    DEPOSIT_FREQUENCY_OF_PAYMENTS,
+    DEPOSIT_DATE_OF_PLACEMENT,
+    DEPOSIT_TAX_RATE,
+    DEPOSIT_OPERATION_DATE,
+    DEPOSIT_OPERATION_SUM,
+    DEPOSIT_ACCURED_INTEREST,
+    DEPOSIT_TOTAL_AMOUNT,
+    DEPOSIT_TAX_AMOUNT
 };

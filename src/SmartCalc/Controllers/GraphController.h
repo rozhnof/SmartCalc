@@ -10,14 +10,11 @@
 class GraphController {
 
 private:
-    GraphModel *model;
-    InfixNotationValidator validator;
+    GraphModel model;
+    InfixNotationValidator validatorInfixNotation;
+    GraphValidator graphValidator;
 
 public:
-
-    GraphController() {
-        model = new GraphModel;
-    }
 
     bool setInput(QString infix, int countPoints, double xMin, double xMax, double yMin, double yMax) {        
         bool status = Validate(infix);
@@ -35,7 +32,7 @@ public:
             status = Validate(input);
 
             if (status) {
-                model->setInput(input);
+                model.setInput(input);
             }
         }
 
@@ -43,25 +40,24 @@ public:
     }
 
     bool Validate(QString &infix) {
-        return validator.Validate(infix);
+        return validatorInfixNotation.Validate(infix);
     }
 
-    bool Validate(GraphInput &input) {
-        GraphValidator validator(input);
-        return validator.Validate();
+    bool Validate(const GraphInput &input) {
+        return graphValidator.Validate(input);
     }
 
     void Calculate() {
-        model->Calculate();
+        model.Calculate();
     }
 
     QVector<double> getCollectionX() {
-        std::vector<double> collectionX = model->getCollectionX();
+        std::vector<double> collectionX = model.getCollectionX();
         return QVector<double>(collectionX.begin(), collectionX.end());
     }
 
     QVector<double> getCollectionY() {
-        std::vector<double> collectionY = model->getCollectionY();
+        std::vector<double> collectionY = model.getCollectionY();
         return QVector<double>(collectionY.begin(), collectionY.end());
     }
 };

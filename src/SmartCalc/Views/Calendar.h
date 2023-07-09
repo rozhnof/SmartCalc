@@ -15,12 +15,10 @@
 #include <QHBoxLayout>
 #include <QComboBox>
 #include "Layout.h"
-#include <QMouseEvent>
 
 
 class Calendar : public QCalendarWidget
 {
-    QPoint _cursorPosition;
 public:
 
     Calendar(QWidget *parent) : QCalendarWidget(parent) {

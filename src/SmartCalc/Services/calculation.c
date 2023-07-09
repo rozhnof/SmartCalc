@@ -70,11 +70,11 @@ void Factorial(NodeNumber* *top) {
 
 void DecisionTrigonometricFunction(char number, NodeNumber* *top) {
     if (number == SIN) {
-        (**top).number = sinl((**top).number);
+        (**top).number = sinl((**top).number * M_PI / 180);
     } else if (number == COS) {
-        (**top).number = cosl((**top).number);
+        (**top).number = cosl((**top).number * M_PI / 180);
     } else if (number == TAN) {
-        (**top).number = tanl((**top).number);
+        (**top).number = tanl((**top).number * M_PI / 180);
     } else if (number == ASIN) {
         (**top).number = asinl((**top).number);
     } else if (number == ACOS) {
@@ -91,17 +91,21 @@ void DecisionTrigonometricFunction(char number, NodeNumber* *top) {
 }
 
 double Calculation(const char* postfix, double x) {
-    char tmp_output[1024] = {0};
-    for (int i = 0; postfix[i] != '\0'; i++) {
+    char *tmp_output = malloc(strlen(postfix) + 1);
+    int i = 0;
+    for (; postfix[i] != '\0'; i++) {
         tmp_output[i] = postfix[i];
     }
+    tmp_output[i] = '\0';
 
     NodeNumber* top = NULL;
 
     char* elem = strtok(tmp_output, " ");
-    while (elem != NULL && *elem != '\0') {
+    while (elem != NULL && elem[0] != '\0') {
         if (elem[0] == 'x') {
             PushNumber(x, &top);
+        } else if (elem[0] == 'e' || elem[0] == 'E') {
+            PushNumber(M_E, &top);
         } else if (IsNumber(elem[0])) {
             PushStrNumber(elem, &top);
         } else if ((IsOperator(elem[0]) || elem[0] == '%' ) && elem[0] != '~') {
@@ -115,6 +119,8 @@ double Calculation(const char* postfix, double x) {
         }
         elem = strtok(NULL, " ");
     }
+
+    free(tmp_output);
     double result = top->number;
     PopNumber(&top);
 

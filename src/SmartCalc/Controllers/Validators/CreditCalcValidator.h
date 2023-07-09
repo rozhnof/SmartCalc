@@ -8,13 +8,8 @@
 
 
 class CreditCalcValidator {
-private:
-    CreditCalculatorInput _input;
-
 public:
-    CreditCalcValidator(CreditCalculatorInput &input) : _input(input) {}
-
-    bool Validate() {
-        return (_input.creditSum > 0 && _input.creditTerm > 0 && _input.interestRate >= 0);
+    bool Validate(const CreditCalculatorInput &input) {
+        return (input.creditSum > 0 && input.creditTerm > 0 && input.interestRate >= 0);
     }
 };

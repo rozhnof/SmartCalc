@@ -14,7 +14,7 @@
 #include "WinUI.h"
 
 
-class Calculator : public QObject
+class View : public QObject
 {
 
 private:
@@ -26,21 +26,16 @@ private:
     DepositCalculatorUI *_depositCalc;
     GraphUI *_graph;
 
-    IPlatformUI *_platform;
+protected:
+    IPlatformUI *_platform = nullptr;
     IPlatformUI *_winUi;
     IPlatformUI *_macUi;
-
 public:
 
 
-    Calculator() {
-        _calc = new CalculatorUI;
-        _creditCalc = new CreditCalculatorUI;
-        _depositCalc = new DepositCalculatorUI;
-        _graph = new GraphUI;
-
-        _winUi = new WinUI;
-        _macUi = new MacUI;
+    View() : _calc(new CalculatorUI), _creditCalc(new CreditCalculatorUI), _depositCalc(new DepositCalculatorUI), _graph(new GraphUI), _winUi(new WinUI), _macUi(new MacUI) {
+        _currentTab = _calc;
+        _platform = _winUi;
 
         _calc->setWindowTitle("Calculator");
         _creditCalc->setWindowTitle("Credit Calculator");
@@ -52,16 +47,21 @@ public:
         _depositCalc->setObjectName("deposit_calculator_window");
         _graph->setObjectName("graph_window");
 
-        SetupPlatform();
-
         _calc->_platform = &_platform;
         _creditCalc->_platform = &_platform;
         _depositCalc->_platform = &_platform;
         _graph->_platform = &_platform;
 
-        _currentTab = _calc;
-
         AddMenu();
+    }
+
+    ~View() {
+        delete _calc;
+        delete _creditCalc;
+        delete _depositCalc;
+        delete _graph;
+        delete _winUi;
+        delete _macUi;
     }
 
     void show() {
@@ -70,15 +70,6 @@ public:
     }
 
 private:
-
-    void SetupPlatform()
-    {
-#ifdef __APPLE__
-        _platform = _macUi;
-#else
-        _platform = _winUi;
-#endif
-    }
 
     void AddMenu() {
         QMenuBar *menuBar = new QMenuBar(_currentTab);
@@ -106,39 +97,45 @@ private:
 
         _currentTab->setMenuBar(menuBar);
 
-        connect(actionCalc, &QAction::triggered, this, &Calculator::SwitchToCalc);
-        connect(actionGraph, &QAction::triggered, this, &Calculator::SwithToGraph);
-        connect(actionCreditCalc, &QAction::triggered, this, &Calculator::SwitchToCreditCalc);
-        connect(actionDepositCalc, &QAction::triggered, this, &Calculator::SwitchToDepositCalc);
-        connect(switchMode, &QAction::triggered, this, &Calculator::SwitchMode);
+        connect(actionCalc, &QAction::triggered, this, &View::switchToCalc);
+        connect(actionGraph, &QAction::triggered, this, &View::switchToGraph);
+        connect(actionCreditCalc, &QAction::triggered, this, &View::switchToCreditCalc);
+        connect(actionDepositCalc, &QAction::triggered, this, &View::switchToDepositCalc);
+        connect(switchMode, &QAction::triggered, this, &View::switchMode);
     }
 
-    void SwitchTo(class MainWindow *newTab) {
+    void switchTo(class MainWindow *newTab) {
         _currentTab->hide();
         _currentTab = newTab;
         show();
     }
 
-    void SwitchToCalc() {
-        SwitchTo(_calc);
+    void switchToCalc() {
+        switchTo(_calc);
     }
 
-    void SwitchToCreditCalc() {
-        SwitchTo(_creditCalc);
+    void switchToCreditCalc() {
+        switchTo(_creditCalc);
     }
 
-    void SwitchToDepositCalc() {
-        SwitchTo(_depositCalc);
+    void switchToDepositCalc() {
+        switchTo(_depositCalc);
     }
 
-    void SwithToGraph() {
-        SwitchTo(_graph);
+    void switchToGraph() {
+        switchTo(_graph);
     }
 
-    void SwitchMode() {
+    void switchMode() {
         if (_platform == _macUi) {
+            if (_winUi == nullptr) {
+                _winUi = new WinUI;
+            }
             _platform = _winUi;
         } else {
+            if (_macUi == nullptr) {
+                _macUi = new MacUI;
+            }
             _platform = _macUi;
         }
         show();

@@ -5,17 +5,13 @@
 #include "Validators/DepositCalcValidator.h"
 #include <QDate>
 
+
 class DepositCalcController {
-
 private:
-
-    DepositCalcModel *model;
+    DepositCalcModel _model;
+    DepositCalcValidator _validator;
 
 public:
-
-    DepositCalcController() {
-        model = new DepositCalcModel;
-    }
 
     bool setInput(double depositAmount, double interestRate, bool interestCapitalization, double taxRate, QDate startDate, QDate endDate, QVector<QDate> paymentDays, std::multimap<QDate, double> topUpList, std::multimap<QDate, double> takeOffList) {
         DepositCalculatorInput input;
@@ -29,7 +25,7 @@ public:
         bool status = Validate(input);
 
         if (status) {
-            model->setInput(input);
+            _model.setInput(input);
         }
 
         return status;
@@ -66,29 +62,28 @@ public:
         return days;
     }
 
-    bool Validate(DepositCalculatorInput input) {
-        DepositCalcValidator validator(input);
-        return validator.Validate();
+    bool Validate(const DepositCalculatorInput &input) {
+        return _validator.Validate(input);
     }
 
     void Calculate() {
-        model->Calculate();
+        _model.Calculate();
     }
 
     double getTotalAmount() {
-        return model->getTotalAmount();
+        return _model.getTotalAmount();
     }
 
     double getTaxAmount() {
-        return model->getTaxAmount();
+        return _model.getTaxAmount();
     }
 
     double getAccuredInterest() {
-        return model->getAccuredInterest();
+        return _model.getAccuredInterest();
     }
 
     std::vector<std::tuple<QDate, QString, double, double>> getGeneralList() {
-        std::vector<std::tuple<Day, std::string, double, double>> generalList = model->getGeneralList();
+        std::vector<std::tuple<Day, std::string, double, double>> generalList = _model.getGeneralList();
         std::vector<std::tuple<QDate, QString, double, double>> generalListUI;
 
         for (const auto& tuple : generalList) {

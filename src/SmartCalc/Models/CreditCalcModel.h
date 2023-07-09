@@ -12,10 +12,7 @@ private:
     CreditCalculatorOutput _output;
 
 public:
-
-    CreditCalcModel() {}
-
-    void setInput(const CreditCalculatorInput input) {
+    void setInput(CreditCalculatorInput input) {
         _input = input;
     }
 

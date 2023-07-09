@@ -8,23 +8,17 @@
 
 
 class GraphValidator {
-private:
-    GraphInput _input;
-
 public:
-    GraphValidator(GraphInput &input) : _input(input) {}
-
-    bool Validate() {
+    bool Validate(const GraphInput &input) {
         bool status = true;
 
-       if (_input.countPoints <= 0) {
+       if (input.countPoints <= 0) {
            status = false;
-       } else if (_input.xMax < _input.xMin) {
+       } else if (input.xMax < input.xMin) {
            status = false;
-       } else if (_input.yMax < _input.yMin) {
+       } else if (input.yMax < input.yMin) {
            status = false;
        }
-
         return status;
     }
 };

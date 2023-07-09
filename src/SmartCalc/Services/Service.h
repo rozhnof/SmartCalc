@@ -1,74 +1,12 @@
 #pragma once
 
 
-#include "../Models/calc.h"
+#include "calc.h"
+#include "IO.h"
 #include <string>
 #include <vector>
-#include <iostream>
 #include <tuple>
 
-
-struct Day {
-    int day;
-    int month;
-    int year;
-    
-    int daysInYear;
-
-    std::vector<double> topUpList;
-    std::vector<double> takeOffList;
-
-    bool isPaymentDay;
-};
-
-
-struct GraphInput {
-    std::string infix;
-    std::string postfix;
-
-    int countPoints;
-    double xMin;
-    double xMax;
-    double yMin;
-    double yMax;
-};
-
-struct GraphOutput {
-    std::vector<double> xPoints;
-    std::vector<double> yPoints;
-};
-
-struct CreditCalculatorInput {
-public:
-    double creditSum;
-    double creditTerm;
-    double interestRate;
-};
-
-struct CreditCalculatorOutput {
-    double totalPayment;
-    double overpayment;
-    
-    std::vector<double> monthlyPayments;
-    std::vector<double> monthlyBodyPayments;
-    std::vector<double> monthlyPercentPayments;
-};
-
-struct DepositCalculatorInput {
-    double depositAmount;
-    double interestRate;
-    double taxRate;
-    bool interestCapitalization;
-    std::vector<Day> daysInPeriod;
-};
-
-struct DepositCalculatorOutput {
-    double accuredInterest;
-    double totalAmount;
-    double taxAmount;
-
-    std::vector<std::tuple<Day, std::string, double, double>> generalList;
-};
 
 class Service
 {
@@ -83,10 +21,8 @@ public:
 
     std::string GetPostfixNotation(const std::string &infix) {
         char *infixChr = new char[infix.size() + 1];
-        char *postfixChr = new char[infix.size() + 3];
-
         strcpy(infixChr, infix.c_str());
-        FromInfixToPostfix(infixChr, postfixChr);
+        char *postfixChr = FromInfixToPostfix(infixChr);
 
         std::string postfix{postfixChr};
 

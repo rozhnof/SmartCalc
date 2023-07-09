@@ -7,19 +7,20 @@
 
 
 class CalculatorController {
+private:
+    InfixNotationValidator _validator;
+    CalculatorModel _model;
 
-    InfixNotationValidator validator;
 public:
 
     CalculatorController() {}
 
     bool Validate(QString &input) {
-        return validator.Validate(input);
+        return _validator.Validate(input);
     }
 
-    double GetResult(QString &input, double &x) {
-        CalculatorModel model;
-        return model.Calculate(input.toStdString(), x);
+    double GetResult(QString &input, double x) {
+        return _model.Calculate(input.toStdString(), x);
     }
 };
 

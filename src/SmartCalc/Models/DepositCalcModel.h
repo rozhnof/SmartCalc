@@ -15,7 +15,7 @@ public:
 
     DepositCalcModel() {}
 
-    void setInput(const DepositCalculatorInput &input) {
+    void setInput(DepositCalculatorInput input) {
         _input = input;
     }
 

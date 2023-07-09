@@ -49,7 +49,9 @@ int IsOperator(char symbol) {
 void PushOutAll(char* output, ConvertHelper* val) {
     while (val->top != NULL) {
         output[val->out_idx++] = val->top->oper;
+        
         output[val->out_idx++] = ' ';
+
         PopOperator(val);
     }
 }
@@ -72,7 +74,7 @@ void PushOut(char* output, ConvertHelper* val) {
 }
 
 int PushOutConditions(char symbol, ConvertHelper* val) {
-    return val->top != NULL && (isFunction(val->top->oper) || Priority(val->top->oper) >= Priority(symbol) || 
+    return val->top != NULL && (isFunction(val->top->oper) || Priority(val->top->oper) > Priority(symbol) || 
     (OperatorIsLeftAssociativity(val->top->oper) && Priority(val->top->oper) == Priority(symbol)));
 }
 
@@ -90,6 +92,7 @@ void ReadNumber(char* input, char* output, ConvertHelper* val) {
     }
     if (input[val->in_idx] == 'e' || input[val->in_idx] == 'E') {
         output[val->out_idx++] = input[val->in_idx++];
+
         if (input[val->in_idx] == '+' || input[val->in_idx] == '-') {
             output[val->out_idx++] = input[val->in_idx++];
         }
@@ -130,51 +133,38 @@ int isFunction(char symbol) {
     return result;
 }
 
-int DecisionFunction(char* input, char* output, ConvertHelper* val) {
-    PushOperator(input[0], val);
-
-    char f_output[1024] = {0};
-    Converter(input + 1, f_output, val);
-    strcat(output, f_output);
-
-    return 0;
-}
-
-
-void Converter(char* input, char* output, ConvertHelper* val) {
-    val->in_idx = 0;
-    val->out_idx = 0;
-
-    while (input[val->in_idx] != '\0') {
-        if (input[val->in_idx] == 'x') {
-            output[val->out_idx++] = 'x';
-        } else if (IsNumber(input[val->in_idx])) {
-            ReadNumber(input, output, val);
-        } else if (input[val->in_idx] == '!') {
-            output[val->out_idx++] = '!';
-        } else if (isFunction(input[val->in_idx])) {
-            PushOperator(input[val->in_idx], val);
-        } else if (input[val->in_idx] == '(') {
-            PushOperator('(', val);
-        } else if (input[val->in_idx] == ')') {
-            PushOutOperatorsBetweenBrackets(output, val);
-        } else if (IsUnaryOperator(input, val->in_idx)) {
-            if (input[val->in_idx] == '-') {
-                PushOutAndPush('~', output, val);
-            }
-        } else if (IsOperator(input[val->in_idx])) {
-            PushOutAndPush(input[val->in_idx], output, val);
-        }
-        output[val->out_idx++] = ' ';
-        val->in_idx++;
-    }
-    PushOutAll(output, val);
-    output[val->out_idx] = '\0';
-}
-
-void FromInfixToPostfix(char* input, char* output) {
+char* FromInfixToPostfix(char* input) {
     ConvertHelper val = {0};
+    char* postfix = malloc(strlen(input) * 3);
     val.top = NULL;
 
-    Converter(input, output, &val);
+    while (input[val.in_idx] != '\0') {
+        if (input[val.in_idx] == 'x' || input[val.in_idx] == 'E' || input[val.in_idx] == 'e') {
+            postfix[val.out_idx++] = input[val.in_idx];
+            postfix[val.out_idx++] = ' ';
+        } else if (IsNumber(input[val.in_idx])) {
+            ReadNumber(input, postfix, &val);
+            postfix[val.out_idx++] = ' ';
+        } else if (input[val.in_idx] == '!') {
+            postfix[val.out_idx++] = '!';
+            postfix[val.out_idx++] = ' ';
+        } else if (isFunction(input[val.in_idx])) {
+            PushOperator(input[val.in_idx], &val);
+        } else if (input[val.in_idx] == '(') {
+            PushOperator('(', &val);
+        } else if (input[val.in_idx] == ')') {
+            PushOutOperatorsBetweenBrackets(postfix, &val);
+        } else if (IsUnaryOperator(input, val.in_idx)) {
+            if (input[val.in_idx] == '-') {
+                PushOutAndPush('~', postfix, &val);
+            }
+        } else if (IsOperator(input[val.in_idx])) {
+            PushOutAndPush(input[val.in_idx], postfix, &val);
+        }
+        val.in_idx++;
+    }
+    PushOutAll(postfix, &val);
+    postfix[val.out_idx] = '\0';
+
+    return postfix;
 }

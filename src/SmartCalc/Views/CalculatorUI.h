@@ -20,116 +20,162 @@ class CalculatorUI : public MainWindow
 {
     Q_OBJECT
 
+private:
+    CalculatorController *_controller;
+    CalcWidgets *_widgets;
+
 public:
-    CalculatorController *controller;
-    CalcWidgets *widgets;
+    CalculatorUI() : MainWindow(), _controller(new CalculatorController), _widgets(new CalcWidgets) {
+        _widgets->calculatorWindow = this;
 
-    CalculatorUI() : MainWindow() {
-        controller = new CalculatorController;
-        widgets = new CalcWidgets;
-        widgets->calculatorWindow = this;
-
-        CreateObjects();
-        Connects();
+        initWidgets();
+        connectWidgetsToSlots();
     }
 
     ~CalculatorUI() {
-        delete controller;
-        delete widgets;
+        delete _controller;
+        delete _widgets;
     }
 
     void SetupUI() override {
-        ResetSettings();
-        (*_platform)->SetupUI(widgets);
+        resetWidgets();
+        (*_platform)->SetupUI(_widgets);
     }
 
 private:
 
-    void CreateObjects() {
-       widgets->inputLineEdit = NewLineEdit(this, "0", "input");
-       widgets->buttonAllClear = NewPushButton(this, "AC", "clear");
-       widgets->buttonClear = NewPushButton(this, "C", "clear");
-       widgets->buttonEqual = NewPushButton(this, "=", "equal");
+    void initInputXWidget() {
+        _widgets->inputXWidget = NewWidget(this, "input_x");
+        _widgets->inputXWidget->setWindowTitle("Input X");
 
-       widgets->buttonDictionary.insert(make_pair(Button0, NewPushButton(this, "0", "number")));
-       widgets->buttonDictionary.insert(make_pair(Button1, NewPushButton(this, "1", "number")));
-       widgets->buttonDictionary.insert(make_pair(Button2, NewPushButton(this, "2", "number")));
-       widgets->buttonDictionary.insert(make_pair(Button3, NewPushButton(this, "3", "number")));
-       widgets->buttonDictionary.insert(make_pair(Button4, NewPushButton(this, "4", "number")));
-       widgets->buttonDictionary.insert(make_pair(Button5, NewPushButton(this, "5", "number")));
-       widgets->buttonDictionary.insert(make_pair(Button6, NewPushButton(this, "6", "number")));
-       widgets->buttonDictionary.insert(make_pair(Button7, NewPushButton(this, "7", "number")));
-       widgets->buttonDictionary.insert(make_pair(Button8, NewPushButton(this, "8", "number")));
-       widgets->buttonDictionary.insert(make_pair(Button9, NewPushButton(this, "9", "number")));
+        QPushButton *buttonEnter = NewPushButton(_widgets->inputXWidget, "Enter X", "button_input_x");
 
-       widgets->buttonDictionary.insert(make_pair(ButtonSin, NewPushButton(this, "sin", "function")));
-       widgets->buttonDictionary.insert(make_pair(ButtonCos, NewPushButton(this, "cos", "function")));
-       widgets->buttonDictionary.insert(make_pair(ButtonTan, NewPushButton(this, "tan", "function")));
-       widgets->buttonDictionary.insert(make_pair(ButtonAsin, NewPushButton(this, "asin", "function")));
-       widgets->buttonDictionary.insert(make_pair(ButtonAcos, NewPushButton(this, "acos", "function")));
-       widgets->buttonDictionary.insert(make_pair(ButtonAtan, NewPushButton(this, "atan", "function")));
-       widgets->buttonDictionary.insert(make_pair(ButtonLog, NewPushButton(this, "log", "function")));
-       widgets->buttonDictionary.insert(make_pair(ButtonSqrt, NewPushButton(this, "sqrt", "function")));
-       widgets->buttonDictionary.insert(make_pair(ButtonLn, NewPushButton(this, "ln", "function")));
+        _widgets->inputXLineEdit = NewLineEdit(_widgets->inputXWidget, "0", "input_x");
+        _widgets->inputXLineEdit->setAlignment(Qt::AlignVCenter | Qt::AlignHCenter);
+        _widgets->inputXLineEdit->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,15}([.][0-9]{1,15})?"), this));
 
-       widgets->buttonDictionary.insert(make_pair(ButtonSum, NewPushButton(this, "+", "operator")));
-       widgets->buttonDictionary.insert(make_pair(ButtonSub, NewPushButton(this, "-", "operator")));
-       widgets->buttonDictionary.insert(make_pair(ButtonMul, NewPushButton(this, "*", "operator")));
-       widgets->buttonDictionary.insert(make_pair(ButtonDiv, NewPushButton(this, "/", "operator")));
-       widgets->buttonDictionary.insert(make_pair(ButtonMod, NewPushButton(this, "%", "mod")));
-       widgets->buttonDictionary.insert(make_pair(ButtonPow, NewPushButton(this, "^", "pow")));
+        QGridLayout *layout = new QGridLayout(_widgets->inputXWidget);
+        layout->addWidget(_widgets->inputXLineEdit, 0, 0);
+        layout->addWidget(buttonEnter, 1, 0);
+        _widgets->inputXWidget->setLayout(layout);
 
-       widgets->buttonDictionary.insert(make_pair(ButtonX, NewPushButton(this, "x", "x")));
-       widgets->buttonDictionary.insert(make_pair(ButtonDot, NewPushButton(this, ".", "dot")));
-       widgets->buttonDictionary.insert(make_pair(ButtonEXP, NewPushButton(this, "e", "exp")));
+        connect(buttonEnter, &QPushButton::clicked, this, &CalculatorUI::CalculateWithX);
+        connect(_widgets->inputXLineEdit, &QLineEdit::returnPressed, this, &CalculatorUI::CalculateWithX);
 
-       widgets->buttonDictionary.insert(make_pair(ButtonFactorial, NewPushButton(this, "!", "factorial")));
-       widgets->buttonDictionary.insert(make_pair(ButtonOpenBracket, NewPushButton(this, "(", "bracket")));
-       widgets->buttonDictionary.insert(make_pair(ButtonCloseBracket, NewPushButton(this, ")", "bracket")));
+        _widgets->animation = new QPropertyAnimation(_widgets->inputXWidget, "pos");
     }
 
-    void Connects() {
-        for (auto it : widgets->buttonDictionary) {
-            connect(it.second, &QPushButton::clicked, this, &CalculatorUI::SetSymbol);
+    void initWidgets() {
+       _widgets->inputLineEdit = NewLineEdit(this, "0", "input");
+       _widgets->buttonAllClear = NewPushButton(this, "AC", "clear");
+       _widgets->buttonClear = NewPushButton(this, "C", "clear");
+       _widgets->buttonEqual = NewPushButton(this, "=", "equal");
+
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_0, NewPushButton(this, "0", "number")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_1, NewPushButton(this, "1", "number")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_2, NewPushButton(this, "2", "number")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_3, NewPushButton(this, "3", "number")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_4, NewPushButton(this, "4", "number")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_5, NewPushButton(this, "5", "number")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_6, NewPushButton(this, "6", "number")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_7, NewPushButton(this, "7", "number")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_8, NewPushButton(this, "8", "number")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_9, NewPushButton(this, "9", "number")));
+
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_SIN, NewPushButton(this, "sin", "function")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_COS, NewPushButton(this, "cos", "function")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_TAN, NewPushButton(this, "tan", "function")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_ASIN, NewPushButton(this, "asin", "function")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_ACOS, NewPushButton(this, "acos", "function")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_ATAN, NewPushButton(this, "atan", "function")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_LOG, NewPushButton(this, "log", "function")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_SQRT, NewPushButton(this, "sqrt", "function")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_LN, NewPushButton(this, "ln", "function")));
+
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_SUM, NewPushButton(this, "+", "operator")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_SUB, NewPushButton(this, "-", "operator")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_MUL, NewPushButton(this, "*", "operator")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_DIV, NewPushButton(this, "/", "operator")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_MOD, NewPushButton(this, "%", "mod")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_POW, NewPushButton(this, "^", "pow")));
+
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_X, NewPushButton(this, "x", "x")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_DOT, NewPushButton(this, ".", "dot")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_EXP, NewPushButton(this, "E", "exp")));
+
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_FACTORIAL, NewPushButton(this, "!", "factorial")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_OPEN_BRACKET, NewPushButton(this, "(", "bracket")));
+       _widgets->buttonDictionary.insert(make_pair(BUTTON_CLOSE_BRACKET, NewPushButton(this, ")", "bracket")));
+
+       initInputXWidget();
+    }
+
+    void connectWidgetsToSlots() {
+        for (auto it : _widgets->buttonDictionary) {
+            connect(it.second, &QPushButton::clicked, this, &CalculatorUI::setLexema);
         }
 
-        connect(widgets->buttonClear, &QPushButton::clicked, this, &CalculatorUI::Clear);
-        connect(widgets->buttonAllClear, &QPushButton::clicked, this, &CalculatorUI::ClearAll);
-        connect(widgets->buttonEqual, &QPushButton::clicked, this, &CalculatorUI::Result);
-        connect(widgets->inputLineEdit, &QLineEdit::returnPressed, this, &CalculatorUI::Result);
+        connect(_widgets->buttonClear, &QPushButton::clicked, this, &CalculatorUI::clearButton);
+        connect(_widgets->buttonAllClear, &QPushButton::clicked, this, &CalculatorUI::clearAllButton);
+        connect(_widgets->buttonEqual, &QPushButton::clicked, this, &CalculatorUI::equalButton);
+        connect(_widgets->inputLineEdit, &QLineEdit::returnPressed, this, &CalculatorUI::equalButton);
     }
 
-    void ResetSettings() {
-        widgets->inputLineEdit->hide();
-        for (auto it : widgets->buttonDictionary) {
+    void resetWidgets() {
+        _widgets->inputLineEdit->hide();
+        for (auto it : _widgets->buttonDictionary) {
             it.second->hide();
         }
     }
 
 private slots:
 
-    void SetSymbol() {
-        widgets->inputLineEdit->setText(widgets->inputLineEdit->text() + static_cast<QPushButton*>(sender())->text());
+    void setLexema() {
+        _widgets->inputLineEdit->setText(_widgets->inputLineEdit->text() + static_cast<QPushButton*>(sender())->text());
     }
 
-    void Clear() {
-        if (!widgets->inputLineEdit->text().isEmpty()) {
-            QString input = widgets->inputLineEdit->text();
+    void clearButton() {
+        if (!_widgets->inputLineEdit->text().isEmpty()) {
+            QString input = _widgets->inputLineEdit->text();
             input.chop(1);
-            widgets->inputLineEdit->setText(input);
+            _widgets->inputLineEdit->setText(input);
         }
     }
 
-    void ClearAll() {
-        widgets->inputLineEdit->setText("");
+    void clearAllButton() {
+        _widgets->inputLineEdit->setText("");
     }
 
-    void Result() {
-        QString input = widgets->inputLineEdit->text();
-        double x = 0;
+    void showInputX() {
+        _widgets->animation->setDuration(200);
+        _widgets->animation->setStartValue(QPoint(_widgets->inputXWidget->x(), 0));
+        _widgets->animation->setEndValue(QPoint(0, 0));
+        _widgets->animation->start();
+    }
 
-        if (controller->Validate(input)) {
-            widgets->inputLineEdit->setText(QString::number(controller->GetResult(input, x), 'g', 8));
+    void hideInputX() {
+        _widgets->animation->setDuration(300);
+        _widgets->animation->setStartValue(QPoint(_widgets->inputXWidget->x(), 0));
+        _widgets->animation->setEndValue(QPoint(-160, 0));
+        _widgets->animation->start();
+    }
+
+    void equalButton() {
+        if (_widgets->inputLineEdit->text().contains('x')) {
+            showInputX();
+        } else {
+            Calculate(_widgets->inputLineEdit->text(), 0);
+        }
+    }
+
+    void CalculateWithX() {
+        hideInputX();
+        Calculate(_widgets->inputLineEdit->text(), _widgets->inputXLineEdit->text().toDouble());
+    }
+
+    void Calculate(QString input, double x) {
+        if (_controller->Validate(input)) {
+            _widgets->inputLineEdit->setText(QString::number(_controller->GetResult(input, x), 'g', 8));
         }
     }
 };

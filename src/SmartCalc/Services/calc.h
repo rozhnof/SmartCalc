@@ -58,7 +58,7 @@ typedef struct ConvertHelper {
 
 
 
-void FromInfixToPostfix(char* input, char* output);
+char* FromInfixToPostfix(char* input);
 void PushOperator(char symbol, ConvertHelper* val);
 void PopOperator(ConvertHelper* val);
 int Priority(char symbol);
@@ -72,9 +72,7 @@ int PushOutConditions(char symbol, ConvertHelper* val);
 void ReadNumber(char* input, char* output, ConvertHelper* val); 
 int IsUnaryOperator(char* input, int input_index);
 int isFunction(char symbol);
-int DecisionFunction(char* input, char* output, ConvertHelper* val);
 void PushOutAndPush(char symbol, char* output, ConvertHelper* val);
-void Converter(char* input, char* output, ConvertHelper* val);
 
 double Calculation(const char* postfix, double x);
 void PopNumber(NodeNumber* *top);

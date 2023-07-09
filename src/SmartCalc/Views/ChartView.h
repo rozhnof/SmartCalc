@@ -36,6 +36,15 @@ public:
         chartView->setParent(parent);
     }
 
+    ~ChartView() {
+        delete chart;
+        delete chartView;
+        delete series;
+        delete axisY;
+        delete bodyBar;
+        delete percentBar;
+    }
+
     void show() {
         chartView->show();
     }
@@ -90,12 +99,5 @@ public:
 
     void SetBarWidth(qreal width) {
         series->setBarWidth(width);
-    }
-
-    ~ChartView() {
-        delete series;
-        delete bodyBar;
-        delete percentBar;
-
     }
 };
