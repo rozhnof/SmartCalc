@@ -11,8 +11,6 @@
 class Service
 {
 public:
-    Service();
-    ~Service();
 
     enum CreditPaymentsType {
         ANNUITY,

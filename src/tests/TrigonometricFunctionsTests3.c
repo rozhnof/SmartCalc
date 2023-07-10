@@ -2,15 +2,16 @@
 
 
 START_TEST(sinx_test) {
-    char input[512] = "sin(x)";
+    char input[] = "sin(x)";
     char x_input_str[512] = "0.0000234523";
-    char output[512] = "";
+    
 
     long double x_input_num = 0;
     sscanf(x_input_str, "%Lf", &x_input_num);
 
-    FromInfixToPostfix(input, output);
-    long double result = Calculation(output, x_input_num);
+    char *postfix = FromInfixToPostfix(input);
+    long double result = Calculation(postfix, x_input_num);
+    free(postfix);
     long double original = sinl(x_input_num);
 
     if (isnan(original)) {
@@ -24,15 +25,16 @@ START_TEST(sinx_test) {
 END_TEST
 
 START_TEST(cosx_test) {
-    char input[512] = "cos(x)";
+    char input[] = "cos(x)";
     char x_input_str[512] = "0.0000234523";
-    char output[512] = "";
+    
 
     long double x_input_num = 0;
     sscanf(x_input_str, "%Lf", &x_input_num);
 
-    FromInfixToPostfix(input, output);
-    long double result = Calculation(output, x_input_num);
+    char *postfix = FromInfixToPostfix(input);
+    long double result = Calculation(postfix, x_input_num);
+    free(postfix);
     long double original = cosl(x_input_num);
 
     if (isnan(original)) {
@@ -46,15 +48,16 @@ START_TEST(cosx_test) {
 END_TEST
 
 START_TEST(tanx_test) {
-    char input[512] = "tan(x)";
+    char input[] = "tan(x)";
     char x_input_str[512] = "0.0000234523";
-    char output[512] = "";
+    
 
     long double x_input_num = 0;
     sscanf(x_input_str, "%Lf", &x_input_num);
 
-    FromInfixToPostfix(input, output);
-    long double result = Calculation(output, x_input_num);
+    char *postfix = FromInfixToPostfix(input);
+    long double result = Calculation(postfix, x_input_num);
+    free(postfix);
     long double original = tanl(x_input_num);
 
     if (isnan(original)) {
@@ -68,15 +71,16 @@ START_TEST(tanx_test) {
 END_TEST
 
 START_TEST(asinx_test) {
-    char input[512] = "asin(x)";
+    char input[] = "asin(x)";
     char x_input_str[512] = "0.0000234523";
-    char output[512] = "";
+    
 
     long double x_input_num = 0;
     sscanf(x_input_str, "%Lf", &x_input_num);
 
-    FromInfixToPostfix(input, output);
-    long double result = Calculation(output, x_input_num);
+    char *postfix = FromInfixToPostfix(input);
+    long double result = Calculation(postfix, x_input_num);
+    free(postfix);
     long double original = asinl(x_input_num);
 
     if (isnan(original)) {
@@ -90,15 +94,16 @@ START_TEST(asinx_test) {
 END_TEST
 
 START_TEST(acosx_test) {
-    char input[512] = "acos(x)";
+    char input[] = "acos(x)";
     char x_input_str[512] = "0.0000234523";
-    char output[512] = "";
+    
 
     long double x_input_num = 0;
     sscanf(x_input_str, "%Lf", &x_input_num);
 
-    FromInfixToPostfix(input, output);
-    long double result = Calculation(output, x_input_num);
+    char *postfix = FromInfixToPostfix(input);
+    long double result = Calculation(postfix, x_input_num);
+    free(postfix);
     long double original = acosl(x_input_num);
 
     if (isnan(original)) {
@@ -112,15 +117,16 @@ START_TEST(acosx_test) {
 END_TEST
 
 START_TEST(atanx_test) {
-    char input[512] = "atan(x)";
+    char input[] = "atan(x)";
     char x_input_str[512] = "0.0000234523";
-    char output[512] = "";
+    
 
     long double x_input_num = 0;
     sscanf(x_input_str, "%Lf", &x_input_num);
 
-    FromInfixToPostfix(input, output);
-    long double result = Calculation(output, x_input_num);
+    char *postfix = FromInfixToPostfix(input);
+    long double result = Calculation(postfix, x_input_num);
+    free(postfix);
     long double original = atanl(x_input_num);
 
     if (isnan(original)) {
@@ -134,15 +140,16 @@ START_TEST(atanx_test) {
 END_TEST
 
 START_TEST(logx_test) {
-    char input[512] = "log(x)";
+    char input[] = "log(x)";
     char x_input_str[512] = "0.0000234523";
-    char output[512] = "";
+    
 
     long double x_input_num = 0;
     sscanf(x_input_str, "%Lf", &x_input_num);
 
-    FromInfixToPostfix(input, output);
-    long double result = Calculation(output, x_input_num);
+    char *postfix = FromInfixToPostfix(input);
+    long double result = Calculation(postfix, x_input_num);
+    free(postfix);
     long double original = log10l(x_input_num);
 
     if (isnan(original)) {
@@ -156,15 +163,16 @@ START_TEST(logx_test) {
 END_TEST
 
 START_TEST(lnx_test) {
-    char input[512] = "ln(x)";
+    char input[] = "ln(x)";
     char x_input_str[512] = "0.0000234523";
-    char output[512] = "";
+    
 
     long double x_input_num = 0;
     sscanf(x_input_str, "%Lf", &x_input_num);
 
-    FromInfixToPostfix(input, output);
-    long double result = Calculation(output, x_input_num);
+    char *postfix = FromInfixToPostfix(input);
+    long double result = Calculation(postfix, x_input_num);
+    free(postfix);
     long double original = log(x_input_num);
 
     if (isnan(original)) {
@@ -178,15 +186,16 @@ START_TEST(lnx_test) {
 END_TEST
 
 START_TEST(sqrtx_test) {
-    char input[512] = "sqrt(x)";
+    char input[] = "sqrt(x)";
     char x_input_str[512] = "0.0000234523";
-    char output[512] = "";
+    
 
     long double x_input_num = 0;
     sscanf(x_input_str, "%Lf", &x_input_num);
 
-    FromInfixToPostfix(input, output);
-    long double result = Calculation(output, x_input_num);
+    char *postfix = FromInfixToPostfix(input);
+    long double result = Calculation(postfix, x_input_num);
+    free(postfix);
     long double original = sqrtl(x_input_num);
 
     if (isnan(original)) {

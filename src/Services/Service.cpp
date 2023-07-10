@@ -1,11 +1,6 @@
 #include <Service.h>
 
 
-
-Service::Service() {}
-
-Service::~Service() {}
-
 std::string Service::GetPostfixNotation(const std::string &infix) {
     char *infixChr = new char[infix.size() + 1];
     strcpy(infixChr, infix.c_str());

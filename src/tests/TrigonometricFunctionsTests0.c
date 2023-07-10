@@ -2,15 +2,16 @@
 
 
 START_TEST(test5_0) {
-    char input[512] = "sin(cos(tan(sqrt(x^(x^(x))))))";
+    char input[] = "sin(cos(tan(sqrt(x^(x^(x))))))";
     char x_input_str[512] = "1.5";
-    char output[512] = "";
+    
 
     long double x_input_num = 0;
     sscanf(x_input_str, "%Lf", &x_input_num);
 
-    FromInfixToPostfix(input, output);
-    long double result = Calculation(output, x_input_num);
+    char *postfix = FromInfixToPostfix(input);
+    long double result = Calculation(postfix, x_input_num);
+    free(postfix);
     long double original = sinl(cosl(tanl(sqrtl(powl(x_input_num, powl(x_input_num, x_input_num))))));
 
     if (isnan(original)) {
@@ -24,15 +25,16 @@ START_TEST(test5_0) {
 END_TEST
 
 START_TEST(test5_1) {
-    char input[512] = "sin(cos(tan(sqrt(x^(x^(x))))))";
+    char input[] = "sin(cos(tan(sqrt(x^(x^(x))))))";
     char x_input_str[512] = "-1.25";
-    char output[512] = "";
+    
 
     long double x_input_num = 0;
     sscanf(x_input_str, "%Lf", &x_input_num);
 
-    FromInfixToPostfix(input, output);
-    long double result = Calculation(output, x_input_num);
+    char *postfix = FromInfixToPostfix(input);
+    long double result = Calculation(postfix, x_input_num);
+    free(postfix);
     long double original = sinl(cosl(tanl(sqrtl(powl(x_input_num, powl(x_input_num, x_input_num))))));
 
     if (isnan(original)) {
@@ -46,15 +48,16 @@ START_TEST(test5_1) {
 END_TEST
 
 START_TEST(test5_2) {
-    char input[512] = "sin(cos(tan(sqrt(x^(x^(x))))))";
+    char input[] = "sin(cos(tan(sqrt(x^(x^(x))))))";
     char x_input_str[512] = "123456789.987654321";
-    char output[512] = "";
+    
 
     long double x_input_num = 0;
     sscanf(x_input_str, "%Lf", &x_input_num);
 
-    FromInfixToPostfix(input, output);
-    long double result = Calculation(output, x_input_num);
+    char *postfix = FromInfixToPostfix(input);
+    long double result = Calculation(postfix, x_input_num);
+    free(postfix);
     long double original = sinl(cosl(tanl(sqrtl(powl(x_input_num, powl(x_input_num, x_input_num))))));
 
     if (isnan(original)) {
@@ -68,15 +71,16 @@ START_TEST(test5_2) {
 END_TEST
 
 START_TEST(test5_3) {
-    char input[512] = "sin(cos(tan(sqrt(x^(x^(x))))))";
+    char input[] = "sin(cos(tan(sqrt(x^(x^(x))))))";
     char x_input_str[512] = "-1.23456789987654321";
-    char output[512] = "";
+    
 
     long double x_input_num = 0;
     sscanf(x_input_str, "%Lf", &x_input_num);
 
-    FromInfixToPostfix(input, output);
-    long double result = Calculation(output, x_input_num);
+    char *postfix = FromInfixToPostfix(input);
+    long double result = Calculation(postfix, x_input_num);
+    free(postfix);
     long double original = sinl(cosl(tanl(sqrtl(powl(x_input_num, powl(x_input_num, x_input_num))))));
 
     if (isnan(original)) {
@@ -90,15 +94,16 @@ START_TEST(test5_3) {
 END_TEST
 
 START_TEST(test5_4) {
-    char input[512] = "sin(cos(tan(sqrt(x^(x^(x))))))";
+    char input[] = "sin(cos(tan(sqrt(x^(x^(x))))))";
     char x_input_str[512] = "0";
-    char output[512] = "";
+    
 
     long double x_input_num = 0;
     sscanf(x_input_str, "%Lf", &x_input_num);
 
-    FromInfixToPostfix(input, output);
-    long double result = Calculation(output, x_input_num);
+    char *postfix = FromInfixToPostfix(input);
+    long double result = Calculation(postfix, x_input_num);
+    free(postfix);
     long double original = sinl(cosl(tanl(sqrtl(powl(x_input_num, powl(x_input_num, x_input_num))))));
 
     if (isnan(original)) {
