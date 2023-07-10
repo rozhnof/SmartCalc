@@ -10,6 +10,12 @@ QT += printsupport charts core5compat gui widgets
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+CONFIG += debug
+CONFIG += force_debug_info
+QMAKE_CXXFLAGS += -fsanitize=address
+QMAKE_LFLAGS += -fsanitize=address
+LIBS += -fsanitize=address
+
 SOURCES += \
     Services/calculation.c \
     Services/converter.c \
@@ -44,7 +50,7 @@ HEADERS += \
     Views/Layout.h \
     Views/MacUI.h \
     Views/WinUI.h \
-    Views/mainwindow.h \
+    Views/MainWindow.h \
     Views/qcustomplot.h
 
 

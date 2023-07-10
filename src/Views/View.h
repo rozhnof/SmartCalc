@@ -60,8 +60,6 @@ public:
         delete _creditCalc;
         delete _depositCalc;
         delete _graph;
-        delete _winUi;
-        delete _macUi;
     }
 
     void show() {

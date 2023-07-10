@@ -1,9 +1,10 @@
 #pragma once
 
 
-#include "mainwindow.h"
+#include "MainWindow.h"
 #include "../Controllers/GraphController.h"
 #include "qcustomplot.h"
+
 
 class GraphUI : public MainWindow
 {
@@ -15,7 +16,7 @@ private:
 
 public:
 
-    GraphUI() : MainWindow(), _widgets(new GraphWidgets), _controller(new GraphController) {
+    GraphUI() : MainWindow(), _controller(new GraphController), _widgets(new GraphWidgets) {
         _widgets->graphWindow = this;
         _widgets->graph = new QCustomPlot(this);
         _widgets->graph->addGraph();
@@ -44,7 +45,7 @@ private:
                         QTextEdit, QLineEdit#input  {
                             background-color: white;
                             border: 1px solid blue;
-                            border-radius: 8
+                            border-radius: 8;
                         }
                         QDoubleSpinBox#data, QLabel#title {
                             background-color: rgba(0, 0, 0, 0);
@@ -138,27 +139,27 @@ private:
     }
 
     void initWidgets() {
-        _widgets->box.insert(make_pair(SCOPE_MIN, new QTextEdit(this)));
-        _widgets->box.insert(make_pair(RANGE_MIN, new QTextEdit(this)));
-        _widgets->box.insert(make_pair(INPUT_X, new QTextEdit(this)));
-        _widgets->box.insert(make_pair(POINTS, new QTextEdit(this)));
-        _widgets->box.insert(make_pair(SCOPE_MAX, new QTextEdit(this)));
-        _widgets->box.insert(make_pair(RANGE_MAX, new QTextEdit(this)));
+        _widgets->box.insert(std::make_pair(SCOPE_MIN, new QTextEdit(this)));
+        _widgets->box.insert(std::make_pair(RANGE_MIN, new QTextEdit(this)));
+        _widgets->box.insert(std::make_pair(INPUT_X, new QTextEdit(this)));
+        _widgets->box.insert(std::make_pair(POINTS, new QTextEdit(this)));
+        _widgets->box.insert(std::make_pair(SCOPE_MAX, new QTextEdit(this)));
+        _widgets->box.insert(std::make_pair(RANGE_MAX, new QTextEdit(this)));
 
-        _widgets->data.insert(make_pair(SCOPE_MIN, NewDoubleSpinBox(this, "data")));
-        _widgets->data.insert(make_pair(RANGE_MIN, NewDoubleSpinBox(this, "data")));
-        _widgets->data.insert(make_pair(INPUT_X, NewDoubleSpinBox(this, "data")));
-        _widgets->data.insert(make_pair(POINTS, NewDoubleSpinBox(this, "data")));
-        _widgets->data.insert(make_pair(SCOPE_MAX, NewDoubleSpinBox(this, "data")));
-        _widgets->data.insert(make_pair(RANGE_MAX, NewDoubleSpinBox(this, "data")));
+        _widgets->data.insert(std::make_pair(SCOPE_MIN, NewDoubleSpinBox(this, "data")));
+        _widgets->data.insert(std::make_pair(RANGE_MIN, NewDoubleSpinBox(this, "data")));
+        _widgets->data.insert(std::make_pair(INPUT_X, NewDoubleSpinBox(this, "data")));
+        _widgets->data.insert(std::make_pair(POINTS, NewDoubleSpinBox(this, "data")));
+        _widgets->data.insert(std::make_pair(SCOPE_MAX, NewDoubleSpinBox(this, "data")));
+        _widgets->data.insert(std::make_pair(RANGE_MAX, NewDoubleSpinBox(this, "data")));
 
         _widgets->inputLineEdit = NewLineEdit(this, "sin(x)", "input");
-        _widgets->title.insert(make_pair(SCOPE_MIN, NewLabel(this, "x min", "title")));
-        _widgets->title.insert(make_pair(RANGE_MIN, NewLabel(this, "y min", "title")));
-        _widgets->title.insert(make_pair(INPUT_X, NewLabel(this, "  X", "title")));
-        _widgets->title.insert(make_pair(POINTS, NewLabel(this, "POINTS", "title")));
-        _widgets->title.insert(make_pair(SCOPE_MAX, NewLabel(this, "x max", "title")));
-        _widgets->title.insert(make_pair(RANGE_MAX, NewLabel(this, "y max", "title")));
+        _widgets->title.insert(std::make_pair(SCOPE_MIN, NewLabel(this, "x min", "title")));
+        _widgets->title.insert(std::make_pair(RANGE_MIN, NewLabel(this, "y min", "title")));
+        _widgets->title.insert(std::make_pair(INPUT_X, NewLabel(this, "  X", "title")));
+        _widgets->title.insert(std::make_pair(POINTS, NewLabel(this, "POINTS", "title")));
+        _widgets->title.insert(std::make_pair(SCOPE_MAX, NewLabel(this, "x max", "title")));
+        _widgets->title.insert(std::make_pair(RANGE_MAX, NewLabel(this, "y max", "title")));
 
         _widgets->checkBoxLineDrawing = new QCheckBox(this);
     }

@@ -10,7 +10,7 @@ LIB = SmartCalc.a
 LIB_DIR = SmartCalc/
 OBJ_DIR = obj/
 COV_DIR = coverage_info/
-TEST_DIR = tests/
+TEST_DIR = Tests/
 LIB_OBJ_DIR = $(OBJ_DIR)$(LIB_DIR)
 COV_OBJ_DIR = $(COV_DIR)$(OBJ_DIR)
 
@@ -20,15 +20,12 @@ endif
 
 ## Make array of all object files for library
 LIB_SRCS = $(addprefix $(LIB_DIR),calculation.c \
-								  converter.c \
-								  credit_calc.c \
-								  validator.c)
+								  converter.c)
 
 ## Make array of all test files
 TEST_SRCS = $(addprefix $(TEST_DIR),Tests.c \
 									BracketExpressionsTests.c \
 									ClearInputTests.c \
-									CreditCalcTest.c \
 									ResultInputValidTests.c \
 									SetBracketsValidTests.c \
 									SetDotValidTests.c \

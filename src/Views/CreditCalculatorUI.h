@@ -1,16 +1,17 @@
 #pragma once
 
-#include "mainwindow.h"
+#include "MainWindow.h"
 #include "IPlatformUI.h"
 #include "../Controllers/CreditCalcController.h"
 #include <cmath>
 
-using namespace std;
 
 class CreditCalculatorUI : public MainWindow
 {
-    CreditCalcWidgets *_widgets;
+private:
     CreditCalcController *_controller;
+    CreditCalcWidgets *_widgets;
+
 public:
     CreditCalculatorUI() : MainWindow(), _controller(new CreditCalcController), _widgets(new CreditCalcWidgets) {
         _widgets->chartView = new ChartView(this);
@@ -34,25 +35,25 @@ public:
 
 private:
     void initWidgets() {
-        _widgets->box.insert(make_pair(CREDIT_SUM, new QTextEdit(this)));
-        _widgets->box.insert(make_pair(CREDIT_TERM, new QTextEdit(this)));
-        _widgets->box.insert(make_pair(CREDIT_INTEREST_RATE, new QTextEdit(this)));
-        _widgets->box.insert(make_pair(CREDIT_TOTAL_PAYMENT, new QTextEdit(this)));
-        _widgets->box.insert(make_pair(CREDIT_OVERPAYMENT, new QTextEdit(this)));
-        _widgets->box.insert(make_pair(CREDIT_MONTHLY_PAYMENT, new QTextEdit(this)));
+        _widgets->box.insert(std::make_pair(CREDIT_SUM, new QTextEdit(this)));
+        _widgets->box.insert(std::make_pair(CREDIT_TERM, new QTextEdit(this)));
+        _widgets->box.insert(std::make_pair(CREDIT_INTEREST_RATE, new QTextEdit(this)));
+        _widgets->box.insert(std::make_pair(CREDIT_TOTAL_PAYMENT, new QTextEdit(this)));
+        _widgets->box.insert(std::make_pair(CREDIT_OVERPAYMENT, new QTextEdit(this)));
+        _widgets->box.insert(std::make_pair(CREDIT_MONTHLY_PAYMENT, new QTextEdit(this)));
 
-        _widgets->title.insert(make_pair(CREDIT_SUM, new QLabel("Credit Sum", this)));
-        _widgets->title.insert(make_pair(CREDIT_TERM, new QLabel("Credit Term", this)));
-        _widgets->title.insert(make_pair(CREDIT_INTEREST_RATE, new QLabel("Interest Rate", this)));
-        _widgets->title.insert(make_pair(CREDIT_TOTAL_PAYMENT, new QLabel("Total Payment", this)));
-        _widgets->title.insert(make_pair(CREDIT_OVERPAYMENT, new QLabel("Overpayment", this)));
-        _widgets->title.insert(make_pair(CREDIT_MONTHLY_PAYMENT, new QLabel("Montly Payments", this)));
+        _widgets->title.insert(std::make_pair(CREDIT_SUM, new QLabel("Credit Sum", this)));
+        _widgets->title.insert(std::make_pair(CREDIT_TERM, new QLabel("Credit Term", this)));
+        _widgets->title.insert(std::make_pair(CREDIT_INTEREST_RATE, new QLabel("Interest Rate", this)));
+        _widgets->title.insert(std::make_pair(CREDIT_TOTAL_PAYMENT, new QLabel("Total Payment", this)));
+        _widgets->title.insert(std::make_pair(CREDIT_OVERPAYMENT, new QLabel("Overpayment", this)));
+        _widgets->title.insert(std::make_pair(CREDIT_MONTHLY_PAYMENT, new QLabel("Montly Payments", this)));
 
-        _widgets->data.insert(make_pair(CREDIT_SUM, NewLineEdit(this, "1000", "inputCreditSum")));
-        _widgets->data.insert(make_pair(CREDIT_TERM, NewLineEdit(this, "12", "inputCreditTerm")));
-        _widgets->data.insert(make_pair(CREDIT_INTEREST_RATE, NewLineEdit(this, "10", "inputInterestRate")));
-        _widgets->data.insert(make_pair(CREDIT_TOTAL_PAYMENT, new QLineEdit(this)));
-        _widgets->data.insert(make_pair(CREDIT_OVERPAYMENT, new QLineEdit(this)));
+        _widgets->data.insert(std::make_pair(CREDIT_SUM, NewLineEdit(this, "1000", "inputCreditSum")));
+        _widgets->data.insert(std::make_pair(CREDIT_TERM, NewLineEdit(this, "12", "inputCreditTerm")));
+        _widgets->data.insert(std::make_pair(CREDIT_INTEREST_RATE, NewLineEdit(this, "10", "inputInterestRate")));
+        _widgets->data.insert(std::make_pair(CREDIT_TOTAL_PAYMENT, new QLineEdit(this)));
+        _widgets->data.insert(std::make_pair(CREDIT_OVERPAYMENT, new QLineEdit(this)));
 
         _widgets->annuityPaymentButton = new QPushButton("Annuity Payment", this);
         _widgets->differentiatedPaymentButton = new QPushButton("Differentiated Payment", this);

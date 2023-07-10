@@ -9,7 +9,7 @@
 #include <QPushButton>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QWidget>
-#include "mainwindow.h"
+#include "MainWindow.h"
 #include <QVector>
 #include <QResizeEvent>
 #include <QDebug>
@@ -71,41 +71,41 @@ private:
        _widgets->buttonClear = NewPushButton(this, "C", "clear");
        _widgets->buttonEqual = NewPushButton(this, "=", "equal");
 
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_0, NewPushButton(this, "0", "number")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_1, NewPushButton(this, "1", "number")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_2, NewPushButton(this, "2", "number")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_3, NewPushButton(this, "3", "number")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_4, NewPushButton(this, "4", "number")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_5, NewPushButton(this, "5", "number")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_6, NewPushButton(this, "6", "number")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_7, NewPushButton(this, "7", "number")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_8, NewPushButton(this, "8", "number")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_9, NewPushButton(this, "9", "number")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_0, NewPushButton(this, "0", "number")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_1, NewPushButton(this, "1", "number")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_2, NewPushButton(this, "2", "number")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_3, NewPushButton(this, "3", "number")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_4, NewPushButton(this, "4", "number")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_5, NewPushButton(this, "5", "number")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_6, NewPushButton(this, "6", "number")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_7, NewPushButton(this, "7", "number")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_8, NewPushButton(this, "8", "number")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_9, NewPushButton(this, "9", "number")));
 
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_SIN, NewPushButton(this, "sin", "function")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_COS, NewPushButton(this, "cos", "function")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_TAN, NewPushButton(this, "tan", "function")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_ASIN, NewPushButton(this, "asin", "function")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_ACOS, NewPushButton(this, "acos", "function")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_ATAN, NewPushButton(this, "atan", "function")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_LOG, NewPushButton(this, "log", "function")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_SQRT, NewPushButton(this, "sqrt", "function")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_LN, NewPushButton(this, "ln", "function")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_SIN, NewPushButton(this, "sin", "function")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_COS, NewPushButton(this, "cos", "function")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_TAN, NewPushButton(this, "tan", "function")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_ASIN, NewPushButton(this, "asin", "function")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_ACOS, NewPushButton(this, "acos", "function")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_ATAN, NewPushButton(this, "atan", "function")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_LOG, NewPushButton(this, "log", "function")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_SQRT, NewPushButton(this, "sqrt", "function")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_LN, NewPushButton(this, "ln", "function")));
 
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_SUM, NewPushButton(this, "+", "operator")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_SUB, NewPushButton(this, "-", "operator")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_MUL, NewPushButton(this, "*", "operator")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_DIV, NewPushButton(this, "/", "operator")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_MOD, NewPushButton(this, "%", "mod")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_POW, NewPushButton(this, "^", "pow")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_SUM, NewPushButton(this, "+", "operator")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_SUB, NewPushButton(this, "-", "operator")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_MUL, NewPushButton(this, "*", "operator")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_DIV, NewPushButton(this, "/", "operator")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_MOD, NewPushButton(this, "%", "mod")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_POW, NewPushButton(this, "^", "pow")));
 
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_X, NewPushButton(this, "x", "x")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_DOT, NewPushButton(this, ".", "dot")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_EXP, NewPushButton(this, "E", "exp")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_X, NewPushButton(this, "x", "x")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_DOT, NewPushButton(this, ".", "dot")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_EXP, NewPushButton(this, "E", "exp")));
 
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_FACTORIAL, NewPushButton(this, "!", "factorial")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_OPEN_BRACKET, NewPushButton(this, "(", "bracket")));
-       _widgets->buttonDictionary.insert(make_pair(BUTTON_CLOSE_BRACKET, NewPushButton(this, ")", "bracket")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_FACTORIAL, NewPushButton(this, "!", "factorial")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_OPEN_BRACKET, NewPushButton(this, "(", "bracket")));
+       _widgets->buttonDictionary.insert(std::make_pair(BUTTON_CLOSE_BRACKET, NewPushButton(this, ")", "bracket")));
 
        initInputXWidget();
     }

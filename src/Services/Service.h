@@ -38,7 +38,7 @@ public:
     }
 
     GraphOutput GetGraphResult(const GraphInput &input) {
-        GraphOutput output;
+        GraphOutput output = {};
 
         double stepX = (fabs(input.xMin) + fabs(input.xMax)) / input.countPoints;
         for (int i = 0; i < input.countPoints; i++)
@@ -54,7 +54,7 @@ public:
     }
 
     CreditCalculatorOutput GetCreditCalculationResult(const CreditCalculatorInput &input, const CreditPaymentsType &type) {
-        CreditCalculatorOutput output;
+        CreditCalculatorOutput output = {};
 
         switch (type)
         {
@@ -69,7 +69,7 @@ public:
     }
 
     DepositCalculatorOutput GetDepositCalculationResult(const DepositCalculatorInput &input) {
-        DepositCalculatorOutput output;
+        DepositCalculatorOutput output = {};
 
         double accumulatedInterestForPeriod = 0;
         output.totalAmount = input.depositAmount;
@@ -111,9 +111,8 @@ public:
     }
 
 private:
-
     CreditCalculatorOutput AnnuityLoan(const CreditCalculatorInput &input) {
-        CreditCalculatorOutput output;
+        CreditCalculatorOutput output = {};
 
         double monthlyInterestRate = input.interestRate / 12 / 100;
         double tmp = pow(1 + monthlyInterestRate, input.creditTerm);
@@ -133,7 +132,7 @@ private:
     }
 
     CreditCalculatorOutput DifferentiatedLoan(const CreditCalculatorInput &input) {
-        CreditCalculatorOutput output;
+        CreditCalculatorOutput output = {};
 
         double monthlyBodyPayment = input.creditSum / input.creditTerm;
         double monthlyInterestRate = input.interestRate / 12 / 100;

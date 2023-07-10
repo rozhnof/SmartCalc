@@ -5,6 +5,7 @@
 #include "Validators/CreditCalcValidator.h"
 #include <QVector>
 
+
 class CreditCalcController {
 private:
     CreditCalcModel _model;

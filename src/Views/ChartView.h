@@ -4,6 +4,7 @@
 #include <QtCharts>
 #include <QColor>
 
+
 class ChartView {
 
     QChart* chart;

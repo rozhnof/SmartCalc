@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "mainwindow.h"
+#include "MainWindow.h"
 #include "IPlatformUI.h"
 #include "../Controllers/DepositCalcController.h"
 #include <cmath>
@@ -15,9 +15,9 @@
 class DepositCalculatorUI : public MainWindow
 {
 private:
-    QToolButton *_calendarSender;
-    DepositCalcWidgets *_widgets;
     DepositCalcController *_controller;
+    DepositCalcWidgets *_widgets;
+    QToolButton *_calendarSender;
 
 public:
     DepositCalculatorUI() : MainWindow(), _controller(new DepositCalcController), _widgets(new DepositCalcWidgets) {
@@ -48,35 +48,35 @@ public:
         _widgets->outputContainer = NewWidget(this, "container");
         _widgets->tablesContainer = NewWidget(this, "table_container");
 
-        _widgets->box.insert(make_pair(DEPOSIT_AMOUNT, NewWidget(this, "box")));
-        _widgets->box.insert(make_pair(DEPOSIT_INTEREST_RATE, NewWidget(this, "box")));
-        _widgets->box.insert(make_pair(DEPOSIT_PLACEMENT_PERIOD, NewWidget(this, "box_left")));
-        _widgets->box.insert(make_pair(DEPOSIT_OPERATION_SUM, NewWidget(this, "box_right")));
-        _widgets->box.insert(make_pair(DEPOSIT_TAX_RATE, NewWidget(this, "box")));
-        _widgets->box.insert(make_pair(DEPOSIT_ACCURED_INTEREST, NewWidget(this, "box")));
-        _widgets->box.insert(make_pair(DEPOSIT_TOTAL_AMOUNT, NewWidget(this, "box")));
-        _widgets->box.insert(make_pair(DEPOSIT_TAX_AMOUNT, NewWidget(this, "box")));
+        _widgets->box.insert(std::make_pair(DEPOSIT_AMOUNT, NewWidget(this, "box")));
+        _widgets->box.insert(std::make_pair(DEPOSIT_INTEREST_RATE, NewWidget(this, "box")));
+        _widgets->box.insert(std::make_pair(DEPOSIT_PLACEMENT_PERIOD, NewWidget(this, "box_left")));
+        _widgets->box.insert(std::make_pair(DEPOSIT_OPERATION_SUM, NewWidget(this, "box_right")));
+        _widgets->box.insert(std::make_pair(DEPOSIT_TAX_RATE, NewWidget(this, "box")));
+        _widgets->box.insert(std::make_pair(DEPOSIT_ACCURED_INTEREST, NewWidget(this, "box")));
+        _widgets->box.insert(std::make_pair(DEPOSIT_TOTAL_AMOUNT, NewWidget(this, "box")));
+        _widgets->box.insert(std::make_pair(DEPOSIT_TAX_AMOUNT, NewWidget(this, "box")));
 
-        _widgets->boxTitle.insert(make_pair(DEPOSIT_AMOUNT, NewLabel(this, "Deposit Amount", "title")));
-        _widgets->boxTitle.insert(make_pair(DEPOSIT_INTEREST_RATE, NewLabel(this, "Interest Rate", "title")));
-        _widgets->boxTitle.insert(make_pair(DEPOSIT_PLACEMENT_PERIOD, NewLabel(this, "Placement period", "title")));
-        _widgets->boxTitle.insert(make_pair(DEPOSIT_FREQUENCY_OF_PAYMENTS, NewLabel(this, "Frequency of Payments", "title")));
-        _widgets->boxTitle.insert(make_pair(DEPOSIT_DATE_OF_PLACEMENT, NewLabel(this, "Date of Placement", "title")));
-        _widgets->boxTitle.insert(make_pair(DEPOSIT_OPERATION_DATE, NewLabel(this, "Date", "title")));
-        _widgets->boxTitle.insert(make_pair(DEPOSIT_OPERATION_SUM, NewLabel(this, "Sum", "title")));
-        _widgets->boxTitle.insert(make_pair(DEPOSIT_TAX_RATE, NewLabel(this, "Tax Rate", "title")));
-        _widgets->boxTitle.insert(make_pair(DEPOSIT_ACCURED_INTEREST, NewLabel(this, "Accrued Interest", "title")));
-        _widgets->boxTitle.insert(make_pair(DEPOSIT_TOTAL_AMOUNT, NewLabel(this, "Total Amount", "title")));
-        _widgets->boxTitle.insert(make_pair(DEPOSIT_TAX_AMOUNT, NewLabel(this, "Tax Amount", "title")));
+        _widgets->boxTitle.insert(std::make_pair(DEPOSIT_AMOUNT, NewLabel(this, "Deposit Amount", "title")));
+        _widgets->boxTitle.insert(std::make_pair(DEPOSIT_INTEREST_RATE, NewLabel(this, "Interest Rate", "title")));
+        _widgets->boxTitle.insert(std::make_pair(DEPOSIT_PLACEMENT_PERIOD, NewLabel(this, "Placement period", "title")));
+        _widgets->boxTitle.insert(std::make_pair(DEPOSIT_FREQUENCY_OF_PAYMENTS, NewLabel(this, "Frequency of Payments", "title")));
+        _widgets->boxTitle.insert(std::make_pair(DEPOSIT_DATE_OF_PLACEMENT, NewLabel(this, "Date of Placement", "title")));
+        _widgets->boxTitle.insert(std::make_pair(DEPOSIT_OPERATION_DATE, NewLabel(this, "Date", "title")));
+        _widgets->boxTitle.insert(std::make_pair(DEPOSIT_OPERATION_SUM, NewLabel(this, "Sum", "title")));
+        _widgets->boxTitle.insert(std::make_pair(DEPOSIT_TAX_RATE, NewLabel(this, "Tax Rate", "title")));
+        _widgets->boxTitle.insert(std::make_pair(DEPOSIT_ACCURED_INTEREST, NewLabel(this, "Accrued Interest", "title")));
+        _widgets->boxTitle.insert(std::make_pair(DEPOSIT_TOTAL_AMOUNT, NewLabel(this, "Total Amount", "title")));
+        _widgets->boxTitle.insert(std::make_pair(DEPOSIT_TAX_AMOUNT, NewLabel(this, "Tax Amount", "title")));
 
-        _widgets->boxData.insert(make_pair(DEPOSIT_AMOUNT, NewLineEdit(this, "10000", "data")));
-        _widgets->boxData.insert(make_pair(DEPOSIT_INTEREST_RATE, NewLineEdit(this, "10", "data")));
-        _widgets->boxData.insert(make_pair(DEPOSIT_PLACEMENT_PERIOD, NewLineEdit(this, "10", "data")));
-        _widgets->boxData.insert(make_pair(DEPOSIT_TAX_RATE, NewLineEdit(this, "", "data")));
-        _widgets->boxData.insert(make_pair(DEPOSIT_OPERATION_SUM, NewLineEdit(this, "", "data")));
-        _widgets->boxData.insert(make_pair(DEPOSIT_ACCURED_INTEREST, NewLineEdit(this, "", "data")));
-        _widgets->boxData.insert(make_pair(DEPOSIT_TOTAL_AMOUNT, NewLineEdit(this, "", "data")));
-        _widgets->boxData.insert(make_pair(DEPOSIT_TAX_AMOUNT, NewLineEdit(this, "", "data")));
+        _widgets->boxData.insert(std::make_pair(DEPOSIT_AMOUNT, NewLineEdit(this, "10000", "data")));
+        _widgets->boxData.insert(std::make_pair(DEPOSIT_INTEREST_RATE, NewLineEdit(this, "10", "data")));
+        _widgets->boxData.insert(std::make_pair(DEPOSIT_PLACEMENT_PERIOD, NewLineEdit(this, "10", "data")));
+        _widgets->boxData.insert(std::make_pair(DEPOSIT_TAX_RATE, NewLineEdit(this, "", "data")));
+        _widgets->boxData.insert(std::make_pair(DEPOSIT_OPERATION_SUM, NewLineEdit(this, "", "data")));
+        _widgets->boxData.insert(std::make_pair(DEPOSIT_ACCURED_INTEREST, NewLineEdit(this, "", "data")));
+        _widgets->boxData.insert(std::make_pair(DEPOSIT_TOTAL_AMOUNT, NewLineEdit(this, "", "data")));
+        _widgets->boxData.insert(std::make_pair(DEPOSIT_TAX_AMOUNT, NewLineEdit(this, "", "data")));
 
         _widgets->calculateButton = NewPushButton(this, "Calculate", "button");
         _widgets->dateOfPlacementButton = NewPushButton(this, QDate::currentDate().toString("dd-MM-yyyy"), "button");
@@ -231,17 +231,17 @@ public:
 
     void setFrequencyOfPaymentsButton() {
         QMenu *menu = new QMenu(this);
-        map<Frequencies, QString> keyAndName;
+        std::map<Frequencies, QString> keyAndName;
 
-        keyAndName.insert(make_pair(DAILY, "Daily"));
-        keyAndName.insert(make_pair(WEEKLY, "Weekly"));
-        keyAndName.insert(make_pair(MONTHLY, "Monthly"));
-        keyAndName.insert(make_pair(QUARTERLY, "Quarterly"));
-        keyAndName.insert(make_pair(SEMI_ANNUALLY, "Semi-Annualy"));
-        keyAndName.insert(make_pair(YEARLY, "Yearly"));
-        keyAndName.insert(make_pair(END_OF_TERM, "End of Term"));
+        keyAndName.insert(std::make_pair(DAILY, "Daily"));
+        keyAndName.insert(std::make_pair(WEEKLY, "Weekly"));
+        keyAndName.insert(std::make_pair(MONTHLY, "Monthly"));
+        keyAndName.insert(std::make_pair(QUARTERLY, "Quarterly"));
+        keyAndName.insert(std::make_pair(SEMI_ANNUALLY, "Semi-Annualy"));
+        keyAndName.insert(std::make_pair(YEARLY, "Yearly"));
+        keyAndName.insert(std::make_pair(END_OF_TERM, "End of Term"));
 
-        for (auto it : keyAndName) {
+        for (const auto &it : keyAndName) {
             QAction *action = new QAction(this);
             action->setText(it.second);
             action->setData(it.first);
@@ -256,14 +256,14 @@ public:
 
     void setPlacementPeriodButton() {
         QMenu *menu = new QMenu(this);
-        map<Periods, QString> keyAndName;
+        std::map<Periods, QString> keyAndName;
 
-        keyAndName.insert(make_pair(DAYS, "Days"));
-        keyAndName.insert(make_pair(WEEKS, "Weeks"));
-        keyAndName.insert(make_pair(MONTHS, "Months"));
-        keyAndName.insert(make_pair(YEARS, "Years"));
+        keyAndName.insert(std::make_pair(DAYS, "Days"));
+        keyAndName.insert(std::make_pair(WEEKS, "Weeks"));
+        keyAndName.insert(std::make_pair(MONTHS, "Months"));
+        keyAndName.insert(std::make_pair(YEARS, "Years"));
 
-        for (auto it : keyAndName) {
+        for (const auto &it : keyAndName) {
             QAction *action = new QAction(this);
             action->setText(it.second);
             action->setData(it.first);
@@ -664,7 +664,7 @@ private slots:
             QDate date = QDate::fromString(_widgets->dateButton->text(), "dd-MM-yyyy");
             double sum = _widgets->boxData[DEPOSIT_OPERATION_SUM]->text().toDouble();
 
-            _widgets->topUpList.insert(make_pair(date, sum));
+            _widgets->topUpList.insert(std::make_pair(date, sum));
             _widgets->topUpTable->setRowCount(0);
 
             for (auto it : _widgets->topUpList) {
@@ -679,7 +679,7 @@ private slots:
             QDate date = QDate::fromString(_widgets->dateButton->text(), "dd-MM-yyyy");
             double sum = _widgets->boxData[DEPOSIT_OPERATION_SUM]->text().toDouble();
 
-            _widgets->takeOffList.insert(make_pair(date, sum));
+            _widgets->takeOffList.insert(std::make_pair(date, sum));
             _widgets->takeOffTable->setRowCount(0);
 
             for (auto it : _widgets->takeOffList) {

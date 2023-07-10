@@ -10,10 +10,8 @@
 #include "Calendar.h"
 #include "ChartView.h"
 
-using namespace std;
 
-
-typedef struct CalcWidgets {
+struct CalcWidgets {
     QMainWindow *calculatorWindow;
     QWidget *inputXWidget;
 
@@ -26,8 +24,8 @@ typedef struct CalcWidgets {
 
     QPropertyAnimation *animation;
 
-    unordered_map<int, QPushButton*> buttonDictionary;
-} CalcWidgets;
+    std::unordered_map<int, QPushButton*> buttonDictionary;
+};
 
 typedef struct GraphWidgets  {
     QWidget *graphWindow;
@@ -36,18 +34,18 @@ typedef struct GraphWidgets  {
     QLineEdit *inputLineEdit;
     QCheckBox* checkBoxLineDrawing;
 
-    unordered_map<int, QTextEdit*> box;
-    unordered_map<int, QLabel*> title;
-    unordered_map<int, QDoubleSpinBox*> data;
+    std::unordered_map<int, QTextEdit*> box;
+    std::unordered_map<int, QLabel*> title;
+    std::unordered_map<int, QDoubleSpinBox*> data;
 } GraphWidgets;
 
 typedef struct CreditCalcWidgets  {
     QWidget *creditCalcWindow;
     ChartView* chartView;
 
-    unordered_map<int, QTextEdit*> box;
-    unordered_map<int, QLabel*> title;
-    unordered_map<int, QLineEdit*> data;
+    std::unordered_map<int, QTextEdit*> box;
+    std::unordered_map<int, QLabel*> title;
+    std::unordered_map<int, QLineEdit*> data;
 
     QVector<double> bodyPaymentCollection;
     QVector<double> percentPaymentCollection;
@@ -88,25 +86,26 @@ typedef struct DepositCalcWidgets  {
 
 
     QToolButton *frequencyOfPaymentsButton;
-    pair<int, QAction*> frequencyActiveAction;
+    std::pair<int, QAction*> frequencyActiveAction;
 
     QToolButton *placementPeriodButton;
-    pair<int, QAction*> periodActiveAction;
+    std::pair<int, QAction*> periodActiveAction;
 
-    multimap<QDate, double> generalList;
-    multimap<QDate, double> topUpList;
-    multimap<QDate, double> takeOffList;
+    std::multimap<QDate, double> generalList;
+    std::multimap<QDate, double> topUpList;
+    std::multimap<QDate, double> takeOffList;
 
     QPushButton *buttonClearGeneralTable;
     QPushButton *buttonClearTopUpTable;
     QPushButton *buttonClearTakeOffTable;
 
-    unordered_map<int, QWidget*> box;
-    unordered_map<int, QLabel*> boxTitle;
-    unordered_map<int, QLineEdit*> boxData;
-    unordered_map<int, QString> operationTypes;
+    std::unordered_map<int, QWidget*> box;
+    std::unordered_map<int, QLabel*> boxTitle;
+    std::unordered_map<int, QLineEdit*> boxData;
+    std::unordered_map<int, QString> operationTypes;
 
 } DepositCalcWidgets;
+
 
 
 enum CalcWidgetsEnum {

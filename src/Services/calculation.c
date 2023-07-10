@@ -70,11 +70,11 @@ void Factorial(NodeNumber* *top) {
 
 void DecisionTrigonometricFunction(char number, NodeNumber* *top) {
     if (number == SIN) {
-        (**top).number = sinl((**top).number * M_PI / 180);
+        (**top).number = sinl((**top).number);
     } else if (number == COS) {
-        (**top).number = cosl((**top).number * M_PI / 180);
+        (**top).number = cosl((**top).number);
     } else if (number == TAN) {
-        (**top).number = tanl((**top).number * M_PI / 180);
+        (**top).number = tanl((**top).number);
     } else if (number == ASIN) {
         (**top).number = asinl((**top).number);
     } else if (number == ACOS) {

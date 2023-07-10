@@ -7,6 +7,7 @@
 #include <QVector>
 #include <QDebug>
 
+
 class GraphController {
 
 private:

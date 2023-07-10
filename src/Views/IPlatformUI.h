@@ -3,9 +3,6 @@
 
 #include "Widgets.h"
 
-using namespace std;
-
-
 
 class IPlatformUI
 {
