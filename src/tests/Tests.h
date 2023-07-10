@@ -1,7 +1,7 @@
 #ifndef TESTS_S21_TESTS_H
 #define TESTS_S21_TESTS_H
 
-#include "../SmartCalc/SmartCalc.h"
+#include "../Services/calc.h"
 #include <check.h>
 #include <stdio.h>
 #include <stdlib.h>

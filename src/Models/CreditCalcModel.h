@@ -12,33 +12,19 @@ private:
     CreditCalculatorOutput _output;
 
 public:
-    void setInput(CreditCalculatorInput input) {
-        _input = input;
-    }
+    void setInput(CreditCalculatorInput input);
 
-    void Calculate(Service::CreditPaymentsType type) {
-        _output = service.GetCreditCalculationResult(_input, type);
-    }
+    void Calculate(Service::CreditPaymentsType type);
 
-    double getTotalPayment() {
-        return _output.totalPayment;
-    }
+    double getTotalPayment();
 
-    double getOverpayment() {
-        return _output.overpayment;
-    }
+    double getOverpayment();
 
-    std::vector<double> getMonthlyPayments() {
-        return _output.monthlyPayments;
-    }
+    std::vector<double> getMonthlyPayments();
 
-    std::vector<double> getMonthlyBodyPayments() {
-        return _output.monthlyBodyPayments;
-    }
+    std::vector<double> getMonthlyBodyPayments();
 
-    std::vector<double> getMonthlyPercentPayments() {
-        return _output.monthlyPercentPayments;
-    }
+    std::vector<double> getMonthlyPercentPayments();
 };
 
 

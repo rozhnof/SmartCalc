@@ -13,14 +13,10 @@ private:
 
 public:
 
-    CalculatorController() {}
+    CalculatorController();
 
-    bool Validate(QString &input) {
-        return _validator.Validate(input);
-    }
+    bool Validate(QString &input);
 
-    double GetResult(QString &input, double x) {
-        return _model.Calculate(input.toStdString(), x);
-    }
+    double GetResult(QString &input, double x);
 };
 

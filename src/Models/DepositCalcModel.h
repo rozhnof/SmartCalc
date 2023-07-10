@@ -13,29 +13,17 @@ private:
 
 public:
 
-    DepositCalcModel() {}
+    DepositCalcModel();
 
-    void setInput(DepositCalculatorInput input) {
-        _input = input;
-    }
+    void setInput(DepositCalculatorInput input);
 
-    void Calculate() {
-        _output =  service.GetDepositCalculationResult(_input);
-    }
+    void Calculate();
 
-    double getTotalAmount() {
-        return _output.totalAmount;
-    }
+    double getTotalAmount();
 
-    double getTaxAmount() {
-        return _output.taxAmount;
-    }
+    double getTaxAmount();
 
-    double getAccuredInterest() {
-        return _output.accuredInterest;
-    }
+    double getAccuredInterest();
 
-    std::vector<std::tuple<Day, std::string, double, double>> getGeneralList() {
-        return _output.generalList;
-    }
+    std::vector<std::tuple<Day, std::string, double, double>> getGeneralList();
 };

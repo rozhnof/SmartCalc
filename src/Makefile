@@ -5,9 +5,6 @@ CHECK_LIB = -lcheck
 OS:=$(shell uname -s)
 CCOV = -lgcov --coverage
 
-LIB_HEADER = $(LIB_DIR)SmartCalc.h
-LIB = SmartCalc.a
-LIB_DIR = SmartCalc/
 OBJ_DIR = obj/
 COV_DIR = coverage_info/
 TEST_DIR = Tests/
@@ -53,6 +50,15 @@ COV_REPORT = $(COV_DIR)/SmartCalc/index.html
 vpath %.c $(LIB_DIR)
 
 all: clean test gcov_report
+
+install: build
+	@mkdir $(HOME)/Desktop/$(APP)/
+	@cp -rf $(APP) $(HOME)/Desktop/$(APP)/
+	make clean
+
+build:
+	@mkdir ../build
+	@cd ./lib/ && qmake $(APP).pro && make
 
 test: $(LIB) $(TEST_SRCS)
 	$(CC) $(FLAGS) $(INC_DIR) $(TEST_SRCS) $(LIB) $(CHECK_LIB) -o $(TEST_EXEC)

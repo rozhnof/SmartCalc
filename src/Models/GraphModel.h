@@ -14,28 +14,17 @@ private:
 
 public:
 
-    GraphModel() {}
-    ~GraphModel() {}
+    GraphModel();
+    ~GraphModel();
 
-    void setInput(GraphInput input) {
-        _input = input;
-        _input.postfix = service.GetPostfixNotation(input.infix);
-    }
+    void setInput(GraphInput input);
     
-    void Calculate() {
-        _output = service.GetGraphResult(_input);
-    }
+    void Calculate();
 
-    GraphOutput getOutput() {
-        return _output;
-    }
+    GraphOutput getOutput();
 
-    std::vector<double> getCollectionX() {
-        return _output.xPoints;
-    }
+    std::vector<double> getCollectionX();
 
-    std::vector<double> getCollectionY() {
-        return _output.yPoints;
-    }
+    std::vector<double> getCollectionY();
 };
 

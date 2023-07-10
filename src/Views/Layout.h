@@ -49,119 +49,42 @@ private:
     int _lastHeight = 0;
 public:
 
-    Layout() {}
+    Layout();
 
-    void SetStartPoints(int x0, int y0) {
-        _x0 = x0;
-        _y0 = y0;
+    void SetStartPoints(int x0, int y0);
 
-        _currentX = x0;
-        _currentY = y0;
-    }
+    void SetEndPoints(int xMax, int yMax);
 
-    void SetEndPoints(int xMax, int yMax) {
-        _xMax = xMax;
-        _yMax = yMax;
-    }
+    void SetRows(int rows);
 
-    void SetRows(int rows) {
-        _rows = rows;
-    }
+    void SetColumns(int columns);
 
-    void SetColumns(int columns) {
-        _columns = columns;
-    }
+    void SetHorizontalSpacing(int horizontalSpacing);
 
-    void SetHorizontalSpacing(int horizontalSpacing) {
-        _horizontalSpacing = horizontalSpacing;
-    }
+    void SetVerticalSpacing(int verticalSpacing);
 
-    void SetVerticalSpacing(int verticalSpacing) {
-        _verticalSpacing = verticalSpacing;
-    }
+    void SetDefaultElementSize(int width, int height);
 
-    void SetDefaultElementSize(int width, int height) {
-        _widgetWidth = width;
-        _widgetHeight = height;
-    }
+    void SetAutoSize();
 
-    void SetAutoSize() {
-        _widgetWidth = ((_xMax - _rightSpacing) - (_x0 + _leftSpacing) - ((_columns - 1) * _horizontalSpacing)) / _columns;
-        _widgetHeight = ((_yMax - _bottomSpacing) - (_y0 + _aboveSpacing) - ((_rows - 1) * _verticalSpacing)) / _rows;
+    void SetLeftSpacing(int spacing);
 
-        _xRemaining = _countXRemaining = ((_xMax - _x0) - (_rightSpacing + _leftSpacing) - ((_columns - 1) * _horizontalSpacing)) % _widgetWidth;
-        _yRemaining = _countYRemaining = ((_yMax - _y0) - (_bottomSpacing + _aboveSpacing) - ((_rows - 1) * _verticalSpacing)) % _widgetHeight;
-    }
+    void SetRightSpacing(int spacing);
 
-    void SetLeftSpacing(int spacing) {
-        _leftSpacing = spacing;
-        _currentX += spacing;
-    }
+    void SetAboveSpacing(int spacing);
 
-    void SetRightSpacing(int spacing) {
-        _rightSpacing = spacing;
-    }
+    void SetBottomSpacing(int spacing);
 
-    void SetAboveSpacing(int spacing) {
-        _aboveSpacing = spacing;
-        _currentY += spacing;
-    }
+    void ChangeColumns(int columns);
 
-    void SetBottomSpacing(int spacing) {
-        _bottomSpacing = spacing;
-    }
+    void AddWidget(QWidget *widget, double colSpan = 1, double rowSpan = 1);
 
-    void ChangeColumns(int columns) {
-        SetColumns(columns);
-        SetAutoSize();
-    }
-
-    void AddWidget(QWidget *widget, double colSpan = 1, double rowSpan = 1) {
-        _currentColSpan = colSpan;
-        _currentRowSpan = rowSpan;
-        AddWidgetWithSize(widget, _widgetWidth * colSpan + _horizontalSpacing * (colSpan - 1), _widgetHeight * rowSpan + _verticalSpacing * (rowSpan - 1));
-    }
-
-    void NextRow() {
-        _columnsCounter = 0;
-        _countYRemaining--;
-        _countXRemaining = _xRemaining;
-        _currentX = _x0 + _leftSpacing;
-
-        _rowsCounter++;
-        _currentY += (_lastHeight + _verticalSpacing);
-    }
+    void NextRow();
 
 
-    void AddWidgetWithSize(QWidget *widget, int width, int height) {
-        if (_countXRemaining > 0) {
-            width++;
-            _countXRemaining--;
-        }
-        if (_countYRemaining > 0) {
-            height++;
-        }
+    void AddWidgetWithSize(QWidget *widget, int width, int height);
 
-        widget->setGeometry(_currentX, _currentY, width, height);
-        _lastWidth = width;
-        _lastHeight = height;
-
-        _columnsCounter += _currentColSpan;
-        SetDefaultSpan();
-
-        if (_columnsCounter >= _columns) {
-            NextRow();
-        } else {
-            _currentX += (width + _horizontalSpacing);
-        }
-
-        widget->show();
-    }
-
-    void SetDefaultSpan() {
-        _currentColSpan = 1;
-        _currentRowSpan = 1;
-    }
+    void SetDefaultSpan();
 
     enum AlignH {
         Left,
@@ -176,53 +99,7 @@ public:
     };
 
 
-    void SetTitle(QWidget* widget, QWidget* title, AlignH alignH, AlignV alignV, int fontSize, int horizontalSpacing, int verticalSpacing) {
-        QFont font;
-        font.setPointSize(fontSize);
-        title->setFont(font);
+    void SetTitle(QWidget* widget, QWidget* title, AlignH alignH, AlignV alignV, int fontSize, int horizontalSpacing, int verticalSpacing);
 
-        int x = 0;
-        int y = 0;
-        int widthHint = title->sizeHint().width();
-        int heightHint = title->sizeHint().height();
-
-        if (alignH == Left) {
-            x = widget->x() + horizontalSpacing;
-        } else if (alignH == Right) {
-            x = widget->x() + widget->width() - widthHint - horizontalSpacing;
-        } else if (alignH == CenterH) {
-            x = widget->x() + widget->width() / 2 - widthHint / 2;
-        }
-
-        if (alignV == Above) {
-            y = widget->y() - heightHint + verticalSpacing;
-        } else if (alignV == Bottom) {
-            y = widget->y() + widget->height() + verticalSpacing;
-        } else if (alignV == CenterV) {
-            y = widget->y() + widget->height() / 2 - heightHint / 2;
-        }
-        title->setGeometry(x, y, widthHint, heightHint);
-    }
-
-    void SetField(QWidget* widget, QWidget* field, AlignH align, int spacing) {
-        int x = 0;
-        int y = 0;
-
-        int height = 0;
-        int width = 0;
-
-        width = widget->width() - spacing;
-        height = widget->height();
-        y = widget->y() + widget->height() / 2 - height / 2;
-
-        if (align == Left) {
-            x = widget->x() + spacing;
-        } else if (align == Right) {
-            x = widget->x() + widget->width() - width - spacing;
-        } else if (align == CenterH) {
-            x = widget->x() + widget->width() / 2 - width / 2;
-        }
-
-        field->setGeometry(x, y, width, height);
-    }
+    void SetField(QWidget* widget, QWidget* field, AlignH align, int spacing);
 };
