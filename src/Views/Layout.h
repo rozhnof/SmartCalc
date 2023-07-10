@@ -49,8 +49,6 @@ private:
     int _lastHeight = 0;
 public:
 
-    Layout();
-
     void SetStartPoints(int x0, int y0);
 
     void SetEndPoints(int xMax, int yMax);

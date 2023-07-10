@@ -1,8 +1,5 @@
-#include <Layout.h>
+#include "Layout.h"
 
-
-
-Layout::Layout() {}
 
 void Layout::SetStartPoints(int x0, int y0) {
     _x0 = x0;
