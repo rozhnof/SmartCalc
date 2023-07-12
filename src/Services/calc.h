@@ -76,7 +76,6 @@ void CalculateTwoNumbersFromStack(char operation, NodeNumber** top);
 void Factorial(NodeNumber** top);
 void DecisionTrigonometricFunction(char number, NodeNumber** top);
 
-
 #ifdef __cplusplus
 }
 #endif

@@ -19,6 +19,7 @@ Suite *test4(void);
 Suite *test5(void);
 Suite *test6(void);
 Suite *test7(void);
+Suite *test8(void);
 
 double readStr(char *input, char *x_input_str);
 

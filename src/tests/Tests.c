@@ -1,6 +1,5 @@
 #include "Tests.h"
 
-
 SRunner *default_srunner_create() {
   SRunner *sr;
 
@@ -10,16 +9,19 @@ SRunner *default_srunner_create() {
   srunner_add_suite(sr, test3());
   srunner_add_suite(sr, test4());
   srunner_add_suite(sr, test5());
+  srunner_add_suite(sr, test6());
+  srunner_add_suite(sr, test7());
+  srunner_add_suite(sr, test8());
 
   return sr;
 }
 
-double readStr(char* input, char* x_input_str) {
-    double x_input_value = 0;
-    char *postfix = FromInfixToPostfix(input);
-    sscanf(x_input_str, "%lf", &x_input_value);
-    double result = Calculation(postfix, x_input_value);
-    return result;
+double readStr(char *input, char *x_input_str) {
+  double x_input_value = 0;
+  char *postfix = FromInfixToPostfix(input);
+  sscanf(x_input_str, "%lf", &x_input_value);
+  double result = Calculation(postfix, x_input_value);
+  return result;
 }
 
 int main(void) {

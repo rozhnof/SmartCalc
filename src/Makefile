@@ -52,62 +52,20 @@ distclean:
 
 style:
 	cp ../materials/linters/.clang-format ../.clang-format
-	clang-format -i -style=Google Controllers/CalculatorController.cpp \
-									Controllers/CalculatorController.h \
-									Controllers/CreditCalcController.cpp \
-									Controllers/CreditCalcController.h \
-									Controllers/DepositCalcController.cpp \
-									Controllers/DepositCalcController.h \
-									Controllers/GraphController.cpp \
-									Controllers/GraphController.h \
-									Controllers/Validators/CreditCalcValidator.cpp \
-									Controllers/Validators/CreditCalcValidator.h \
-									Controllers/Validators/DepositCalcValidator.cpp \
-									Controllers/Validators/DepositCalcValidator.h \
-									Controllers/Validators/GraphValidator.cpp \
-									Controllers/Validators/GraphValidator.h \
-									Controllers/Validators/InfixNotationValidator.cpp \
-									Controllers/Validators/InfixNotationValidator.h \
+	clang-format -n -i -style=Google Controllers/*.cpp \
+									Controllers/*.h \
+									Controllers/Validators/*.cpp \
+									Controllers/Validators/*.h \
 									main.cpp \
-									Models/CalculatorModel.cpp \
-									Models/CalculatorModel.h \
-									Models/CreditCalcModel.cpp \
-									Models/CreditCalcModel.h \
-									Models/DepositCalcModel.cpp \
-									Models/DepositCalcModel.h \
-									Models/GraphModel.cpp \
-									Models/GraphModel.h \
-									Services/calc.h \
-									Services/IO.h \
-									Services/Service.cpp \
-									Services/Service.h \
-									Tests/Tests.h \
-									Views/CalculatorUI.cpp \
-									Views/CalculatorUI.h \
-									Views/Calendar.cpp \
-									Views/Calendar.h \
-									Views/ChartView.cpp \
-									Views/ChartView.h \
-									Views/CreditCalculatorUI.cpp \
-									Views/CreditCalculatorUI.h \
-									Views/DepositCalculatorUI.cpp \
-									Views/DepositCalculatorUI.h \
-									Views/GraphUI.cpp \
-									Views/GraphUI.h \
-									Views/IPlatformUI.h \
-									Views/Layout.cpp \
-									Views/Layout.h \
-									Views/MacUI.cpp \
-									Views/MacUI.h \
-									Views/MainWindow.cpp \
-									Views/MainWindow.h \
-									Views/qcustomplot.cpp \
-									Views/qcustomplot.h \
-									Views/View.cpp \
-									Views/View.h \
-									Views/Widgets.h \
-									Views/WinUI.cpp \
-									Views/WinUI.h
+									Models/*.cpp \
+									Models/*.h \
+									Services/*.h \
+									Services/*.cpp \
+									Services/*.c \
+									Tests/*.h \
+									Tests/*.c \
+									Views/*.cpp \
+									Views/*.h 
 
 CC = gcc
 INC_DIR = -I.
@@ -127,6 +85,7 @@ LIB_COV_OBJS = lib/Coverage/obj/converter.o \
 
 TEST_SRCS = Tests/BracketExpressionsTests.c \
             Tests/Tests.c \
+			Tests/OtherTests.c \
             Tests/TrigonometricFunctionsTests0.c \
             Tests/TrigonometricFunctionsTests1.c \
             Tests/TrigonometricFunctionsTests2.c \
@@ -137,6 +96,7 @@ TEST_SRCS = Tests/BracketExpressionsTests.c \
 
 TEST_OBJS = lib/Coverage/obj/BracketExpressionsTests.o \
             lib/Coverage/obj/Tests.o \
+			lib/Coverage/obj/OtherTests.o \
             lib/Coverage/obj/TrigonometricFunctionsTests0.o \
             lib/Coverage/obj/TrigonometricFunctionsTests1.o \
             lib/Coverage/obj/TrigonometricFunctionsTests2.o \
@@ -160,6 +120,7 @@ COV_REPORT = lib/Coverage/index.html
 ALL_TEST_SRCS = \
                 Tests/BracketExpressionsTests.c \
                 Tests/Tests.c \
+				Tests/OtherTests.c \
                 Tests/TrigonometricFunctionsTests0.c \
                 Tests/TrigonometricFunctionsTests1.c \
                 Tests/TrigonometricFunctionsTests2.c \
@@ -182,7 +143,7 @@ gcov_report: $(LIB_COV_OBJS) $(TEST_OBJS)
 	@mkdir -p lib/Coverage
 	$(CC) $(FLAGS) $(CCOV) $(LIB_COV_OBJS) $(TEST_OBJS) $(CHECK_LIB) -o $(COV_EXEC)
 	@-./$(COV_EXEC)
-	@lcov -q -c -d $(COV_DIR) -o $(COV_INFO) --exclude "$(TEST_DIR)*"
+	@lcov -q -c -d $(COV_DIR) -o $(COV_INFO) --exclude "$(TEST_DIR)*" --exclude /usr/local/Cellar
 	@genhtml -q $(COV_INFO) -o $(COV_DIR)
 	@open $(COV_REPORT)
 	@rm -rf *.gc*
