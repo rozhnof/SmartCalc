@@ -49,7 +49,6 @@ distclean:
 	-rm -rf ../$(APP_NAME)-$(VERSION).tar.gz
 
 style:
-	cp ../materials/linters/.clang-format ../.clang-format
 	clang-format -n -style=Google Controllers/*.cpp \
 									Controllers/*.h \
 									Controllers/Validators/*.cpp \
