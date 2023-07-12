@@ -1,30 +1,25 @@
 #pragma once
 
-
 #include "../Services/Service.h"
 
-
 class GraphModel {
+ private:
+  Service service;
 
-private:
-    Service service;
+  GraphInput _input;
+  GraphOutput _output;
 
-    GraphInput _input;
-    GraphOutput _output;
+ public:
+  GraphModel();
+  ~GraphModel();
 
-public:
+  void setInput(GraphInput input);
 
-    GraphModel();
-    ~GraphModel();
+  void Calculate();
 
-    void setInput(GraphInput input);
-    
-    void Calculate();
+  GraphOutput getOutput();
 
-    GraphOutput getOutput();
+  std::vector<double> getCollectionX();
 
-    std::vector<double> getCollectionX();
-
-    std::vector<double> getCollectionY();
+  std::vector<double> getCollectionY();
 };
-

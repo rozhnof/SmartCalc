@@ -1,117 +1,108 @@
 #pragma once
 
-
-#include "MainWindow.h"
-#include "IPlatformUI.h"
-#include "../Controllers/DepositCalcController.h"
-#include <cmath>
-#include "Calendar.h"
-#include <QDate>
-#include <QCursor>
-#include <QVector>
 #include <QAction>
+#include <QCursor>
+#include <QDate>
+#include <QVector>
+#include <cmath>
 
+#include "../Controllers/DepositCalcController.h"
+#include "Calendar.h"
+#include "IPlatformUI.h"
+#include "MainWindow.h"
 
-class DepositCalculatorUI : public MainWindow
-{
-private:
-    DepositCalcController *_controller;
-    DepositCalcWidgets *_widgets;
-    QToolButton *_calendarSender;
+class DepositCalculatorUI : public MainWindow {
+ private:
+  DepositCalcController *_controller;
+  DepositCalcWidgets *_widgets;
+  QToolButton *_calendarSender;
 
-public:
-    DepositCalculatorUI();
+ public:
+  DepositCalculatorUI();
 
-    ~DepositCalculatorUI();
+  ~DepositCalculatorUI();
 
-    void initWidgets();
+  void initWidgets();
 
-    void setGeometry();
+  void setGeometry();
 
-    bool setInput();
+  bool setInput();
 
-    enum Periods {
-        DAYS,
-        WEEKS,
-        MONTHS,
-        YEARS
-    };
+  enum Periods { DAYS, WEEKS, MONTHS, YEARS };
 
-    QVector<QDate> setPaymentDays(QDate startDate, QDate endDate, int frequencyOfPayments);
+  QVector<QDate> setPaymentDays(QDate startDate, QDate endDate,
+                                int frequencyOfPayments);
 
-    QDate setEndDate(QDate startDate, int periodType, int periodCount);
+  QDate setEndDate(QDate startDate, int periodType, int periodCount);
 
+  void getOutput();
 
+  void connectWidgetsToSlots();
 
-    void getOutput();
+  enum Frequencies {
+    DAILY,
+    WEEKLY,
+    MONTHLY,
+    QUARTERLY,
+    SEMI_ANNUALLY,
+    YEARLY,
+    END_OF_TERM
+  };
 
-    void connectWidgetsToSlots();
+  void setFrequencyOfPaymentsButton();
 
-    enum Frequencies {
-        DAILY,
-        WEEKLY,
-        MONTHLY,
-        QUARTERLY,
-        SEMI_ANNUALLY,
-        YEARLY,
-        END_OF_TERM
-    };
+  void setPlacementPeriodButton();
 
-    void setFrequencyOfPaymentsButton();
+  void setOutputContainer();
 
-    void setPlacementPeriodButton();
+  void setTableContainer();
 
-    void setOutputContainer();
+  void setTable();
 
-    void setTableContainer();
+  void setAddInputContainer();
 
-    void setTable();
+  void setMainInputContainer();
 
+  void setInputValidator();
 
-    void setAddInputContainer();
+  void setRow(QTableWidget *table, QString date, QString sum);
 
-    void setMainInputContainer();
+  void setRow(QTableWidget *table, QString date, QString type, QString sum,
+              QString depositSum);
 
-    void setInputValidator();
+  void setFrequencyButtonActiveAction(QAction *action);
 
-    void setRow(QTableWidget *table, QString date, QString sum);
+  void setPeriodButtonActiveAction(QAction *action);
 
-    void setRow(QTableWidget *table, QString date, QString type, QString sum, QString depositSum);
+  void fillGeneralList();
 
-    void setFrequencyButtonActiveAction(QAction *action);
+  void setStyle();
 
-    void setPeriodButtonActiveAction(QAction *action);
+ private slots:
 
-    void fillGeneralList();
+  void clearTakeOffList();
 
-    void setStyle();
+  void clearTopUpList();
 
-private slots:
+  void clearGeneralList();
 
-    void clearTakeOffList();
+  void showGeneralTable();
 
-    void clearTopUpList();
+  void showTopUpTable();
 
-    void clearGeneralList();
+  void showTakeOffTable();
 
-    void showGeneralTable();
+  void addTopUp();
 
-    void showTopUpTable();
+  void addTakeOff();
 
-    void showTakeOffTable();
+  void Calculate();
 
-    void addTopUp();
+  void setPeriod();
 
-    void addTakeOff();
+  void setFrequency();
 
+  void calendarShow();
 
-    void Calculate();
-
-    void setPeriod();
-
-    void setFrequency();
-
-    void calendarShow();
-
-    void setDate();
+  void setDate();
 };

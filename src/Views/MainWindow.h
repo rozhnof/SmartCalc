@@ -1,37 +1,38 @@
 #pragma once
 
-
-#include <QWidget>
-#include <QTabWidget>
-#include <iostream>
-#include "IPlatformUI.h"
-#include <unordered_map>
 #include <QMainWindow>
+#include <QTabWidget>
+#include <QWidget>
+#include <iostream>
+#include <unordered_map>
 
+#include "IPlatformUI.h"
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
+ public:
+  IPlatformUI **_platform;
 
-public:
-    IPlatformUI **_platform;
+  MainWindow();
 
-    MainWindow();
+  virtual void SetupUI();
 
-    virtual void SetupUI();
+  ~MainWindow();
 
-    ~MainWindow();
+  QCheckBox *NewCheckBox(QWidget *parent, QString text = "",
+                         QString objectName = "");
 
-    QCheckBox *NewCheckBox(QWidget *parent, QString text = "", QString objectName = "");
+  QWidget *NewWidget(QWidget *parent, QString objectName = "");
 
-    QWidget *NewWidget(QWidget *parent, QString objectName = "");
+  QLabel *NewLabel(QWidget *parent, QString text = "", QString objectName = "");
 
-    QLabel *NewLabel(QWidget *parent, QString text = "", QString objectName = "");
+  QDoubleSpinBox *NewDoubleSpinBox(QWidget *parent, QString objectName);
 
-    QDoubleSpinBox *NewDoubleSpinBox(QWidget *parent, QString objectName);
+  QLineEdit *NewLineEdit(QWidget *parent, QString text = "",
+                         QString objectName = "");
 
-    QLineEdit *NewLineEdit(QWidget *parent, QString text = "", QString objectName = "");
+  QPushButton *NewPushButton(QWidget *parent, QString text = "",
+                             QString objectName = "");
 
-    QPushButton *NewPushButton(QWidget *parent, QString text = "", QString objectName = "");
-
-    QToolButton *NewToolButton(QWidget *parent, QString text = "", QString objectName = "");
+  QToolButton *NewToolButton(QWidget *parent, QString text = "",
+                             QString objectName = "");
 };

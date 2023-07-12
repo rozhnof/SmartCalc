@@ -1,24 +1,20 @@
 #pragma once
 
+#include <QWidget>
+#include <iostream>
 
 #include "IPlatformUI.h"
-#include <iostream>
-#include <QWidget>
 
+class MacUI : public IPlatformUI {
+ public:
+  void SetupUI(CalcWidgets *widgets) override;
 
-class MacUI : public IPlatformUI
-{
-public:
+  void SetupUI(CreditCalcWidgets *widgets) override;
 
-    void SetupUI(CalcWidgets *widgets) override;
+ private:
+  void setStyle(CalcWidgets *widgets);
 
-    void SetupUI(CreditCalcWidgets *widgets) override;
+  void setStyle(CreditCalcWidgets *widgets);
 
-private:
-
-    void setStyle(CalcWidgets *widgets);
-
-    void setStyle(CreditCalcWidgets *widgets);
-
-    void setGeometry(CalcWidgets *widgets);
+  void setGeometry(CalcWidgets *widgets);
 };

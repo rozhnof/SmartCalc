@@ -1,13 +1,12 @@
 #pragma once
 
-
-#include <iostream>
-#include <algorithm>
 #include <QString>
+#include <algorithm>
+#include <iostream>
+
 #include "../../Services/Service.h"
 
-
 class CreditCalcValidator {
-public:
-    bool Validate(const CreditCalculatorInput &input);
+ public:
+  bool Validate(const CreditCalculatorInput &input);
 };

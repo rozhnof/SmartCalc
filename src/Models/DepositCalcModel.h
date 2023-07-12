@@ -1,29 +1,26 @@
 #pragma once
 
-
 #include "../Services/Service.h"
 
-
 class DepositCalcModel {
-private:
-    Service service;
+ private:
+  Service service;
 
-    DepositCalculatorInput _input;
-    DepositCalculatorOutput _output;
+  DepositCalculatorInput _input;
+  DepositCalculatorOutput _output;
 
-public:
+ public:
+  DepositCalcModel();
 
-    DepositCalcModel();
+  void setInput(DepositCalculatorInput input);
 
-    void setInput(DepositCalculatorInput input);
+  void Calculate();
 
-    void Calculate();
+  double getTotalAmount();
 
-    double getTotalAmount();
+  double getTaxAmount();
 
-    double getTaxAmount();
+  double getAccuredInterest();
 
-    double getAccuredInterest();
-
-    std::vector<std::tuple<Day, std::string, double, double>> getGeneralList();
+  std::vector<std::tuple<Day, std::string, double, double>> getGeneralList();
 };

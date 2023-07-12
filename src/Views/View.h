@@ -1,58 +1,50 @@
 #pragma once
 
+#include <QObject>
+#include <QtGui/QAction>
+#include <QtWidgets/QMenu>
+#include <QtWidgets/QMenuBar>
 
 #include "CalculatorUI.h"
 #include "CreditCalculatorUI.h"
 #include "DepositCalculatorUI.h"
 #include "GraphUI.h"
-
-#include <QObject>
-#include <QtWidgets/QMenu>
-#include <QtWidgets/QMenuBar>
-#include <QtGui/QAction>
 #include "MacUI.h"
 #include "WinUI.h"
 
+class View : public QObject {
+ private:
+  class MainWindow *_currentTab;
 
-class View : public QObject
-{
+  CalculatorUI *_calc;
+  CreditCalculatorUI *_creditCalc;
+  DepositCalculatorUI *_depositCalc;
+  GraphUI *_graph;
 
-private:
+ protected:
+  IPlatformUI *_platform = nullptr;
+  IPlatformUI *_winUi;
+  IPlatformUI *_macUi;
 
-    class MainWindow *_currentTab;
+ public:
+  View();
 
-    CalculatorUI *_calc;
-    CreditCalculatorUI *_creditCalc;
-    DepositCalculatorUI *_depositCalc;
-    GraphUI *_graph;
+  ~View();
 
-protected:
-    IPlatformUI *_platform = nullptr;
-    IPlatformUI *_winUi;
-    IPlatformUI *_macUi;
-public:
+  void show();
 
+ private:
+  void AddMenu();
 
-    View();
+  void switchTo(class MainWindow *newTab);
 
-    ~View();
+  void switchToCalc();
 
-    void show();
+  void switchToCreditCalc();
 
-private:
+  void switchToDepositCalc();
 
-    void AddMenu();
+  void switchToGraph();
 
-    void switchTo(class MainWindow *newTab);
-
-    void switchToCalc();
-
-    void switchToCreditCalc();
-
-    void switchToDepositCalc();
-
-    void switchToGraph();
-
-    void switchMode();
-
+  void switchMode();
 };

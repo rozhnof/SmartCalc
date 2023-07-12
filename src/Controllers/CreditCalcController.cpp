@@ -1,50 +1,52 @@
 #include "CreditCalcController.h"
 
+bool CreditCalcController::setInput(double creditSum, double creditTerm,
+                                    double interestRate) {
+  CreditCalculatorInput input;
 
+  input.creditSum = creditSum;
+  input.creditTerm = creditTerm;
+  input.interestRate = interestRate;
 
-bool CreditCalcController::setInput(double creditSum, double creditTerm, double interestRate) {
-    CreditCalculatorInput input;
+  bool status = Validate(input);
 
-    input.creditSum = creditSum;
-    input.creditTerm = creditTerm;
-    input.interestRate = interestRate;
+  if (status) {
+    _model.setInput(input);
+  }
 
-    bool status = Validate(input);
-
-    if (status) {
-        _model.setInput(input);
-    }
-
-    return status;
+  return status;
 }
 
 bool CreditCalcController::Validate(CreditCalculatorInput &input) {
-    return _validator.Validate(input);
+  return _validator.Validate(input);
 }
 
 void CreditCalcController::Calculate(Service::CreditPaymentsType type) {
-    _model.Calculate(type);
+  _model.Calculate(type);
 }
 
 double CreditCalcController::getTotalPayment() {
-    return _model.getTotalPayment();
+  return _model.getTotalPayment();
 }
 
 double CreditCalcController::getOverpayment() {
-    return _model.getOverpayment();
+  return _model.getOverpayment();
 }
 
 QVector<double> CreditCalcController::getMonthlyPayments() {
-    std::vector<double> monthlyPayments = _model.getMonthlyPayments();
-    return QVector<double>(monthlyPayments.begin(), monthlyPayments.end());
+  std::vector<double> monthlyPayments = _model.getMonthlyPayments();
+  return QVector<double>(monthlyPayments.begin(), monthlyPayments.end());
 }
 
 QVector<double> CreditCalcController::getMonthlyBodyPayments() {
-    std::vector<double> monthlyBodyPayments = _model.getMonthlyBodyPayments();
-    return QVector<double>(monthlyBodyPayments.begin(), monthlyBodyPayments.end());
+  std::vector<double> monthlyBodyPayments = _model.getMonthlyBodyPayments();
+  return QVector<double>(monthlyBodyPayments.begin(),
+                         monthlyBodyPayments.end());
 }
 
 QVector<double> CreditCalcController::getMonthlyPercentPayments() {
-    std::vector<double> monthlyPercentPayments = _model.getMonthlyPercentPayments();
-    return QVector<double>(monthlyPercentPayments.begin(), monthlyPercentPayments.end());
+  std::vector<double> monthlyPercentPayments =
+      _model.getMonthlyPercentPayments();
+  return QVector<double>(monthlyPercentPayments.begin(),
+                         monthlyPercentPayments.end());
 }

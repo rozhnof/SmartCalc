@@ -1,33 +1,30 @@
 #pragma once
 
-
 #include <QCalendarWidget>
-#include <QPainter>
+#include <QComboBox>
+#include <QHBoxLayout>
 #include <QHeaderView>
+#include <QLayout>
+#include <QLineEdit>
+#include <QMenu>
+#include <QPainter>
+#include <QScrollArea>
+#include <QSpinBox>
 #include <QTextCharFormat>
 #include <QToolButton>
 #include <iostream>
-#include <QSpinBox>
-#include <QMenu>
-#include <QLineEdit>
-#include <QLayout>
-#include <QScrollArea>
-#include <QHBoxLayout>
-#include <QComboBox>
+
 #include "Layout.h"
 
+class Calendar : public QCalendarWidget {
+ public:
+  Calendar(QWidget *parent);
 
-class Calendar : public QCalendarWidget
-{
-public:
+  void SettingsUp();
 
-    Calendar(QWidget *parent);
+  void SetWeekdayTextColor(QColor color);
 
-    void SettingsUp();
+  void RemadeLayout();
 
-    void SetWeekdayTextColor(QColor color);
-
-    void RemadeLayout();
-
-    void SetStyle();
+  void SetStyle();
 };

@@ -1,31 +1,29 @@
 #pragma once
 
+#include <QDebug>
+#include <QVector>
 
 #include "../Models/GraphModel.h"
 #include "Validators/GraphValidator.h"
 #include "Validators/InfixNotationValidator.h"
-#include <QVector>
-#include <QDebug>
-
 
 class GraphController {
+ private:
+  GraphModel model;
+  InfixNotationValidator validatorInfixNotation;
+  GraphValidator graphValidator;
 
-private:
-    GraphModel model;
-    InfixNotationValidator validatorInfixNotation;
-    GraphValidator graphValidator;
+ public:
+  bool setInput(QString infix, int countPoints, double xMin, double xMax,
+                double yMin, double yMax);
 
-public:
+  bool Validate(QString &infix);
 
-    bool setInput(QString infix, int countPoints, double xMin, double xMax, double yMin, double yMax);
+  bool Validate(const GraphInput &input);
 
-    bool Validate(QString &infix);
+  void Calculate();
 
-    bool Validate(const GraphInput &input);
+  QVector<double> getCollectionX();
 
-    void Calculate();
-
-    QVector<double> getCollectionX();
-
-    QVector<double> getCollectionY();
+  QVector<double> getCollectionY();
 };

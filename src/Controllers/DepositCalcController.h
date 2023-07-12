@@ -1,32 +1,36 @@
 #pragma once
 
+#include <QDate>
 
 #include "../Models/DepositCalcModel.h"
 #include "Validators/DepositCalcValidator.h"
-#include <QDate>
-
 
 class DepositCalcController {
-private:
-    DepositCalcModel _model;
-    DepositCalcValidator _validator;
+ private:
+  DepositCalcModel _model;
+  DepositCalcValidator _validator;
 
-public:
+ public:
+  bool setInput(double depositAmount, double interestRate,
+                bool interestCapitalization, double taxRate, QDate startDate,
+                QDate endDate, QVector<QDate> paymentDays,
+                std::multimap<QDate, double> topUpList,
+                std::multimap<QDate, double> takeOffList);
 
-    bool setInput(double depositAmount, double interestRate, bool interestCapitalization, double taxRate, QDate startDate, QDate endDate, QVector<QDate> paymentDays, std::multimap<QDate, double> topUpList, std::multimap<QDate, double> takeOffList);
+  std::vector<Day> ConvertPeriod(QDate startDate, QDate endDate,
+                                 QVector<QDate> paymentDays,
+                                 std::multimap<QDate, double> topUpList,
+                                 std::multimap<QDate, double> takeOffList);
 
-    std::vector<Day> ConvertPeriod(QDate startDate, QDate endDate, QVector<QDate> paymentDays, std::multimap<QDate, double> topUpList, std::multimap<QDate, double> takeOffList);
+  bool Validate(const DepositCalculatorInput &input);
 
-    bool Validate(const DepositCalculatorInput &input);
+  void Calculate();
 
-    void Calculate();
+  double getTotalAmount();
 
-    double getTotalAmount();
+  double getTaxAmount();
 
-    double getTaxAmount();
+  double getAccuredInterest();
 
-    double getAccuredInterest();
-
-    std::vector<std::tuple<QDate, QString, double, double>> getGeneralList();
+  std::vector<std::tuple<QDate, QString, double, double>> getGeneralList();
 };
-

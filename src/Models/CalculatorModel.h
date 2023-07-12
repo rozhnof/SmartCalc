@@ -1,20 +1,18 @@
 #pragma once
 
-
-#include "../Services/Service.h"
 #include <iostream>
 
+#include "../Services/Service.h"
 
 class CalculatorModel {
+ private:
+  Service service;
 
-private:
-    Service service;
+  std::string _infix;
+  std::string _postfix;
 
-    std::string _infix;
-    std::string _postfix;
+  double _result;
 
-    double _result;
-
-public:
-    double Calculate(std::string infix, double x);
+ public:
+  double Calculate(std::string infix, double x);
 };

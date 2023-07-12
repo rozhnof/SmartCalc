@@ -6,13 +6,13 @@ START_TEST(test2_0) {
     char x_input_str[512] = "1.5";
     
 
-    long double x_input_num = 0;
-    sscanf(x_input_str, "%Lf", &x_input_num);
+    double x_input_num = 0;
+    sscanf(x_input_str, "%lf", &x_input_num);
 
     char *postfix = FromInfixToPostfix(input);
-    long double result = Calculation(postfix, x_input_num);
+    double result = Calculation(postfix, x_input_num);
     free(postfix);
-    long double original = 1.5 + 2.5 * 3.5 / powl(4.5,5.5) + 1.5 * (2.5 + (3.5 * (4.5 / (-5.5) + (+10.5) - (-20.5)) / x_input_num));
+    double original = 1.5 + 2.5 * 3.5 / powl(4.5,5.5) + 1.5 * (2.5 + (3.5 * (4.5 / (-5.5) + (+10.5) - (-20.5)) / x_input_num));
 
     if (isnan(original)) {
         ck_assert_ldouble_nan(result);
@@ -29,13 +29,13 @@ START_TEST(test2_1) {
     char x_input_str[512] = "-1.25";
     
 
-    long double x_input_num = 0;
-    sscanf(x_input_str, "%Lf", &x_input_num);
+    double x_input_num = 0;
+    sscanf(x_input_str, "%lf", &x_input_num);
 
     char *postfix = FromInfixToPostfix(input);
-    long double result = Calculation(postfix, x_input_num);
+    double result = Calculation(postfix, x_input_num);
     free(postfix);
-    long double original = 1.5 + 2.5 * 3.5 / powl(4.5,5.5) + 1.5 * (2.5 + (3.5 * (4.5 / (-5.5) + (+10.5) - (-20.5)) / x_input_num));
+    double original = 1.5 + 2.5 * 3.5 / powl(4.5,5.5) + 1.5 * (2.5 + (3.5 * (4.5 / (-5.5) + (+10.5) - (-20.5)) / x_input_num));
 
     if (isnan(original)) {
         ck_assert_ldouble_nan(result);
@@ -52,13 +52,13 @@ START_TEST(test2_2) {
     char x_input_str[512] = "5";
     
 
-    long double x_input_num = 0;
-    sscanf(x_input_str, "%Lf", &x_input_num);
+    double x_input_num = 0;
+    sscanf(x_input_str, "%lf", &x_input_num);
 
     char *postfix = FromInfixToPostfix(input);
-    long double result = Calculation(postfix, x_input_num);
+    double result = Calculation(postfix, x_input_num);
     free(postfix);
-    long double original = 1.5 + 2.5 * 3.5 / powl(4.5,5.5) + 1.5 * (2.5 + (3.5 * (4.5 / (-5.5) + (+10.5) - (-20.5)) / 120));
+    double original = 1.5 + 2.5 * 3.5 / powl(4.5,5.5) + 1.5 * (2.5 + (3.5 * (4.5 / (-5.5) + (+10.5) - (-20.5)) / 120));
 
     if (isnan(original)) {
         ck_assert_ldouble_nan(result);
@@ -75,13 +75,13 @@ START_TEST(test2_3) {
     char x_input_str[512] = "4";
     
 
-    long double x_input_num = 0;
-    sscanf(x_input_str, "%Lf", &x_input_num);
+    double x_input_num = 0;
+    sscanf(x_input_str, "%lf", &x_input_num);
 
     char *postfix = FromInfixToPostfix(input);
-    long double result = Calculation(postfix, x_input_num);
+    double result = Calculation(postfix, x_input_num);
     free(postfix);
-    long double original = fmodl(-223.5, 135.3)-x_input_num;
+    double original = fmodl(-223.5, 135.3)-x_input_num;
 
     if (isnan(original)) {
         ck_assert_ldouble_nan(result);
@@ -98,13 +98,13 @@ START_TEST(test2_4) {
     char x_input_str[512] = "0";
     
 
-    long double x_input_num = 0;
-    sscanf(x_input_str, "%Lf", &x_input_num);
+    double x_input_num = 0;
+    sscanf(x_input_str, "%lf", &x_input_num);
 
     char *postfix = FromInfixToPostfix(input);
-    long double result = Calculation(postfix, x_input_num);
+    double result = Calculation(postfix, x_input_num);
     free(postfix);
-    long double original = 1.5 + 2.5 * 3.5 / powl(4.5,5.5) + 1.5 * (2.5 + (3.5 * (4.5 / (-5.5) + (+10.5) - (-20.5)) / 1));
+    double original = 1.5 + 2.5 * 3.5 / powl(4.5,5.5) + 1.5 * (2.5 + (3.5 * (4.5 / (-5.5) + (+10.5) - (-20.5)) / 1));
 
     if (isnan(original)) {
         ck_assert_ldouble_nan(result);
@@ -119,7 +119,7 @@ END_TEST
 
 
 
-Suite *test2(void) {
+Suite *test7(void) {
   Suite *s;
   TCase *tc;
 

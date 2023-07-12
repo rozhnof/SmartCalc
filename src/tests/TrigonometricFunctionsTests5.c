@@ -1,18 +1,18 @@
 #include "Tests.h"
 
 
-START_TEST(test1_0) {
+START_TEST(test5_0) {
     char input[] = "asin(acos(atan(sqrt(x))))";
     char x_input_str[512] = "1.5";
     
 
-    long double x_input_num = 0;
-    sscanf(x_input_str, "%Lf", &x_input_num);
+    double x_input_num = 0;
+    sscanf(x_input_str, "%lf", &x_input_num);
 
     char *postfix = FromInfixToPostfix(input);
-    long double result = Calculation(postfix, x_input_num);
+    double result = Calculation(postfix, x_input_num);
     free(postfix);
-    long double original = asinl(acosl(atanl(sqrtl(x_input_num))));
+    double original = asinl(acosl(atanl(sqrtl(x_input_num))));
 
     if (isnan(original)) {
         ck_assert_ldouble_nan(result);
@@ -24,18 +24,18 @@ START_TEST(test1_0) {
 }
 END_TEST
 
-START_TEST(test1_1) {
+START_TEST(test5_1) {
     char input[] = "asin(acos(atan(sqrt(x)";
     char x_input_str[512] = "-1.25";
     
 
-    long double x_input_num = 0;
-    sscanf(x_input_str, "%Lf", &x_input_num);
+    double x_input_num = 0;
+    sscanf(x_input_str, "%lf", &x_input_num);
 
     char *postfix = FromInfixToPostfix(input);
-    long double result = Calculation(postfix, x_input_num);
+    double result = Calculation(postfix, x_input_num);
     free(postfix);
-    long double original = asinl(acosl(atanl(sqrtl(x_input_num))));
+    double original = asinl(acosl(atanl(sqrtl(x_input_num))));
 
     if (isnan(original)) {
         ck_assert_ldouble_nan(result);
@@ -47,18 +47,18 @@ START_TEST(test1_1) {
 }
 END_TEST
 
-START_TEST(test1_2) {
+START_TEST(test5_2) {
     char input[] = "asin(acos(atan(sqrt(x)";
     char x_input_str[512] = "1000000";
     
 
-    long double x_input_num = 0;
-    sscanf(x_input_str, "%Lf", &x_input_num);
+    double x_input_num = 0;
+    sscanf(x_input_str, "%lf", &x_input_num);
 
     char *postfix = FromInfixToPostfix(input);
-    long double result = Calculation(postfix, x_input_num);
+    double result = Calculation(postfix, x_input_num);
     free(postfix);
-    long double original = asinl(acosl(atanl(sqrtl(x_input_num))));
+    double original = asinl(acosl(atanl(sqrtl(x_input_num))));
 
     if (isnan(original)) {
         ck_assert_ldouble_nan(result);
@@ -70,18 +70,18 @@ START_TEST(test1_2) {
 }
 END_TEST
 
-START_TEST(test1_3) {
+START_TEST(test5_3) {
     char input[] = "asin(acos(atan(sqrt(x)";
     char x_input_str[512] = "-1005000.5";
     
 
-    long double x_input_num = 0;
-    sscanf(x_input_str, "%Lf", &x_input_num);
+    double x_input_num = 0;
+    sscanf(x_input_str, "%lf", &x_input_num);
 
     char *postfix = FromInfixToPostfix(input);
-    long double result = Calculation(postfix, x_input_num);
+    double result = Calculation(postfix, x_input_num);
     free(postfix);
-    long double original = asinl(acosl(atanl(sqrtl(x_input_num))));
+    double original = asinl(acosl(atanl(sqrtl(x_input_num))));
 
     if (isnan(original)) {
         ck_assert_ldouble_nan(result);
@@ -93,18 +93,18 @@ START_TEST(test1_3) {
 }
 END_TEST
 
-START_TEST(test1_4) {
+START_TEST(test5_4) {
     char input[] = "asin(acos(atan(sqrt(x)";
     char x_input_str[512] = "0";
     
 
-    long double x_input_num = 0;
-    sscanf(x_input_str, "%Lf", &x_input_num);
+    double x_input_num = 0;
+    sscanf(x_input_str, "%lf", &x_input_num);
 
     char *postfix = FromInfixToPostfix(input);
-    long double result = Calculation(postfix, x_input_num);
+    double result = Calculation(postfix, x_input_num);
     free(postfix);
-    long double original = asinl(acosl(atanl(sqrtl(x_input_num))));
+    double original = asinl(acosl(atanl(sqrtl(x_input_num))));
 
     if (isnan(original)) {
         ck_assert_ldouble_nan(result);
@@ -119,19 +119,19 @@ END_TEST
 
 
 
-Suite *test1(void) {
+Suite *test5(void) {
   Suite *s;
   TCase *tc;
 
-  s = suite_create("test1");
+  s = suite_create("test5");
   tc = tcase_create("core");
 
     suite_add_tcase(s, tc);
-    tcase_add_test(tc, test1_0);
-    tcase_add_test(tc, test1_1);
-    tcase_add_test(tc, test1_2);
-    tcase_add_test(tc, test1_3);
-    tcase_add_test(tc, test1_4);
+    tcase_add_test(tc, test5_0);
+    tcase_add_test(tc, test5_1);
+    tcase_add_test(tc, test5_2);
+    tcase_add_test(tc, test5_3);
+    tcase_add_test(tc, test5_4);
 
   return s;
 }

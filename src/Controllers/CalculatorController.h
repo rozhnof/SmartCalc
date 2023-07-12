@@ -1,22 +1,19 @@
 #pragma once
 
+#include <QString>
 
 #include "../Models/CalculatorModel.h"
 #include "Validators/InfixNotationValidator.h"
-#include <QString>
-
 
 class CalculatorController {
-private:
-    InfixNotationValidator _validator;
-    CalculatorModel _model;
+ private:
+  InfixNotationValidator _validator;
+  CalculatorModel _model;
 
-public:
+ public:
+  CalculatorController();
 
-    CalculatorController();
+  bool Validate(QString &input);
 
-    bool Validate(QString &input);
-
-    double GetResult(QString &input, double x);
+  double GetResult(QString &input, double x);
 };
-

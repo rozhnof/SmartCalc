@@ -3,29 +3,27 @@
 
 #include "../Services/Service.h"
 
-
 class CreditCalcModel {
-private:
-    Service service;
+ private:
+  Service service;
 
-    CreditCalculatorInput _input;
-    CreditCalculatorOutput _output;
+  CreditCalculatorInput _input;
+  CreditCalculatorOutput _output;
 
-public:
-    void setInput(CreditCalculatorInput input);
+ public:
+  void setInput(CreditCalculatorInput input);
 
-    void Calculate(Service::CreditPaymentsType type);
+  void Calculate(Service::CreditPaymentsType type);
 
-    double getTotalPayment();
+  double getTotalPayment();
 
-    double getOverpayment();
+  double getOverpayment();
 
-    std::vector<double> getMonthlyPayments();
+  std::vector<double> getMonthlyPayments();
 
-    std::vector<double> getMonthlyBodyPayments();
+  std::vector<double> getMonthlyBodyPayments();
 
-    std::vector<double> getMonthlyPercentPayments();
+  std::vector<double> getMonthlyPercentPayments();
 };
 
-
-#endif // CREDITCALCMODELH
+#endif  // CREDITCALCMODELH

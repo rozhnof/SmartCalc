@@ -1,20 +1,16 @@
 #include "MacUI.h"
 
-
-
 void MacUI::SetupUI(CalcWidgets *widgets) {
-    setStyle(widgets);
-    setGeometry(widgets);
+  setStyle(widgets);
+  setGeometry(widgets);
 }
 
-void MacUI::SetupUI(CreditCalcWidgets *widgets) {
-    setStyle(widgets);
-}
+void MacUI::SetupUI(CreditCalcWidgets *widgets) { setStyle(widgets); }
 
 void MacUI::setStyle(CalcWidgets *widgets) {
-    widgets->inputLineEdit->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    widgets->inputXLineEdit->setAlignment(Qt::AlignVCenter | Qt::AlignHCenter);
-    widgets->calculatorWindow->setStyleSheet(R"(
+  widgets->inputLineEdit->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  widgets->inputXLineEdit->setAlignment(Qt::AlignVCenter | Qt::AlignHCenter);
+  widgets->calculatorWindow->setStyleSheet(R"(
             QLineEdit#input {
                 background-color: rgb(36, 36, 39);
                 font-size: 26px;
@@ -76,7 +72,7 @@ void MacUI::setStyle(CalcWidgets *widgets) {
 }
 
 void MacUI::setStyle(CreditCalcWidgets *widgets) {
-    widgets->creditCalcWindow->setStyleSheet(R"(
+  widgets->creditCalcWindow->setStyleSheet(R"(
             QMainWindow, QChartView {
                 background-color: rgb(36, 36, 39);
             }
@@ -117,72 +113,75 @@ void MacUI::setStyle(CreditCalcWidgets *widgets) {
             }
         )");
 
-    widgets->title[CREDIT_SUM]->setStyleSheet("color: rgb(217, 217, 217);");
-    widgets->title[CREDIT_TERM]->setStyleSheet("color: rgb(217, 217, 217);");
-    widgets->title[CREDIT_INTEREST_RATE]->setStyleSheet("color: rgb(217, 217, 217);");
+  widgets->title[CREDIT_SUM]->setStyleSheet("color: rgb(217, 217, 217);");
+  widgets->title[CREDIT_TERM]->setStyleSheet("color: rgb(217, 217, 217);");
+  widgets->title[CREDIT_INTEREST_RATE]->setStyleSheet(
+      "color: rgb(217, 217, 217);");
 
-    widgets->chartView->SetBarWidth(0.75);
-    widgets->chartView->SetBarColor(QColor(226, 153, 57), QColor(237, 177, 99));
-    widgets->chartView->SetBorderBarColor(QColor(36, 36, 39), QColor(36, 36, 39));
-    widgets->chartView->SetLabelsColor(QColor(217, 217, 217));
-    widgets->chartView->SetLinePenColor(QColor(217, 217, 217));
-    widgets->chartView->SetGridLineColor(QColor(217, 217, 217));
+  widgets->chartView->SetBarWidth(0.75);
+  widgets->chartView->SetBarColor(QColor(226, 153, 57), QColor(237, 177, 99));
+  widgets->chartView->SetBorderBarColor(QColor(36, 36, 39), QColor(36, 36, 39));
+  widgets->chartView->SetLabelsColor(QColor(217, 217, 217));
+  widgets->chartView->SetLinePenColor(QColor(217, 217, 217));
+  widgets->chartView->SetGridLineColor(QColor(217, 217, 217));
 }
 
 void MacUI::setGeometry(CalcWidgets *widgets) {
-    Layout layout;
+  Layout layout;
 
-    widgets->calculatorWindow->setFixedSize(420, 350);
-    layout.SetStartPoints(0, 0);
-    layout.SetEndPoints(widgets->calculatorWindow->width(), widgets->calculatorWindow->height());
-    layout.SetColumns(7);
-    layout.SetRows(7);
-    layout.SetLeftSpacing(0);
-    layout.SetRightSpacing(0);
-    layout.SetAboveSpacing(0);
-    layout.SetBottomSpacing(0);
-    layout.SetHorizontalSpacing(0);
-    layout.SetVerticalSpacing(0);
-    layout.SetAutoSize();
+  widgets->calculatorWindow->setFixedSize(420, 350);
+  layout.SetStartPoints(0, 0);
+  layout.SetEndPoints(widgets->calculatorWindow->width(),
+                      widgets->calculatorWindow->height());
+  layout.SetColumns(7);
+  layout.SetRows(7);
+  layout.SetLeftSpacing(0);
+  layout.SetRightSpacing(0);
+  layout.SetAboveSpacing(0);
+  layout.SetBottomSpacing(0);
+  layout.SetHorizontalSpacing(0);
+  layout.SetVerticalSpacing(0);
+  layout.SetAutoSize();
 
-    layout.AddWidget(widgets->inputLineEdit, 7, 2);
-    widgets->inputXWidget->setGeometry(-160, 0, 160, widgets->inputLineEdit->height());
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_X]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_OPEN_BRACKET]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_CLOSE_BRACKET]);
-    layout.AddWidget(widgets->buttonAllClear);
-    layout.AddWidget(widgets->buttonClear);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_EXP]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_DIV]);
+  layout.AddWidget(widgets->inputLineEdit, 7, 2);
+  widgets->inputXWidget->setGeometry(-160, 0, 160,
+                                     widgets->inputLineEdit->height());
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_X]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_OPEN_BRACKET]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_CLOSE_BRACKET]);
+  layout.AddWidget(widgets->buttonAllClear);
+  layout.AddWidget(widgets->buttonClear);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_EXP]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_DIV]);
 
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_MOD]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_POW]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_FACTORIAL]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_7]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_8]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_9]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_MUL]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_MOD]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_POW]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_FACTORIAL]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_7]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_8]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_9]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_MUL]);
 
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_LOG]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_LN]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_SQRT]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_4]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_5]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_6]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_SUB]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_LOG]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_LN]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_SQRT]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_4]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_5]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_6]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_SUB]);
 
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_ASIN]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_ACOS]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_ATAN]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_1]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_2]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_3]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_SUM]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_ASIN]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_ACOS]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_ATAN]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_1]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_2]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_3]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_SUM]);
 
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_SIN]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_COS]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_TAN]);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_0], 2);
-    layout.AddWidget(widgets->buttonDictionary[BUTTON_DOT]);
-    layout.AddWidget(widgets->buttonEqual);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_SIN]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_COS]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_TAN]);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_0], 2);
+  layout.AddWidget(widgets->buttonDictionary[BUTTON_DOT]);
+  layout.AddWidget(widgets->buttonEqual);
 }

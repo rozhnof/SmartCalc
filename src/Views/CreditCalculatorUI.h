@@ -1,45 +1,44 @@
 #pragma once
 
-#include "MainWindow.h"
-#include "IPlatformUI.h"
-#include "../Controllers/CreditCalcController.h"
 #include <cmath>
 
+#include "../Controllers/CreditCalcController.h"
+#include "IPlatformUI.h"
+#include "MainWindow.h"
 
-class CreditCalculatorUI : public MainWindow
-{
-private:
-    CreditCalcController *_controller;
-    CreditCalcWidgets *_widgets;
+class CreditCalculatorUI : public MainWindow {
+ private:
+  CreditCalcController *_controller;
+  CreditCalcWidgets *_widgets;
 
-public:
-    CreditCalculatorUI();
+ public:
+  CreditCalculatorUI();
 
-    ~CreditCalculatorUI();
+  ~CreditCalculatorUI();
 
-    void SetupUI() override;
+  void SetupUI() override;
 
-private:
-    void initWidgets();
+ private:
+  void initWidgets();
 
-    void connectWidgetsToSlots();
+  void connectWidgetsToSlots();
 
-    void setGeometry();
+  void setGeometry();
 
-    void setOptions();
+  void setOptions();
 
-    void setInputValidator();
+  void setInputValidator();
 
-    bool setInput();
+  bool setInput();
 
-    void getOutput();
+  void getOutput();
 
-    void Calculate(Service::CreditPaymentsType type);
+  void Calculate(Service::CreditPaymentsType type);
 
-private slots:
-    void AnnuityPayment();
+ private slots:
+  void AnnuityPayment();
 
-    void DifferentiatedPayment();
+  void DifferentiatedPayment();
 
-    void DrawChartBars();
+  void DrawChartBars();
 };

@@ -6,13 +6,13 @@ START_TEST(sinx_test) {
     char x_input_str[512] = "0.0000234523";
     
 
-    long double x_input_num = 0;
-    sscanf(x_input_str, "%Lf", &x_input_num);
+    double x_input_num = 0;
+    sscanf(x_input_str, "%lf", &x_input_num);
 
     char *postfix = FromInfixToPostfix(input);
-    long double result = Calculation(postfix, x_input_num);
+    double result = Calculation(postfix, x_input_num);
     free(postfix);
-    long double original = sinl(x_input_num);
+    double original = sinl(x_input_num);
 
     if (isnan(original)) {
         ck_assert_ldouble_nan(result);
@@ -29,13 +29,13 @@ START_TEST(cosx_test) {
     char x_input_str[512] = "0.0000234523";
     
 
-    long double x_input_num = 0;
-    sscanf(x_input_str, "%Lf", &x_input_num);
+    double x_input_num = 0;
+    sscanf(x_input_str, "%lf", &x_input_num);
 
     char *postfix = FromInfixToPostfix(input);
-    long double result = Calculation(postfix, x_input_num);
+    double result = Calculation(postfix, x_input_num);
     free(postfix);
-    long double original = cosl(x_input_num);
+    double original = cosl(x_input_num);
 
     if (isnan(original)) {
         ck_assert_ldouble_nan(result);
@@ -52,13 +52,13 @@ START_TEST(tanx_test) {
     char x_input_str[512] = "0.0000234523";
     
 
-    long double x_input_num = 0;
-    sscanf(x_input_str, "%Lf", &x_input_num);
+    double x_input_num = 0;
+    sscanf(x_input_str, "%lf", &x_input_num);
 
     char *postfix = FromInfixToPostfix(input);
-    long double result = Calculation(postfix, x_input_num);
+    double result = Calculation(postfix, x_input_num);
     free(postfix);
-    long double original = tanl(x_input_num);
+    double original = tanl(x_input_num);
 
     if (isnan(original)) {
         ck_assert_ldouble_nan(result);
@@ -75,13 +75,13 @@ START_TEST(asinx_test) {
     char x_input_str[512] = "0.0000234523";
     
 
-    long double x_input_num = 0;
-    sscanf(x_input_str, "%Lf", &x_input_num);
+    double x_input_num = 0;
+    sscanf(x_input_str, "%lf", &x_input_num);
 
     char *postfix = FromInfixToPostfix(input);
-    long double result = Calculation(postfix, x_input_num);
+    double result = Calculation(postfix, x_input_num);
     free(postfix);
-    long double original = asinl(x_input_num);
+    double original = asinl(x_input_num);
 
     if (isnan(original)) {
         ck_assert_ldouble_nan(result);
@@ -98,13 +98,13 @@ START_TEST(acosx_test) {
     char x_input_str[512] = "0.0000234523";
     
 
-    long double x_input_num = 0;
-    sscanf(x_input_str, "%Lf", &x_input_num);
+    double x_input_num = 0;
+    sscanf(x_input_str, "%lf", &x_input_num);
 
     char *postfix = FromInfixToPostfix(input);
-    long double result = Calculation(postfix, x_input_num);
+    double result = Calculation(postfix, x_input_num);
     free(postfix);
-    long double original = acosl(x_input_num);
+    double original = acosl(x_input_num);
 
     if (isnan(original)) {
         ck_assert_ldouble_nan(result);
@@ -121,13 +121,13 @@ START_TEST(atanx_test) {
     char x_input_str[512] = "0.0000234523";
     
 
-    long double x_input_num = 0;
-    sscanf(x_input_str, "%Lf", &x_input_num);
+    double x_input_num = 0;
+    sscanf(x_input_str, "%lf", &x_input_num);
 
     char *postfix = FromInfixToPostfix(input);
-    long double result = Calculation(postfix, x_input_num);
+    double result = Calculation(postfix, x_input_num);
     free(postfix);
-    long double original = atanl(x_input_num);
+    double original = atanl(x_input_num);
 
     if (isnan(original)) {
         ck_assert_ldouble_nan(result);
@@ -144,13 +144,13 @@ START_TEST(logx_test) {
     char x_input_str[512] = "0.0000234523";
     
 
-    long double x_input_num = 0;
-    sscanf(x_input_str, "%Lf", &x_input_num);
+    double x_input_num = 0;
+    sscanf(x_input_str, "%lf", &x_input_num);
 
     char *postfix = FromInfixToPostfix(input);
-    long double result = Calculation(postfix, x_input_num);
+    double result = Calculation(postfix, x_input_num);
     free(postfix);
-    long double original = log10l(x_input_num);
+    double original = log10l(x_input_num);
 
     if (isnan(original)) {
         ck_assert_ldouble_nan(result);
@@ -167,13 +167,13 @@ START_TEST(lnx_test) {
     char x_input_str[512] = "0.0000234523";
     
 
-    long double x_input_num = 0;
-    sscanf(x_input_str, "%Lf", &x_input_num);
+    double x_input_num = 0;
+    sscanf(x_input_str, "%lf", &x_input_num);
 
     char *postfix = FromInfixToPostfix(input);
-    long double result = Calculation(postfix, x_input_num);
+    double result = Calculation(postfix, x_input_num);
     free(postfix);
-    long double original = log(x_input_num);
+    double original = log(x_input_num);
 
     if (isnan(original)) {
         ck_assert_ldouble_nan(result);
@@ -190,13 +190,13 @@ START_TEST(sqrtx_test) {
     char x_input_str[512] = "0.0000234523";
     
 
-    long double x_input_num = 0;
-    sscanf(x_input_str, "%Lf", &x_input_num);
+    double x_input_num = 0;
+    sscanf(x_input_str, "%lf", &x_input_num);
 
     char *postfix = FromInfixToPostfix(input);
-    long double result = Calculation(postfix, x_input_num);
+    double result = Calculation(postfix, x_input_num);
     free(postfix);
-    long double original = sqrtl(x_input_num);
+    double original = sqrtl(x_input_num);
 
     if (isnan(original)) {
         ck_assert_ldouble_nan(result);

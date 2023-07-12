@@ -27,23 +27,17 @@ SOURCES += \
     Models/CreditCalcModel.cpp \
     Models/DepositCalcModel.cpp \
     Models/GraphModel.cpp \
-    Services/calc.cpp \
-    Services/IO.cpp \
     Services/Service.cpp \
-    Tests/Tests.cpp \
     Views/CalculatorUI.cpp \
     Views/Calendar.cpp \
     Views/ChartView.cpp \
     Views/CreditCalculatorUI.cpp \
     Views/DepositCalculatorUI.cpp \
     Views/GraphUI.cpp \
-    Views/IPlatformUI.cpp \
     Views/Layout.cpp \
     Views/MacUI.cpp \
     Views/MainWindow.cpp \
-    Views/qcustomplot.cpp \
     Views/View.cpp \
-    Views/Widgets.cpp \
     Views/WinUI.cpp
 
 HEADERS += \
@@ -78,11 +72,10 @@ HEADERS += \
     Views/qcustomplot.h
 
 
-DESTDIR += ../build/
 
-
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
-
+TARGET = SmartCalc
+DESTDIR = ../build
+target.path = $$DESTDIR/$$TARGET
+INSTALLS += target
+OBJECTS_DIR = obj
+MOC_DIR = moc

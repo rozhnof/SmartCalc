@@ -1,10 +1,11 @@
 #ifndef TESTS_S21_TESTS_H
 #define TESTS_S21_TESTS_H
 
-#include "../Services/calc.h"
 #include <check.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "../Services/calc.h"
 
 #define ACCURACY 1e-6
 
@@ -16,8 +17,9 @@ Suite *test2(void);
 Suite *test3(void);
 Suite *test4(void);
 Suite *test5(void);
+Suite *test6(void);
+Suite *test7(void);
 
-long double readStr(char* input, char* x_input_str);
+double readStr(char *input, char *x_input_str);
 
-
-#endif // TESTS_S21_TESTS_H
+#endif  // TESTS_S21_TESTS_H

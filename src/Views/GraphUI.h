@@ -1,44 +1,37 @@
 #pragma once
 
-
-#include "MainWindow.h"
 #include "../Controllers/GraphController.h"
+#include "MainWindow.h"
 #include "qcustomplot.h"
 
+class GraphUI : public MainWindow {
+  Q_OBJECT
 
-class GraphUI : public MainWindow
-{
-Q_OBJECT
+ private:
+  GraphController *_controller;
+  GraphWidgets *_widgets;
 
-private:
-    GraphController *_controller;
-    GraphWidgets *_widgets;
+ public:
+  GraphUI();
 
-public:
+  ~GraphUI();
 
-    GraphUI();
+ private:
+  void setStyle();
 
-    ~GraphUI();
+  void setGeometry();
 
-private:
+  void setOptions();
 
-    void setStyle();
+  void initWidgets();
 
-    void setGeometry();
+  void connectWidgetsToSlots();
 
-    void setOptions();
+ private slots:
 
-    void initWidgets();
+  void drawLine();
 
-    void connectWidgetsToSlots();
+  void drawingLineState();
 
-private slots:
-
-    void drawLine();
-
-    void drawingLineState();
-
-    void drawGraph();
+  void drawGraph();
 };
-
-

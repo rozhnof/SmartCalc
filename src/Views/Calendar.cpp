@@ -1,73 +1,74 @@
 #include "Calendar.h"
 
-
-
 Calendar::Calendar(QWidget *parent) : QCalendarWidget(parent) {
-    SettingsUp();
-    RemadeLayout();
-    SetStyle();
+  SettingsUp();
+  RemadeLayout();
+  SetStyle();
 }
 
 void Calendar::SettingsUp() {
-    setGridVisible(false);
-    setSelectionMode(QCalendarWidget::SingleSelection);
-    setFirstDayOfWeek(Qt::DayOfWeek::Monday);
-    setLocale(QLocale("en_US"));
-    setVerticalHeaderFormat(QCalendarWidget::NoVerticalHeader);
-    setMaximumDate(QDate(2100, 1, 1));
-    setMinimumDate(QDate(2000, 1, 1));
-    setSelectedDate(QDate::currentDate());
-    SetWeekdayTextColor(QColor(108, 112, 119));
+  setGridVisible(false);
+  setSelectionMode(QCalendarWidget::SingleSelection);
+  setFirstDayOfWeek(Qt::DayOfWeek::Monday);
+  setLocale(QLocale("en_US"));
+  setVerticalHeaderFormat(QCalendarWidget::NoVerticalHeader);
+  setMaximumDate(QDate(2100, 1, 1));
+  setMinimumDate(QDate(2000, 1, 1));
+  setSelectedDate(QDate::currentDate());
+  SetWeekdayTextColor(QColor(108, 112, 119));
 }
 
 void Calendar::SetWeekdayTextColor(QColor color) {
-    QTextCharFormat format;
-    format.setForeground(color);
-    for (int i = Qt::DayOfWeek::Monday; i <= Qt::DayOfWeek::Sunday; i++) {
-        setWeekdayTextFormat(static_cast<Qt::DayOfWeek>(i), format);
-    }
+  QTextCharFormat format;
+  format.setForeground(color);
+  for (int i = Qt::DayOfWeek::Monday; i <= Qt::DayOfWeek::Sunday; i++) {
+    setWeekdayTextFormat(static_cast<Qt::DayOfWeek>(i), format);
+  }
 }
 
 void Calendar::RemadeLayout() {
-    QWidget *calendar = findChild<QWidget*>("qt_calendar_calendarview");
-    QWidget *calendarArea = findChild<QWidget*>("qt_calendar_navigationbar");
-    QToolButton *toolButtonLeft = findChild<QToolButton*>("qt_calendar_prevmonth");
-    QToolButton *toolButtonRight = findChild<QToolButton*>("qt_calendar_nextmonth");
-    QToolButton *yearBox = findChild<QToolButton*>("qt_calendar_yearbutton");
-    QSpinBox *yearEdit = findChild<QSpinBox*>("qt_calendar_yearedit");
-    QToolButton *monthMenu = findChild<QToolButton*>("qt_calendar_monthbutton");
+  QWidget *calendar = findChild<QWidget *>("qt_calendar_calendarview");
+  QWidget *calendarArea = findChild<QWidget *>("qt_calendar_navigationbar");
+  QToolButton *toolButtonLeft =
+      findChild<QToolButton *>("qt_calendar_prevmonth");
+  QToolButton *toolButtonRight =
+      findChild<QToolButton *>("qt_calendar_nextmonth");
+  QToolButton *yearBox = findChild<QToolButton *>("qt_calendar_yearbutton");
+  QSpinBox *yearEdit = findChild<QSpinBox *>("qt_calendar_yearedit");
+  QToolButton *monthMenu = findChild<QToolButton *>("qt_calendar_monthbutton");
 
-    QLayout *horizontalBar = calendarArea->layout();
+  QLayout *horizontalBar = calendarArea->layout();
 
-    horizontalBar->removeWidget(toolButtonLeft);
-    horizontalBar->removeWidget(toolButtonRight);
-    horizontalBar->removeWidget(yearBox);
-    horizontalBar->removeWidget(monthMenu);
-    horizontalBar->removeWidget(yearEdit);
+  horizontalBar->removeWidget(toolButtonLeft);
+  horizontalBar->removeWidget(toolButtonRight);
+  horizontalBar->removeWidget(yearBox);
+  horizontalBar->removeWidget(monthMenu);
+  horizontalBar->removeWidget(yearEdit);
 
-    QLayout *layout = this->layout();
-    layout->removeWidget(calendar);
-    layout->removeWidget(calendarArea);
+  QLayout *layout = this->layout();
+  layout->removeWidget(calendar);
+  layout->removeWidget(calendarArea);
 
-    QSpacerItem *horizontalSpacer = new QSpacerItem(QSpacerItem(width()/2, 0, QSizePolicy::MinimumExpanding, QSizePolicy::Fixed));
-    horizontalBar->addWidget(yearBox);
-    horizontalBar->addWidget(monthMenu);
-    horizontalBar->addItem(horizontalSpacer);
-    horizontalBar->addWidget(toolButtonLeft);
-    horizontalBar->addWidget(toolButtonRight);
-    layout->addWidget(calendarArea);
-    layout->addWidget(calendar);
+  QSpacerItem *horizontalSpacer = new QSpacerItem(QSpacerItem(
+      width() / 2, 0, QSizePolicy::MinimumExpanding, QSizePolicy::Fixed));
+  horizontalBar->addWidget(yearBox);
+  horizontalBar->addWidget(monthMenu);
+  horizontalBar->addItem(horizontalSpacer);
+  horizontalBar->addWidget(toolButtonLeft);
+  horizontalBar->addWidget(toolButtonRight);
+  layout->addWidget(calendarArea);
+  layout->addWidget(calendar);
 
-    yearEdit->setButtonSymbols(QAbstractSpinBox::NoButtons);
-    toolButtonLeft->setIcon(QIcon());
-    toolButtonRight->setIcon(QIcon());
-    toolButtonLeft->setText("<");
-    toolButtonRight->setText(">");
+  yearEdit->setButtonSymbols(QAbstractSpinBox::NoButtons);
+  toolButtonLeft->setIcon(QIcon());
+  toolButtonRight->setIcon(QIcon());
+  toolButtonLeft->setText("<");
+  toolButtonRight->setText(">");
 }
 
 void Calendar::SetStyle() {
-    setStyleSheet(
-                R"(
+  setStyleSheet(
+      R"(
             QWidget#qt_calendar_navigationbar {
                 background-color: rgb(255,255,255);
             }
@@ -131,6 +132,5 @@ void Calendar::SetStyle() {
                 border: 1px rgb(230,230,230);
                 border-radius: 5;
             }
-            )"
-        );
+            )");
 }

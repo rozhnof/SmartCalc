@@ -14,11 +14,11 @@ SRunner *default_srunner_create() {
   return sr;
 }
 
-long double readStr(char* input, char* x_input_str) {
-    long double x_input_value = 0;
+double readStr(char* input, char* x_input_str) {
+    double x_input_value = 0;
     char *postfix = FromInfixToPostfix(input);
-    sscanf(x_input_str, "%Lf", &x_input_value);
-    long double result = Calculation(postfix, x_input_value);
+    sscanf(x_input_str, "%lf", &x_input_value);
+    double result = Calculation(postfix, x_input_value);
     return result;
 }
 

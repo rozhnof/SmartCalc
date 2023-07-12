@@ -1,25 +1,20 @@
 #pragma once
 
+#include <QWidget>
+#include <iostream>
 
 #include "IPlatformUI.h"
-#include <iostream>
-#include <QWidget>
 
+class WinUI : public IPlatformUI {
+ public:
+  void SetupUI(CalcWidgets *widgets) override;
 
-class WinUI : public IPlatformUI
-{
+  void SetupUI(CreditCalcWidgets *widgets) override;
 
-public:
+ private:
+  void setStyle(CalcWidgets *widgets);
 
-    void SetupUI(CalcWidgets *widgets) override;
+  void setStyle(CreditCalcWidgets *widgets);
 
-    void SetupUI(CreditCalcWidgets *widgets) override;
-
-private:
-
-    void setStyle(CalcWidgets *widgets);
-
-    void setStyle(CreditCalcWidgets *widgets);
-
-    void setGeometry(CalcWidgets *widgets);
+  void setGeometry(CalcWidgets *widgets);
 };

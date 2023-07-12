@@ -1,61 +1,58 @@
 #pragma once
 
-
+#include <QDebug>
+#include <QPushButton>
+#include <QResizeEvent>
+#include <QVector>
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QPushButton>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QWidget>
-#include "MainWindow.h"
-#include <QVector>
-#include <QResizeEvent>
-#include <QDebug>
+
 #include "../Controllers/CalculatorController.h"
+#include "MainWindow.h"
 
+class CalculatorUI : public MainWindow {
+  Q_OBJECT
 
-class CalculatorUI : public MainWindow
-{
-    Q_OBJECT
+ private:
+  CalculatorController *_controller;
+  CalcWidgets *_widgets;
 
-private:
-    CalculatorController *_controller;
-    CalcWidgets *_widgets;
+ public:
+  CalculatorUI();
 
-public:
-    CalculatorUI();
+  ~CalculatorUI();
 
-    ~CalculatorUI();
+  void SetupUI() override;
 
-    void SetupUI() override;
+ private:
+  void initInputXWidget();
 
-private:
+  void initWidgets();
 
-    void initInputXWidget();
+  void connectWidgetsToSlots();
 
-    void initWidgets();
+  void resetWidgets();
 
-    void connectWidgetsToSlots();
+ private slots:
 
-    void resetWidgets();
+  void setLexema();
 
-private slots:
+  void clearButton();
 
-    void setLexema();
+  void clearAllButton();
 
-    void clearButton();
+  void showInputX();
 
-    void clearAllButton();
+  void hideInputX();
 
-    void showInputX();
+  void equalButton();
 
-    void hideInputX();
+  void CalculateWithX();
 
-    void equalButton();
-
-    void CalculateWithX();
-
-    void Calculate(QString input, double x);
+  void Calculate(QString input, double x);
 };
