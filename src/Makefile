@@ -21,9 +21,6 @@ qmake: $(APP_NAME).pro
 
 rebuild: clean all
 
-open: install
-	${HOME}/Desktop/SmartCalc
-
 clean: 
 	-rm -f test test.c *.o *.out *.a *.gc* *.info
 	-rm -f .qmake.stash
@@ -144,7 +141,7 @@ gcov_report: $(LIB_COV_OBJS) $(TEST_OBJS)
 	@mkdir -p lib/Coverage
 	$(CC) $(FLAGS) $(CCOV) $(LIB_COV_OBJS) $(TEST_OBJS) $(CHECK_LIB) -o $(COV_EXEC)
 	@-./$(COV_EXEC)
-	@lcov -q -c -d $(COV_DIR) -o $(COV_INFO) --exclude "$(TEST_DIR)*" --exclude /usr/local/Cellar
+	@lcov -q -c -d $(COV_DIR) -o $(COV_INFO) --exclude "$(TEST_DIR)*" --exclude /usr
 	@genhtml -q $(COV_INFO) -o $(COV_DIR)
 	@open $(COV_REPORT)
 	@rm -rf *.gc*

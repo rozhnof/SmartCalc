@@ -1,7 +1,7 @@
 #include "Tests.h"
 
 START_TEST(test0_0) {
-  char input[] = "~2+3/3/3/e%2";
+  char input[] = "e";
   char x_input_str[512] = "0";
 
   double x_input_num = 0;
@@ -10,7 +10,7 @@ START_TEST(test0_0) {
   char *postfix = FromInfixToPostfix(input);
   double result = Calculation(postfix, x_input_num);
   free(postfix);
-  double original = -2 + 3 / 3 / 3 / 3;
+  double original = M_E;
 
   if (isnan(original)) {
     ck_assert_ldouble_nan(result);

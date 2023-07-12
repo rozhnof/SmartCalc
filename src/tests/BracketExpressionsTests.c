@@ -76,7 +76,7 @@ START_TEST(test2_2) {
 END_TEST
 
 START_TEST(test2_3) {
-  char input[] = "-223.5mod135.3-x";
+  char input[] = "-223.5%135.3-x";
   char x_input_str[512] = "4";
 
   double x_input_num = 0;
