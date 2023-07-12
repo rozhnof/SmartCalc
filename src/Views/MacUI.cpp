@@ -118,30 +118,30 @@ void MacUI::setStyle(CreditCalcWidgets *widgets) {
   widgets->title[CREDIT_INTEREST_RATE]->setStyleSheet(
       "color: rgb(217, 217, 217);");
 
-  widgets->chartView->SetBarWidth(0.75);
-  widgets->chartView->SetBarColor(QColor(226, 153, 57), QColor(237, 177, 99));
-  widgets->chartView->SetBorderBarColor(QColor(36, 36, 39), QColor(36, 36, 39));
-  widgets->chartView->SetLabelsColor(QColor(217, 217, 217));
-  widgets->chartView->SetLinePenColor(QColor(217, 217, 217));
-  widgets->chartView->SetGridLineColor(QColor(217, 217, 217));
+  widgets->chartView->setBarWidth(0.75);
+  widgets->chartView->setBarColor(QColor(226, 153, 57), QColor(237, 177, 99));
+  widgets->chartView->setBorderBarColor(QColor(36, 36, 39), QColor(36, 36, 39));
+  widgets->chartView->setLabelsColor(QColor(217, 217, 217));
+  widgets->chartView->setLinePenColor(QColor(217, 217, 217));
+  widgets->chartView->setGridLineColor(QColor(217, 217, 217));
 }
 
 void MacUI::setGeometry(CalcWidgets *widgets) {
   Layout layout;
 
   widgets->calculatorWindow->setFixedSize(420, 350);
-  layout.SetStartPoints(0, 0);
-  layout.SetEndPoints(widgets->calculatorWindow->width(),
+  layout.setStartPoints(0, 0);
+  layout.setEndPoints(widgets->calculatorWindow->width(),
                       widgets->calculatorWindow->height());
-  layout.SetColumns(7);
-  layout.SetRows(7);
-  layout.SetLeftSpacing(0);
-  layout.SetRightSpacing(0);
-  layout.SetAboveSpacing(0);
-  layout.SetBottomSpacing(0);
-  layout.SetHorizontalSpacing(0);
-  layout.SetVerticalSpacing(0);
-  layout.SetAutoSize();
+  layout.setColumns(7);
+  layout.setRows(7);
+  layout.setLeftSpacing(0);
+  layout.setRightSpacing(0);
+  layout.setAboveSpacing(0);
+  layout.setBottomSpacing(0);
+  layout.setHorizontalSpacing(0);
+  layout.setVerticalSpacing(0);
+  layout.setAutoSize();
 
   layout.AddWidget(widgets->inputLineEdit, 7, 2);
   widgets->inputXWidget->setGeometry(-160, 0, 160,

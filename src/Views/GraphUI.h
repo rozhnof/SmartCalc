@@ -8,30 +8,23 @@ class GraphUI : public MainWindow {
   Q_OBJECT
 
  private:
-  GraphController *_controller;
-  GraphWidgets *_widgets;
+  GraphController *controller_;
+  GraphWidgets *widgets_;
 
  public:
   GraphUI();
-
   ~GraphUI();
 
  private:
   void setStyle();
-
   void setGeometry();
-
   void setOptions();
 
   void initWidgets();
-
   void connectWidgetsToSlots();
 
  private slots:
-
   void drawLine();
-
   void drawingLineState();
-
   void drawGraph();
 };

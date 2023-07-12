@@ -17,7 +17,7 @@ bool GraphController::setInput(QString infix, int countPoints, double xMin,
     status = Validate(input);
 
     if (status) {
-      model.setInput(input);
+      model_.setInput(input);
     }
   }
 
@@ -25,21 +25,21 @@ bool GraphController::setInput(QString infix, int countPoints, double xMin,
 }
 
 bool GraphController::Validate(QString &infix) {
-  return validatorInfixNotation.Validate(infix);
+  return validatorInfixNotation_.Validate(infix);
 }
 
 bool GraphController::Validate(const GraphInput &input) {
-  return graphValidator.Validate(input);
+  return graphValidator_.Validate(input);
 }
 
-void GraphController::Calculate() { model.Calculate(); }
+void GraphController::Calculate() { model_.Calculate(); }
 
 QVector<double> GraphController::getCollectionX() {
-  std::vector<double> collectionX = model.getCollectionX();
+  std::vector<double> collectionX = model_.getCollectionX();
   return QVector<double>(collectionX.begin(), collectionX.end());
 }
 
 QVector<double> GraphController::getCollectionY() {
-  std::vector<double> collectionY = model.getCollectionY();
+  std::vector<double> collectionY = model_.getCollectionY();
   return QVector<double>(collectionY.begin(), collectionY.end());
 }

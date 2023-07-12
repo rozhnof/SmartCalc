@@ -20,11 +20,10 @@ class Calendar : public QCalendarWidget {
  public:
   Calendar(QWidget *parent);
 
-  void SettingsUp();
+  void settingsUp();
 
-  void SetWeekdayTextColor(QColor color);
+  void remadeLayout();
 
-  void RemadeLayout();
-
-  void SetStyle();
+  void setWeekdayTextColor(QColor color);
+  void setStyle();
 };

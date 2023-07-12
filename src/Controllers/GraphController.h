@@ -9,21 +9,19 @@
 
 class GraphController {
  private:
-  GraphModel model;
-  InfixNotationValidator validatorInfixNotation;
-  GraphValidator graphValidator;
+  GraphModel model_;
+  InfixNotationValidator validatorInfixNotation_;
+  GraphValidator graphValidator_;
 
  public:
   bool setInput(QString infix, int countPoints, double xMin, double xMax,
                 double yMin, double yMax);
 
-  bool Validate(QString &infix);
+  QVector<double> getCollectionX();
+  QVector<double> getCollectionY();
 
+  bool Validate(QString &infix);
   bool Validate(const GraphInput &input);
 
   void Calculate();
-
-  QVector<double> getCollectionX();
-
-  QVector<double> getCollectionY();
 };

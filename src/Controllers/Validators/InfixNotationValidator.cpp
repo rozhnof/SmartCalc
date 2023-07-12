@@ -55,51 +55,51 @@ int InfixNotationValidator::isFunction(QString &lexema, int startIndex) {
 }
 
 bool InfixNotationValidator::Validate(QString &input) {
-  status.lexemaStatus =
+  status_.lexemaStatus =
       NUMBER | UNARY_OPERATOR | FUNCTION | OPEN_BRACKET | VAR_X | CONST_E;
-  status.functionStatus = true;
-  status.expStatus = true;
-  status.bracketCount = 0;
-  status.dotCount = 0;
-  status.expCount = 0;
+  status_.functionStatus = true;
+  status_.expStatus = true;
+  status_.bracketCount = 0;
+  status_.dotCount = 0;
+  status_.expCount = 0;
 
   if (input.size() == 0) {
-    status.lexemaStatus = 0;
+    status_.lexemaStatus = 0;
   }
 
-  for (int i = 0; i < input.size() && status.lexemaStatus; i++) {
+  for (int i = 0; i < input.size() && status_.lexemaStatus; i++) {
     if (isNumber(input[i])) {
-      SetNumber();
+      setNumber();
     } else if (isOperator(input[i])) {
-      if (status.lexemaStatus & OPERATOR) {
-        SetOperator();
-      } else if (status.lexemaStatus & EXP_OPERATOR) {
-        SetUnaryOperator();
+      if (status_.lexemaStatus & OPERATOR) {
+        setOperator();
+      } else if (status_.lexemaStatus & EXP_OPERATOR) {
+        setUnaryOperator();
       } else if (isUnaryOperator(input[i])) {
-        SetUnaryOperator();
+        setUnaryOperator();
       } else {
-        status.lexemaStatus = 0;
+        status_.lexemaStatus = 0;
       }
     } else if (isFunction(input, i)) {
-      SetFunction();
+      setFunction();
     } else if (input[i] == 'x') {
-      SetX();
+      setX();
     } else if (input[i] == '(') {
-      SetOpenBracket();
+      setOpenBracket();
     } else if (input[i] == ')') {
-      SetCloseBracket();
+      setCloseBracket();
     } else if (input[i] == '.') {
-      SetDot();
+      setDot();
     } else if (input[i] == '!') {
-      SetFactorial();
+      setFactorial();
     } else if (input[i] == 'e' || input[i] == 'E') {
-      SetExp();
+      setExp();
     } else {
-      status.lexemaStatus = 0;
+      status_.lexemaStatus = 0;
     }
 
-    if (status.expCount > 1) {
-      status.lexemaStatus = 0;
+    if (status_.expCount > 1) {
+      status_.lexemaStatus = 0;
     }
   }
 
@@ -109,8 +109,8 @@ bool InfixNotationValidator::Validate(QString &input) {
 bool InfixNotationValidator::FinalValidation(QString &input) {
   bool res = false;
 
-  if (!status.lexemaStatus || !status.functionStatus || !status.expStatus ||
-      status.bracketCount != 0) {
+  if (!status_.lexemaStatus || !status_.functionStatus || !status_.expStatus ||
+      status_.bracketCount != 0) {
     res = false;
   } else if (input.back() == '(' || input.back() == '.' ||
              isOperator(input.back())) {
@@ -121,101 +121,101 @@ bool InfixNotationValidator::FinalValidation(QString &input) {
   return res;
 }
 
-void InfixNotationValidator::SetNumber() {
-  if (status.lexemaStatus & NUMBER) {
-    status.lexemaStatus = NUMBER | OPERATOR | DOT | EXP | CLOSE_BRACKET;
-    if (status.dotCount == 0) {
-      status.lexemaStatus |= FACTORIAL;
+void InfixNotationValidator::setNumber() {
+  if (status_.lexemaStatus & NUMBER) {
+    status_.lexemaStatus = NUMBER | OPERATOR | DOT | EXP | CLOSE_BRACKET;
+    if (status_.dotCount == 0) {
+      status_.lexemaStatus |= FACTORIAL;
     }
-    status.expStatus = true;
+    status_.expStatus = true;
   } else {
-    status.lexemaStatus = 0;
+    status_.lexemaStatus = 0;
   }
 }
 
-void InfixNotationValidator::SetOperator() {
-  if (status.lexemaStatus & OPERATOR) {
-    status.lexemaStatus =
+void InfixNotationValidator::setOperator() {
+  if (status_.lexemaStatus & OPERATOR) {
+    status_.lexemaStatus =
         NUMBER | FUNCTION | OPEN_BRACKET | VAR_X | CONST_E | UNARY_OPERATOR;
-    status.expStatus = true;
-    status.expCount = 0;
+    status_.expStatus = true;
+    status_.expCount = 0;
   } else {
-    status.lexemaStatus = 0;
+    status_.lexemaStatus = 0;
   }
-  status.dotCount = 0;
+  status_.dotCount = 0;
 }
 
-void InfixNotationValidator::SetUnaryOperator() {
-  if (status.lexemaStatus & (UNARY_OPERATOR | EXP_OPERATOR)) {
-    status.lexemaStatus = NUMBER | FUNCTION | OPEN_BRACKET | VAR_X | CONST_E;
+void InfixNotationValidator::setUnaryOperator() {
+  if (status_.lexemaStatus & (UNARY_OPERATOR | EXP_OPERATOR)) {
+    status_.lexemaStatus = NUMBER | FUNCTION | OPEN_BRACKET | VAR_X | CONST_E;
   } else {
-    status.lexemaStatus = 0;
-  }
-}
-
-void InfixNotationValidator::SetFunction() {
-  if (status.lexemaStatus & FUNCTION) {
-    status.lexemaStatus = OPEN_BRACKET;
-    status.functionStatus = false;
-  } else {
-    status.lexemaStatus = 0;
+    status_.lexemaStatus = 0;
   }
 }
 
-void InfixNotationValidator::SetFactorial() {
-  if (status.lexemaStatus & FACTORIAL) {
-    status.lexemaStatus = OPERATOR;
+void InfixNotationValidator::setFunction() {
+  if (status_.lexemaStatus & FUNCTION) {
+    status_.lexemaStatus = OPEN_BRACKET;
+    status_.functionStatus = false;
   } else {
-    status.lexemaStatus = 0;
+    status_.lexemaStatus = 0;
   }
 }
 
-void InfixNotationValidator::SetX() {
-  if (status.lexemaStatus & VAR_X) {
-    status.lexemaStatus = OPERATOR | CLOSE_BRACKET;
+void InfixNotationValidator::setFactorial() {
+  if (status_.lexemaStatus & FACTORIAL) {
+    status_.lexemaStatus = OPERATOR;
   } else {
-    status.lexemaStatus = 0;
+    status_.lexemaStatus = 0;
   }
 }
 
-void InfixNotationValidator::SetOpenBracket() {
-  if (status.lexemaStatus & OPEN_BRACKET) {
-    status.lexemaStatus =
+void InfixNotationValidator::setX() {
+  if (status_.lexemaStatus & VAR_X) {
+    status_.lexemaStatus = OPERATOR | CLOSE_BRACKET;
+  } else {
+    status_.lexemaStatus = 0;
+  }
+}
+
+void InfixNotationValidator::setOpenBracket() {
+  if (status_.lexemaStatus & OPEN_BRACKET) {
+    status_.lexemaStatus =
         NUMBER | FUNCTION | OPEN_BRACKET | VAR_X | CONST_E | UNARY_OPERATOR;
-    status.functionStatus = true;
-    status.bracketCount++;
+    status_.functionStatus = true;
+    status_.bracketCount++;
   } else {
-    status.lexemaStatus = 0;
+    status_.lexemaStatus = 0;
   }
 }
 
-void InfixNotationValidator::SetCloseBracket() {
-  if (status.lexemaStatus & CLOSE_BRACKET) {
-    status.lexemaStatus = OPERATOR | CLOSE_BRACKET;
-    status.bracketCount--;
+void InfixNotationValidator::setCloseBracket() {
+  if (status_.lexemaStatus & CLOSE_BRACKET) {
+    status_.lexemaStatus = OPERATOR | CLOSE_BRACKET;
+    status_.bracketCount--;
   } else {
-    status.lexemaStatus = 0;
+    status_.lexemaStatus = 0;
   }
 }
 
-void InfixNotationValidator::SetDot() {
-  if (status.lexemaStatus & DOT && status.dotCount == 0) {
-    status.lexemaStatus = NUMBER;
-    status.dotCount++;
+void InfixNotationValidator::setDot() {
+  if (status_.lexemaStatus & DOT && status_.dotCount == 0) {
+    status_.lexemaStatus = NUMBER;
+    status_.dotCount++;
   } else {
-    status.lexemaStatus = 0;
+    status_.lexemaStatus = 0;
   }
 }
 
-void InfixNotationValidator::SetExp() {
-  if (status.lexemaStatus & EXP) {
-    status.lexemaStatus = EXP_OPERATOR | NUMBER;
-    status.dotCount = 0;
-    status.expCount++;
-    status.expStatus = false;
-  } else if (status.lexemaStatus & CONST_E) {
-    status.lexemaStatus = OPERATOR | CLOSE_BRACKET;
+void InfixNotationValidator::setExp() {
+  if (status_.lexemaStatus & EXP) {
+    status_.lexemaStatus = EXP_OPERATOR | NUMBER;
+    status_.dotCount = 0;
+    status_.expCount++;
+    status_.expStatus = false;
+  } else if (status_.lexemaStatus & CONST_E) {
+    status_.lexemaStatus = OPERATOR | CLOSE_BRACKET;
   } else {
-    status.lexemaStatus = 0;
+    status_.lexemaStatus = 0;
   }
 }

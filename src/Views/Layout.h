@@ -7,85 +7,69 @@
 
 class Layout {
  private:
-  int _x0 = 0;
-  int _y0 = 0;
+  int x0_ = 0;
+  int y0_ = 0;
 
-  int _xMax;
-  int _yMax;
+  int xMax_;
+  int yMax_;
 
-  int _rows = 1;
-  int _columns = 1;
+  int rows_ = 1;
+  int columns_ = 1;
 
-  int _rowsCounter = 0;
-  int _columnsCounter = 0;
+  int rowsCounter_ = 0;
+  int columnsCounter_ = 0;
 
-  int _horizontalSpacing = 0;
-  int _verticalSpacing = 0;
+  int horizontalSpacing_ = 0;
+  int verticalSpacing_ = 0;
 
-  int _leftSpacing = 0;
-  int _rightSpacing = 0;
-  int _aboveSpacing = 0;
-  int _bottomSpacing = 0;
+  int leftSpacing_ = 0;
+  int rightSpacing_ = 0;
+  int aboveSpacing_ = 0;
+  int bottomSpacing_ = 0;
 
-  int _widgetWidth;
-  int _widgetHeight;
+  int widgetWidth_;
+  int widgetHeight_;
 
-  int _currentX = 0;
-  int _currentY = 0;
+  int currentX_ = 0;
+  int currentY_ = 0;
 
-  int _currentColSpan = 1;
-  int _currentRowSpan = 1;
+  int currentColSpan_ = 1;
+  int currentRowSpan_ = 1;
 
-  int _xRemaining = 0;
-  int _yRemaining = 0;
+  int xRemaining_ = 0;
+  int yRemaining_ = 0;
 
-  int _countXRemaining = 0;
-  int _countYRemaining = 0;
+  int countXRemaining_ = 0;
+  int countYRemaining_ = 0;
 
-  int _lastWidth = 0;
-  int _lastHeight = 0;
+  int lastWidth_ = 0;
+  int lastHeight_ = 0;
 
  public:
-  void SetStartPoints(int x0, int y0);
+  enum AlignH { Left, Right, CenterH };
+  enum AlignV { Above, Bottom, CenterV };
 
-  void SetEndPoints(int xMax, int yMax);
-
-  void SetRows(int rows);
-
-  void SetColumns(int columns);
-
-  void SetHorizontalSpacing(int horizontalSpacing);
-
-  void SetVerticalSpacing(int verticalSpacing);
-
-  void SetDefaultElementSize(int width, int height);
-
-  void SetAutoSize();
-
-  void SetLeftSpacing(int spacing);
-
-  void SetRightSpacing(int spacing);
-
-  void SetAboveSpacing(int spacing);
-
-  void SetBottomSpacing(int spacing);
+  void setStartPoints(int x0, int y0);
+  void setEndPoints(int xMax, int yMax);
+  void setRows(int rows);
+  void setColumns(int columns);
+  void setHorizontalSpacing(int horizontalSpacing);
+  void setVerticalSpacing(int verticalSpacing);
+  void setDefaultElementSize(int width, int height);
+  void setAutoSize();
+  void setLeftSpacing(int spacing);
+  void setRightSpacing(int spacing);
+  void setAboveSpacing(int spacing);
+  void setBottomSpacing(int spacing);
+  void setDefaultSpan();
 
   void ChangeColumns(int columns);
-
-  void AddWidget(QWidget* widget, double colSpan = 1, double rowSpan = 1);
-
   void NextRow();
 
+  void AddWidget(QWidget* widget, double colSpan = 1, double rowSpan = 1);
   void AddWidgetWithSize(QWidget* widget, int width, int height);
-
-  void SetDefaultSpan();
-
-  enum AlignH { Left, Right, CenterH };
-
-  enum AlignV { Above, Bottom, CenterV };
 
   void SetTitle(QWidget* widget, QWidget* title, AlignH alignH, AlignV alignV,
                 int fontSize, int horizontalSpacing, int verticalSpacing);
-
   void SetField(QWidget* widget, QWidget* field, AlignH align, int spacing);
 };

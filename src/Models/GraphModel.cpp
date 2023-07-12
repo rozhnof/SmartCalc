@@ -5,14 +5,14 @@ GraphModel::GraphModel() {}
 GraphModel::~GraphModel() {}
 
 void GraphModel::setInput(GraphInput input) {
-  _input = input;
-  _input.postfix = service.GetPostfixNotation(input.infix);
+  input_ = input;
+  input_.postfix = service_.GetPostfixNotation(input.infix);
 }
 
-void GraphModel::Calculate() { _output = service.GetGraphResult(_input); }
+void GraphModel::Calculate() { output_ = service_.GetGraphResult(input_); }
 
-GraphOutput GraphModel::getOutput() { return _output; }
+GraphOutput GraphModel::getOutput() { return output_; }
 
-std::vector<double> GraphModel::getCollectionX() { return _output.xPoints; }
+std::vector<double> GraphModel::getCollectionX() { return output_.xPoints; }
 
-std::vector<double> GraphModel::getCollectionY() { return _output.yPoints; }
+std::vector<double> GraphModel::getCollectionY() { return output_.yPoints; }

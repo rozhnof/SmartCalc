@@ -1,12 +1,12 @@
 #include "Calendar.h"
 
 Calendar::Calendar(QWidget *parent) : QCalendarWidget(parent) {
-  SettingsUp();
-  RemadeLayout();
-  SetStyle();
+  settingsUp();
+  remadeLayout();
+  setStyle();
 }
 
-void Calendar::SettingsUp() {
+void Calendar::settingsUp() {
   setGridVisible(false);
   setSelectionMode(QCalendarWidget::SingleSelection);
   setFirstDayOfWeek(Qt::DayOfWeek::Monday);
@@ -15,10 +15,10 @@ void Calendar::SettingsUp() {
   setMaximumDate(QDate(2100, 1, 1));
   setMinimumDate(QDate(2000, 1, 1));
   setSelectedDate(QDate::currentDate());
-  SetWeekdayTextColor(QColor(108, 112, 119));
+  setWeekdayTextColor(QColor(108, 112, 119));
 }
 
-void Calendar::SetWeekdayTextColor(QColor color) {
+void Calendar::setWeekdayTextColor(QColor color) {
   QTextCharFormat format;
   format.setForeground(color);
   for (int i = Qt::DayOfWeek::Monday; i <= Qt::DayOfWeek::Sunday; i++) {
@@ -26,7 +26,7 @@ void Calendar::SetWeekdayTextColor(QColor color) {
   }
 }
 
-void Calendar::RemadeLayout() {
+void Calendar::remadeLayout() {
   QWidget *calendar = findChild<QWidget *>("qt_calendar_calendarview");
   QWidget *calendarArea = findChild<QWidget *>("qt_calendar_navigationbar");
   QToolButton *toolButtonLeft =
@@ -66,7 +66,7 @@ void Calendar::RemadeLayout() {
   toolButtonRight->setText(">");
 }
 
-void Calendar::SetStyle() {
+void Calendar::setStyle() {
   setStyleSheet(
       R"(
             QWidget#qt_calendar_navigationbar {

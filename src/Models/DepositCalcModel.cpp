@@ -3,22 +3,22 @@
 DepositCalcModel::DepositCalcModel() {}
 
 void DepositCalcModel::setInput(DepositCalculatorInput input) {
-  _input = input;
+  input_ = input;
 }
 
 void DepositCalcModel::Calculate() {
-  _output = service.GetDepositCalculationResult(_input);
+  output_ = service_.GetDepositCalculationResult(input_);
 }
 
-double DepositCalcModel::getTotalAmount() { return _output.totalAmount; }
+double DepositCalcModel::getTotalAmount() { return output_.totalAmount; }
 
-double DepositCalcModel::getTaxAmount() { return _output.taxAmount; }
+double DepositCalcModel::getTaxAmount() { return output_.taxAmount; }
 
 double DepositCalcModel::getAccuredInterest() {
-  return _output.accuredInterest;
+  return output_.accuredInterest;
 }
 
 std::vector<std::tuple<Day, std::string, double, double> >
 DepositCalcModel::getGeneralList() {
-  return _output.generalList;
+  return output_.generalList;
 }

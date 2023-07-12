@@ -40,6 +40,7 @@ clean:
 	-rm -rf $(LIB) $(TEST_EXEC) $(COV_EXEC) $(OBJ_DIR) $(COV_INFO) $(COV_REPORT) $(COV_DIR)
 	-rm -f test.log
 	-rm -rf lib
+	-rm -f $(APP_NAME).pro.user
 
 dvi:
 	open instruction.html
@@ -52,7 +53,7 @@ distclean:
 
 style:
 	cp ../materials/linters/.clang-format ../.clang-format
-	clang-format -n -i -style=Google Controllers/*.cpp \
+	clang-format -n -style=Google Controllers/*.cpp \
 									Controllers/*.h \
 									Controllers/Validators/*.cpp \
 									Controllers/Validators/*.h \

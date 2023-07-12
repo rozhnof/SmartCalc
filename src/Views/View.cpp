@@ -1,38 +1,38 @@
 #include "View.h"
 
 View::View()
-    : _calc(new CalculatorUI),
-      _creditCalc(new CreditCalculatorUI),
-      _depositCalc(new DepositCalculatorUI),
-      _graph(new GraphUI),
-      _winUi(new WinUI),
-      _macUi(new MacUI) {
-  _currentTab = _calc;
-  _platform = _winUi;
+    : calc_(new CalculatorUI),
+      creditCalc_(new CreditCalculatorUI),
+      depositCalc_(new DepositCalculatorUI),
+      graph_(new GraphUI),
+      winUi_(new WinUI),
+      macUi_(new MacUI) {
+  _currentTab = calc_;
+  platform_ = winUi_;
 
-  _calc->setWindowTitle("Calculator");
-  _creditCalc->setWindowTitle("Credit Calculator");
-  _depositCalc->setWindowTitle("Deposit Calculator");
-  _graph->setWindowTitle("Graph");
+  calc_->setWindowTitle("Calculator");
+  creditCalc_->setWindowTitle("Credit Calculator");
+  depositCalc_->setWindowTitle("Deposit Calculator");
+  graph_->setWindowTitle("Graph");
 
-  _calc->setObjectName("calculator_window");
-  _creditCalc->setObjectName("credit_calculator_window");
-  _depositCalc->setObjectName("deposit_calculator_window");
-  _graph->setObjectName("graph_window");
+  calc_->setObjectName("calculator_window");
+  creditCalc_->setObjectName("credit_calculator_window");
+  depositCalc_->setObjectName("deposit_calculator_window");
+  graph_->setObjectName("graph_window");
 
-  _calc->_platform = &_platform;
-  _creditCalc->_platform = &_platform;
-  _depositCalc->_platform = &_platform;
-  _graph->_platform = &_platform;
+  calc_->platform_ = &platform_;
+  creditCalc_->platform_ = &platform_;
+  depositCalc_->platform_ = &platform_;
+  graph_->platform_ = &platform_;
 
   AddMenu();
 }
 
 View::~View() {
-  delete _calc;
-  delete _creditCalc;
-  delete _depositCalc;
-  delete _graph;
+  delete calc_;
+  delete creditCalc_;
+  delete depositCalc_;
+  delete graph_;
 }
 
 void View::show() {
@@ -81,25 +81,25 @@ void View::switchTo(MainWindow *newTab) {
   show();
 }
 
-void View::switchToCalc() { switchTo(_calc); }
+void View::switchToCalc() { switchTo(calc_); }
 
-void View::switchToCreditCalc() { switchTo(_creditCalc); }
+void View::switchToCreditCalc() { switchTo(creditCalc_); }
 
-void View::switchToDepositCalc() { switchTo(_depositCalc); }
+void View::switchToDepositCalc() { switchTo(depositCalc_); }
 
-void View::switchToGraph() { switchTo(_graph); }
+void View::switchToGraph() { switchTo(graph_); }
 
 void View::switchMode() {
-  if (_platform == _macUi) {
-    if (_winUi == nullptr) {
-      _winUi = new WinUI;
+  if (platform_ == macUi_) {
+    if (winUi_ == nullptr) {
+      winUi_ = new WinUI;
     }
-    _platform = _winUi;
+    platform_ = winUi_;
   } else {
-    if (_macUi == nullptr) {
-      _macUi = new MacUI;
+    if (macUi_ == nullptr) {
+      macUi_ = new MacUI;
     }
-    _platform = _macUi;
+    platform_ = macUi_;
   }
   show();
 }

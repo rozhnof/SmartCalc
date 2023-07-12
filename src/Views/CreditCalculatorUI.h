@@ -8,27 +8,22 @@
 
 class CreditCalculatorUI : public MainWindow {
  private:
-  CreditCalcController *_controller;
-  CreditCalcWidgets *_widgets;
+  CreditCalcController *controller_;
+  CreditCalcWidgets *widgets_;
 
  public:
   CreditCalculatorUI();
-
   ~CreditCalculatorUI();
 
   void SetupUI() override;
 
  private:
   void initWidgets();
-
   void connectWidgetsToSlots();
 
   void setGeometry();
-
   void setOptions();
-
   void setInputValidator();
-
   bool setInput();
 
   void getOutput();
@@ -37,7 +32,6 @@ class CreditCalculatorUI : public MainWindow {
 
  private slots:
   void AnnuityPayment();
-
   void DifferentiatedPayment();
 
   void DrawChartBars();

@@ -2,9 +2,9 @@
 
 DepositCalculatorUI::DepositCalculatorUI()
     : MainWindow(),
-      _controller(new DepositCalcController),
-      _widgets(new DepositCalcWidgets) {
-  _widgets->depositCalcWindow = this;
+      controller_(new DepositCalcController),
+      widgets_(new DepositCalcWidgets) {
+  widgets_->depositCalcWindow = this;
 
   initWidgets();
   setGeometry();
@@ -19,114 +19,114 @@ DepositCalculatorUI::DepositCalculatorUI()
 }
 
 DepositCalculatorUI::~DepositCalculatorUI() {
-  delete _controller;
-  delete _widgets;
+  delete controller_;
+  delete widgets_;
 }
 
 void DepositCalculatorUI::initWidgets() {
   this->setFixedSize(1280, 615);
 
-  _widgets->mainInputContainer = NewWidget(this, "container");
-  _widgets->addInputContainer = NewWidget(this, "container");
-  _widgets->outputContainer = NewWidget(this, "container");
-  _widgets->tablesContainer = NewWidget(this, "table_container");
+  widgets_->mainInputContainer = NewWidget(this, "container");
+  widgets_->addInputContainer = NewWidget(this, "container");
+  widgets_->outputContainer = NewWidget(this, "container");
+  widgets_->tablesContainer = NewWidget(this, "table_container");
 
-  _widgets->box.insert(std::make_pair(DEPOSIT_AMOUNT, NewWidget(this, "box")));
-  _widgets->box.insert(
+  widgets_->box.insert(std::make_pair(DEPOSIT_AMOUNT, NewWidget(this, "box")));
+  widgets_->box.insert(
       std::make_pair(DEPOSIT_INTEREST_RATE, NewWidget(this, "box")));
-  _widgets->box.insert(
+  widgets_->box.insert(
       std::make_pair(DEPOSIT_PLACEMENT_PERIOD, NewWidget(this, "box_left")));
-  _widgets->box.insert(
+  widgets_->box.insert(
       std::make_pair(DEPOSIT_OPERATION_SUM, NewWidget(this, "box_right")));
-  _widgets->box.insert(
+  widgets_->box.insert(
       std::make_pair(DEPOSIT_TAX_RATE, NewWidget(this, "box")));
-  _widgets->box.insert(
+  widgets_->box.insert(
       std::make_pair(DEPOSIT_ACCURED_INTEREST, NewWidget(this, "box")));
-  _widgets->box.insert(
+  widgets_->box.insert(
       std::make_pair(DEPOSIT_TOTAL_AMOUNT, NewWidget(this, "box")));
-  _widgets->box.insert(
+  widgets_->box.insert(
       std::make_pair(DEPOSIT_TAX_AMOUNT, NewWidget(this, "box")));
 
-  _widgets->boxTitle.insert(std::make_pair(
+  widgets_->boxTitle.insert(std::make_pair(
       DEPOSIT_AMOUNT, NewLabel(this, "Deposit Amount", "title")));
-  _widgets->boxTitle.insert(std::make_pair(
+  widgets_->boxTitle.insert(std::make_pair(
       DEPOSIT_INTEREST_RATE, NewLabel(this, "Interest Rate", "title")));
-  _widgets->boxTitle.insert(std::make_pair(
+  widgets_->boxTitle.insert(std::make_pair(
       DEPOSIT_PLACEMENT_PERIOD, NewLabel(this, "Placement period", "title")));
-  _widgets->boxTitle.insert(
+  widgets_->boxTitle.insert(
       std::make_pair(DEPOSIT_FREQUENCY_OF_PAYMENTS,
                      NewLabel(this, "Frequency of Payments", "title")));
-  _widgets->boxTitle.insert(std::make_pair(
+  widgets_->boxTitle.insert(std::make_pair(
       DEPOSIT_DATE_OF_PLACEMENT, NewLabel(this, "Date of Placement", "title")));
-  _widgets->boxTitle.insert(
+  widgets_->boxTitle.insert(
       std::make_pair(DEPOSIT_OPERATION_DATE, NewLabel(this, "Date", "title")));
-  _widgets->boxTitle.insert(
+  widgets_->boxTitle.insert(
       std::make_pair(DEPOSIT_OPERATION_SUM, NewLabel(this, "Sum", "title")));
-  _widgets->boxTitle.insert(
+  widgets_->boxTitle.insert(
       std::make_pair(DEPOSIT_TAX_RATE, NewLabel(this, "Tax Rate", "title")));
-  _widgets->boxTitle.insert(std::make_pair(
+  widgets_->boxTitle.insert(std::make_pair(
       DEPOSIT_ACCURED_INTEREST, NewLabel(this, "Accrued Interest", "title")));
-  _widgets->boxTitle.insert(std::make_pair(
+  widgets_->boxTitle.insert(std::make_pair(
       DEPOSIT_TOTAL_AMOUNT, NewLabel(this, "Total Amount", "title")));
-  _widgets->boxTitle.insert(std::make_pair(
+  widgets_->boxTitle.insert(std::make_pair(
       DEPOSIT_TAX_AMOUNT, NewLabel(this, "Tax Amount", "title")));
 
-  _widgets->boxData.insert(
+  widgets_->boxData.insert(
       std::make_pair(DEPOSIT_AMOUNT, NewLineEdit(this, "10000", "data")));
-  _widgets->boxData.insert(
+  widgets_->boxData.insert(
       std::make_pair(DEPOSIT_INTEREST_RATE, NewLineEdit(this, "10", "data")));
-  _widgets->boxData.insert(std::make_pair(DEPOSIT_PLACEMENT_PERIOD,
+  widgets_->boxData.insert(std::make_pair(DEPOSIT_PLACEMENT_PERIOD,
                                           NewLineEdit(this, "10", "data")));
-  _widgets->boxData.insert(
+  widgets_->boxData.insert(
       std::make_pair(DEPOSIT_TAX_RATE, NewLineEdit(this, "", "data")));
-  _widgets->boxData.insert(
+  widgets_->boxData.insert(
       std::make_pair(DEPOSIT_OPERATION_SUM, NewLineEdit(this, "", "data")));
-  _widgets->boxData.insert(
+  widgets_->boxData.insert(
       std::make_pair(DEPOSIT_ACCURED_INTEREST, NewLineEdit(this, "", "data")));
-  _widgets->boxData.insert(
+  widgets_->boxData.insert(
       std::make_pair(DEPOSIT_TOTAL_AMOUNT, NewLineEdit(this, "", "data")));
-  _widgets->boxData.insert(
+  widgets_->boxData.insert(
       std::make_pair(DEPOSIT_TAX_AMOUNT, NewLineEdit(this, "", "data")));
 
-  _widgets->calculateButton = NewPushButton(this, "Calculate", "button");
-  _widgets->dateOfPlacementButton = NewPushButton(
+  widgets_->calculateButton = NewPushButton(this, "Calculate", "button");
+  widgets_->dateOfPlacementButton = NewPushButton(
       this, QDate::currentDate().toString("dd-MM-yyyy"), "button");
-  _widgets->frequencyOfPaymentsButton = NewToolButton(this, "", "button");
+  widgets_->frequencyOfPaymentsButton = NewToolButton(this, "", "button");
 
-  _widgets->setTopUpListButton =
+  widgets_->setTopUpListButton =
       NewPushButton(this, "Top Up List", "button_left");
-  _widgets->setTakeOffListButton =
+  widgets_->setTakeOffListButton =
       NewPushButton(this, "Take Off List", "button_left");
-  _widgets->setGeneralListButton =
+  widgets_->setGeneralListButton =
       NewPushButton(this, "General List", "button_left");
-  _widgets->topUpButton = NewPushButton(this, "Top Up", "button_left");
-  _widgets->dateButton = NewPushButton(
+  widgets_->topUpButton = NewPushButton(this, "Top Up", "button_left");
+  widgets_->dateButton = NewPushButton(
       this, QDate::currentDate().toString("dd-MM-yyyy"), "button_left");
 
-  _widgets->takeOffButton = NewPushButton(this, "Take Off", "button_right");
-  _widgets->placementPeriodButton = NewToolButton(this, "", "button_right");
-  _widgets->buttonClearGeneralTable =
+  widgets_->takeOffButton = NewPushButton(this, "Take Off", "button_right");
+  widgets_->placementPeriodButton = NewToolButton(this, "", "button_right");
+  widgets_->buttonClearGeneralTable =
       NewPushButton(this, "Clear", "button_right");
-  _widgets->buttonClearTakeOffTable =
+  widgets_->buttonClearTakeOffTable =
       NewPushButton(this, "Clear", "button_right");
-  _widgets->buttonClearTopUpTable =
+  widgets_->buttonClearTopUpTable =
       NewPushButton(this, "Clear", "button_right");
 
-  _widgets->interestCapitalization =
+  widgets_->interestCapitalization =
       NewCheckBox(this, "Interest Capitalization", "check_box");
 
-  _widgets->generalTable = new QTableWidget(this);
-  _widgets->generalTable->setObjectName("data_table");
+  widgets_->generalTable = new QTableWidget(this);
+  widgets_->generalTable->setObjectName("data_table");
 
-  _widgets->topUpTable = new QTableWidget(this);
-  _widgets->topUpTable->setObjectName("data_table");
+  widgets_->topUpTable = new QTableWidget(this);
+  widgets_->topUpTable->setObjectName("data_table");
 
-  _widgets->takeOffTable = new QTableWidget(this);
-  _widgets->takeOffTable->setObjectName("data_table");
+  widgets_->takeOffTable = new QTableWidget(this);
+  widgets_->takeOffTable->setObjectName("data_table");
 
-  _widgets->backgroundCalendar = NewWidget(this, "calendar_background");
-  _widgets->calendar = new Calendar(_widgets->backgroundCalendar);
-  _widgets->backgroundCalendar->hide();
+  widgets_->backgroundCalendar = NewWidget(this, "calendar_background");
+  widgets_->calendar = new Calendar(widgets_->backgroundCalendar);
+  widgets_->backgroundCalendar->hide();
 }
 
 void DepositCalculatorUI::setGeometry() {
@@ -137,24 +137,24 @@ void DepositCalculatorUI::setGeometry() {
 }
 
 bool DepositCalculatorUI::setInput() {
-  double depositAmount = _widgets->boxData[DEPOSIT_AMOUNT]->text().toDouble();
+  double depositAmount = widgets_->boxData[DEPOSIT_AMOUNT]->text().toDouble();
   double interestRate =
-      _widgets->boxData[DEPOSIT_INTEREST_RATE]->text().toDouble();
-  int frequencyOfPayments = _widgets->frequencyActiveAction.first;
-  bool interestCapitalization = _widgets->interestCapitalization->isChecked();
-  double taxRate = _widgets->boxData[DEPOSIT_TAX_RATE]->text().toDouble();
+      widgets_->boxData[DEPOSIT_INTEREST_RATE]->text().toDouble();
+  int frequencyOfPayments = widgets_->frequencyActiveAction.first;
+  bool interestCapitalization = widgets_->interestCapitalization->isChecked();
+  double taxRate = widgets_->boxData[DEPOSIT_TAX_RATE]->text().toDouble();
   double placementCount =
-      _widgets->boxData[DEPOSIT_PLACEMENT_PERIOD]->text().toDouble();
-  int placementPeriodType = _widgets->periodActiveAction.first;
+      widgets_->boxData[DEPOSIT_PLACEMENT_PERIOD]->text().toDouble();
+  int placementPeriodType = widgets_->periodActiveAction.first;
   QDate startDate =
-      QDate::fromString(_widgets->dateOfPlacementButton->text(), "dd-MM-yyyy");
+      QDate::fromString(widgets_->dateOfPlacementButton->text(), "dd-MM-yyyy");
   QDate endDate = setEndDate(startDate, placementPeriodType, placementCount);
   QVector<QDate> paymentDays =
       setPaymentDays(startDate, endDate, frequencyOfPayments);
 
-  return _controller->setInput(
+  return controller_->setInput(
       depositAmount, interestRate, interestCapitalization, taxRate, startDate,
-      endDate, paymentDays, _widgets->topUpList, _widgets->takeOffList);
+      endDate, paymentDays, widgets_->topUpList, widgets_->takeOffList);
 }
 
 QVector<QDate> DepositCalculatorUI::setPaymentDays(QDate startDate,
@@ -214,42 +214,42 @@ void DepositCalculatorUI::getOutput() {
   double totalAmount = 0;
   double taxAmount = 0;
 
-  accuredInterest = _controller->getAccuredInterest();
-  totalAmount = _controller->getTotalAmount();
-  taxAmount = _controller->getTaxAmount();
+  accuredInterest = controller_->getAccuredInterest();
+  totalAmount = controller_->getTotalAmount();
+  taxAmount = controller_->getTaxAmount();
 
-  _widgets->boxData[DEPOSIT_ACCURED_INTEREST]->setText(
+  widgets_->boxData[DEPOSIT_ACCURED_INTEREST]->setText(
       QString::number(accuredInterest, 'f', 2));
-  _widgets->boxData[DEPOSIT_TOTAL_AMOUNT]->setText(
+  widgets_->boxData[DEPOSIT_TOTAL_AMOUNT]->setText(
       QString::number(totalAmount, 'f', 2));
-  _widgets->boxData[DEPOSIT_TAX_AMOUNT]->setText(
+  widgets_->boxData[DEPOSIT_TAX_AMOUNT]->setText(
       QString::number(taxAmount, 'f', 2));
 }
 
 void DepositCalculatorUI::connectWidgetsToSlots() {
-  connect(_widgets->dateButton, &QPushButton::clicked, this,
+  connect(widgets_->dateButton, &QPushButton::clicked, this,
           &DepositCalculatorUI::calendarShow);
-  connect(_widgets->dateOfPlacementButton, &QPushButton::clicked, this,
+  connect(widgets_->dateOfPlacementButton, &QPushButton::clicked, this,
           &DepositCalculatorUI::calendarShow);
-  connect(_widgets->calendar, &QCalendarWidget::clicked, this,
+  connect(widgets_->calendar, &QCalendarWidget::clicked, this,
           &DepositCalculatorUI::setDate);
-  connect(_widgets->calculateButton, &QPushButton::clicked, this,
+  connect(widgets_->calculateButton, &QPushButton::clicked, this,
           &DepositCalculatorUI::Calculate);
-  connect(_widgets->topUpButton, &QPushButton::clicked, this,
+  connect(widgets_->topUpButton, &QPushButton::clicked, this,
           &DepositCalculatorUI::addTopUp);
-  connect(_widgets->takeOffButton, &QPushButton::clicked, this,
+  connect(widgets_->takeOffButton, &QPushButton::clicked, this,
           &DepositCalculatorUI::addTakeOff);
-  connect(_widgets->setGeneralListButton, &QPushButton::clicked, this,
+  connect(widgets_->setGeneralListButton, &QPushButton::clicked, this,
           &DepositCalculatorUI::showGeneralTable);
-  connect(_widgets->setTopUpListButton, &QPushButton::clicked, this,
+  connect(widgets_->setTopUpListButton, &QPushButton::clicked, this,
           &DepositCalculatorUI::showTopUpTable);
-  connect(_widgets->setTakeOffListButton, &QPushButton::clicked, this,
+  connect(widgets_->setTakeOffListButton, &QPushButton::clicked, this,
           &DepositCalculatorUI::showTakeOffTable);
-  connect(_widgets->buttonClearTakeOffTable, &QPushButton::clicked, this,
+  connect(widgets_->buttonClearTakeOffTable, &QPushButton::clicked, this,
           &DepositCalculatorUI::clearTakeOffList);
-  connect(_widgets->buttonClearTopUpTable, &QPushButton::clicked, this,
+  connect(widgets_->buttonClearTopUpTable, &QPushButton::clicked, this,
           &DepositCalculatorUI::clearTopUpList);
-  connect(_widgets->buttonClearGeneralTable, &QPushButton::clicked, this,
+  connect(widgets_->buttonClearGeneralTable, &QPushButton::clicked, this,
           &DepositCalculatorUI::clearGeneralList);
 }
 
@@ -273,8 +273,8 @@ void DepositCalculatorUI::setFrequencyOfPaymentsButton() {
     connect(action, &QAction::triggered, this,
             &DepositCalculatorUI::setFrequency);
   }
-  _widgets->frequencyOfPaymentsButton->setMenu(menu);
-  _widgets->frequencyOfPaymentsButton->setPopupMode(QToolButton::InstantPopup);
+  widgets_->frequencyOfPaymentsButton->setMenu(menu);
+  widgets_->frequencyOfPaymentsButton->setPopupMode(QToolButton::InstantPopup);
 
   setFrequencyButtonActiveAction(menu->actions()[MONTHLY]);
 }
@@ -295,249 +295,249 @@ void DepositCalculatorUI::setPlacementPeriodButton() {
     menu->addAction(action);
     connect(action, &QAction::triggered, this, &DepositCalculatorUI::setPeriod);
   }
-  _widgets->placementPeriodButton->setMenu(menu);
-  _widgets->placementPeriodButton->setPopupMode(QToolButton::InstantPopup);
+  widgets_->placementPeriodButton->setMenu(menu);
+  widgets_->placementPeriodButton->setPopupMode(QToolButton::InstantPopup);
 
   setPeriodButtonActiveAction(menu->actions()[MONTHS]);
 }
 
 void DepositCalculatorUI::setOutputContainer() {
-  _widgets->outputContainer->setGeometry(
+  widgets_->outputContainer->setGeometry(
       10,
-      _widgets->mainInputContainer->y() +
-          _widgets->mainInputContainer->height() + 10,
+      widgets_->mainInputContainer->y() +
+          widgets_->mainInputContainer->height() + 10,
       320, 250);
 
   Layout layout;
-  layout.SetStartPoints(_widgets->outputContainer->x(),
-                        _widgets->outputContainer->y());
-  layout.SetEndPoints(
-      _widgets->outputContainer->x() + _widgets->outputContainer->width(),
-      _widgets->outputContainer->y() + _widgets->outputContainer->height());
-  layout.SetRows(3);
-  layout.SetColumns(1);
-  layout.SetLeftSpacing(10);
-  layout.SetRightSpacing(10);
-  layout.SetAboveSpacing(35);
-  layout.SetBottomSpacing(10);
-  layout.SetHorizontalSpacing(2);
-  layout.SetVerticalSpacing(35);
-  layout.SetAutoSize();
+  layout.setStartPoints(widgets_->outputContainer->x(),
+                        widgets_->outputContainer->y());
+  layout.setEndPoints(
+      widgets_->outputContainer->x() + widgets_->outputContainer->width(),
+      widgets_->outputContainer->y() + widgets_->outputContainer->height());
+  layout.setRows(3);
+  layout.setColumns(1);
+  layout.setLeftSpacing(10);
+  layout.setRightSpacing(10);
+  layout.setAboveSpacing(35);
+  layout.setBottomSpacing(10);
+  layout.setHorizontalSpacing(2);
+  layout.setVerticalSpacing(35);
+  layout.setAutoSize();
 
-  layout.AddWidget(_widgets->box[DEPOSIT_ACCURED_INTEREST]);
-  layout.AddWidget(_widgets->box[DEPOSIT_TOTAL_AMOUNT]);
-  layout.AddWidget(_widgets->box[DEPOSIT_TAX_AMOUNT]);
+  layout.AddWidget(widgets_->box[DEPOSIT_ACCURED_INTEREST]);
+  layout.AddWidget(widgets_->box[DEPOSIT_TOTAL_AMOUNT]);
+  layout.AddWidget(widgets_->box[DEPOSIT_TAX_AMOUNT]);
 
-  layout.SetTitle(_widgets->box[DEPOSIT_ACCURED_INTEREST],
-                  _widgets->boxTitle[DEPOSIT_ACCURED_INTEREST], Layout::CenterH,
+  layout.SetTitle(widgets_->box[DEPOSIT_ACCURED_INTEREST],
+                  widgets_->boxTitle[DEPOSIT_ACCURED_INTEREST], Layout::CenterH,
                   Layout::Above, 16, 0, -10);
-  layout.SetTitle(_widgets->box[DEPOSIT_TOTAL_AMOUNT],
-                  _widgets->boxTitle[DEPOSIT_TOTAL_AMOUNT], Layout::CenterH,
+  layout.SetTitle(widgets_->box[DEPOSIT_TOTAL_AMOUNT],
+                  widgets_->boxTitle[DEPOSIT_TOTAL_AMOUNT], Layout::CenterH,
                   Layout::Above, 16, 0, -10);
-  layout.SetTitle(_widgets->box[DEPOSIT_TAX_AMOUNT],
-                  _widgets->boxTitle[DEPOSIT_TAX_AMOUNT], Layout::CenterH,
+  layout.SetTitle(widgets_->box[DEPOSIT_TAX_AMOUNT],
+                  widgets_->boxTitle[DEPOSIT_TAX_AMOUNT], Layout::CenterH,
                   Layout::Above, 16, 0, -10);
 
-  layout.SetField(_widgets->box[DEPOSIT_ACCURED_INTEREST],
-                  _widgets->boxData[DEPOSIT_ACCURED_INTEREST], Layout::Left, 5);
-  layout.SetField(_widgets->box[DEPOSIT_TOTAL_AMOUNT],
-                  _widgets->boxData[DEPOSIT_TOTAL_AMOUNT], Layout::Left, 5);
-  layout.SetField(_widgets->box[DEPOSIT_TAX_AMOUNT],
-                  _widgets->boxData[DEPOSIT_TAX_AMOUNT], Layout::Left, 5);
+  layout.SetField(widgets_->box[DEPOSIT_ACCURED_INTEREST],
+                  widgets_->boxData[DEPOSIT_ACCURED_INTEREST], Layout::Left, 5);
+  layout.SetField(widgets_->box[DEPOSIT_TOTAL_AMOUNT],
+                  widgets_->boxData[DEPOSIT_TOTAL_AMOUNT], Layout::Left, 5);
+  layout.SetField(widgets_->box[DEPOSIT_TAX_AMOUNT],
+                  widgets_->boxData[DEPOSIT_TAX_AMOUNT], Layout::Left, 5);
 }
 
 void DepositCalculatorUI::setTableContainer() {
   Layout layout;
 
-  int x0 = _widgets->mainInputContainer->x() +
-           _widgets->mainInputContainer->width() + 20;
-  int y0 = _widgets->addInputContainer->y() +
-           _widgets->addInputContainer->height() + 26 + 45 + 20;
+  int x0 = widgets_->mainInputContainer->x() +
+           widgets_->mainInputContainer->width() + 20;
+  int y0 = widgets_->addInputContainer->y() +
+           widgets_->addInputContainer->height() + 26 + 45 + 20;
 
   int xMax = this->width() - 10;
   int yMax = this->height() - 10;
 
-  layout.SetStartPoints(x0, y0);
-  layout.SetEndPoints(xMax, yMax);
-  layout.SetRows(1);
-  layout.SetColumns(1);
-  layout.SetAutoSize();
+  layout.setStartPoints(x0, y0);
+  layout.setEndPoints(xMax, yMax);
+  layout.setRows(1);
+  layout.setColumns(1);
+  layout.setAutoSize();
 
-  layout.AddWidget(_widgets->tablesContainer);
-  _widgets->generalTable->setGeometry(
-      _widgets->tablesContainer->x(), _widgets->tablesContainer->y(),
-      _widgets->tablesContainer->width(), _widgets->tablesContainer->height());
-  _widgets->topUpTable->setGeometry(
-      _widgets->tablesContainer->x(), _widgets->tablesContainer->y(),
-      _widgets->tablesContainer->width(), _widgets->tablesContainer->height());
-  _widgets->takeOffTable->setGeometry(
-      _widgets->tablesContainer->x(), _widgets->tablesContainer->y(),
-      _widgets->tablesContainer->width(), _widgets->tablesContainer->height());
+  layout.AddWidget(widgets_->tablesContainer);
+  widgets_->generalTable->setGeometry(
+      widgets_->tablesContainer->x(), widgets_->tablesContainer->y(),
+      widgets_->tablesContainer->width(), widgets_->tablesContainer->height());
+  widgets_->topUpTable->setGeometry(
+      widgets_->tablesContainer->x(), widgets_->tablesContainer->y(),
+      widgets_->tablesContainer->width(), widgets_->tablesContainer->height());
+  widgets_->takeOffTable->setGeometry(
+      widgets_->tablesContainer->x(), widgets_->tablesContainer->y(),
+      widgets_->tablesContainer->width(), widgets_->tablesContainer->height());
 }
 
 void DepositCalculatorUI::setTable() {
-  _widgets->generalTable->setColumnCount(4);
+  widgets_->generalTable->setColumnCount(4);
   QStringList headerLabelsGeneralTable;
   headerLabelsGeneralTable << "Date"
                            << "Operation Type"
                            << "Operation Sum"
                            << "Deposit Sum";
-  _widgets->generalTable->setHorizontalHeaderLabels(headerLabelsGeneralTable);
-  _widgets->generalTable->horizontalHeader()->setSectionResizeMode(
+  widgets_->generalTable->setHorizontalHeaderLabels(headerLabelsGeneralTable);
+  widgets_->generalTable->horizontalHeader()->setSectionResizeMode(
       QHeaderView::Stretch);
-  _widgets->generalTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+  widgets_->generalTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-  _widgets->takeOffTable->setColumnCount(2);
+  widgets_->takeOffTable->setColumnCount(2);
   QStringList headerLabelsTakeOff;
   headerLabelsTakeOff << "Date"
                       << "Sum";
-  _widgets->takeOffTable->setHorizontalHeaderLabels(headerLabelsTakeOff);
-  _widgets->takeOffTable->horizontalHeader()->setSectionResizeMode(
+  widgets_->takeOffTable->setHorizontalHeaderLabels(headerLabelsTakeOff);
+  widgets_->takeOffTable->horizontalHeader()->setSectionResizeMode(
       QHeaderView::Stretch);
-  _widgets->takeOffTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+  widgets_->takeOffTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-  _widgets->topUpTable->setColumnCount(2);
+  widgets_->topUpTable->setColumnCount(2);
   QStringList headerLabelsTopUpTable;
   headerLabelsTopUpTable << "Date"
                          << "Sum";
-  _widgets->topUpTable->setHorizontalHeaderLabels(headerLabelsTopUpTable);
-  _widgets->topUpTable->horizontalHeader()->setSectionResizeMode(
+  widgets_->topUpTable->setHorizontalHeaderLabels(headerLabelsTopUpTable);
+  widgets_->topUpTable->horizontalHeader()->setSectionResizeMode(
       QHeaderView::Stretch);
-  _widgets->topUpTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+  widgets_->topUpTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
 void DepositCalculatorUI::setAddInputContainer() {
-  _widgets->addInputContainer->setGeometry(
-      _widgets->mainInputContainer->x() +
-          _widgets->mainInputContainer->width() + 10,
+  widgets_->addInputContainer->setGeometry(
+      widgets_->mainInputContainer->x() +
+          widgets_->mainInputContainer->width() + 10,
       10, 930, 170);
   Layout layout;
 
-  layout.SetStartPoints(_widgets->addInputContainer->x(),
-                        _widgets->addInputContainer->y());
-  layout.SetEndPoints(
-      _widgets->addInputContainer->x() + _widgets->addInputContainer->width(),
-      _widgets->addInputContainer->y() + _widgets->addInputContainer->height());
-  layout.SetRows(2);
-  layout.SetColumns(3);
-  layout.SetLeftSpacing(10);
-  layout.SetRightSpacing(10);
-  layout.SetAboveSpacing(35);
-  layout.SetBottomSpacing(10);
-  layout.SetVerticalSpacing(35);
-  layout.SetHorizontalSpacing(10);
-  layout.SetAutoSize();
+  layout.setStartPoints(widgets_->addInputContainer->x(),
+                        widgets_->addInputContainer->y());
+  layout.setEndPoints(
+      widgets_->addInputContainer->x() + widgets_->addInputContainer->width(),
+      widgets_->addInputContainer->y() + widgets_->addInputContainer->height());
+  layout.setRows(2);
+  layout.setColumns(3);
+  layout.setLeftSpacing(10);
+  layout.setRightSpacing(10);
+  layout.setAboveSpacing(35);
+  layout.setBottomSpacing(10);
+  layout.setVerticalSpacing(35);
+  layout.setHorizontalSpacing(10);
+  layout.setAutoSize();
 
-  layout.AddWidget(_widgets->dateOfPlacementButton);
-  layout.SetHorizontalSpacing(2);
-  layout.AddWidget(_widgets->dateButton, 0.5);
-  layout.SetHorizontalSpacing(10);
-  layout.AddWidget(_widgets->box[DEPOSIT_OPERATION_SUM], 0.5);
-  layout.AddWidget(_widgets->interestCapitalization);
+  layout.AddWidget(widgets_->dateOfPlacementButton);
+  layout.setHorizontalSpacing(2);
+  layout.AddWidget(widgets_->dateButton, 0.5);
+  layout.setHorizontalSpacing(10);
+  layout.AddWidget(widgets_->box[DEPOSIT_OPERATION_SUM], 0.5);
+  layout.AddWidget(widgets_->interestCapitalization);
   layout.NextRow();
-  layout.AddWidget(_widgets->box[DEPOSIT_TAX_RATE]);
-  layout.SetHorizontalSpacing(2);
-  layout.AddWidget(_widgets->topUpButton, 0.5);
-  layout.SetHorizontalSpacing(10);
-  layout.AddWidget(_widgets->takeOffButton, 0.5);
-  layout.AddWidget(_widgets->calculateButton);
+  layout.AddWidget(widgets_->box[DEPOSIT_TAX_RATE]);
+  layout.setHorizontalSpacing(2);
+  layout.AddWidget(widgets_->topUpButton, 0.5);
+  layout.setHorizontalSpacing(10);
+  layout.AddWidget(widgets_->takeOffButton, 0.5);
+  layout.AddWidget(widgets_->calculateButton);
   layout.NextRow();
-  layout.SetHorizontalSpacing(2);
-  layout.AddWidget(_widgets->setTopUpListButton, 0.5);
-  layout.SetHorizontalSpacing(10);
-  layout.AddWidget(_widgets->buttonClearTopUpTable, 0.5);
-  layout.SetHorizontalSpacing(2);
-  layout.AddWidget(_widgets->setTakeOffListButton, 0.5);
-  layout.SetHorizontalSpacing(10);
-  layout.AddWidget(_widgets->buttonClearTakeOffTable, 0.5);
-  layout.SetHorizontalSpacing(2);
-  layout.AddWidget(_widgets->setGeneralListButton, 0.5);
-  layout.SetHorizontalSpacing(10);
-  layout.AddWidget(_widgets->buttonClearGeneralTable, 0.5);
+  layout.setHorizontalSpacing(2);
+  layout.AddWidget(widgets_->setTopUpListButton, 0.5);
+  layout.setHorizontalSpacing(10);
+  layout.AddWidget(widgets_->buttonClearTopUpTable, 0.5);
+  layout.setHorizontalSpacing(2);
+  layout.AddWidget(widgets_->setTakeOffListButton, 0.5);
+  layout.setHorizontalSpacing(10);
+  layout.AddWidget(widgets_->buttonClearTakeOffTable, 0.5);
+  layout.setHorizontalSpacing(2);
+  layout.AddWidget(widgets_->setGeneralListButton, 0.5);
+  layout.setHorizontalSpacing(10);
+  layout.AddWidget(widgets_->buttonClearGeneralTable, 0.5);
 
-  layout.SetTitle(_widgets->dateOfPlacementButton,
-                  _widgets->boxTitle[DEPOSIT_DATE_OF_PLACEMENT],
+  layout.SetTitle(widgets_->dateOfPlacementButton,
+                  widgets_->boxTitle[DEPOSIT_DATE_OF_PLACEMENT],
                   Layout::CenterH, Layout::Above, 16, 0, -10);
-  layout.SetTitle(_widgets->box[DEPOSIT_OPERATION_SUM],
-                  _widgets->boxTitle[DEPOSIT_OPERATION_SUM], Layout::CenterH,
+  layout.SetTitle(widgets_->box[DEPOSIT_OPERATION_SUM],
+                  widgets_->boxTitle[DEPOSIT_OPERATION_SUM], Layout::CenterH,
                   Layout::Above, 16, 0, -10);
-  layout.SetTitle(_widgets->box[DEPOSIT_TAX_RATE],
-                  _widgets->boxTitle[DEPOSIT_TAX_RATE], Layout::CenterH,
+  layout.SetTitle(widgets_->box[DEPOSIT_TAX_RATE],
+                  widgets_->boxTitle[DEPOSIT_TAX_RATE], Layout::CenterH,
                   Layout::Above, 16, 0, -10);
-  layout.SetTitle(_widgets->dateButton,
-                  _widgets->boxTitle[DEPOSIT_OPERATION_DATE], Layout::CenterH,
+  layout.SetTitle(widgets_->dateButton,
+                  widgets_->boxTitle[DEPOSIT_OPERATION_DATE], Layout::CenterH,
                   Layout::Above, 16, 0, -10);
 
-  layout.SetField(_widgets->box[DEPOSIT_TAX_RATE],
-                  _widgets->boxData[DEPOSIT_TAX_RATE], Layout::CenterH, 0);
-  layout.SetField(_widgets->box[DEPOSIT_OPERATION_SUM],
-                  _widgets->boxData[DEPOSIT_OPERATION_SUM], Layout::CenterH, 0);
+  layout.SetField(widgets_->box[DEPOSIT_TAX_RATE],
+                  widgets_->boxData[DEPOSIT_TAX_RATE], Layout::CenterH, 0);
+  layout.SetField(widgets_->box[DEPOSIT_OPERATION_SUM],
+                  widgets_->boxData[DEPOSIT_OPERATION_SUM], Layout::CenterH, 0);
 }
 
 void DepositCalculatorUI::setMainInputContainer() {
-  _widgets->mainInputContainer->setGeometry(10, 10, 320, 335);
+  widgets_->mainInputContainer->setGeometry(10, 10, 320, 335);
 
   Layout layout;
-  layout.SetStartPoints(_widgets->mainInputContainer->x(),
-                        _widgets->mainInputContainer->y());
-  layout.SetEndPoints(
-      _widgets->mainInputContainer->x() + _widgets->mainInputContainer->width(),
-      _widgets->mainInputContainer->y() +
-          _widgets->mainInputContainer->height());
-  layout.SetRows(4);
-  layout.SetColumns(1);
-  layout.SetLeftSpacing(10);
-  layout.SetRightSpacing(10);
-  layout.SetAboveSpacing(35);
-  layout.SetBottomSpacing(10);
-  layout.SetHorizontalSpacing(2);
-  layout.SetVerticalSpacing(35);
-  layout.SetAutoSize();
+  layout.setStartPoints(widgets_->mainInputContainer->x(),
+                        widgets_->mainInputContainer->y());
+  layout.setEndPoints(
+      widgets_->mainInputContainer->x() + widgets_->mainInputContainer->width(),
+      widgets_->mainInputContainer->y() +
+          widgets_->mainInputContainer->height());
+  layout.setRows(4);
+  layout.setColumns(1);
+  layout.setLeftSpacing(10);
+  layout.setRightSpacing(10);
+  layout.setAboveSpacing(35);
+  layout.setBottomSpacing(10);
+  layout.setHorizontalSpacing(2);
+  layout.setVerticalSpacing(35);
+  layout.setAutoSize();
 
-  layout.AddWidget(_widgets->box[DEPOSIT_AMOUNT]);
-  layout.AddWidget(_widgets->box[DEPOSIT_INTEREST_RATE]);
+  layout.AddWidget(widgets_->box[DEPOSIT_AMOUNT]);
+  layout.AddWidget(widgets_->box[DEPOSIT_INTEREST_RATE]);
   layout.ChangeColumns(2);
-  layout.AddWidget(_widgets->box[DEPOSIT_PLACEMENT_PERIOD]);
-  layout.AddWidget(_widgets->placementPeriodButton);
+  layout.AddWidget(widgets_->box[DEPOSIT_PLACEMENT_PERIOD]);
+  layout.AddWidget(widgets_->placementPeriodButton);
   layout.ChangeColumns(1);
-  layout.AddWidget(_widgets->frequencyOfPaymentsButton);
+  layout.AddWidget(widgets_->frequencyOfPaymentsButton);
 
-  layout.SetTitle(_widgets->box[DEPOSIT_AMOUNT],
-                  _widgets->boxTitle[DEPOSIT_AMOUNT], Layout::CenterH,
+  layout.SetTitle(widgets_->box[DEPOSIT_AMOUNT],
+                  widgets_->boxTitle[DEPOSIT_AMOUNT], Layout::CenterH,
                   Layout::Above, 16, 0, -10);
-  layout.SetTitle(_widgets->box[DEPOSIT_INTEREST_RATE],
-                  _widgets->boxTitle[DEPOSIT_INTEREST_RATE], Layout::CenterH,
+  layout.SetTitle(widgets_->box[DEPOSIT_INTEREST_RATE],
+                  widgets_->boxTitle[DEPOSIT_INTEREST_RATE], Layout::CenterH,
                   Layout::Above, 16, 0, -10);
   layout.SetTitle(
-      _widgets->box[DEPOSIT_PLACEMENT_PERIOD],
-      _widgets->boxTitle[DEPOSIT_PLACEMENT_PERIOD], Layout::Left, Layout::Above,
-      16, _widgets->box[DEPOSIT_PLACEMENT_PERIOD]->width() / 2 + 10, -10);
-  layout.SetTitle(_widgets->frequencyOfPaymentsButton,
-                  _widgets->boxTitle[DEPOSIT_FREQUENCY_OF_PAYMENTS],
+      widgets_->box[DEPOSIT_PLACEMENT_PERIOD],
+      widgets_->boxTitle[DEPOSIT_PLACEMENT_PERIOD], Layout::Left, Layout::Above,
+      16, widgets_->box[DEPOSIT_PLACEMENT_PERIOD]->width() / 2 + 10, -10);
+  layout.SetTitle(widgets_->frequencyOfPaymentsButton,
+                  widgets_->boxTitle[DEPOSIT_FREQUENCY_OF_PAYMENTS],
                   Layout::CenterH, Layout::Above, 16, 0, -10);
 
-  layout.SetField(_widgets->box[DEPOSIT_AMOUNT],
-                  _widgets->boxData[DEPOSIT_AMOUNT], Layout::Left, 5);
-  layout.SetField(_widgets->box[DEPOSIT_INTEREST_RATE],
-                  _widgets->boxData[DEPOSIT_INTEREST_RATE], Layout::Left, 5);
-  layout.SetField(_widgets->box[DEPOSIT_PLACEMENT_PERIOD],
-                  _widgets->boxData[DEPOSIT_PLACEMENT_PERIOD], Layout::Left, 5);
+  layout.SetField(widgets_->box[DEPOSIT_AMOUNT],
+                  widgets_->boxData[DEPOSIT_AMOUNT], Layout::Left, 5);
+  layout.SetField(widgets_->box[DEPOSIT_INTEREST_RATE],
+                  widgets_->boxData[DEPOSIT_INTEREST_RATE], Layout::Left, 5);
+  layout.SetField(widgets_->box[DEPOSIT_PLACEMENT_PERIOD],
+                  widgets_->boxData[DEPOSIT_PLACEMENT_PERIOD], Layout::Left, 5);
 }
 
 void DepositCalculatorUI::setInputValidator() {
-  _widgets->boxData[DEPOSIT_AMOUNT]->setValidator(
+  widgets_->boxData[DEPOSIT_AMOUNT]->setValidator(
       new QRegularExpressionValidator(
           QRegularExpression("[0-9]{1,10}([.][0-9]{1,2})?"), this));
-  _widgets->boxData[DEPOSIT_INTEREST_RATE]->setValidator(
+  widgets_->boxData[DEPOSIT_INTEREST_RATE]->setValidator(
       new QRegularExpressionValidator(
           QRegularExpression("[0-9]{1,3}([.][0-9]{1,2})?"), this));
-  _widgets->boxData[DEPOSIT_TAX_RATE]->setValidator(
+  widgets_->boxData[DEPOSIT_TAX_RATE]->setValidator(
       new QRegularExpressionValidator(
           QRegularExpression("[0-9]{1,2}([.][0-9]{1,2})?"), this));
-  _widgets->boxData[DEPOSIT_OPERATION_SUM]->setValidator(
+  widgets_->boxData[DEPOSIT_OPERATION_SUM]->setValidator(
       new QRegularExpressionValidator(
           QRegularExpression("[0-9]{1,10}([.][0-9]{1,2})?"), this));
-  _widgets->boxData[DEPOSIT_PLACEMENT_PERIOD]->setValidator(
+  widgets_->boxData[DEPOSIT_PLACEMENT_PERIOD]->setValidator(
       new QRegularExpressionValidator(QRegularExpression("[0-9]{1,2}"), this));
 }
 
@@ -563,23 +563,23 @@ void DepositCalculatorUI::setRow(QTableWidget *table, QString date,
 }
 
 void DepositCalculatorUI::setFrequencyButtonActiveAction(QAction *action) {
-  _widgets->frequencyActiveAction.first = action->data().toInt();
-  _widgets->frequencyActiveAction.second = action;
+  widgets_->frequencyActiveAction.first = action->data().toInt();
+  widgets_->frequencyActiveAction.second = action;
 
-  _widgets->frequencyOfPaymentsButton->setText(action->text());
+  widgets_->frequencyOfPaymentsButton->setText(action->text());
 }
 
 void DepositCalculatorUI::setPeriodButtonActiveAction(QAction *action) {
-  _widgets->periodActiveAction.first = action->data().toInt();
-  _widgets->periodActiveAction.second = action;
+  widgets_->periodActiveAction.first = action->data().toInt();
+  widgets_->periodActiveAction.second = action;
 
-  _widgets->placementPeriodButton->setText(action->text());
+  widgets_->placementPeriodButton->setText(action->text());
 }
 
 void DepositCalculatorUI::fillGeneralList() {
-  _widgets->generalTable->setRowCount(0);
+  widgets_->generalTable->setRowCount(0);
   std::vector<std::tuple<QDate, QString, double, double>> generalList =
-      _controller->getGeneralList();
+      controller_->getGeneralList();
 
   for (const auto &tuple : generalList) {
     QString date = std::get<0>(tuple).toString("dd-MM-yyyy");
@@ -587,7 +587,7 @@ void DepositCalculatorUI::fillGeneralList() {
     QString operationSum = QString::number(std::get<2>(tuple), 'f', 2);
     QString depositSum = QString::number(std::get<3>(tuple), 'f', 2);
 
-    setRow(_widgets->generalTable, date, type, operationSum, depositSum);
+    setRow(widgets_->generalTable, date, type, operationSum, depositSum);
   }
 }
 
@@ -714,60 +714,60 @@ void DepositCalculatorUI::setStyle() {
                 border-radius: 5;
             }
         )";
-  _widgets->depositCalcWindow->setStyleSheet(styleSheet);
+  widgets_->depositCalcWindow->setStyleSheet(styleSheet);
 
-  for (auto it : _widgets->boxData) {
+  for (auto it : widgets_->boxData) {
     it.second->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
   }
 
-  _widgets->boxData[DEPOSIT_ACCURED_INTEREST]->setReadOnly(true);
-  _widgets->boxData[DEPOSIT_TOTAL_AMOUNT]->setReadOnly(true);
-  _widgets->boxData[DEPOSIT_TAX_AMOUNT]->setReadOnly(true);
+  widgets_->boxData[DEPOSIT_ACCURED_INTEREST]->setReadOnly(true);
+  widgets_->boxData[DEPOSIT_TOTAL_AMOUNT]->setReadOnly(true);
+  widgets_->boxData[DEPOSIT_TAX_AMOUNT]->setReadOnly(true);
 }
 
 void DepositCalculatorUI::clearTakeOffList() {
-  _widgets->takeOffList.clear();
-  _widgets->takeOffTable->setRowCount(0);
+  widgets_->takeOffList.clear();
+  widgets_->takeOffTable->setRowCount(0);
 }
 
 void DepositCalculatorUI::clearTopUpList() {
-  _widgets->topUpList.clear();
-  _widgets->topUpTable->setRowCount(0);
+  widgets_->topUpList.clear();
+  widgets_->topUpTable->setRowCount(0);
 }
 
 void DepositCalculatorUI::clearGeneralList() {
-  _widgets->generalList.clear();
-  _widgets->generalTable->setRowCount(0);
+  widgets_->generalList.clear();
+  widgets_->generalTable->setRowCount(0);
 }
 
 void DepositCalculatorUI::showGeneralTable() {
-  _widgets->takeOffTable->hide();
-  _widgets->topUpTable->hide();
-  _widgets->generalTable->show();
+  widgets_->takeOffTable->hide();
+  widgets_->topUpTable->hide();
+  widgets_->generalTable->show();
 }
 
 void DepositCalculatorUI::showTopUpTable() {
-  _widgets->generalTable->hide();
-  _widgets->takeOffTable->hide();
-  _widgets->topUpTable->show();
+  widgets_->generalTable->hide();
+  widgets_->takeOffTable->hide();
+  widgets_->topUpTable->show();
 }
 
 void DepositCalculatorUI::showTakeOffTable() {
-  _widgets->generalTable->hide();
-  _widgets->topUpTable->hide();
-  _widgets->takeOffTable->show();
+  widgets_->generalTable->hide();
+  widgets_->topUpTable->hide();
+  widgets_->takeOffTable->show();
 }
 
 void DepositCalculatorUI::addTopUp() {
-  if (_widgets->topUpList.size() < 50) {
-    QDate date = QDate::fromString(_widgets->dateButton->text(), "dd-MM-yyyy");
-    double sum = _widgets->boxData[DEPOSIT_OPERATION_SUM]->text().toDouble();
+  if (widgets_->topUpList.size() < 50) {
+    QDate date = QDate::fromString(widgets_->dateButton->text(), "dd-MM-yyyy");
+    double sum = widgets_->boxData[DEPOSIT_OPERATION_SUM]->text().toDouble();
 
-    _widgets->topUpList.insert(std::make_pair(date, sum));
-    _widgets->topUpTable->setRowCount(0);
+    widgets_->topUpList.insert(std::make_pair(date, sum));
+    widgets_->topUpTable->setRowCount(0);
 
-    for (auto it : _widgets->topUpList) {
-      setRow(_widgets->topUpTable, it.first.toString("dd-MM-yyyy"),
+    for (auto it : widgets_->topUpList) {
+      setRow(widgets_->topUpTable, it.first.toString("dd-MM-yyyy"),
              QString::number(it.second, 'f', 2));
     }
   }
@@ -775,15 +775,15 @@ void DepositCalculatorUI::addTopUp() {
 }
 
 void DepositCalculatorUI::addTakeOff() {
-  if (_widgets->takeOffList.size() < 50) {
-    QDate date = QDate::fromString(_widgets->dateButton->text(), "dd-MM-yyyy");
-    double sum = _widgets->boxData[DEPOSIT_OPERATION_SUM]->text().toDouble();
+  if (widgets_->takeOffList.size() < 50) {
+    QDate date = QDate::fromString(widgets_->dateButton->text(), "dd-MM-yyyy");
+    double sum = widgets_->boxData[DEPOSIT_OPERATION_SUM]->text().toDouble();
 
-    _widgets->takeOffList.insert(std::make_pair(date, sum));
-    _widgets->takeOffTable->setRowCount(0);
+    widgets_->takeOffList.insert(std::make_pair(date, sum));
+    widgets_->takeOffTable->setRowCount(0);
 
-    for (auto it : _widgets->takeOffList) {
-      setRow(_widgets->takeOffTable, it.first.toString("dd-MM-yyyy"),
+    for (auto it : widgets_->takeOffList) {
+      setRow(widgets_->takeOffTable, it.first.toString("dd-MM-yyyy"),
              QString::number(it.second, 'f', 2));
     }
   }
@@ -792,7 +792,7 @@ void DepositCalculatorUI::addTakeOff() {
 
 void DepositCalculatorUI::Calculate() {
   if (setInput()) {
-    _controller->Calculate();
+    controller_->Calculate();
     getOutput();
     fillGeneralList();
     showGeneralTable();
@@ -808,25 +808,25 @@ void DepositCalculatorUI::setFrequency() {
 }
 
 void DepositCalculatorUI::calendarShow() {
-  _calendarSender = static_cast<QToolButton *>(sender());
+  calendarSender_ = static_cast<QToolButton *>(sender());
 
   int calendarWidth = 300;
   int calendarHeight = 300;
 
-  int calendarY = _calendarSender->y() + _calendarSender->height() + 10;
+  int calendarY = calendarSender_->y() + calendarSender_->height() + 10;
   int calendarX =
-      _calendarSender->x() + _calendarSender->width() / 2 - calendarWidth / 2;
+      calendarSender_->x() + calendarSender_->width() / 2 - calendarWidth / 2;
 
-  _widgets->backgroundCalendar->setGeometry(calendarX, calendarY, calendarWidth,
+  widgets_->backgroundCalendar->setGeometry(calendarX, calendarY, calendarWidth,
                                             calendarHeight);
-  _widgets->calendar->setGeometry(10, 10,
-                                  _widgets->backgroundCalendar->width() - 15,
-                                  _widgets->backgroundCalendar->height() - 20);
-  _widgets->backgroundCalendar->show();
+  widgets_->calendar->setGeometry(10, 10,
+                                  widgets_->backgroundCalendar->width() - 15,
+                                  widgets_->backgroundCalendar->height() - 20);
+  widgets_->backgroundCalendar->show();
 }
 
 void DepositCalculatorUI::setDate() {
-  _widgets->backgroundCalendar->hide();
-  QDate selectedDate(_widgets->calendar->selectedDate());
-  _calendarSender->setText(selectedDate.toString("dd-MM-yyyy"));
+  widgets_->backgroundCalendar->hide();
+  QDate selectedDate(widgets_->calendar->selectedDate());
+  calendarSender_->setText(selectedDate.toString("dd-MM-yyyy"));
 }

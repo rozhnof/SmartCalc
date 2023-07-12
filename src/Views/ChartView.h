@@ -4,36 +4,28 @@
 #include <QtCharts>
 
 class ChartView {
-  QChart *chart;
-  QChartView *chartView;
-  QStackedBarSeries *series;
-  QValueAxis *axisY;
-  QBarSet *bodyBar;
-  QBarSet *percentBar;
+ private:
+  QChart *chart_;
+  QChartView *chartView_;
+  QStackedBarSeries *series_;
+  QValueAxis *axisY_;
+  QBarSet *bodyBar_;
+  QBarSet *percentBar_;
 
  public:
   ChartView(QWidget *parent);
-
   ~ChartView();
 
   void show();
+  void clear();
 
   void setGeometry(int ax, int ay, int aw, int ah);
-
-  void Clear();
-
-  void SetData(QVector<double> newBodyBar, QVector<double> newPercentBar);
-
-  void SetBarColor(QColor bodyBarColor, QColor percentBarColor);
-
-  void SetBorderBarColor(QColor bodyBorderBarColor,
+  void setData(QVector<double> newBodyBar, QVector<double> newPercentBar);
+  void setBarColor(QColor bodyBarColor, QColor percentBarColor);
+  void setBorderBarColor(QColor bodyBorderBarColor,
                          QColor percentBorderBarColor);
-
-  void SetLabelsColor(QColor color);
-
-  void SetLinePenColor(QColor color);
-
-  void SetGridLineColor(QColor color);
-
-  void SetBarWidth(qreal width);
+  void setLabelsColor(QColor color);
+  void setLinePenColor(QColor color);
+  void setGridLineColor(QColor color);
+  void setBarWidth(qreal width);
 };

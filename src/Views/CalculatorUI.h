@@ -19,40 +19,32 @@ class CalculatorUI : public MainWindow {
   Q_OBJECT
 
  private:
-  CalculatorController *_controller;
-  CalcWidgets *_widgets;
+  CalculatorController *controller_;
+  CalcWidgets *widgets_;
 
  public:
   CalculatorUI();
-
   ~CalculatorUI();
 
   void SetupUI() override;
 
  private:
   void initInputXWidget();
-
   void initWidgets();
-
   void connectWidgetsToSlots();
 
   void resetWidgets();
 
  private slots:
-
   void setLexema();
 
   void clearButton();
-
+  void equalButton();
   void clearAllButton();
 
   void showInputX();
-
   void hideInputX();
 
-  void equalButton();
-
   void CalculateWithX();
-
   void Calculate(QString input, double x);
 };

@@ -4,10 +4,9 @@
 
 class GraphModel {
  private:
-  Service service;
-
-  GraphInput _input;
-  GraphOutput _output;
+  Service service_;
+  GraphInput input_;
+  GraphOutput output_;
 
  public:
   GraphModel();
@@ -15,11 +14,9 @@ class GraphModel {
 
   void setInput(GraphInput input);
 
-  void Calculate();
-
   GraphOutput getOutput();
-
   std::vector<double> getCollectionX();
-
   std::vector<double> getCollectionY();
+
+  void Calculate();
 };

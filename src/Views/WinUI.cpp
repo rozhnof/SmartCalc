@@ -113,30 +113,30 @@ void WinUI::setStyle(CreditCalcWidgets *widgets) {
   widgets->title[CREDIT_INTEREST_RATE]->setStyleSheet(
       "color: rgb(217, 217, 217);");
 
-  widgets->chartView->SetBarWidth(0.75);
-  widgets->chartView->SetBarColor(QColor(105, 124, 194), QColor(132, 157, 245));
-  widgets->chartView->SetBorderBarColor(QColor(27, 32, 50), QColor(27, 32, 50));
-  widgets->chartView->SetLabelsColor(QColor(217, 217, 217));
-  widgets->chartView->SetLinePenColor(QColor(217, 217, 217));
-  widgets->chartView->SetGridLineColor(QColor(217, 217, 217));
+  widgets->chartView->setBarWidth(0.75);
+  widgets->chartView->setBarColor(QColor(105, 124, 194), QColor(132, 157, 245));
+  widgets->chartView->setBorderBarColor(QColor(27, 32, 50), QColor(27, 32, 50));
+  widgets->chartView->setLabelsColor(QColor(217, 217, 217));
+  widgets->chartView->setLinePenColor(QColor(217, 217, 217));
+  widgets->chartView->setGridLineColor(QColor(217, 217, 217));
 }
 
 void WinUI::setGeometry(CalcWidgets *widgets) {
   Layout layout;
 
   widgets->calculatorWindow->setFixedSize(420, 350);
-  layout.SetStartPoints(0, 0);
-  layout.SetEndPoints(widgets->calculatorWindow->width(),
+  layout.setStartPoints(0, 0);
+  layout.setEndPoints(widgets->calculatorWindow->width(),
                       widgets->calculatorWindow->height());
-  layout.SetColumns(7);
-  layout.SetRows(7);
-  layout.SetLeftSpacing(3);
-  layout.SetRightSpacing(3);
-  layout.SetAboveSpacing(2);
-  layout.SetBottomSpacing(3);
-  layout.SetHorizontalSpacing(2);
-  layout.SetVerticalSpacing(2);
-  layout.SetAutoSize();
+  layout.setColumns(7);
+  layout.setRows(7);
+  layout.setLeftSpacing(3);
+  layout.setRightSpacing(3);
+  layout.setAboveSpacing(2);
+  layout.setBottomSpacing(3);
+  layout.setHorizontalSpacing(2);
+  layout.setVerticalSpacing(2);
+  layout.setAutoSize();
 
   layout.AddWidget(widgets->inputLineEdit, 7, 2);
   widgets->inputXWidget->setGeometry(-160, 0, 160,

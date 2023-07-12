@@ -11,42 +11,42 @@ bool CreditCalcController::setInput(double creditSum, double creditTerm,
   bool status = Validate(input);
 
   if (status) {
-    _model.setInput(input);
+    model_.setInput(input);
   }
 
   return status;
 }
 
 bool CreditCalcController::Validate(CreditCalculatorInput &input) {
-  return _validator.Validate(input);
+  return validator_.Validate(input);
 }
 
 void CreditCalcController::Calculate(Service::CreditPaymentsType type) {
-  _model.Calculate(type);
+  model_.Calculate(type);
 }
 
 double CreditCalcController::getTotalPayment() {
-  return _model.getTotalPayment();
+  return model_.getTotalPayment();
 }
 
 double CreditCalcController::getOverpayment() {
-  return _model.getOverpayment();
+  return model_.getOverpayment();
 }
 
 QVector<double> CreditCalcController::getMonthlyPayments() {
-  std::vector<double> monthlyPayments = _model.getMonthlyPayments();
+  std::vector<double> monthlyPayments = model_.getMonthlyPayments();
   return QVector<double>(monthlyPayments.begin(), monthlyPayments.end());
 }
 
 QVector<double> CreditCalcController::getMonthlyBodyPayments() {
-  std::vector<double> monthlyBodyPayments = _model.getMonthlyBodyPayments();
+  std::vector<double> monthlyBodyPayments = model_.getMonthlyBodyPayments();
   return QVector<double>(monthlyBodyPayments.begin(),
                          monthlyBodyPayments.end());
 }
 
 QVector<double> CreditCalcController::getMonthlyPercentPayments() {
   std::vector<double> monthlyPercentPayments =
-      _model.getMonthlyPercentPayments();
+      model_.getMonthlyPercentPayments();
   return QVector<double>(monthlyPercentPayments.begin(),
                          monthlyPercentPayments.end());
 }

@@ -1,118 +1,118 @@
 #include "Layout.h"
 
-void Layout::SetStartPoints(int x0, int y0) {
-  _x0 = x0;
-  _y0 = y0;
+void Layout::setStartPoints(int x0, int y0) {
+  x0_ = x0;
+  y0_ = y0;
 
-  _currentX = x0;
-  _currentY = y0;
+  currentX_ = x0;
+  currentY_ = y0;
 }
 
-void Layout::SetEndPoints(int xMax, int yMax) {
-  _xMax = xMax;
-  _yMax = yMax;
+void Layout::setEndPoints(int xMax, int yMax) {
+  xMax_ = xMax;
+  yMax_ = yMax;
 }
 
-void Layout::SetRows(int rows) { _rows = rows; }
+void Layout::setRows(int rows) { rows_ = rows; }
 
-void Layout::SetColumns(int columns) { _columns = columns; }
+void Layout::setColumns(int columns) { columns_ = columns; }
 
-void Layout::SetHorizontalSpacing(int horizontalSpacing) {
-  _horizontalSpacing = horizontalSpacing;
+void Layout::setHorizontalSpacing(int horizontalSpacing) {
+  horizontalSpacing_ = horizontalSpacing;
 }
 
-void Layout::SetVerticalSpacing(int verticalSpacing) {
-  _verticalSpacing = verticalSpacing;
+void Layout::setVerticalSpacing(int verticalSpacing) {
+  verticalSpacing_ = verticalSpacing;
 }
 
-void Layout::SetDefaultElementSize(int width, int height) {
-  _widgetWidth = width;
-  _widgetHeight = height;
+void Layout::setDefaultElementSize(int width, int height) {
+  widgetWidth_ = width;
+  widgetHeight_ = height;
 }
 
-void Layout::SetAutoSize() {
-  _widgetWidth = ((_xMax - _rightSpacing) - (_x0 + _leftSpacing) -
-                  ((_columns - 1) * _horizontalSpacing)) /
-                 _columns;
-  _widgetHeight = ((_yMax - _bottomSpacing) - (_y0 + _aboveSpacing) -
-                   ((_rows - 1) * _verticalSpacing)) /
-                  _rows;
+void Layout::setAutoSize() {
+  widgetWidth_ = ((xMax_ - rightSpacing_) - (x0_ + leftSpacing_) -
+                  ((columns_ - 1) * horizontalSpacing_)) /
+                 columns_;
+  widgetHeight_ = ((yMax_ - bottomSpacing_) - (y0_ + aboveSpacing_) -
+                   ((rows_ - 1) * verticalSpacing_)) /
+                  rows_;
 
-  _xRemaining = _countXRemaining =
-      ((_xMax - _x0) - (_rightSpacing + _leftSpacing) -
-       ((_columns - 1) * _horizontalSpacing)) %
-      _widgetWidth;
-  _yRemaining = _countYRemaining =
-      ((_yMax - _y0) - (_bottomSpacing + _aboveSpacing) -
-       ((_rows - 1) * _verticalSpacing)) %
-      _widgetHeight;
+  xRemaining_ = countXRemaining_ =
+      ((xMax_ - x0_) - (rightSpacing_ + leftSpacing_) -
+       ((columns_ - 1) * horizontalSpacing_)) %
+      widgetWidth_;
+  yRemaining_ = countYRemaining_ =
+      ((yMax_ - y0_) - (bottomSpacing_ + aboveSpacing_) -
+       ((rows_ - 1) * verticalSpacing_)) %
+      widgetHeight_;
 }
 
-void Layout::SetLeftSpacing(int spacing) {
-  _leftSpacing = spacing;
-  _currentX += spacing;
+void Layout::setLeftSpacing(int spacing) {
+  leftSpacing_ = spacing;
+  currentX_ += spacing;
 }
 
-void Layout::SetRightSpacing(int spacing) { _rightSpacing = spacing; }
+void Layout::setRightSpacing(int spacing) { rightSpacing_ = spacing; }
 
-void Layout::SetAboveSpacing(int spacing) {
-  _aboveSpacing = spacing;
-  _currentY += spacing;
+void Layout::setAboveSpacing(int spacing) {
+  aboveSpacing_ = spacing;
+  currentY_ += spacing;
 }
 
-void Layout::SetBottomSpacing(int spacing) { _bottomSpacing = spacing; }
+void Layout::setBottomSpacing(int spacing) { bottomSpacing_ = spacing; }
 
 void Layout::ChangeColumns(int columns) {
-  SetColumns(columns);
-  SetAutoSize();
+  setColumns(columns);
+  setAutoSize();
 }
 
 void Layout::AddWidget(QWidget *widget, double colSpan, double rowSpan) {
-  _currentColSpan = colSpan;
-  _currentRowSpan = rowSpan;
+  currentColSpan_ = colSpan;
+  currentRowSpan_ = rowSpan;
   AddWidgetWithSize(widget,
-                    _widgetWidth * colSpan + _horizontalSpacing * (colSpan - 1),
-                    _widgetHeight * rowSpan + _verticalSpacing * (rowSpan - 1));
+                    widgetWidth_ * colSpan + horizontalSpacing_ * (colSpan - 1),
+                    widgetHeight_ * rowSpan + verticalSpacing_ * (rowSpan - 1));
 }
 
 void Layout::NextRow() {
-  _columnsCounter = 0;
-  _countYRemaining--;
-  _countXRemaining = _xRemaining;
-  _currentX = _x0 + _leftSpacing;
+  columnsCounter_ = 0;
+  countYRemaining_--;
+  countXRemaining_ = xRemaining_;
+  currentX_ = x0_ + leftSpacing_;
 
-  _rowsCounter++;
-  _currentY += (_lastHeight + _verticalSpacing);
+  rowsCounter_++;
+  currentY_ += (lastHeight_ + verticalSpacing_);
 }
 
 void Layout::AddWidgetWithSize(QWidget *widget, int width, int height) {
-  if (_countXRemaining > 0) {
+  if (countXRemaining_ > 0) {
     width++;
-    _countXRemaining--;
+    countXRemaining_--;
   }
-  if (_countYRemaining > 0) {
+  if (countYRemaining_ > 0) {
     height++;
   }
 
-  widget->setGeometry(_currentX, _currentY, width, height);
-  _lastWidth = width;
-  _lastHeight = height;
+  widget->setGeometry(currentX_, currentY_, width, height);
+  lastWidth_ = width;
+  lastHeight_ = height;
 
-  _columnsCounter += _currentColSpan;
-  SetDefaultSpan();
+  columnsCounter_ += currentColSpan_;
+  setDefaultSpan();
 
-  if (_columnsCounter >= _columns) {
+  if (columnsCounter_ >= columns_) {
     NextRow();
   } else {
-    _currentX += (width + _horizontalSpacing);
+    currentX_ += (width + horizontalSpacing_);
   }
 
   widget->show();
 }
 
-void Layout::SetDefaultSpan() {
-  _currentColSpan = 1;
-  _currentRowSpan = 1;
+void Layout::setDefaultSpan() {
+  currentColSpan_ = 1;
+  currentRowSpan_ = 1;
 }
 
 void Layout::SetTitle(QWidget *widget, QWidget *title, AlignH alignH,

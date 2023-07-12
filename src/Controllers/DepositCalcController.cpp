@@ -18,7 +18,7 @@ bool DepositCalcController::setInput(double depositAmount, double interestRate,
   bool status = Validate(input);
 
   if (status) {
-    _model.setInput(input);
+    model_.setInput(input);
   }
 
   return status;
@@ -60,25 +60,25 @@ std::vector<Day> DepositCalcController::ConvertPeriod(
 }
 
 bool DepositCalcController::Validate(const DepositCalculatorInput& input) {
-  return _validator.Validate(input);
+  return validator_.Validate(input);
 }
 
-void DepositCalcController::Calculate() { _model.Calculate(); }
+void DepositCalcController::Calculate() { model_.Calculate(); }
 
 double DepositCalcController::getTotalAmount() {
-  return _model.getTotalAmount();
+  return model_.getTotalAmount();
 }
 
-double DepositCalcController::getTaxAmount() { return _model.getTaxAmount(); }
+double DepositCalcController::getTaxAmount() { return model_.getTaxAmount(); }
 
 double DepositCalcController::getAccuredInterest() {
-  return _model.getAccuredInterest();
+  return model_.getAccuredInterest();
 }
 
 std::vector<std::tuple<QDate, QString, double, double>>
 DepositCalcController::getGeneralList() {
   std::vector<std::tuple<Day, std::string, double, double>> generalList =
-      _model.getGeneralList();
+      model_.getGeneralList();
   std::vector<std::tuple<QDate, QString, double, double>> generalListUI;
 
   for (const auto& tuple : generalList) {

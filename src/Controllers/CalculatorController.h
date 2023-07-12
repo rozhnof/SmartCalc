@@ -7,8 +7,8 @@
 
 class CalculatorController {
  private:
-  InfixNotationValidator _validator;
-  CalculatorModel _model;
+  InfixNotationValidator validator_;
+  CalculatorModel model_;
 
  public:
   CalculatorController();

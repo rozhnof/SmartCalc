@@ -41,40 +41,28 @@ class InfixNotationValidator {
     int expCount;
   };
 
-  Status status = {};
+  Status status_ = {};
 
  public:
-  bool isUnaryOperator(QChar &lexema);
-
-  bool isExponentOperator(QChar lexema);
-
-  bool isOperator(const QChar &lexema);
-
-  bool isNumber(const QChar &symbol);
-
-  int isFunction(QString &lexema, int startIndex);
-
   bool Validate(QString &input);
 
+ private:
   bool FinalValidation(QString &input);
 
-  void SetNumber();
+  bool isUnaryOperator(QChar &lexema);
+  bool isExponentOperator(QChar lexema);
+  bool isOperator(const QChar &lexema);
+  bool isNumber(const QChar &symbol);
+  int isFunction(QString &lexema, int startIndex);
 
-  void SetOperator();
-
-  void SetUnaryOperator();
-
-  void SetFunction();
-
-  void SetFactorial();
-
-  void SetX();
-
-  void SetOpenBracket();
-
-  void SetCloseBracket();
-
-  void SetDot();
-
-  void SetExp();
+  void setNumber();
+  void setOperator();
+  void setUnaryOperator();
+  void setFunction();
+  void setFactorial();
+  void setX();
+  void setOpenBracket();
+  void setCloseBracket();
+  void setDot();
+  void setExp();
 };

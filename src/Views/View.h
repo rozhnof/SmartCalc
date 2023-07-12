@@ -15,20 +15,18 @@
 class View : public QObject {
  private:
   class MainWindow *_currentTab;
-
-  CalculatorUI *_calc;
-  CreditCalculatorUI *_creditCalc;
-  DepositCalculatorUI *_depositCalc;
-  GraphUI *_graph;
+  CalculatorUI *calc_;
+  CreditCalculatorUI *creditCalc_;
+  DepositCalculatorUI *depositCalc_;
+  GraphUI *graph_;
 
  protected:
-  IPlatformUI *_platform = nullptr;
-  IPlatformUI *_winUi;
-  IPlatformUI *_macUi;
+  IPlatformUI *platform_ = nullptr;
+  IPlatformUI *winUi_;
+  IPlatformUI *macUi_;
 
  public:
   View();
-
   ~View();
 
   void show();
@@ -37,14 +35,9 @@ class View : public QObject {
   void AddMenu();
 
   void switchTo(class MainWindow *newTab);
-
   void switchToCalc();
-
   void switchToCreditCalc();
-
   void switchToDepositCalc();
-
   void switchToGraph();
-
   void switchMode();
 };

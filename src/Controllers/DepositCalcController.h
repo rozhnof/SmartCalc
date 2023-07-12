@@ -7,8 +7,8 @@
 
 class DepositCalcController {
  private:
-  DepositCalcModel _model;
-  DepositCalcValidator _validator;
+  DepositCalcModel model_;
+  DepositCalcValidator validator_;
 
  public:
   bool setInput(double depositAmount, double interestRate,
@@ -16,6 +16,11 @@ class DepositCalcController {
                 QDate endDate, QVector<QDate> paymentDays,
                 std::multimap<QDate, double> topUpList,
                 std::multimap<QDate, double> takeOffList);
+
+  double getTotalAmount();
+  double getTaxAmount();
+  double getAccuredInterest();
+  std::vector<std::tuple<QDate, QString, double, double>> getGeneralList();
 
   std::vector<Day> ConvertPeriod(QDate startDate, QDate endDate,
                                  QVector<QDate> paymentDays,
@@ -25,12 +30,4 @@ class DepositCalcController {
   bool Validate(const DepositCalculatorInput &input);
 
   void Calculate();
-
-  double getTotalAmount();
-
-  double getTaxAmount();
-
-  double getAccuredInterest();
-
-  std::vector<std::tuple<QDate, QString, double, double>> getGeneralList();
 };

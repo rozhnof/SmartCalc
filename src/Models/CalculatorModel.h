@@ -6,12 +6,10 @@
 
 class CalculatorModel {
  private:
-  Service service;
-
-  std::string _infix;
-  std::string _postfix;
-
-  double _result;
+  Service service_;
+  std::string infix_;
+  std::string postfix_;
+  double result_;
 
  public:
   double Calculate(std::string infix, double x);

@@ -12,7 +12,6 @@ class Service {
   enum CreditPaymentsType { ANNUITY, DIFFERENTIATED };
 
   std::string GetPostfixNotation(const std::string &infix);
-
   double GetCalculationResult(const std::string &postfix, const double &x);
 
   GraphOutput GetGraphResult(const GraphInput &input);
@@ -25,6 +24,5 @@ class Service {
 
  private:
   CreditCalculatorOutput AnnuityLoan(const CreditCalculatorInput &input);
-
   CreditCalculatorOutput DifferentiatedLoan(const CreditCalculatorInput &input);
 };

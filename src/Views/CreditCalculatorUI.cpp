@@ -2,10 +2,10 @@
 
 CreditCalculatorUI::CreditCalculatorUI()
     : MainWindow(),
-      _controller(new CreditCalcController),
-      _widgets(new CreditCalcWidgets) {
-  _widgets->chartView = new ChartView(this);
-  _widgets->creditCalcWindow = this;
+      controller_(new CreditCalcController),
+      widgets_(new CreditCalcWidgets) {
+  widgets_->chartView = new ChartView(this);
+  widgets_->creditCalcWindow = this;
 
   initWidgets();
   setGeometry();
@@ -15,175 +15,175 @@ CreditCalculatorUI::CreditCalculatorUI()
 }
 
 CreditCalculatorUI::~CreditCalculatorUI() {
-  delete _controller;
-  delete _widgets;
+  delete controller_;
+  delete widgets_;
 }
 
-void CreditCalculatorUI::SetupUI() { (*_platform)->SetupUI(_widgets); }
+void CreditCalculatorUI::SetupUI() { (*platform_)->SetupUI(widgets_); }
 
 void CreditCalculatorUI::initWidgets() {
-  _widgets->box.insert(std::make_pair(CREDIT_SUM, new QTextEdit(this)));
-  _widgets->box.insert(std::make_pair(CREDIT_TERM, new QTextEdit(this)));
-  _widgets->box.insert(
+  widgets_->box.insert(std::make_pair(CREDIT_SUM, new QTextEdit(this)));
+  widgets_->box.insert(std::make_pair(CREDIT_TERM, new QTextEdit(this)));
+  widgets_->box.insert(
       std::make_pair(CREDIT_INTEREST_RATE, new QTextEdit(this)));
-  _widgets->box.insert(
+  widgets_->box.insert(
       std::make_pair(CREDIT_TOTAL_PAYMENT, new QTextEdit(this)));
-  _widgets->box.insert(std::make_pair(CREDIT_OVERPAYMENT, new QTextEdit(this)));
-  _widgets->box.insert(
+  widgets_->box.insert(std::make_pair(CREDIT_OVERPAYMENT, new QTextEdit(this)));
+  widgets_->box.insert(
       std::make_pair(CREDIT_MONTHLY_PAYMENT, new QTextEdit(this)));
 
-  _widgets->title.insert(
+  widgets_->title.insert(
       std::make_pair(CREDIT_SUM, new QLabel("Credit Sum", this)));
-  _widgets->title.insert(
+  widgets_->title.insert(
       std::make_pair(CREDIT_TERM, new QLabel("Credit Term", this)));
-  _widgets->title.insert(
+  widgets_->title.insert(
       std::make_pair(CREDIT_INTEREST_RATE, new QLabel("Interest Rate", this)));
-  _widgets->title.insert(
+  widgets_->title.insert(
       std::make_pair(CREDIT_TOTAL_PAYMENT, new QLabel("Total Payment", this)));
-  _widgets->title.insert(
+  widgets_->title.insert(
       std::make_pair(CREDIT_OVERPAYMENT, new QLabel("Overpayment", this)));
-  _widgets->title.insert(std::make_pair(CREDIT_MONTHLY_PAYMENT,
+  widgets_->title.insert(std::make_pair(CREDIT_MONTHLY_PAYMENT,
                                         new QLabel("Montly Payments", this)));
 
-  _widgets->data.insert(
+  widgets_->data.insert(
       std::make_pair(CREDIT_SUM, NewLineEdit(this, "1000", "inputCreditSum")));
-  _widgets->data.insert(
+  widgets_->data.insert(
       std::make_pair(CREDIT_TERM, NewLineEdit(this, "12", "inputCreditTerm")));
-  _widgets->data.insert(std::make_pair(
+  widgets_->data.insert(std::make_pair(
       CREDIT_INTEREST_RATE, NewLineEdit(this, "10", "inputInterestRate")));
-  _widgets->data.insert(
+  widgets_->data.insert(
       std::make_pair(CREDIT_TOTAL_PAYMENT, new QLineEdit(this)));
-  _widgets->data.insert(
+  widgets_->data.insert(
       std::make_pair(CREDIT_OVERPAYMENT, new QLineEdit(this)));
 
-  _widgets->annuityPaymentButton = new QPushButton("Annuity Payment", this);
-  _widgets->differentiatedPaymentButton =
+  widgets_->annuityPaymentButton = new QPushButton("Annuity Payment", this);
+  widgets_->differentiatedPaymentButton =
       new QPushButton("Differentiated Payment", this);
-  _widgets->monthlyPaymentList = new QComboBox(this);
+  widgets_->monthlyPaymentList = new QComboBox(this);
 }
 
 void CreditCalculatorUI::connectWidgetsToSlots() {
-  connect(_widgets->annuityPaymentButton, &QPushButton::clicked, this,
+  connect(widgets_->annuityPaymentButton, &QPushButton::clicked, this,
           &CreditCalculatorUI::AnnuityPayment);
-  connect(_widgets->differentiatedPaymentButton, &QPushButton::clicked, this,
+  connect(widgets_->differentiatedPaymentButton, &QPushButton::clicked, this,
           &CreditCalculatorUI::DifferentiatedPayment);
 }
 
 void CreditCalculatorUI::setGeometry() {
   this->setFixedSize(950, 700);
-  _widgets->chartView->setGeometry(0, 225, this->width(), this->height() - 225);
+  widgets_->chartView->setGeometry(0, 225, this->width(), this->height() - 225);
 
   Layout layout;
 
-  layout.SetStartPoints(0, 0);
-  layout.SetEndPoints(950, 225);
-  layout.SetColumns(3);
-  layout.SetRows(3);
-  layout.SetLeftSpacing(14);
-  layout.SetRightSpacing(14);
-  layout.SetAboveSpacing(50);
-  layout.SetBottomSpacing(0);
-  layout.SetHorizontalSpacing(12);
-  layout.SetVerticalSpacing(20);
-  layout.SetAutoSize();
+  layout.setStartPoints(0, 0);
+  layout.setEndPoints(950, 225);
+  layout.setColumns(3);
+  layout.setRows(3);
+  layout.setLeftSpacing(14);
+  layout.setRightSpacing(14);
+  layout.setAboveSpacing(50);
+  layout.setBottomSpacing(0);
+  layout.setHorizontalSpacing(12);
+  layout.setVerticalSpacing(20);
+  layout.setAutoSize();
 
-  layout.AddWidget(_widgets->box[CREDIT_SUM]);
-  layout.AddWidget(_widgets->box[CREDIT_TERM]);
-  layout.AddWidget(_widgets->box[CREDIT_INTEREST_RATE]);
+  layout.AddWidget(widgets_->box[CREDIT_SUM]);
+  layout.AddWidget(widgets_->box[CREDIT_TERM]);
+  layout.AddWidget(widgets_->box[CREDIT_INTEREST_RATE]);
 
   layout.ChangeColumns(2);
-  layout.AddWidget(_widgets->annuityPaymentButton);
-  layout.AddWidget(_widgets->differentiatedPaymentButton);
+  layout.AddWidget(widgets_->annuityPaymentButton);
+  layout.AddWidget(widgets_->differentiatedPaymentButton);
 
   layout.ChangeColumns(3);
-  layout.AddWidget(_widgets->box[CREDIT_TOTAL_PAYMENT]);
-  layout.AddWidget(_widgets->box[CREDIT_OVERPAYMENT]);
-  layout.AddWidget(_widgets->box[CREDIT_MONTHLY_PAYMENT]);
+  layout.AddWidget(widgets_->box[CREDIT_TOTAL_PAYMENT]);
+  layout.AddWidget(widgets_->box[CREDIT_OVERPAYMENT]);
+  layout.AddWidget(widgets_->box[CREDIT_MONTHLY_PAYMENT]);
 
-  layout.SetTitle(_widgets->box[CREDIT_SUM], _widgets->title[CREDIT_SUM],
+  layout.SetTitle(widgets_->box[CREDIT_SUM], widgets_->title[CREDIT_SUM],
                   Layout::Left, Layout::Above, 16, 0, -10);
-  layout.SetTitle(_widgets->box[CREDIT_TERM], _widgets->title[CREDIT_TERM],
+  layout.SetTitle(widgets_->box[CREDIT_TERM], widgets_->title[CREDIT_TERM],
                   Layout::Left, Layout::Above, 16, 0, -10);
-  layout.SetTitle(_widgets->box[CREDIT_INTEREST_RATE],
-                  _widgets->title[CREDIT_INTEREST_RATE], Layout::Left,
+  layout.SetTitle(widgets_->box[CREDIT_INTEREST_RATE],
+                  widgets_->title[CREDIT_INTEREST_RATE], Layout::Left,
                   Layout::Above, 16, 0, -10);
-  layout.SetTitle(_widgets->box[CREDIT_TOTAL_PAYMENT],
-                  _widgets->title[CREDIT_TOTAL_PAYMENT], Layout::Left,
+  layout.SetTitle(widgets_->box[CREDIT_TOTAL_PAYMENT],
+                  widgets_->title[CREDIT_TOTAL_PAYMENT], Layout::Left,
                   Layout::CenterV, 16, 5, 0);
-  layout.SetTitle(_widgets->box[CREDIT_OVERPAYMENT],
-                  _widgets->title[CREDIT_OVERPAYMENT], Layout::Left,
+  layout.SetTitle(widgets_->box[CREDIT_OVERPAYMENT],
+                  widgets_->title[CREDIT_OVERPAYMENT], Layout::Left,
                   Layout::CenterV, 16, 5, 0);
-  layout.SetTitle(_widgets->box[CREDIT_MONTHLY_PAYMENT],
-                  _widgets->title[CREDIT_MONTHLY_PAYMENT], Layout::Left,
+  layout.SetTitle(widgets_->box[CREDIT_MONTHLY_PAYMENT],
+                  widgets_->title[CREDIT_MONTHLY_PAYMENT], Layout::Left,
                   Layout::CenterV, 16, 5, 0);
 
-  layout.SetField(_widgets->box[CREDIT_SUM], _widgets->data[CREDIT_SUM],
+  layout.SetField(widgets_->box[CREDIT_SUM], widgets_->data[CREDIT_SUM],
                   Layout::Left, 15);
-  layout.SetField(_widgets->box[CREDIT_TERM], _widgets->data[CREDIT_TERM],
+  layout.SetField(widgets_->box[CREDIT_TERM], widgets_->data[CREDIT_TERM],
                   Layout::Left, 15);
-  layout.SetField(_widgets->box[CREDIT_INTEREST_RATE],
-                  _widgets->data[CREDIT_INTEREST_RATE], Layout::Left, 15);
-  layout.SetField(_widgets->box[CREDIT_TOTAL_PAYMENT],
-                  _widgets->data[CREDIT_TOTAL_PAYMENT], Layout::Right, 15);
-  layout.SetField(_widgets->box[CREDIT_OVERPAYMENT],
-                  _widgets->data[CREDIT_OVERPAYMENT], Layout::Right, 15);
+  layout.SetField(widgets_->box[CREDIT_INTEREST_RATE],
+                  widgets_->data[CREDIT_INTEREST_RATE], Layout::Left, 15);
+  layout.SetField(widgets_->box[CREDIT_TOTAL_PAYMENT],
+                  widgets_->data[CREDIT_TOTAL_PAYMENT], Layout::Right, 15);
+  layout.SetField(widgets_->box[CREDIT_OVERPAYMENT],
+                  widgets_->data[CREDIT_OVERPAYMENT], Layout::Right, 15);
 
-  layout.SetField(_widgets->box[CREDIT_MONTHLY_PAYMENT],
-                  _widgets->monthlyPaymentList, Layout::Left,
-                  _widgets->box[CREDIT_MONTHLY_PAYMENT]->width() / 2);
+  layout.SetField(widgets_->box[CREDIT_MONTHLY_PAYMENT],
+                  widgets_->monthlyPaymentList, Layout::Left,
+                  widgets_->box[CREDIT_MONTHLY_PAYMENT]->width() / 2);
 }
 
 void CreditCalculatorUI::setOptions() {
-  _widgets->data[CREDIT_TOTAL_PAYMENT]->setReadOnly(true);
-  _widgets->data[CREDIT_OVERPAYMENT]->setReadOnly(true);
+  widgets_->data[CREDIT_TOTAL_PAYMENT]->setReadOnly(true);
+  widgets_->data[CREDIT_OVERPAYMENT]->setReadOnly(true);
 
-  _widgets->data[CREDIT_SUM]->setAlignment(Qt::AlignLeft);
-  _widgets->data[CREDIT_TERM]->setAlignment(Qt::AlignLeft);
-  _widgets->data[CREDIT_INTEREST_RATE]->setAlignment(Qt::AlignLeft);
-  _widgets->data[CREDIT_TOTAL_PAYMENT]->setAlignment(Qt::AlignRight);
-  _widgets->data[CREDIT_OVERPAYMENT]->setAlignment(Qt::AlignRight);
+  widgets_->data[CREDIT_SUM]->setAlignment(Qt::AlignLeft);
+  widgets_->data[CREDIT_TERM]->setAlignment(Qt::AlignLeft);
+  widgets_->data[CREDIT_INTEREST_RATE]->setAlignment(Qt::AlignLeft);
+  widgets_->data[CREDIT_TOTAL_PAYMENT]->setAlignment(Qt::AlignRight);
+  widgets_->data[CREDIT_OVERPAYMENT]->setAlignment(Qt::AlignRight);
 
-  _widgets->box[CREDIT_SUM]->setReadOnly(true);
-  _widgets->box[CREDIT_TERM]->setReadOnly(true);
-  _widgets->box[CREDIT_INTEREST_RATE]->setReadOnly(true);
-  _widgets->box[CREDIT_TOTAL_PAYMENT]->setReadOnly(true);
-  _widgets->box[CREDIT_OVERPAYMENT]->setReadOnly(true);
-  _widgets->box[CREDIT_MONTHLY_PAYMENT]->setReadOnly(true);
+  widgets_->box[CREDIT_SUM]->setReadOnly(true);
+  widgets_->box[CREDIT_TERM]->setReadOnly(true);
+  widgets_->box[CREDIT_INTEREST_RATE]->setReadOnly(true);
+  widgets_->box[CREDIT_TOTAL_PAYMENT]->setReadOnly(true);
+  widgets_->box[CREDIT_OVERPAYMENT]->setReadOnly(true);
+  widgets_->box[CREDIT_MONTHLY_PAYMENT]->setReadOnly(true);
 }
 
 void CreditCalculatorUI::setInputValidator() {
-  _widgets->data[CREDIT_SUM]->setValidator(new QRegularExpressionValidator(
+  widgets_->data[CREDIT_SUM]->setValidator(new QRegularExpressionValidator(
       QRegularExpression("[0-9]{1,10}[.][0-9]{0,2}"), this));
-  _widgets->data[CREDIT_TERM]->setValidator(
+  widgets_->data[CREDIT_TERM]->setValidator(
       new QRegularExpressionValidator(QRegularExpression("[0-9]{0,2}"), this));
-  _widgets->data[CREDIT_INTEREST_RATE]->setValidator(
+  widgets_->data[CREDIT_INTEREST_RATE]->setValidator(
       new QRegularExpressionValidator(
           QRegularExpression("[0-9]{1,2}[.][0-9]{0,2}"), this));
 }
 
 bool CreditCalculatorUI::setInput() {
-  double creditSum = _widgets->data[CREDIT_SUM]->text().toDouble();
-  double creditTerm = _widgets->data[CREDIT_TERM]->text().toDouble();
-  double interestRate = _widgets->data[CREDIT_INTEREST_RATE]->text().toDouble();
+  double creditSum = widgets_->data[CREDIT_SUM]->text().toDouble();
+  double creditTerm = widgets_->data[CREDIT_TERM]->text().toDouble();
+  double interestRate = widgets_->data[CREDIT_INTEREST_RATE]->text().toDouble();
 
-  return _controller->setInput(creditSum, creditTerm, interestRate);
+  return controller_->setInput(creditSum, creditTerm, interestRate);
 }
 
 void CreditCalculatorUI::getOutput() {
-  _widgets->monthlyPaymentList->clear();
-  for (auto it : _controller->getMonthlyPayments()) {
-    _widgets->monthlyPaymentList->addItem(QString::number(it, 'f', 2));
+  widgets_->monthlyPaymentList->clear();
+  for (auto it : controller_->getMonthlyPayments()) {
+    widgets_->monthlyPaymentList->addItem(QString::number(it, 'f', 2));
   }
 
-  _widgets->data[CREDIT_TOTAL_PAYMENT]->setText(
-      QString::number(_controller->getTotalPayment(), 'f', 2));
-  _widgets->data[CREDIT_OVERPAYMENT]->setText(
-      QString::number(_controller->getOverpayment(), 'f', 2));
+  widgets_->data[CREDIT_TOTAL_PAYMENT]->setText(
+      QString::number(controller_->getTotalPayment(), 'f', 2));
+  widgets_->data[CREDIT_OVERPAYMENT]->setText(
+      QString::number(controller_->getOverpayment(), 'f', 2));
 }
 
 void CreditCalculatorUI::Calculate(Service::CreditPaymentsType type) {
   if (setInput()) {
-    _controller->Calculate(type);
+    controller_->Calculate(type);
     getOutput();
     DrawChartBars();
   }
@@ -196,7 +196,7 @@ void CreditCalculatorUI::DifferentiatedPayment() {
 }
 
 void CreditCalculatorUI::DrawChartBars() {
-  _widgets->chartView->SetData(_controller->getMonthlyBodyPayments(),
-                               _controller->getMonthlyPercentPayments());
-  _widgets->chartView->show();
+  widgets_->chartView->setData(controller_->getMonthlyBodyPayments(),
+                               controller_->getMonthlyPercentPayments());
+  widgets_->chartView->show();
 }

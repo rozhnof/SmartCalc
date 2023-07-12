@@ -1,81 +1,83 @@
 #include "ChartView.h"
 
 ChartView::ChartView(QWidget *parent) {
-  chart = new QChart;
-  chartView = new QChartView(chart);
+  chart_ = new QChart;
+  chartView_ = new QChartView(chart_);
 
-  series = new QStackedBarSeries();
-  bodyBar = new QBarSet("Body");
-  percentBar = new QBarSet("Percent");
-  axisY = new QValueAxis();
+  series_ = new QStackedBarSeries();
+  bodyBar_ = new QBarSet("Body");
+  percentBar_ = new QBarSet("Percent");
+  axisY_ = new QValueAxis();
 
-  chartView->setRenderHint(QPainter::Antialiasing);
-  chart->setAnimationOptions(QChart::SeriesAnimations);
-  chart->setTheme(QChart::ChartThemeBlueNcs);
-  chart->legend()->setVisible(true);
-  chart->legend()->setAlignment(Qt::AlignBottom);
+  chartView_->setRenderHint(QPainter::Antialiasing);
+  chart_->setAnimationOptions(QChart::SeriesAnimations);
+  chart_->setTheme(QChart::ChartThemeBlueNcs);
+  chart_->legend()->setVisible(true);
+  chart_->legend()->setAlignment(Qt::AlignBottom);
 
-  axisY->setMin(0);
-  chart->addAxis(axisY, Qt::AlignLeft);
+  axisY_->setMin(0);
+  chart_->addAxis(axisY_, Qt::AlignLeft);
 
-  chart->setBackgroundVisible(false);
-  chartView->setParent(parent);
+  chart_->setBackgroundVisible(false);
+  chartView_->setParent(parent);
 }
 
 ChartView::~ChartView() {
-  delete chart;
-  delete chartView;
-  delete series;
-  delete axisY;
-  delete bodyBar;
-  delete percentBar;
+  delete chart_;
+  delete chartView_;
+  delete series_;
+  delete axisY_;
+  delete bodyBar_;
+  delete percentBar_;
 }
 
-void ChartView::show() { chartView->show(); }
+void ChartView::show() { chartView_->show(); }
 
 void ChartView::setGeometry(int ax, int ay, int aw, int ah) {
-  chartView->setGeometry(ax, ay, aw, ah);
+  chartView_->setGeometry(ax, ay, aw, ah);
 }
 
-void ChartView::Clear() {
-  bodyBar->remove(0, bodyBar->count());
-  percentBar->remove(0, percentBar->count());
-  chart->removeSeries(series);
+void ChartView::clear() {
+  bodyBar_->remove(0, bodyBar_->count());
+  percentBar_->remove(0, percentBar_->count());
+  chart_->removeSeries(series_);
 }
 
-void ChartView::SetData(QVector<double> newBodyBar,
+void ChartView::setData(QVector<double> newBodyBar,
                         QVector<double> newPercentBar) {
-  if (series->count()) Clear();
+  if (series_->count()) clear();
 
-  bodyBar->append(newBodyBar);
-  percentBar->append(newPercentBar);
+  bodyBar_->append(newBodyBar);
+  percentBar_->append(newPercentBar);
 
-  axisY->setMax(newBodyBar[0] + newPercentBar[0]);
+  axisY_->setMax(newBodyBar[0] + newPercentBar[0]);
 
-  series->append(bodyBar);
-  series->append(percentBar);
+  series_->append(bodyBar_);
+  series_->append(percentBar_);
 
-  chart->addSeries(series);
-  series->attachAxis(axisY);
+  chart_->addSeries(series_);
+  series_->attachAxis(axisY_);
 }
 
-void ChartView::SetBarColor(QColor bodyBarColor, QColor percentBarColor) {
-  bodyBar->setColor(bodyBarColor);
-  percentBar->setColor(percentBarColor);
+void ChartView::setBarColor(QColor bodyBarColor, QColor percentBarColor) {
+  bodyBar_->setColor(bodyBarColor);
+  percentBar_->setColor(percentBarColor);
 }
 
-void ChartView::SetBorderBarColor(QColor bodyBorderBarColor,
+void ChartView::setBorderBarColor(QColor bodyBorderBarColor,
                                   QColor percentBorderBarColor) {
-  bodyBar->setBorderColor(bodyBorderBarColor);
-  percentBar->setBorderColor(percentBorderBarColor);
+  bodyBar_->setBorderColor(bodyBorderBarColor);
+  percentBar_->setBorderColor(percentBorderBarColor);
 }
 
-void ChartView::SetLabelsColor(QColor color) { axisY->setLabelsColor(color); }
+void ChartView::setLabelsColor(QColor color) { axisY_->setLabelsColor(color); }
 
-void ChartView::SetLinePenColor(QColor color) { axisY->setLinePenColor(color); }
-
-void ChartView::SetGridLineColor(QColor color) {
-  axisY->setGridLineColor(color);
+void ChartView::setLinePenColor(QColor color) {
+  axisY_->setLinePenColor(color);
 }
 
-void ChartView::SetBarWidth(qreal width) { series->setBarWidth(width); }
+void ChartView::setGridLineColor(QColor color) {
+  axisY_->setGridLineColor(color);
+}
+
+void ChartView::setBarWidth(qreal width) { series_->setBarWidth(width); }
