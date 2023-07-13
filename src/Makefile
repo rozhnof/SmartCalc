@@ -40,7 +40,7 @@ clean:
 	-rm -f $(APP_NAME).pro.user
 
 dvi:
-	open instruction.html
+	open ../README.md
 
 dist: clean
 	tar -czf ../$(APP_NAME)-$(VERSION).tar.gz ./*
